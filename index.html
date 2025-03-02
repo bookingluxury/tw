@@ -1267,6 +1267,11 @@ document.addEventListener("DOMContentLoaded", function () {
         border: 1px solid #fff1f4;
 
       }
+img {
+    max-width: 100%; /* Không phóng lớn hơn kích thước gốc */
+    height: auto;
+    object-fit: contain; /* Giữ tỉ lệ, không bị kéo dãn */
+}
 
       .text-blue-500 {
         margin-bottom: 50px;
