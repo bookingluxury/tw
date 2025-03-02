@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no"
+    />
+    <title>Sảnh Đánh Giá</title>
+    <!-- Font Awesome cho icon (phiên bản 4.7) -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary-color: #6a82fb;
+        --secondary-color: #fc5c7d;
+        --tertiary-color: #ff9a9e;
+        --accent-color: #007bff;
+        --text-color: #333;
+        --bg-color: #f9f9f9;
+        --card-bg: #fff;
+        --hover-bg: #e0e0e0;
+        --nav-bg: #e9ecef;
+        --hover-nav-bg: #ced4da;
+      }
+      /* Reset & Global Styles */
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        line-height: 1.6;
+      }
+      a {
+        text-decoration: none;
+      }
+      /* Logo Top */
+      .logo-top {
+        width: 400px;
+        height: 120px;
+        background: url("https://i.ibb.co/DgYWjtjM/logo-490c306a.png") no-repeat
+          center/contain;
+        margin: 20px auto;
+        padding: 5px;
+        backdrop-filter: blur(5px);
+        transition: transform 0.3s ease;
+      }
+      .logo-top:hover {
+        transform: scale(1.05);
+      }
+      @media (max-width: 600px) {
+        .logo-top {
+          width: 250px;
+          height: 80px;
+        }
+      }
+      /* Header Gradient */
+      .review-header {
+        background: linear-gradient(
+          270deg,
+          var(--primary-color),
+          var(--secondary-color),
+          var(--tertiary-color)
+        );
+        background-size: 600% 600%;
+        animation: gradientAnimation 8s ease infinite;
+        padding: 30px 0;
+        text-align: center;
+        color: #fff;
+        font-size: 2.5rem;
+        font-weight: 700;
+        letter-spacing: 2px;
+        margin-bottom: 15px;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+      }
+      @keyframes gradientAnimation {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+      /* Sidebar */
+      .sidebar {
+        background: var(--card-bg);
+        padding: 0px;
+        box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        margin-right: 10px;
+      }
+      .sidebar a {
+        display: block;
+        padding: 10px 1px;
+        margin-bottom: 10px;
+        color: var(--text-color);
+        background: var(--card-bg);
+        border-radius: 0px;
+        font-weight: bold;
+        position: relative;
+        overflow: hidden;
+        transition: all 0.3s ease;
+      }
+      /* Icon cho sidebar */
+      .sidebar a i {
+        margin-right: 8px;
+        font-size: 1.2em;
+      }
+      /* Hiệu ứng Underline di chuyển */
+      .sidebar a::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background: var(--accent-color);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.3s ease;
+      }
+      /* Hiệu ứng khi hover */
+      .sidebar a:hover {
+        background: linear-gradient(
+          90deg,
+          var(--primary-color),
+          var(--secondary-color)
+        );
+        color: #fff;
+        transform: scale(1.03);
+      }
+      .sidebar a:hover::after {
+        transform: scaleX(1);
+      }
+      /* Mục đang active */
+      .sidebar a.active {
+        background: linear-gradient(
+          90deg,
+          var(--primary-color),
+          var(--secondary-color)
+        );
+        color: #fff;
+      }
+      /* Main Content - Sử dụng CSS Grid */
+      .main-content {
+        width: 75%;
+        display: grid;
+        grid-gap: 5px; /* Giảm khoảng cách giữa các review */
+        grid-template-columns: repeat(2, minmax(100px, 1fr));
+        justify-items: center;
+        padding-bottom: 10px;
+        margin-top: 20px; /* Tạo khoảng cách với phần phía trên */
+      }
+      @media (min-width: 768px) {
+        .main-content {
+          flex: 1;
+          display: grid;
+          grid-gap: 5px; /* Giảm khoảng cách giữa các review */
+          grid-template-columns: repeat(3, minmax(150px, 1fr));
+          justify-items: center;
+          padding-bottom: 10px;
+          margin-top: 20px; /* Tạo khoảng cách phía trên */
+        }
+      }
+      /* Hiệu ứng Shine cho review card */
+      .review-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -75%;
+        width: 50%;
+        height: 100%;
+        background: linear-gradient(
+          120deg,
+          transparent,
+          rgba(255, 255, 255, 0.4),
+          transparent
+        );
+        transform: skewX(-25deg);
+        opacity: 0;
+      }
+      .review-card:hover::before {
+        animation: shine 0.8s forwards;
+        opacity: 1;
+      }
+      @keyframes shine {
+        0% {
+          left: -75%;
+        }
+        100% {
+          left: 125%;
+        }
+      }
+      .review-card img {
+        width: 120px;
+        height: 170px;
+        border-radius: 10px;
+        object-fit: cover;
+        border: 2px solid var(--secondary-color);
+        transition: transform 0.2s ease;
+      }
+      .review-card:hover img {
+        transform: scale(1.05);
+      }
+      /* Tiêu đề đánh giá với hiệu ứng gradient text */
+      .review-card span {
+        display: block;
+        margin-top: 8px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        text-align: center; /* Căn giữa tiêu đề */
+        background: linear-gradient(90deg, #ff9a9e, #fc5c7d, #6a82fb);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .review-card p {
+        margin-top: 4px;
+        font-size: 0.9rem;
+        color: #666;
+      }
+      /* Review Detail Modal (Overlay) */
+      .review-detail-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 100;
+        animation: fadeIn 0.3s ease;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      .review-detail {
+        background: var(--card-bg);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        width: 90%;
+        max-width: 450px;
+        position: relative;
+        animation: zoomIn 0.3s ease;
+      }
+      @keyframes zoomIn {
+        from {
+          transform: scale(0.8);
+          opacity: 0;
+        }
+        to {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+      .review-detail .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+      }
+      .review-detail h2 {
+        font-size: 1.8rem;
+        color: var(--text-color);
+      }
+      .review-detail .balance {
+        font-size: 1rem;
+        color: #e67e22;
+      }
+      /* Tab Header cho Modal */
+      .tab-header {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 15px;
+      }
+      .tab {
+        background: #f1f1f1;
+        border: none;
+        padding: 8px 16px;
+        cursor: pointer;
+        margin: 0 3px;
+        border-radius: 4px;
+        font-size: 0.9rem;
+        transition: background 0.3s, color 0.3s;
+      }
+      .tab.active {
+        background: var(--primary-color);
+        color: #fff;
+      }
+      /* Nội dung các tab */
+      #currentTab {
+      }
+      #historyTab {
+        display: none;
+      }
+      #historyTab .history-inside {
+        max-height: 250px;
+        overflow-y: auto;
+        margin-bottom: 15px;
+      }
+      /* CSS cho bảng lịch sử sử dụng CSS counters để đánh số tự động */
+      .history-table {
+        counter-reset: rowNumber;
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.9rem;
+      }
+      .history-table thead th {
+        background: #f1f1f1;
+        font-weight: 600;
+        padding: 8px;
+        border: 1px solid #ddd;
+      }
+      .history-table tbody tr {
+        counter-increment: rowNumber;
+      }
+      .history-table tbody tr td {
+        padding: 8px;
+        text-align: center;
+        border: 1px solid #ddd;
+      }
+      /* Đánh số tự động cho cột đầu tiên (STT) */
+      .history-table tbody tr td:first-child::before {
+        content: counter(rowNumber);
+        margin-right: 5px;
+      }
+      .history-table tbody tr:nth-child(even) {
+        background: #fbfbfb;
+      }
+      /* Timer, Options & Buttons */
+      .timer {
+        color: #e74c3c;
+        font-weight: bold;
+        font-size: 1.4rem;
+        margin-bottom: 8px;
+        text-align: center;
+      }
+      .live-period-label {
+        font-size: 1.1rem;
+        font-weight: 600;
+        text-align: center;
+        margin-bottom: 8px;
+      }
+      .options {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        margin-bottom: 15px;
+      }
+      .option {
+        padding: 15px;
+        background: #f1f1f1;
+        text-align: center;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background 0.3s, transform 0.3s;
+        font-size: 1.1rem;
+        font-weight: 600;
+      }
+      .option:hover {
+        background: #ddd;
+        transform: scale(1.03);
+      }
+      .option.selected {
+        background: var(--accent-color);
+        color: #fff;
+      }
+      .submit-button,
+      .close-button {
+        padding: 10px 18px;
+        border: none;
+        border-radius: 6px;
+        font-size: 1rem;
+        font-weight: bold;
+        cursor: pointer;
+        margin-right: 8px;
+        transition: background 0.3s, transform 0.2s;
+      }
+      .submit-button {
+        background: #27ae60;
+        color: #fff;
+      }
+      .submit-button:hover {
+        background: #219150;
+        transform: scale(1.03);
+      }
+      .close-button {
+        background: #e74c3c;
+        color: #fff;
+      }
+      .close-button:hover {
+        background: #c0392b;
+        transform: scale(1.03);
+      }
+      /* Hiển thị đáp án đã chọn */
+      #selectedOptionDisplay {
+        text-align: center;
+        font-size: 1.1rem;
+        font-weight: bold;
+        color: var(--accent-color);
+        margin-bottom: 15px;
+      }
+      /* Ô nhập số tiền cược */
+      .bet-amount {
+        margin-bottom: 15px;
+        text-align: center;
+      }
+      .bet-amount label {
+        margin-right: 8px;
+        font-size: 1rem;
+        font-weight: 500;
+      }
+      .bet-amount input {
+        padding: 5px;
+        font-size: 1rem;
+        width: 120px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+      /* History Section (trang chính) */
+      .history {
+        margin: 20px;
+        margin-bottom: 120px;
+        background: var(--card-bg);
+        padding: 15px;
+        border-radius: 6px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        font-size: 0.9rem;
+        overflow-x: auto;
+      }
+      .history h3 {
+        margin-bottom: 10px;
+        font-size: 1.4rem;
+        text-align: center;
+        color: var(--text-color);
+      }
+      /* Responsive */
+      @media (max-width: 768px) {
+        .container {
+          flex-direction: column;
+        }
+        .sidebar {
+          width: 100%;
+          margin-bottom: 20px;
+        }
+      }
+      /* Container bố trí Sidebar và Main-content */
+      .container {
+        display: flex;
+        /* Mặc định sẽ không wrap để các phần luôn nằm trong 1 hàng */
+        flex-wrap: nowrap;
+      }
+      /* Desktop layout (từ 768px trở lên): Sidebar có chiều rộng cố định, main-content chiếm phần còn lại */
+      @media (min-width: 768px) {
+        .container {
+          flex-direction: row;
+          align-items: flex-start;
+        }
+        .sidebar {
+          width: 150px;
+          margin-right: 20px;
+        }
+        .main-content {
+          flex: 1;
+          display: grid;
+          grid-gap: 5px;
+          grid-template-columns: repeat(3, minmax(150px, 1fr));
+          justify-items: center;
+          padding-bottom: 10px;
+          margin-top: 20px;
+        }
+      }
+      /* Mobile layout (dưới 768px): Sidebar chiếm 35% và main-content chiếm 65% */
+      @media (max-width: 767px) {
+        .container {
+          flex-direction: row;
+          /* Ép 2 phần nằm trên 1 hàng */
+          flex-wrap: nowrap;
+        }
+        .sidebar {
+          width: 35%;
+          margin-right: 10px;
+        }
+        .main-content {
+          width: 75%;
+          display: grid;
+          grid-gap: 5px;
+          grid-template-columns: repeat(2, minmax(100px, 1fr));
+          justify-items: center;
+          padding-bottom: 10px;
+          margin-top: 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="logo-top"></div>
+    <!-- Tiêu đề Sảnh Đánh Giá -->
+    <div class="review-header">Sảnh Đánh Giá</div>
+    <div class="container">
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <a href="#" class="active" onclick="showReview('all')">
+          <i class="fa fa-th-large"></i> Tất cả
+        </a>
+        <a href="#" onclick="showReview('Đánh Giá 1')">
+          <i class="fa fa-star"></i> Đánh Giá 1
+        </a>
+        <a href="#" onclick="showReview('Đánh Giá 2')">
+          <i class="fa fa-heart"></i> Đánh Giá 2
+        </a>
+        <a href="#" onclick="showReview('Đánh Giá 3')">
+          <i class="fa fa-smile-o"></i> Đánh Giá 3
+        </a>
+      </div>
+      <!-- Main Content (Review Cards) -->
+      <div class="main-content" id="mainContent">
+        <div
+          class="review-card"
+          data-review="Đánh Giá 1"
+          onclick="openReview('review1')"
+        >
+          <img
+            src="https://i.ibb.co/Qnvrk3Q/photo-412-23-06-2024-18-22-44.jpg"
+            alt="Đánh Giá 1"
+          />
+          <span>Đánh Giá 1</span>
+        </div>
+        <div
+          class="review-card"
+          data-review="Đánh Giá 2"
+          onclick="openReview('review2')"
+        >
+          <img
+            src="https://i.ibb.co/tY6XwFB/photo-432-23-06-2024-18-25-51.jpg"
+            alt="Đánh Giá 2"
+          />
+          <span>Đánh Giá 2</span>
+        </div>
+        <div
+          class="review-card"
+          data-review="Đánh Giá 3"
+          onclick="openReview('review3')"
+        >
+          <img
+            src="https://i.ibb.co/CVsgcbB/photo-311-23-06-2024-17-58-00.jpg"
+            alt="Đánh Giá 3"
+          />
+          <span>Đánh Giá 3</span>
+        </div>
+      </div>
+    </div>
+    <!-- Review Detail Modal (Overlay) -->
+    <div class="review-detail-overlay" id="reviewOverlay">
+      <div class="review-detail" id="reviewDetail">
+        <div class="header">
+          <h2 id="reviewTitle">Đánh Giá</h2>
+          <div class="balance">Số dư: <span id="balance">498.85</span></div>
+        </div>
+        <!-- Tab Navigation -->
+        <div class="tab-header">
+          <button
+            id="tabCurrent"
+            class="tab active"
+            onclick="showTab('current')"
+          >
+            Đánh Giá Trực Tiếp
+          </button>
+          <button id="tabHistory" class="tab" onclick="showTab('history')">
+            Lịch Sử Kỳ Trước
+          </button>
+        </div>
+        <!-- Tab: Đánh Giá Trực Tiếp -->
+        <div id="currentTab">
+          <p class="live-period-label">
+            Kỳ đánh giá hiện tại: <span id="livePeriod">202503010001</span>
+          </p>
+          <div class="timer" id="countdown">00:03:00</div>
+          <div class="options">
+            <div class="option">A<br /><span>1.05</span></div>
+            <div class="option">B<br /><span>1.05</span></div>
+            <div class="option">C<br /><span>1.05</span></div>
+            <div class="option">D<br /><span>1.05</span></div>
+          </div>
+          <div
+            class="bet-amount"
+            style="text-align: center; margin-bottom: 10px"
+          >
+            <label for="betAmount">Số tiền cược:</label>
+            <input
+              type="number"
+              id="betAmount"
+              placeholder="Nhập số tiền"
+              min="0"
+              style="padding: 5px; width: 120px"
+            />
+          </div>
+          <div id="selectedOptionDisplay"></div>
+          <button class="submit-button" onclick="submitReview()">
+            Đánh giá
+          </button>
+          <button class="close-button" onclick="closeReview()">Quay lại</button>
+        </div>
+        <!-- Tab: Lịch Sử Kỳ Trước (Modal) -->
+        <div id="historyTab">
+          <div class="history-inside">
+            <h3>
+              Lịch sử kỳ đánh giá của
+              <span id="currentReviewType">Đánh Giá</span>
+            </h3>
+            <table class="history-table">
+              <thead>
+                <tr>
+                  <th>STT</th>
+                  <th>Số Kỳ</th>
+                  <th>Kết Quả</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td></td>
+                  <td>202502113451</td>
+                  <td>D</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>202502113450</td>
+                  <td>A</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>202502113449</td>
+                  <td>D</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>202502113448</td>
+                  <td>A</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>202502113447</td>
+                  <td>B</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>202502113446</td>
+                  <td>C</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>202502113445</td>
+                  <td>A</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>202502113444</td>
+                  <td>B</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>202502113443</td>
+                  <td>D</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <button class="close-button" onclick="closeReview()">Quay lại</button>
+        </div>
+      </div>
+    </div>
+    <!-- History Section (trang chính) -->
+    <div class="history">
+      <h3>Lịch sử các kỳ đánh giá</h3>
+      <table class="history-table">
+        <thead>
+          <tr>
+            <th>STT</th>
+            <th>Số Kỳ</th>
+            <th>Kết Quả</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td></td>
+            <td>202502113451</td>
+            <td>D</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>202502113450</td>
+            <td>A</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>202502113449</td>
+            <td>D</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>202502113448</td>
+            <td>A</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>202502113447</td>
+            <td>B</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>202502113446</td>
+            <td>C</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>202502113445</td>
+            <td>A</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>202502113444</td>
+            <td>B</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>202502113443</td>
+            <td>D</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div id="navbar-placeholder"></div>
+    <script src="menu.js"></script>
+    <script>
+      fetch("navbar.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("navbar-placeholder").innerHTML = data;
+        });
+      // Lọc thẻ đánh giá theo Sidebar sử dụng data-review
+      function showReview(review) {
+        document.querySelectorAll(".review-card").forEach((card) => {
+          card.style.display =
+            review === "all" || card.getAttribute("data-review") === review
+              ? "block"
+              : "none";
+        });
+      }
+      let timer;
+      // Mở modal đánh giá (Review Detail)
+      function openReview(reviewId) {
+        document.getElementById("mainContent").style.display = "none";
+        document.getElementById("reviewOverlay").style.display = "flex";
+        const reviewTitle = reviewId.replace("review", "Đánh Giá ");
+        document.getElementById("reviewTitle").innerText = reviewTitle;
+        document.getElementById("currentReviewType").innerText = reviewTitle;
+        showTab("current");
+        // Cập nhật mã kỳ hiện tại: nếu kỳ trước là 202502113451 thì kỳ này là 202502113452
+        document.getElementById("livePeriod").innerText = "202502113452";
+        startCountdown(180);
+      }
+      // Đóng modal đánh giá
+      function closeReview() {
+        document.getElementById("mainContent").style.display = "grid";
+        document.getElementById("reviewOverlay").style.display = "none";
+        clearInterval(timer);
+        document.getElementById("countdown").textContent = "00:03:00";
+        document.querySelectorAll("#currentTab .option").forEach((opt) => {
+          opt.classList.remove("selected");
+        });
+        document.getElementById("selectedOptionDisplay").textContent = "";
+        document.getElementById("betAmount").value = "";
+      }
+      // Gửi đánh giá (giả lập)
+      function submitReview() {
+        const selected = document.querySelector("#currentTab .option.selected");
+        const betAmountInput = document.getElementById("betAmount");
+        const betAmount = parseFloat(betAmountInput.value);
+        if (!selected) {
+          alert("Vui lòng chọn một tùy chọn trước khi gửi đánh giá.");
+          return;
+        }
+        if (!betAmount || betAmount <= 0) {
+          alert("Vui lòng nhập số tiền cược hợp lệ.");
+          return;
+        }
+        const balanceElement = document.getElementById("balance");
+        let currentBalance = parseFloat(balanceElement.textContent);
+        if (betAmount > currentBalance) {
+          alert("Số tiền cược vượt quá số dư hiện tại.");
+          return;
+        }
+        let newBalance = currentBalance - betAmount;
+        balanceElement.textContent = newBalance.toFixed(2);
+        alert(
+          "Đánh giá của bạn đã được gửi thành công!\nBạn đã chọn: " +
+            selected.innerText.trim().charAt(0) +
+            "\nSố tiền cược: " +
+            betAmount
+        );
+        closeReview();
+      }
+      // Đếm ngược thời gian đánh giá
+      function startCountdown(duration) {
+        let time = duration;
+        const countdownElement = document.getElementById("countdown");
+        timer = setInterval(() => {
+          const minutes = Math.floor(time / 60);
+          const seconds = time % 60;
+          countdownElement.textContent = `${minutes
+            .toString()
+            .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+          if (time <= 0) {
+            clearInterval(timer);
+            alert("Hết thời gian đánh giá!");
+            closeReview();
+          }
+          time--;
+        }, 1000);
+      }
+      // Chuyển đổi giữa tab "Đánh Giá Trực Tiếp" và "Lịch Sử Kỳ Trước"
+      function showTab(tab) {
+        if (tab === "current") {
+          document.getElementById("currentTab").style.display = "block";
+          document.getElementById("historyTab").style.display = "none";
+          document.getElementById("tabCurrent").classList.add("active");
+          document.getElementById("tabHistory").classList.remove("active");
+          startCountdown(180);
+        } else {
+          clearInterval(timer);
+          document.getElementById("currentTab").style.display = "none";
+          document.getElementById("historyTab").style.display = "block";
+          document.getElementById("tabHistory").classList.add("active");
+          document.getElementById("tabCurrent").classList.remove("active");
+        }
+      }
+      // Xử lý chọn đáp án
+      document.querySelectorAll("#currentTab .option").forEach((option) => {
+        option.addEventListener("click", function () {
+          document.querySelectorAll("#currentTab .option").forEach((opt) => {
+            opt.classList.remove("selected");
+          });
+          this.classList.add("selected");
+          document.getElementById("selectedOptionDisplay").textContent =
+            "Bạn đã chọn: " + this.innerText.trim().charAt(0);
+        });
+      });
+    </script>
+  </body>
+</html>

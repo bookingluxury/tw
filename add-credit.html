@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Thanh Toán - Modern Payment Interface</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Roboto:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* Reset & cơ bản */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Montserrat", sans-serif;
+        background: #0b0f1a;
+        background: radial-gradient(
+          circle at center,
+          rgba(11, 15, 26, 0.8) 0%,
+          rgba(11, 15, 26, 1) 100%
+        );
+        min-height: 100vh;
+        color: #fff;
+
+        position: relative;
+      }
+      body::before {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url("https://i.ibb.co/ycBpNQyM/pngtree-light-effect-background-halo-radial-image-2419979.jpg")
+          no-repeat center center;
+        background-size: cover;
+        opacity: 0.2;
+        pointer-events: none;
+      }
+      .container {
+        max-width: 800px;
+        margin: 0 auto 120px;
+        padding: 0px;
+        background: #1a1a1a;
+        border-radius: 12px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+      }
+      h3 {
+        position: relative;
+        font-size: 2rem;
+        font-weight: 600;
+        text-align: center;
+        padding: 20px;
+        margin-bottom: 20px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        background: linear-gradient(90deg, #b93e05, #0066ff, #922efd);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        text-align: center;
+        animation: gradientShift 3s ease infinite;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+      }
+      @keyframes gradientShift {
+        0% {
+          background-position: 0% center;
+        }
+        50% {
+          background-position: 100% center;
+        }
+        100% {
+          background-position: 0% center;
+        }
+      }
+      /* Hiệu ứng chữ chạy (marquee) theo chiều dọc */
+      .scrolling-text {
+        position: relative;
+        height: 200px;
+        overflow: hidden;
+        background: #111;
+        border-radius: 4px;
+        margin-bottom: 20px;
+        padding: 10px;
+      }
+      .scrolling-content {
+        position: absolute;
+        width: 100%;
+        animation: scrollUp 20s linear infinite;
+      }
+      @keyframes scrollUp {
+        0% {
+          top: 100%;
+        }
+        100% {
+          top: -100%;
+        }
+      }
+      .payment-note ion-icon {
+        color: #fc5c7d; /* Thay đổi màu sắc icon theo ý bạn */
+      }
+      .icon-line {
+        font-weight: 600;
+        background: linear-gradient(90deg, #10b905, #efefef, #7a00ff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        text-align: center;
+        display: block;
+        margin-bottom: 5px;
+        transition: color 0.3s;
+      }
+
+      .icon-line:hover {
+        color: #fc5c7d; /* Màu khi hover */
+      }
+
+      .icon-dynamic {
+        display: inline-block;
+        animation: rotateIcon 4s linear infinite;
+        transition: transform 0.3s;
+      }
+      .icon-dynamic:hover {
+        transform: scale(1.2);
+      }
+
+      /* Dynamic notification style */
+      #notification {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: rgba(0, 0, 0, 0.9);
+        color: #ffc107;
+        padding: 15px 20px;
+        border: 1px solid #ffc107;
+        border-radius: 4px;
+        opacity: 0;
+        transform: translateY(-20px);
+        transition: opacity 0.5s ease, transform 0.5s ease;
+        z-index: 9999;
+      }
+      #notification.show {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .payment-note {
+        margin: 20px 0;
+
+        padding: 15px;
+        background: linear-gradient(90deg, #b99e05, #efefef, #00ffc8);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        text-align: center;
+        border-left: 4px solid #fc5c7d;
+        border-radius: 4px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        font-size: 1rem;
+        line-height: 1.5;
+        color: #fff;
+      }
+      .payment-note p {
+        margin-bottom: 10px;
+      }
+      .payment-note ul {
+        list-style: none;
+        margin: 10px 0;
+        padding-left: 20px;
+      }
+      .payment-note li {
+        background: linear-gradient(90deg, #ff5e00, #efefef, #7a00ff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        text-align: center;
+        font-weight: 600;
+        margin-bottom: 5px;
+        position: relative;
+      }
+      .payment-note li:hover {
+        color: #fc5c7d;
+        transition: color 0.3s;
+      }
+      /* Payment option (card) style */
+      .payment-option {
+        position: relative;
+        margin: 10px 0;
+        padding: 10px;
+        border-radius: 12px;
+        background: linear-gradient(145deg, #000, #1a1a1a);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+        transition: transform 0.3s ease, box-shadow 0.3s ease, border 0.3s ease;
+        overflow: hidden;
+      }
+      .payment-option:hover {
+        transform: scale(1.03);
+        box-shadow: 0 10px 20px rgba(252, 92, 125, 0.8);
+        border: 1px solid #fc5c7d;
+      }
+      .payment-option::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 40%;
+        background: rgba(255, 255, 255, 0.1);
+        border-top-left-radius: 12px;
+        border-top-right-radius: 12px;
+        pointer-events: none;
+      }
+      .payment-option a {
+        display: block;
+        padding: 15px 20px;
+        font-weight: 600;
+        background: linear-gradient(90deg, #0544b9, #efefef, #ff0000);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        text-align: center;
+        font-size: 1.2rem;
+        cursor: pointer;
+        position: relative;
+        z-index: 1;
+        transition: background 0.3s;
+      }
+      .payment-option a:hover {
+      }
+      /* Chi tiết thanh toán */
+      .payment-details {
+        padding: 15px 20px;
+        font-size: 1rem;
+        background: #121212;
+        display: none;
+        color: #fff;
+        border-top: 1px solid #333;
+      }
+      /* Bảng thanh toán (giống thật hơn) */
+      .payment-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+      }
+      .payment-table th,
+      .payment-table td {
+        border: 1px solid #333;
+        padding: 8px;
+      }
+      .payment-table th:nth-child(2),
+      .payment-table td:nth-child(2) {
+        width: 50%; /* Giảm kích thước cột "Nội Dung" */
+        max-width: 50%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .payment-table th {
+        background: #2a2a2a;
+        color: #ffc107;
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 0.9rem;
+      }
+      .payment-table td {
+        background: #1a1a1a;
+        font-size: 0.95rem;
+      }
+      .payment-details button {
+        padding: 4px 8px;
+        background: #ff0000;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: background 0.3s;
+      }
+      .payment-details button:hover {
+        background: #09ff00;
+        color: #000000;
+      }
+      .payment-details input[type="number"],
+      .payment-details input[type="file"] {
+        width: 100%;
+        margin: 8px 0;
+        padding: 8px;
+        border-radius: 4px;
+        border: 1px solid #444;
+        font-size: 1rem;
+        background: #000;
+        color: #fff;
+      }
+      /* Nút submit */
+      .submit-btn {
+        display: block;
+        width: 100%;
+        text-align: center;
+        padding: 12px;
+        background: linear-gradient(135deg, #15ff00, #b1ff57);
+        border: none;
+        border-radius: 4px;
+        font-size: 1.1rem;
+        color: #000;
+        font-weight: bold;
+        cursor: pointer;
+        margin-top: 10px;
+        transition: transform 0.3s, box-shadow 0.3s;
+      }
+      .submit-btn:hover {
+        transform: scale(1.03);
+      }
+      @media (max-width: 600px) {
+        h3 {
+          font-size: 1.5rem;
+        }
+        .payment-option a {
+          font-size: 1rem;
+          padding: 12px 15px;
+        }
+        .payment-details {
+          font-size: 0.9rem;
+          padding: 10px 15px;
+        }
+        .submit-btn {
+          font-size: 1rem;
+          padding: 10px;
+        }
+        .payment-table th,
+        .payment-table td {
+          font-size: 0.8rem;
+        }
+      }
+      .logo-top {
+        width: 500px;
+        height: 120px;
+        background: url("https://i.ibb.co/P4Jg4Qh/1-removebg-preview.png")
+          no-repeat center/contain;
+        background-size: contain;
+        z-index: 1001;
+        transition: transform 0.3s ease;
+        padding: 5px;
+        margin-bottom: 20px;
+        backdrop-filter: blur(5px);
+      }
+      @media (max-width: 600px) {
+        .logo-top {
+          max-width: 100%;
+          height: 130px;
+        }
+      }
+      .logo-top:hover {
+        transform: scale(1.05);
+      }
+      .content-footer {
+        background: linear-gradient(90deg, #10b905, #efefef, #7a00ff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        text-align: center;
+        padding: 1.5rem 0;
+        margin-top: 2rem;
+        border-top: 1px solid #444;
+        font-size: 0.9rem;
+        letter-spacing: 0.5px;
+      }
+      .footer-container p {
+        margin: 0.5rem;
+      }
+      .footer-container a {
+        color: #ffc107;
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+      .footer-container a:hover {
+        color: #ffdd57;
+      }
+      @keyframes rotateIcon {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      #vietEmail {
+        color: #fff;
+        display: table-cell;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Dynamic notification block -->
+    <div id="notification"></div>
+    <div class="logo-top"></div>
+    <div id="navbar-placeholder"></div>
+    <script src="menu.js"></script>
+    <div class="bottom-nav">
+      <a class="nav-item" href="index.html">
+        <i class="fa fa-home"></i>
+        <span>Trang Chủ</span>
+      </a>
+      <a class="nav-item" href="services.html">
+        <i class="fa fa-briefcase"></i>
+        <span>Dịch Vụ</span>
+      </a>
+      <a class="nav-item" href="booking.html">
+        <i class="fa fa-calendar-check"></i>
+        <span>Booking</span>
+      </a>
+      <a class="nav-item" href="photos.html">
+        <i class="fa fa-camera"></i>
+        <span>Thư Viện Ảnh</span>
+      </a>
+      <a class="nav-item" href="video.html">
+        <i class="fa fa-film"></i>
+        <span>Video Nổi Bật</span>
+      </a>
+      <a class="nav-item" href="private-connection.html">
+        <i class="fa fa-lock"></i>
+        <span>Kết Nối 18+</span>
+      </a>
+      <a class="nav-item" href="add-credit.html">
+        <i class="fa fa-credit-card"></i>
+        <span>Thêm Tín Dụng</span>
+      </a>
+    </div>
+    <div class="container">
+      <h3>Chọn Hình Thức Thanh Toán</h3>
+
+      <!-- Marquee chạy nội dung thông báo thanh toán -->
+      <div class="scrolling-text">
+        <div class="scrolling-content">
+          <span class="icon-line">
+            <ion-icon name="bulb-outline"></ion-icon> Vì Sao Quý Khách Cần Thanh
+            Toán? 為什麼需要付款？
+          </span>
+          <span class="icon-line">
+            <ion-icon name="checkmark-circle-outline"></ion-icon> Xác thực khách
+            hàng có nhu cầu thật (驗證真實 khách hàng)
+          </span>
+          <span class="icon-line">
+            <ion-icon name="checkmark-circle-outline"></ion-icon> Kích hoạt
+            quyền truy cập dịch vụ đặc biệt (開通特別服務)
+          </span>
+          <span class="icon-line">
+            <ion-icon name="checkmark-circle-outline"></ion-icon> Bảo vệ quyền
+            lợi khách hàng (保障您的權益)
+          </span>
+          <span class="icon-line">
+            <ion-icon name="checkmark-circle-outline"></ion-icon> Hỗ trợ từ CSKH
+            (專業客服指導)
+          </span>
+          <span class="icon-line">
+            <ion-icon name="checkmark-circle-outline"></ion-icon> Quyền lợi ưu
+            tiên (優先享受 nhiều ưu đãi)
+          </span>
+          <span class="icon-line">
+            <ion-icon name="bulb-outline"></ion-icon> Lưu ý 提醒:
+          </span>
+          <span class="icon-line">
+            <ion-icon name="checkmark-circle-outline"></ion-icon> Thanh toán một
+            lần (一次性付款)
+          </span>
+          <span class="icon-line">
+            <ion-icon name="checkmark-circle-outline"></ion-icon> Hệ thống tự
+            động xử lý giao dịch (系統自動確認付款)
+          </span>
+          <span class="icon-line">
+            <ion-icon name="checkmark-circle-outline"></ion-icon> Liên hệ CSKH
+            (如有疑問請聯繫客服)
+          </span>
+          <span class="icon-line">
+            <ion-icon name="disc-outline"></ion-icon> Hãy thanh toán ngay để tận
+            hưởng dịch vụ đặc biệt!
+          </span>
+        </div>
+      </div>
+
+      <!-- Note thanh toán & chi tiết -->
+      <div class="payment-note">
+        <p>
+          <ion-icon name="alert-circle-outline"></ion-icon
+          ><strong
+            >THÔNG BÁO THANH TOÁN & QUYỀN TRUY CẬP DỊCH VỤ ĐẶC BIỆT</strong
+          >
+        </p>
+        <p>
+          <ion-icon name="card-outline"></ion-icon
+          ><strong>Hướng Dẫn Thanh Toán</strong>
+        </p>
+        <p>Quý khách có thể thanh toán qua các phương thức sau:</p>
+        <ul>
+          <li>
+            <ion-icon name="chevron-forward-outline"></ion-icon> Tài khoản ngân
+            hàng Việt Nam – Chuyển khoản nội địa.
+          </li>
+          <li>
+            <ion-icon name="chevron-forward-outline"></ion-icon> Tài khoản ngân
+            hàng Đài Loan – Phù hợp cho khách hàng tại Đài Loan.
+          </li>
+          <li>
+            <ion-icon name="chevron-forward-outline"></ion-icon> Ví điện tử
+            &amp; phương thức quốc tế (nếu có) – Liên hệ để được hướng dẫn.
+          </li>
+        </ul>
+        <p>
+          Sau khi thanh toán, hệ thống tự động xác nhận giao dịch và cấp quyền
+          truy cập dịch vụ. Nếu cần hỗ trợ, hãy liên hệ CSKH.
+        </p>
+      </div>
+
+      <!-- Thanh toán qua Tài Khoản Việt -->
+      <div class="payment-option">
+        <a onclick="togglePaymentForm('viet')">Thanh toán qua Tài Khoản Việt</a>
+        <div class="payment-details" id="vietDetails">
+          <table class="payment-table">
+            <thead>
+              <tr>
+                <th>Thông Tin</th>
+                <th>Nội Dung</th>
+                <th>Copy</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Số tài khoản</td>
+                <td id="sacombankAccountNumber">070150806362</td>
+                <td>
+                  <button onclick="copyToClipboard('sacombankAccountNumber')">
+                    Copy
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td>Ngân hàng</td>
+                <td id="sacombankBank">Sacombank</td>
+                <td>
+                  <button onclick="copyToClipboard('sacombankBank')">
+                    Copy
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td>Chủ thẻ</td>
+                <td id="sacombankAccountName">DANG VAN MANH</td>
+                <td>
+                  <button onclick="copyToClipboard('sacombankAccountName')">
+                    Copy
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td>Số điện thoại</td>
+                <td id="sacombankPhone">0937019615</td>
+                <td>
+                  <button onclick="copyToClipboard('sacombankPhone')">
+                    Copy
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td>Địa chỉ</td>
+                <td id="sacombankAddress">Đức cơ, Gia lai</td>
+                <td>
+                  <button onclick="copyToClipboard('sacombankAddress')">
+                    Copy
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td>Email</td>
+                <td id="vietEmail"></td>
+                <td>
+                  <button onclick="copyToClipboard('vietEmail')">Copy</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Thanh toán qua Ngân hàng Đài Loan -->
+      <div class="payment-option">
+        <a onclick="togglePaymentForm('tw')"
+          >Thanh toán qua Ngân hàng Đài Loan</a
+        >
+        <div class="payment-details" id="twDetails">
+          <p style="color: #ff6666; font-weight: 600">
+            Thông tin tài khoản Đài Loan hiện không khả dụng!
+          </p>
+        </div>
+      </div>
+
+      <!-- Xác nhận thanh toán (Visa) -->
+      <div class="payment-option">
+        <a onclick="togglePaymentForm('visa')">Xác nhận thanh toán</a>
+        <div class="payment-details" id="visaDetails">
+          <p><strong>Số tiền thanh toán:</strong></p>
+          <input
+            type="number"
+            id="amountPaid"
+            placeholder="Nhập số tiền bạn đã thanh toán"
+            required
+          />
+          <p><strong>Cách thức thanh toán:</strong> Gửi Hóa Đơn để xác nhận</p>
+
+          <input
+            type="file"
+            id="invoiceUpload"
+            accept=".pdf, .jpg, .jpeg, .png"
+          />
+          <button
+            class="submit-btn"
+            id="visaSubmit"
+            onclick="confirmPayment('visa')"
+          >
+            Xác Nhận Thanh Toán
+          </button>
+        </div>
+      </div>
+
+      <!-- Icon mạng xã hội (hiệu ứng quay) -->
+      <div
+        style="
+          display: flex;
+          justify-content: center;
+          gap: 1rem;
+          margin-top: 1rem;
+        "
+      >
+        <a href="#" style="color: #4267b2; text-decoration: none">
+          <ion-icon
+            class="icon-dynamic"
+            name="logo-facebook"
+            style="font-size: 2rem"
+          ></ion-icon>
+        </a>
+        <a href="#" style="color: #25d366; text-decoration: none">
+          <ion-icon
+            class="icon-dynamic"
+            name="logo-whatsapp"
+            style="font-size: 2rem"
+          ></ion-icon>
+        </a>
+        <a href="#" style="color: #e1306c; text-decoration: none">
+          <ion-icon
+            class="icon-dynamic"
+            name="logo-instagram"
+            style="font-size: 2rem"
+          ></ion-icon>
+        </a>
+        <a href="#" style="color: #69c9d0; text-decoration: none">
+          <ion-icon
+            class="icon-dynamic"
+            name="logo-tiktok"
+            style="font-size: 2rem"
+          ></ion-icon>
+        </a>
+        <a href="#" style="color: #0077b5; text-decoration: none">
+          <ion-icon
+            class="icon-dynamic"
+            name="logo-linkedin"
+            style="font-size: 2rem"
+          ></ion-icon>
+        </a>
+      </div>
+
+      <!-- Footer -->
+      <footer class="content-footer">
+        <div class="footer-container">
+          <p>
+            &copy; 2023 <strong>Dangcapgaigoi</strong>. All rights reserved.
+          </p>
+          <p>
+            Designed by
+            <a href="https://dangcapgaigoi.com" target="_blank"
+              >Dangcapgaigoi Team</a
+            >
+          </p>
+        </div>
+      </footer>
+    </div>
+
+    <!-- Script JS -->
+    <script>
+      // Nạp navbar (nếu cần)
+      fetch("navbar.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("vietEmail").textContent =
+            "letienthanh6879" + "@" + "gmail.com";
+        });
+      document.getElementById("vietEmail").textContent =
+        "letienthanh6879@gmail.com";
+
+      // Dynamic notification function
+      function showNotification(message) {
+        const notification = document.getElementById("notification");
+        notification.textContent = message;
+        notification.classList.add("show");
+        setTimeout(() => {
+          notification.classList.remove("show");
+        }, 3000);
+      }
+
+      // Toggle hiển thị/ẩn chi tiết thanh toán
+      function togglePaymentForm(method) {
+        const detailsId = method + "Details";
+        const detailsElement = document.getElementById(detailsId);
+        const forms = ["vietDetails", "twDetails", "visaDetails"];
+        forms.forEach((f) => {
+          if (f !== detailsId) {
+            document.getElementById(f).style.display = "none";
+          }
+        });
+        // Với tài khoản Đài Loan, hiển thị thông báo động và ẩn luôn thông tin
+        if (method === "tw") {
+          showNotification(
+            "Các giao dịch hiện đang quá tải. Vui lòng chọn phương thức khác hoặc liên hệ CSKH."
+          );
+          detailsElement.style.display = "none";
+          return;
+        }
+        detailsElement.style.display =
+          detailsElement.style.display === "block" ? "none" : "block";
+      }
+
+      // Hàm copy nội dung sử dụng thông báo động
+      function copyToClipboard(id) {
+        const copyText = document.getElementById(id);
+        navigator.clipboard
+          .writeText(copyText.textContent || copyText.value)
+          .then(() => {
+            showNotification(
+              "Đã sao chép: " + (copyText.textContent || copyText.value)
+            );
+          })
+          .catch((err) => {
+            showNotification("Không thể sao chép: " + err);
+          });
+      }
+
+      // Xác nhận thanh toán (upload hóa đơn) sử dụng thông báo động
+      function confirmPayment(method) {
+        const amount = document.getElementById("amountPaid").value;
+        if (!amount || amount <= 0) {
+          showNotification("Vui lòng nhập số tiền thanh toán hợp lệ.");
+          return;
+        }
+        const invoice = document.getElementById("invoiceUpload").files[0];
+        if (!invoice) {
+          showNotification("Vui lòng tải lên hóa đơn.");
+          return;
+        }
+        showNotification(
+          "Gửi Hóa Đơn thành công! Vui lòng đợi hệ thống xác nhận!"
+        );
+      }
+    </script>
+  </body>
+</html>

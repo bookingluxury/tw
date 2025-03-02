@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=no, user-scalable=no"
+    />
+    <title>Profile</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Bootstrap Icons CDN -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+    />
+    <!-- Google Font Montserrat -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --card-bg: #dbdbdb;
+        --text-color: #5a20cb;
+        --disable-text-color: #7c3aed;
+        --gray-color: #9ca3af;
+      }
+
+      body {
+        margin: 0;
+        padding: 0 !important;
+        font-family: "Montserrat", sans-serif;
+        background: #f8f8f8;
+      }
+
+      .wrapper {
+        position: relative;
+        min-height: 100vh;
+        overflow-y: auto;
+        padding-bottom: 80px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+      }
+
+      /* HEADER với độ cong và bóng nhẹ */
+      .header {
+        position: relative;
+        z-index: 1;
+        height: 190px;
+        background: linear-gradient(90deg, #8c6ddd, #a770ce, #906edc);
+        user-select: none;
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+
+      .qr-code-container {
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        width: 40px;
+        height: 40px;
+        border: 2px solid #fff;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+      }
+      .qr-code-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .logout-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        color: #fff;
+        font-size: 14px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+      .logout-btn i {
+        font-size: 36px;
+      }
+
+      .user-wrapper {
+        display: flex;
+        align-items: center;
+        position: absolute;
+        bottom: 50px;
+        left: 25px;
+      }
+      .user_img {
+        border-radius: 50%;
+        overflow: hidden;
+        width: 70px;
+        height: 70px;
+        border: 2px solid #fff;
+        box-shadow: 0 0 6px rgba(0, 0, 0, 0.2), 0 0 12px rgba(0, 0, 0, 0.2);
+      }
+      .user_img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .login-content {
+        display: flex;
+        align-items: center;
+        margin-left: 15px;
+      }
+      .login-btn {
+        font-size: 20px;
+        color: #fff;
+        font-weight: 600;
+      }
+      .login-content img {
+        margin-left: 10px;
+      }
+      .login-label {
+        font-size: 18px;
+        margin-left: 5px;
+        color: #c7c6c1;
+        font-weight: 700;
+      }
+      .login-label i.icon-3d {
+        font-size: 18px;
+        color: #ffe066;
+        filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.3));
+        margin-right: 5px;
+      }
+      .bi-arrow-repeat,
+      .fa-refresh {
+        margin-right: 10px;
+      }
+
+      /* Finance: Nạp/Rút tiền với hiệu ứng Embossed nhẹ */
+      .finance {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        margin: -30px 20px 10px;
+        height: 95px;
+        background-color: var(--card-bg);
+        border-radius: 10px;
+        box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.15),
+          -2px -2px 6px rgba(255, 255, 255, 0.4);
+        z-index: 10;
+      }
+      .finance-item {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--text-color);
+        cursor: pointer;
+      }
+      .finance-item img {
+        width: 45px;
+        height: 45px;
+        margin-right: 10px;
+      }
+      .line {
+        width: 1px;
+        height: 60%;
+        background-color: rgba(255, 255, 255, 0.4);
+      }
+      .finance-item .text {
+        font-size: 16px;
+        font-weight: 900;
+      }
+
+      .wallet {
+        background-color: var(--card-bg);
+        border-radius: 10px;
+        box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.15),
+          -2px -2px 6px rgba(255, 255, 255, 0.4);
+        color: var(--text-color);
+        margin: 0 20px 15px;
+        padding: 10px 20px; /* Giảm padding tổng thể */
+        /* Nếu cần cố định chiều cao, có thể dùng min-height hoặc height */
+        /* height: 120px; */
+      }
+      .wallet .part-1 {
+        display: flex;
+        align-items: center;
+        margin-top: 15px; /* Giảm khoảng cách trên */
+        height: 20px; /* Giảm chiều cao */
+        margin-bottom: 18px; /* Giảm khoảng cách dưới */
+      }
+      .wallet .part-1 img.wallet-logo {
+        width: 35px; /* Giảm kích thước logo */
+        height: 35px;
+        margin-bottom: 5px;
+        margin-right: 8px;
+      }
+      .wallet .part-1 p {
+        font-size: 16px;
+        font-weight: 900;
+      }
+      .wallet .part-2 {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+      .wallet .part-2 span {
+        color: #662799;
+        font-size: 14px;
+        margin-right: 20px;
+        font-weight: 900;
+      }
+      .wallet .part-2 .balance {
+        margin-left: auto;
+        font-size: 18px;
+        color: rgb(192, 67, 173);
+        font-weight: 700;
+        text-align: right;
+      }
+      .wallet .part-2 .refresh-btn {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: linear-gradient(90deg, #8c6ddd, #a770ce, #906edc);
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        cursor: pointer;
+        margin-right: 10px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        filter: drop-shadow(1px 1px 3px rgba(0, 0, 0, 0.2));
+      }
+      .wallet .part-2 .refresh-btn:hover {
+        transform: scale(1.1);
+        box-shadow: 0 0 8px rgba(0, 0, 0, 0.25);
+      }
+
+      /* Menu với hiệu ứng Embossed nhẹ và độ cong */
+      .menu {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        margin: 5px 20px 120px;
+        background-color: var(--card-bg);
+        border-radius: 10px;
+        box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.15),
+          -2px -2px 6px rgba(255, 255, 255, 0.4);
+      }
+      .menu-item {
+        width: 50%;
+        font-weight: 600;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        padding-left: 7px;
+        border-bottom: 1px solid #f0f0f0;
+        border-right: 1px solid #f0f0f0;
+        color: #c820cb;
+        cursor: pointer;
+        transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+      }
+      .menu-item:nth-child(2n) {
+        border-right: none;
+      }
+      .menu-item:nth-last-child(1),
+      .menu-item:nth-last-child(2) {
+        border-bottom: none;
+      }
+      .menu-item:hover {
+        background: #5e5293;
+        color: #ffe066;
+      }
+      .menu-item:active {
+        box-shadow: inset 2px 2px 6px rgba(0, 0, 0, 0.15),
+          inset -2px -2px 6px rgba(255, 255, 255, 0.4);
+      }
+      .menu-item img {
+        width: 30px;
+        height: 30px;
+        margin-right: 10px;
+      }
+      .menu-item span {
+        font-size: 14px;
+        font-weight: 600;
+      }
+
+      /* BOTTOM NAV giữ nguyên */
+      .bottom-nav {
+        position: fixed !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        background: #222 !important;
+        height: 95px !important;
+        display: flex !important;
+        font-weight: 700 !important;
+        align-items: center !important;
+        padding: 0.75rem 10px !important;
+        border-top: 2px solid #444 !important;
+        z-index: 100002 !important;
+        box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.2),
+          0 0 10px 2px rgba(255, 255, 255, 0.3) !important;
+        gap: 30px !important;
+        scroll-snap-type: x mandatory !important;
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+        white-space: nowrap !important;
+        scroll-behavior: smooth !important;
+        padding-bottom: env(safe-area-inset-bottom) !important;
+        -webkit-overflow-scrolling: touch !important;
+        touch-action: pan-x !important;
+      }
+      .bottom-nav .nav-btn img {
+        width: 40px;
+        height: 40px;
+        object-fit: contain;
+      }
+      .nav-btn {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+        z-index: 100002 !important;
+        padding: 0.75rem 0;
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: #fff;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: relative;
+        text-decoration: none;
+      }
+      .nav-btn i.icon-3d {
+        font-size: 1.9rem;
+        color: #ff5fa5;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+      }
+      .nav-btn i {
+        font-size: 1.7rem;
+        color: #ff5fa5;
+        transition: transform 0.3s ease, color 0.3s ease;
+      }
+      .nav-btn:hover {
+        color: #8400ff;
+      }
+      .nav-btn:hover i {
+        transform: scale(1.2);
+        color: #ffe066;
+      }
+      .nav-btn.active i {
+        color: #ffe066;
+        animation: glow 1.2s infinite alternate;
+      }
+      @keyframes glow {
+        0% {
+          text-shadow: 0 0 10px #ff69b4, 0 0 20px #ff69b4;
+        }
+        100% {
+          text-shadow: 0 0 20px #ff69b4, 0 0 30px #ff69b4;
+        }
+      }
+      i.icon-3d {
+        filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.3));
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <!-- HEADER -->
+      <div class="header">
+        <!-- QR Code góc trái -->
+        <div class="qr-code-container">
+          <img
+            src="https://i.ibb.co/fYWPsXpg/simple-qr-code-icon-the-icon-can-be-used-for-websites-print-templates-presentation-templates-illustr.png"
+            alt="QR Code"
+          />
+        </div>
+
+        <!-- Nút Đăng xuất góc phải -->
+        <div class="logout-btn">
+          <i class="bi bi-box-arrow-right icon-3d"></i>
+        </div>
+
+        <!-- Thông tin User với avatar -->
+        <div class="user-wrapper">
+          <div class="user_img">
+            <img src="https://be.girlvip.pro/avatar/18.png" alt="User Image" />
+          </div>
+          <div class="login-content">
+            <p class="login-btn">huy2212</p>
+            <img
+              src="https://girlvip.pro/img/mine/level_vip.webp"
+              width="40"
+              style="margin-left: 20px"
+              alt="VIP"
+            />
+            <p class="login-label">
+              VIP
+              <?= $info["vip"] ?>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <!-- NẠP TIỀN / RÚT TIỀN -->
+        <div class="finance">
+          <div class="finance-item">
+            <img src="https://i.ibb.co/tMW84Jgn/top-up.png" alt="Nạp tiền" />
+            <span class="text">Nạp tiền</span>
+          </div>
+          <div class="line"></div>
+          <div class="finance-item">
+            <img
+              src="https://i.ibb.co/21KbgySD/withdrawal.png"
+              alt="Rút tiền"
+            />
+            <span class="text">Rút tiền</span>
+          </div>
+        </div>
+
+        <!-- Ví -->
+        <div class="wallet">
+          <div class="part-1">
+            <img
+              src="https://i.ibb.co/8g4r187w/wallet.png"
+              alt="Wallet Logo"
+              class="wallet-logo"
+            />
+            <p class="flex-1 font-20 font-primary-color">Ví của tôi</p>
+          </div>
+          <div class="part-2">
+            <div class="refresh-btn">
+              <i class="fa fa-refresh" aria-hidden="true"></i>
+            </div>
+            <span>Số dư</span>
+            <p class="balance">77777</p>
+          </div>
+          <div class="part-2">
+            <div class="refresh-btn">
+              <i class="fa fa-refresh" aria-hidden="true"></i>
+            </div>
+            <span>Điểm tín nhiệm</span>
+            <p class="balance">99</p>
+          </div>
+        </div>
+
+        <!-- MENU -->
+        <div class="menu">
+          <div class="menu-item" data-modal="userBankModal">
+            <div class="menu-item-icon">
+              <img
+                src="https://i.ibb.co/SwTkCQxy/3631694-bank-banking-finance-icon.png"
+                alt="Tài khoản ngân hàng"
+              />
+            </div>
+            <span class="menu-item-label">Tài khoản của tôi</span>
+          </div>
+          <div class="menu-item" data-modal="reviewModal">
+            <div class="menu-item-icon">
+              <img
+                src="https://i.ibb.co/5WphvxmP/4135321.png"
+                alt="Lịch sử đánh giá"
+              />
+            </div>
+            <span class="menu-item-label">Lịch sử đánh giá</span>
+          </div>
+          <div class="menu-item" data-modal="bookingHistoryModal">
+            <div class="menu-item-icon">
+              <img
+                src="https://i.ibb.co/1J6qpCjN/5684733.png"
+                alt="Lịch sử dịch vụ"
+              />
+            </div>
+            <span class="menu-item-label">Lịch sử dich vụ</span>
+          </div>
+          <div class="menu-item" data-modal="userDetailModal">
+            <div class="menu-item-icon">
+              <img
+                src="https://i.ibb.co/Jwh0vN8D/5681422-design-laptop-ux-icon.png"
+                alt="Trung tâm cá nhân"
+              />
+            </div>
+            <span class="menu-item-label">Trung tâm cá nhân</span>
+          </div>
+          <div class="menu-item" data-modal="userNotiModal">
+            <div class="menu-item-icon">
+              <img
+                src="https://i.ibb.co/SD3yTtdP/3082909.png"
+                alt="Thông báo"
+              />
+            </div>
+            <span class="menu-item-label">Thông báo</span>
+          </div>
+          <div class="menu-item" data-modal="cskhModal">
+            <div class="menu-item-icon">
+              <img
+                src="https://i.ibb.co/xKxqh6BR/5695500.png"
+                alt="Chăm sóc khách hàng"
+              />
+            </div>
+            <span class="menu-item-label">Chăm sóc khách hàng</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BOTTOM NAV -->
+    <div class="bottom-nav">
+      <a href="index.html" class="nav-btn">
+        <img src="https://i.ibb.co/7JMBcSLM/5684646.png" alt="Trang chủ" />
+        <span>Trang chủ</span>
+      </a>
+      <a href="services.html" class="nav-btn">
+        <img
+          src="https://i.ibb.co/SwbKL5LF/3668636-premium-rate-rating-icon.png"
+          alt="Đánh giá"
+        />
+        <span>Đánh giá</span>
+      </a>
+      <a href="add-credit.html" class="nav-btn">
+        <img
+          src="https://i.ibb.co/yn0NTF8T/3631712-cash-money-wallet-icon.png"
+          alt="Tài khoản tôi"
+        />
+        <span>Tài khoản tôi</span>
+      </a>
+      <a href="services.html" class="nav-btn">
+        <img src="https://i.ibb.co/WRcbXqY/6091783.png" alt="Dịch Vụ" />
+        <span>Dịch Vụ</span>
+      </a>
+      <a href="booking.html" class="nav-btn">
+        <img src="https://i.ibb.co/209QjsY8/5695442.png" alt="Booking" />
+        <span>Booking</span>
+      </a>
+      <a href="photos.html" class="nav-btn">
+        <img src="https://i.ibb.co/d4bTk40m/8341973.png" alt="Thư Viện Ảnh" />
+        <span>Thư Viện Ảnh</span>
+      </a>
+      <a href="video.html" class="nav-btn">
+        <img
+          src="https://i.ibb.co/XkVNCPPQ/7793060-flowchart-video-gallery-movies-icon.png"
+          alt="Video Nổi Bật"
+        />
+        <span>Video Nổi Bật</span>
+      </a>
+      <a href="private-connection.html" class="nav-btn">
+        <img src="https://i.ibb.co/3yyX9n08/5337863.png" alt="Kết Nối 18+" />
+        <span>Kết Nối 18+</span>
+      </a>
+    </div>
+    <div id="navbar-placeholder"></div>
+    <script src="menu.js"></script>
+  </body>
+</html>

@@ -1,0 +1,1329 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thư viện ảnh hiện đại</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <script
+    type="module"
+    src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+  ></script>
+  <script
+    nomodule
+    src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+  ></script>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Roboto:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* Global Styles */
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        /* Màu nền gốc: xanh đen (navy/dark) */
+        background: #0b0f1a;
+
+        /* Gradient radial để tạo chiều sâu mờ ở trung tâm */
+        background: radial-gradient(
+          circle at center,
+          rgba(11, 15, 26, 0.7) 0%,
+          /* Màu hơi trong suốt ở tâm */ rgba(11, 15, 26, 1) 100%
+            /* Màu đậm hơn ở ngoài rìa */
+        );
+
+        /* Đặt chiều cao full màn hình */
+        min-height: 100vh;
+
+        /* Đảm bảo phần tử con được hiển thị phía trên */
+        position: relative;
+
+        color: #fff; /* Màu chữ mặc định (trắng) trên nền tối */
+      }
+
+      /* Lớp phủ sao (starfield) tạo thêm độ sâu */
+      body::before {
+        content: "";
+        position: absolute;
+        z-index: -1; /* Đẩy lớp phủ ra phía sau nội dung */
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+
+        /* Thay đường dẫn ảnh sao, hoặc bạn có thể dùng ảnh bokeh, particle... */
+        background: url("https://i.ibb.co/ycBpNQyM/pngtree-light-effect-background-halo-radial-image-2419979.jpg")
+          no-repeat center center;
+        background-size: cover;
+
+        /* Độ trong suốt để hòa trộn với nền phía dưới */
+        opacity: 0.2;
+        pointer-events: none;
+      }
+      .container {
+        padding-bottom: 80px;
+      }
+     
+      h1 {
+        position: relative;
+
+        text-align: center;
+        font-size: 2.5rem;
+
+        border-radius: 8px;
+        background: linear-gradient(
+          45deg,
+          #ff5252,
+          #ff9800,
+          #4caf50,
+          #2196f3,
+          #9c27b0
+        );
+        background-size: 300%;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        animation: gradientAnimation 5s ease infinite, slideIn 1s ease-out;
+      }
+      @keyframes gradientAnimation {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+      @keyframes slideIn {
+        0% {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .category-tabs {
+    display: flex;
+    justify-content: center; /* Căn giữa các mục */
+    flex-wrap: wrap; /* Đảm bảo không bị tràn dòng */
+    width: 100%; /* Chiếm toàn bộ chiều rộng */
+    padding: 10px 0;
+    gap: 15px; /* Thêm khoảng cách giữa các tab */
+}
+
+
+.category-tabs .nav-item {
+    flex: 1;
+    text-align: center;
+    min-width: 120px; /* Đảm bảo không quá nhỏ */
+    max-width: 180px; /* Giới hạn kích thước tối đa */
+}
+
+
+
+.category-tabs::-webkit-scrollbar {
+    display: none;
+}
+
+
+
+.category-tabs .nav-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-width: 120px;
+    font-weight: bold;
+    background: linear-gradient(90deg, #ff5e00, #efefef, #7a00ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+    padding: 12px 18px;
+    transition: background-color 0.4s ease, transform 0.4s ease;
+}
+
+/* Bỏ viền khi hover */
+.category-tabs .nav-link:hover {
+    transform: scale(1.1);
+    background-color: transparent !important; /* Không có hiệu ứng nền */
+    box-shadow: none !important; /* Không có viền hoặc shadow */
+    border: none !important; /* Bỏ luôn border nếu có */
+}
+
+/* Bỏ viền khi tab được chọn */
+.category-tabs .nav-link.active {
+    color: #fff;
+    background-color: rgba(255, 255, 255, 0.2);
+    border: none;
+    outline: none; /* Chặn trình duyệt tự động thêm viền */
+}
+
+/* Bỏ viền khi focus */
+.category-tabs .nav-link:focus {
+    outline: none !important; /* Chặn viền trắng khi click vào */
+    box-shadow: none !important;
+    border: none !important;
+}
+
+.nav-link {
+  border: none;
+   background: linear-gradient(90deg, #0544b9, #efefef, #ff0000);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+      /* Photo Gallery Styles */
+      .photo-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px; /* Khoảng cách giữa các ảnh (hàng ngang và dọc) */
+        justify-content: center;
+      }
+      .photo-card {
+        position: relative; /* Để định vị tiêu đề */
+        background-color: #fff;
+        border: 1px solid #ccc; /* Viền cho ảnh nhỏ */
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        cursor: pointer;
+      }
+      .photo-card img {
+        width: 100%;
+        height: 270px; /* Chiều cao cố định cho ảnh nhỏ */
+        object-fit: cover;
+        display: block;
+      }
+      /* Hiệu ứng cho tiêu đề ảnh: ẩn mặc định, xuất hiện khi hover */
+      .photo-info {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 5px;
+        background: rgba(0, 0, 0, 0.6);
+        transform: translateY(100%);
+        transition: transform 0.3s ease;
+        text-align: center;
+      }
+      .photo-card:hover .photo-info {
+        transform: translateY(0);
+      }
+      .photo-title {
+        margin: 0;
+        font-size: 1rem;
+        /* Hiệu ứng gradient động cho tiêu đề ảnh */
+        background: linear-gradient(45deg, #ff5252, #ff9800);
+        background-size: 200%;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: textGradient 3s ease infinite;
+      }
+      @keyframes textGradient {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      /* Hiệu ứng riêng cho từng danh mục ảnh */
+      /* 1. Ảnh gái xinh: phóng to nhẹ, bóng mờ màu hồng */
+      #anhGaiXinh-photos .photo-card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 10px 20px rgba(255, 182, 193, 0.6);
+      }
+      /* 2. Hot Tiktok: phóng to + xoay nhẹ, bóng mờ màu cam */
+      #hotTiktok-photos .photo-card:hover {
+        transform: scale(1.05) rotate(2deg);
+        box-shadow: 0 10px 20px rgba(255, 165, 0, 0.6);
+      }
+      /* 3. Ảnh sexy: phóng to, thêm viền đỏ và bóng mờ đỏ */
+      #anhSexy-photos .photo-card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 10px 20px rgba(0, 255, 149, 0.6);
+        border: 2px solid #00fff2;
+      }
+      /* 4. Ảnh nóng: phóng to + xoay nhẹ (ngược), tăng độ sáng, bóng mờ đỏ cam */
+      #anhNong-photos .photo-card:hover {
+        transform: scale(1.05) rotate(-1deg);
+        box-shadow: 0 10px 20px rgba(255, 69, 0, 0.6);
+        filter: brightness(1.1);
+      }
+      .photo-col {
+        flex: 0 0 calc(33.333% - 10px);
+        max-width: calc(33.333% - 10px);
+      }
+
+      @media (max-width: 768px) {
+        .photo-col {
+          flex: 0 0 calc(50% - 2px);
+          max-width: calc(50% - 2px);
+        }
+        h1 {
+          font-size: 3.5rem;
+        }
+      }
+      @media (max-width: 480px) {
+        .photo-col {
+          flex: 0 0 calc(50% - 2px);
+          max-width: calc(50% - 2px);
+        }
+      }
+      .nav-link.active {
+      background: linear-gradient(90deg, #10b905, #efefef, #7a00ff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        text-align: center;
+        border: none;
+
+       }
+      #modalImage {
+        border-radius: 12px;
+      }
+      .content-footer {
+        background: linear-gradient(90deg, #10b905, #efefef, #7a00ff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        text-align: center;
+        padding: 1.5rem 0;
+        margin-top: 2rem;
+        border-top: 1px solid #444;
+        font-size: 0.9rem;
+        letter-spacing: 0.5px;
+      }
+      .footer-container p {
+        margin: 0.5rem;
+      }
+      .footer-container a {
+        color: #ffc107;
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+      .footer-container a:hover {
+        color: #ffdd57;
+      }
+      @keyframes rotateIcon {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.icon-dynamic {
+  display: inline-block;
+  animation: rotateIcon 4s linear infinite;
+}
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem; /* Giảm khoảng cách giữa các icon */
+  margin-top: 0.3rem; /* Giảm khoảng cách phía trên */
+  margin-bottom: 0rem; /* Giảm khoảng cách phía dưới */
+}
+
+.content-footer {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem; /* Giảm khoảng cách giữa icon và footer */
+}
+
+    </style>
+  </head>
+  <body>
+    
+
+    <div id="navbar-placeholder"></div>
+    <script src="menu.js"></script>
+    <div class="container py-3">
+      <h1>📸 Thư viện ảnh</h1>
+      
+      <!-- Các Tab (Categories) -->
+      <ul
+        class="nav nav-tabs category-tabs justify-content-center mb-3"
+        id="myTab"
+      >
+       <!-- Nav tabs -->
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a class="nav-link active" data-bs-toggle="tab" href="#anhGaiXinh">Gái xinh</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" data-bs-toggle="tab" href="#hotTiktok">Hot Tiktok</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" data-bs-toggle="tab" href="#anhSexy">Ảnh sexy</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" data-bs-toggle="tab" href="#anhNong">Ảnh nóng</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" data-bs-toggle="tab" href="#noitieng">Nổi Tiếng</a>
+  </li>
+</ul>
+
+<!-- Tab contents -->
+<div class="tab-content">
+  <!-- Tab: Ảnh gái xinh -->
+  <div class="tab-pane fade show active" id="anhGaiXinh">
+    <div class="row g-0 photo-container" id="anhGaiXinh-photos">
+      <!-- Các ảnh cho "Ảnh gái xinh" sẽ được render tại đây -->
+    </div>
+  </div>
+  <!-- Tab: Hot Tiktok -->
+  <div class="tab-pane fade" id="hotTiktok">
+    <div class="row g-0 photo-container" id="hotTiktok-photos">
+      <!-- Các ảnh cho "Hot Tiktok" -->
+    </div>
+  </div>
+  <!-- Tab: Ảnh sexy -->
+  <div class="tab-pane fade" id="anhSexy">
+    <div class="row g-0 photo-container" id="anhSexy-photos">
+      <!-- Các ảnh cho "Ảnh sexy" -->
+    </div>
+  </div>
+  <!-- Tab: Ảnh nóng -->
+  <div class="tab-pane fade" id="anhNong">
+    <div class="row g-0 photo-container" id="anhNong-photos">
+      <!-- Các ảnh cho "Ảnh nóng" -->
+    </div>
+  </div>
+  <!-- Tab: Người Nổi Tiếng -->
+  <div class="tab-pane fade" id="noitieng">
+    <div class="row g-0 photo-container" id="noitieng-photos">
+      <!-- Thêm các ảnh khác nếu cần -->
+    </div>
+  </div>
+</div>
+
+    <!-- Modal hiển thị ảnh lớn kèm nút Prev & Next -->
+    <div
+      class="modal fade"
+      id="imageModal"
+      tabindex="-1"
+      aria-labelledby="imageModalLabel"
+      aria-hidden="true"
+    >
+      <div
+        class="modal-dialog modal-dialog-centered modal-lg position-relative"
+      >
+        <div class="modal-content">
+          <div class="modal-body p-0 position-relative">
+            <img id="modalImage" src="" alt="" class="img-fluid w-100" />
+            <!-- Nút Prev -->
+            <button
+              id="prevButton"
+              class="btn btn-secondary position-absolute"
+              style="
+                top: 50%;
+                left: 10px;
+                transform: translateY(-50%);
+                z-index: 10;
+              "
+            >
+              Prev
+            </button>
+            <!-- Nút Next -->
+            <button
+              id="nextButton"
+              class="btn btn-secondary position-absolute"
+              style="
+                top: 50%;
+                right: 10px;
+                transform: translateY(-50%);
+                z-index: 10;
+              "
+            >
+              Next
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="navbar-placeholder"></div>
+
+    <script src="menu.js"></script>
+    <div
+    style="
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1rem;
+    "
+  >
+    <a href="#" style="color: #4267b2; text-decoration: none">
+      <ion-icon
+        class="icon-dynamic"
+        name="logo-facebook"
+        style="font-size: 2rem"
+      ></ion-icon>
+    </a>
+    <a href="#" style="color: #25d366; text-decoration: none">
+      <ion-icon
+        class="icon-dynamic"
+        name="logo-whatsapp"
+        style="font-size: 2rem"
+      ></ion-icon>
+    </a>
+    <a href="#" style="color: #e1306c; text-decoration: none">
+      <ion-icon
+        class="icon-dynamic"
+        name="logo-instagram"
+        style="font-size: 2rem"
+      ></ion-icon>
+    </a>
+    <a href="#" style="color: #69c9d0; text-decoration: none">
+      <ion-icon
+        class="icon-dynamic"
+        name="logo-tiktok"
+        style="font-size: 2rem"
+      ></ion-icon>
+    </a>
+    <a href="#" style="color: #0077b5; text-decoration: none">
+      <ion-icon
+        class="icon-dynamic"
+        name="logo-linkedin"
+        style="font-size: 2rem"
+      ></ion-icon>
+    </a>
+  </div>
+
+  <!-- Footer -->
+  <footer class="content-footer">
+    <div class="footer-container">
+      <p>
+        &copy; 2023 <strong>Dangcapgaigoi</strong>. All rights reserved.
+      </p>
+      <p>
+        Designed by
+        <a href="https://dangcapgaigoi.com" target="_blank"
+          >Dangcapgaigoi Team</a
+        >
+      </p>
+    </div>
+  </footer>
+
+    <!-- Bootstrap Bundle JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+  const noiTiengLink = document.querySelector('a[href="#noitieng"]');
+  if (noiTiengLink) {
+    noiTiengLink.addEventListener("click", function (e) {
+      e.preventDefault();
+      alert("Bạn chưa được truy cập chức năng này");
+    });
+  }
+});
+
+      fetch("navbar.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("navbar-placeholder").innerHTML = data;
+        });
+      // ============================================
+      // 1. Xác định danh mục (tabs) của bạn
+      // ============================================
+      // Ví dụ: "anhGaiXinh", "hotTiktok", "anhSexy", "anhNong"
+      const categories = ["anhGaiXinh", "hotTiktok", "anhSexy", "anhNong"];
+
+      // ============================================
+      // 2. Khai báo mảng ảnh cho các danh mục khác (nếu có)
+      // Ví dụ: bạn có thể có một số ảnh cho các mục khác –
+      // nếu không có, bạn có thể để mảng rỗng hoặc bỏ qua.
+      // ============================================
+const anhGaiXinhImages=["https://i.ibb.co/K2F6fxp/photo-360-23-06-2024-18-06-52.jpg","https://i.ibb.co/YDySRRw/photo-361-23-06-2024-18-06-52.jpg","https://i.ibb.co/Sf3hfJk/photo-362-23-06-2024-18-07-57.jpg","https://i.ibb.co/484B0s1/photo-363-23-06-2024-18-07-57.jpg","https://i.ibb.co/1zLxYyn/photo-368-23-06-2024-18-09-20.jpg","https://i.ibb.co/023NYtX/photo-369-23-06-2024-18-09-35.jpg","https://i.ibb.co/QNCkBtV/photo-370-23-06-2024-18-09-35.jpg","https://i.ibb.co/R9F2YLm/photo-371-23-06-2024-18-09-35.jpg","https://i.ibb.co/KwYf0DC/photo-372-23-06-2024-18-09-46.jpg","https://i.ibb.co/CK1ngZP/photo-373-23-06-2024-18-09-46.jpg","https://i.ibb.co/N3Kb5H0/photo-374-23-06-2024-18-09-54.jpg","https://i.ibb.co/jLhpXKb/photo-383-23-06-2024-18-14-25.jpg","https://i.ibb.co/yWstjfm/photo-387-23-06-2024-18-15-52.jpg","https://i.ibb.co/tPKmtRy/photo-386-23-06-2024-18-15-52.jpg","https://i.ibb.co/T2KrQtb/photo-391-23-06-2024-18-17-07.jpg","https://i.ibb.co/StS8gvD/photo-393-23-06-2024-18-17-42.jpg","https://i.ibb.co/j68ggCS/photo-394-23-06-2024-18-17-51.jpg","https://i.ibb.co/vxWNg21/photo-396-23-06-2024-18-18-26.jpg","https://i.ibb.co/hDX5csj/photo-401-23-06-2024-18-19-56.jpg","https://i.ibb.co/3hpsgPx/photo-402-23-06-2024-18-20-40.jpg","https://i.ibb.co/Yjx58pw/photo-403-23-06-2024-18-20-55.jpg","https://i.ibb.co/b1YmpJ4/photo-404-23-06-2024-18-20-55.jpg","https://i.ibb.co/qFN49qn/photo-405-23-06-2024-18-20-55.jpg","https://i.ibb.co/XfHCFrh/photo-407-23-06-2024-18-21-13.jpg","https://i.ibb.co/VjDP3t9/photo-409-23-06-2024-18-22-02.jpg","https://i.ibb.co/xXtZxkL/photo-411-23-06-2024-18-22-24.jpg","https://i.ibb.co/Ybj2jY8/photo-410-23-06-2024-18-22-13.jpg","https://i.ibb.co/wwkFTCD/photo-413-23-06-2024-18-23-45.jpg","https://i.ibb.co/QfS8gKg/photo-414-23-06-2024-18-23-45.jpg","https://i.ibb.co/G2xd22z/photo-415-23-06-2024-18-23-45.jpg","https://i.ibb.co/WPgnzfV/photo-416-23-06-2024-18-24-02.jpg","https://i.ibb.co/6rj7kqT/photo-417-23-06-2024-18-24-02.jpg","https://i.ibb.co/WyXtTyY/photo-424-23-06-2024-18-25-01.jpg","https://i.ibb.co/HGXbfby/photo-425-23-06-2024-18-25-11.jpg","https://i.ibb.co/6ZHzBnL/photo-426-23-06-2024-18-25-11.jpg","https://i.ibb.co/kmwkF08/photo-427-23-06-2024-18-25-29.jpg","https://i.ibb.co/Ns2FNk5/photo-428-23-06-2024-18-25-29.jpg","https://i.ibb.co/MBDjSHf/photo-429-23-06-2024-18-25-29.jpg","https://i.ibb.co/250ghm7/photo-430-23-06-2024-18-25-29.jpg","https://i.ibb.co/yYWpj3m/photo-431-23-06-2024-18-25-29.jpg","https://i.ibb.co/tY6XwFB/photo-432-23-06-2024-18-25-51.jpg","https://i.ibb.co/pxZrvF3/photo-435-23-06-2024-18-26-15.jpg","https://i.ibb.co/5h2rjtx/photo-436-23-06-2024-18-26-15.jpg","https://i.ibb.co/8X0yrwh/photo-437-23-06-2024-18-26-32.jpg","https://i.ibb.co/FK4V14J/photo-438-23-06-2024-18-26-32.jpg","https://i.ibb.co/1ntQMVq/photo-439-23-06-2024-18-26-32.jpg","https://i.ibb.co/3RxYPP5/photo-440-23-06-2024-18-26-40.jpg","https://i.ibb.co/FVmb8j2/photo-441-23-06-2024-18-26-55.jpg","https://i.ibb.co/2P6z40D/photo-442-23-06-2024-18-26-55.jpg","https://i.ibb.co/TTVmBpF/photo-443-23-06-2024-18-26-55.jpg","https://i.ibb.co/PMJDQ4Q/photo-444-23-06-2024-18-27-10.jpg","https://i.ibb.co/6gp8d4r/photo-445-23-06-2024-18-27-10.jpg","https://i.ibb.co/n6YXsZV/photo-446-23-06-2024-18-27-10.jpg","https://i.ibb.co/CMYJp9D/photo-447-23-06-2024-18-27-33.jpg","https://i.ibb.co/S6cPWYJ/photo-448-23-06-2024-18-27-34.jpg","https://i.ibb.co/wNtFcLk/photo-449-23-06-2024-18-27-34.jpg","https://i.ibb.co/Y0dntqX/photo-451-23-06-2024-18-27-34.jpg","https://i.ibb.co/8Mnck33/photo-450-23-06-2024-18-27-34.jpg","https://i.ibb.co/7jg9zPk/photo-452-23-06-2024-18-28-06.jpg","https://i.ibb.co/NsVxqjj/photo-454-23-06-2024-18-28-06.jpg","https://i.ibb.co/qYkLL8g/photo-455-23-06-2024-18-28-06.jpg","https://i.ibb.co/Hpfsb5W/photo-456-23-06-2024-18-28-19.jpg","https://i.ibb.co/C55Qqc7/photo-457-23-06-2024-18-28-19.jpg","https://i.ibb.co/W2yHxBm/photo-458-23-06-2024-18-28-19.jpg","https://i.ibb.co/TW0z7Bq/photo-460-23-06-2024-18-28-37.jpg","https://i.ibb.co/K2hnwjs/photo-461-23-06-2024-18-28-37.jpg","https://i.ibb.co/pjknsPV/photo-462-23-06-2024-18-28-37.jpg","https://i.ibb.co/VgL2TrG/photo-463-23-06-2024-18-28-44.jpg","https://i.ibb.co/PGzKDXR/photo-464-23-06-2024-18-28-54.jpg","https://i.ibb.co/G2fY244/photo-465-23-06-2024-18-29-03.jpg","https://i.ibb.co/tbHmW1D/photo-466-23-06-2024-18-29-09.jpg","https://i.ibb.co/VBk6vG0/photo-467-23-06-2024-18-29-18.jpg","https://i.ibb.co/pRBHxqV/photo-468-23-06-2024-18-29-40.jpg","https://i.ibb.co/KXxvhXx/photo-469-23-06-2024-18-29-40.jpg","https://i.ibb.co/tpQFK52/photo-471-23-06-2024-18-29-41.jpg","https://i.ibb.co/Qnvrk3Q/photo-412-23-06-2024-18-22-44.jpg","https://i.ibb.co/MPvxB6s/photo-453-23-06-2024-18-28-06.jpg","https://i.ibb.co/LrgPGpx/photo-459-23-06-2024-18-28-37.jpg","https://i.ibb.co/hHCbG9h/photo-472-23-06-2024-18-29-52.jpg","https://i.ibb.co/8BYkWwx/photo-473-23-06-2024-18-30-02.jpg","https://i.ibb.co/3kdhsnf/photo-474-23-06-2024-18-30-02.jpg","https://i.ibb.co/y5HtHm7/photo-475-23-06-2024-18-30-10.jpg","https://i.ibb.co/873XLC6/photo-476-23-06-2024-18-30-17.jpg","https://i.ibb.co/NVD30JF/photo-478-23-06-2024-18-30-26.jpg","https://i.ibb.co/g67zDPL/photo-479-23-06-2024-18-30-46.jpg","https://i.ibb.co/0Y7QgLr/photo-480-23-06-2024-18-30-46.jpg","https://i.ibb.co/qNcZbw8/photo-481-23-06-2024-18-30-46.jpg","https://i.ibb.co/612XhHK/photo-482-23-06-2024-18-30-46.jpg","https://i.ibb.co/ysjBRK2/photo-483-23-06-2024-18-30-46.jpg","https://i.ibb.co/wgjLkyZ/photo-484-23-06-2024-18-31-09.jpg","https://i.ibb.co/Rghqz7n/photo-518-23-06-2024-18-36-35.jpg","https://i.ibb.co/Zgdz1gK/photo-519-23-06-2024-18-37-03.jpg","https://i.ibb.co/yNPmRbw/photo-520-23-06-2024-18-37-03.jpg","https://i.ibb.co/bXQbVkj/photo-521-23-06-2024-18-37-03.jpg","https://i.ibb.co/XZsyXs3/photo-522-23-06-2024-18-37-03.jpg","https://i.ibb.co/RTgsTDq/photo-523-23-06-2024-18-37-28.jpg","https://i.ibb.co/RzQVbVv/photo-524-23-06-2024-18-37-28.jpg","https://i.ibb.co/fDRCDqv/photo-525-23-06-2024-18-37-40.jpg","https://i.ibb.co/5rGMWgV/photo-526-23-06-2024-18-38-11.jpg","https://i.ibb.co/Xz74JNC/photo-527-23-06-2024-18-38-11.jpg","https://i.ibb.co/ZL2vQ18/photo-528-23-06-2024-18-38-11.jpg","https://i.ibb.co/2K1133G/photo-529-23-06-2024-18-38-11.jpg","https://i.ibb.co/CJyynqH/photo-530-23-06-2024-18-39-00.jpg","https://i.ibb.co/B3Rb7Qh/photo-531-23-06-2024-18-39-10.jpg","https://i.ibb.co/PhG7n77/photo-532-23-06-2024-18-40-26.jpg","https://i.ibb.co/tYb0Bnt/photo-533-23-06-2024-18-40-36.jpg","https://i.ibb.co/FBzh4Yk/photo-534-23-06-2024-18-41-56.jpg","https://i.ibb.co/qgWcdVK/photo-535-23-06-2024-18-42-02.jpg","https://i.ibb.co/zZDG4B6/photo-536-23-06-2024-18-42-08.jpg","https://i.ibb.co/sVjmdmX/photo-537-23-06-2024-18-42-16.jpg","https://i.ibb.co/zHR4QST/photo-538-23-06-2024-18-42-31.jpg","https://i.ibb.co/kDFFKzC/photo-539-23-06-2024-18-49-29.jpg","https://i.ibb.co/TtxDXK7/photo-540-23-06-2024-18-49-29.jpg","https://i.ibb.co/7kzV0Ln/photo-541-23-06-2024-18-49-29.jpg","https://i.ibb.co/StGJKsg/photo-543-23-06-2024-18-50-58.jpg","https://i.ibb.co/mz5JBKz/photo-549-23-06-2024-18-51-05.jpg",];const hotTiktokImages=["https://i.ibb.co/MRsjWpb/photo-2-23-06-2024-15-02-26.jpg","https://i.ibb.co/6nwPB9r/photo-5-23-06-2024-15-14-03.jpg","https://i.ibb.co/ggMVFBk/photo-6-23-06-2024-15-17-01.jpg","https://i.ibb.co/WBcy3SM/photo-7-23-06-2024-15-17-01.jpg","https://i.ibb.co/Rz8DmrP/photo-8-23-06-2024-15-17-01.jpg","https://i.ibb.co/zXGMmdB/photo-9-23-06-2024-15-17-01.jpg","https://i.ibb.co/FgSKFhq/photo-12-23-06-2024-15-17-01-thumb.jpg","https://i.ibb.co/dghG2pL/photo-10-23-06-2024-15-17-01.jpg","https://i.ibb.co/0JsHR5N/photo-14-23-06-2024-15-23-14.jpg","https://i.ibb.co/HpFgnwm/photo-18-23-06-2024-15-37-18.jpg","https://i.ibb.co/fpBWS5H/photo-19-23-06-2024-15-37-18.jpg","https://i.ibb.co/fNHBFmj/photo-20-23-06-2024-15-37-18.jpg","https://i.ibb.co/g9nm61x/photo-28-23-06-2024-15-38-55.jpg","https://i.ibb.co/xSb5jPB/photo-29-23-06-2024-15-38-55.jpg","https://i.ibb.co/7WXxJ9F/photo-30-23-06-2024-15-39-06-thumb.jpg","https://i.ibb.co/rw4wdMK/photo-31-23-06-2024-15-39-40.jpg","https://i.ibb.co/XWv7g1m/photo-32-23-06-2024-15-39-40.jpg","https://i.ibb.co/Db8QZ0Z/photo-33-23-06-2024-15-39-51.jpg","https://i.ibb.co/RbTDH2s/photo-34-23-06-2024-15-40-03.jpg","https://i.ibb.co/wr6z51F/photo-36-23-06-2024-15-40-12.jpg","https://i.ibb.co/gTcVktG/photo-37-23-06-2024-15-40-22.jpg","https://i.ibb.co/XJ54tkm/photo-38-23-06-2024-15-42-25.jpg","https://i.ibb.co/DKb3hZz/photo-39-23-06-2024-15-42-25.jpg","https://i.ibb.co/HFTzfH4/photo-40-23-06-2024-15-42-25.jpg","https://i.ibb.co/sv66cF3/photo-41-23-06-2024-15-42-53.jpg","https://i.ibb.co/vjHxgN4/photo-42-23-06-2024-15-42-53.jpg","https://i.ibb.co/NsWFr94/photo-43-23-06-2024-15-42-53.jpg","https://i.ibb.co/9p3hK1b/photo-44-23-06-2024-15-44-07.jpg","https://i.ibb.co/ZJn3YpL/photo-45-23-06-2024-15-44-07.jpg","https://i.ibb.co/dW6bdzt/photo-46-23-06-2024-15-44-07.jpg","https://i.ibb.co/GT3wfJ1/photo-47-23-06-2024-15-44-25.jpg","https://i.ibb.co/VQLPjMB/photo-48-23-06-2024-15-44-37.jpg","https://i.ibb.co/chY2sxS/photo-49-23-06-2024-15-44-55.jpg","https://i.ibb.co/FqcMhjL/photo-50-23-06-2024-15-44-55.jpg","https://i.ibb.co/RQN6VcH/photo-51-23-06-2024-15-44-55.jpg","https://i.ibb.co/23QcyRz/photo-52-23-06-2024-15-46-49.jpg","https://i.ibb.co/w4342wJ/photo-53-23-06-2024-15-47-41.jpg","https://i.ibb.co/P4G1j51/photo-54-23-06-2024-15-47-41.jpg","https://i.ibb.co/xg2BPpL/photo-56-23-06-2024-15-48-57.jpg","https://i.ibb.co/KqWncBF/photo-57-23-06-2024-15-49-11.jpg","https://i.ibb.co/W6Y6wwk/photo-58-23-06-2024-15-49-11.jpg","https://i.ibb.co/84n0xYB/photo-59-23-06-2024-15-49-28.jpg","https://i.ibb.co/34cXfbt/photo-60-23-06-2024-15-49-28.jpg","https://i.ibb.co/7jzGL6j/photo-61-23-06-2024-15-49-28.jpg","https://i.ibb.co/68rrSMC/photo-62-23-06-2024-15-49-39.jpg","https://i.ibb.co/T0vD3Tp/photo-63-23-06-2024-15-50-50.jpg","https://i.ibb.co/Smqsv40/photo-64-23-06-2024-15-50-50.jpg","https://i.ibb.co/SvGJWsn/photo-65-23-06-2024-15-50-50.jpg","https://i.ibb.co/68QSzp0/photo-66-23-06-2024-15-51-09.jpg","https://i.ibb.co/Vt4mJYN/photo-67-23-06-2024-15-51-31.jpg","https://i.ibb.co/GM7nScX/photo-68-23-06-2024-15-51-31.jpg","https://i.ibb.co/ZgW3Sq2/photo-69-23-06-2024-15-51-31.jpg","https://i.ibb.co/CMK51Yq/photo-70-23-06-2024-15-51-48.jpg","https://i.ibb.co/X3sCF8L/photo-71-23-06-2024-15-51-48.jpg","https://i.ibb.co/L5WmnWR/photo-72-23-06-2024-15-52-01.jpg","https://i.ibb.co/9cYsS0n/photo-73-23-06-2024-15-52-30.jpg","https://i.ibb.co/MBPBQhY/photo-74-23-06-2024-15-52-30.jpg","https://i.ibb.co/KxLDtbS/photo-75-23-06-2024-15-53-17.jpg","https://i.ibb.co/4SS2tnZ/photo-76-23-06-2024-15-53-17.jpg","https://i.ibb.co/54P8dsf/photo-77-23-06-2024-15-53-17.jpg","https://i.ibb.co/ScpsJHV/photo-78-23-06-2024-15-53-17.jpg","https://i.ibb.co/WK8kbyC/photo-79-23-06-2024-15-53-26.jpg","https://i.ibb.co/qYZ6pt4/photo-80-23-06-2024-15-54-48.jpg","https://i.ibb.co/QvkwTVC/photo-81-23-06-2024-15-55-23.jpg","https://i.ibb.co/s1ZHgy3/photo-83-23-06-2024-15-56-40.jpg","https://i.ibb.co/NWyzh2v/photo-84-23-06-2024-15-56-40.jpg","https://i.ibb.co/wW7vtj6/photo-85-23-06-2024-15-57-11.jpg","https://i.ibb.co/WtNgNk8/photo-86-23-06-2024-15-57-30.jpg","https://i.ibb.co/yd5DPmy/photo-87-23-06-2024-15-57-40.jpg","https://i.ibb.co/TP6chtT/photo-88-23-06-2024-15-58-41.jpg","https://i.ibb.co/mqL8Phw/photo-97-23-06-2024-16-01-45.jpg","https://i.ibb.co/P9fdD7S/photo-96-23-06-2024-15-59-55.jpg","https://i.ibb.co/61FD3VM/photo-98-23-06-2024-16-02-09.jpg","https://i.ibb.co/FB4nTnP/photo-100-23-06-2024-16-04-42.jpg","https://i.ibb.co/58P88bN/photo-101-23-06-2024-16-04-42-thumb.jpg","https://i.ibb.co/qnSLTVv/photo-104-23-06-2024-16-05-45.jpg","https://i.ibb.co/1XLpgLh/photo-105-23-06-2024-16-06-41-thumb.jpg","https://i.ibb.co/Jq4n3rS/photo-106-23-06-2024-16-06-41-thumb.jpg","https://i.ibb.co/h9dY2KH/photo-107-23-06-2024-16-06-41-thumb.jpg","https://i.ibb.co/ZTZ13Bd/photo-108-23-06-2024-16-07-03-thumb.jpg","https://i.ibb.co/KNbdJbr/photo-109-23-06-2024-16-07-10-thumb.jpg","https://i.ibb.co/5k0r41L/photo-110-23-06-2024-16-07-18-thumb.jpg","https://i.ibb.co/zRgSrBm/photo-111-23-06-2024-16-07-31.jpg","https://i.ibb.co/HV5QD09/photo-112-23-06-2024-16-07-31.jpg","https://i.ibb.co/jw9h8H1/photo-113-23-06-2024-16-07-31.jpg","https://i.ibb.co/JBqZthP/photo-114-23-06-2024-16-07-57.jpg","https://i.ibb.co/wKxkQfw/photo-115-23-06-2024-16-07-57.jpg","https://i.ibb.co/jgk5Lt4/photo-116-23-06-2024-16-07-57-thumb.jpg","https://i.ibb.co/09NLRtH/photo-117-23-06-2024-16-07-57.jpg","https://i.ibb.co/RTqVnJC/photo-118-23-06-2024-16-07-57.jpg","https://i.ibb.co/HBMLRwC/photo-327-23-06-2024-18-00-07.jpg","https://i.ibb.co/ZLpVxkP/photo-328-23-06-2024-18-00-07.jpg","https://i.ibb.co/RSLV9wc/photo-329-23-06-2024-18-00-07.jpg","https://i.ibb.co/PNJKsfs/photo-330-23-06-2024-18-00-07.jpg","https://i.ibb.co/WFNX7rP/photo-332-23-06-2024-18-00-55.jpg","https://i.ibb.co/3WmNy8t/photo-333-23-06-2024-18-00-55.jpg","https://i.ibb.co/CnzdNM0/photo-335-23-06-2024-18-02-59.jpg","https://i.ibb.co/rdZDKLc/photo-336-23-06-2024-18-03-23.jpg","https://i.ibb.co/YcdY1jx/photo-337-23-06-2024-18-03-23.jpg","https://i.ibb.co/NmcrtrC/photo-338-23-06-2024-18-03-33.jpg","https://i.ibb.co/t80qYtr/photo-339-23-06-2024-18-03-56.jpg","https://i.ibb.co/Ns64WPc/photo-340-23-06-2024-18-03-56.jpg","https://i.ibb.co/G57vn9P/photo-341-23-06-2024-18-03-56.jpg","https://i.ibb.co/PmJtWLD/photo-342-23-06-2024-18-03-56.jpg","https://i.ibb.co/vcnwsG4/photo-343-23-06-2024-18-03-56.jpg","https://i.ibb.co/whzK7pt/photo-344-23-06-2024-18-03-56.jpg","https://i.ibb.co/XYmyvmg/photo-349-23-06-2024-18-04-25.jpg","https://i.ibb.co/BwQC9WS/photo-351-23-06-2024-18-04-48.jpg","https://i.ibb.co/j8wNrBQ/photo-356-23-06-2024-18-05-55.jpg","https://i.ibb.co/7pSnjsL/photo-357-23-06-2024-18-06-51.jpg","https://i.ibb.co/9gF42p3/photo-358-23-06-2024-18-06-52.jpg","https://i.ibb.co/0DZJLQQ/photo-359-23-06-2024-18-06-52.jpg","https://i.ibb.co/Qdmbv56/photo-119-23-06-2024-16-08-05.jpg","https://i.ibb.co/3ykgsgT/photo-121-23-06-2024-16-08-23.jpg","https://i.ibb.co/XL4HnZ6/photo-123-23-06-2024-16-08-46-thumb.jpg","https://i.ibb.co/dbqgsWR/photo-124-23-06-2024-16-08-46.jpg","https://i.ibb.co/cLQSBtk/photo-125-23-06-2024-16-08-46-thumb.jpg","https://i.ibb.co/b5YchBD/photo-126-23-06-2024-16-08-53-thumb.jpg","https://i.ibb.co/x7GT3FH/photo-127-23-06-2024-16-09-02-thumb.jpg","https://i.ibb.co/k29cBSb/photo-128-23-06-2024-16-09-21-thumb.jpg","https://i.ibb.co/d6b3nTL/photo-129-23-06-2024-16-09-21-thumb.jpg","https://i.ibb.co/K5HXs5s/photo-130-23-06-2024-16-09-21-thumb.jpg","https://i.ibb.co/7VXmNpb/photo-131-23-06-2024-16-09-21.jpg","https://i.ibb.co/JkdBRwH/photo-132-23-06-2024-16-09-39.jpg","https://i.ibb.co/HtnGbc0/photo-133-23-06-2024-16-09-39-thumb.jpg","https://i.ibb.co/Sx5FdWT/photo-134-23-06-2024-16-09-39-thumb.jpg","https://i.ibb.co/qrhvq8x/photo-135-23-06-2024-16-09-39-thumb.jpg","https://i.ibb.co/t2XRmpY/photo-136-23-06-2024-16-09-39-thumb.jpg","https://i.ibb.co/vXdmK71/photo-141-23-06-2024-16-10-20.jpg","https://i.ibb.co/3ztPq25/photo-142-23-06-2024-16-10-20.jpg","https://i.ibb.co/PrY9npf/photo-147-23-06-2024-16-10-51.jpg","https://i.ibb.co/0mCntNr/photo-148-23-06-2024-16-10-51.jpg",];const anhSexyImages=["https://i.ibb.co/9HTZBn3/photo-149-23-06-2024-16-11-00-thumb.jpg","https://i.ibb.co/0rfP8d8/photo-150-23-06-2024-16-11-00-thumb.jpg","https://i.ibb.co/NxL76g8/photo-151-23-06-2024-16-11-12-thumb.jpg","https://i.ibb.co/Jxfx0Hr/photo-156-23-06-2024-16-11-36.jpg","https://i.ibb.co/qW4NTkp/photo-157-23-06-2024-16-11-37.jpg","https://i.ibb.co/8mN3qkm/photo-158-23-06-2024-16-11-37.jpg","https://i.ibb.co/NYCXCPK/photo-163-23-06-2024-16-13-50.jpg","https://i.ibb.co/K6ngyBW/photo-165-23-06-2024-16-14-53.jpg","https://i.ibb.co/k1TCjnW/photo-166-23-06-2024-16-15-37-thumb.jpg","https://i.ibb.co/5ByN6fm/photo-167-23-06-2024-16-16-19.jpg","https://i.ibb.co/jb6N5hx/photo-168-23-06-2024-16-16-31-thumb.jpg","https://i.ibb.co/XCvNdwp/photo-169-23-06-2024-16-18-02-thumb.jpg","https://i.ibb.co/RyrpJVz/photo-170-23-06-2024-16-18-35-thumb.jpg","https://i.ibb.co/y4fz02F/photo-171-23-06-2024-16-19-26-thumb.jpg","https://i.ibb.co/jRhK8FC/photo-172-23-06-2024-16-20-25-thumb.jpg","https://i.ibb.co/VNxrp1j/photo-173-23-06-2024-16-20-25-thumb.jpg","https://i.ibb.co/LP6JKB6/photo-174-23-06-2024-16-20-25-thumb.jpg","https://i.ibb.co/ZTYFXbh/photo-175-23-06-2024-16-20-25-thumb.jpg","https://i.ibb.co/NZm2yM4/photo-176-23-06-2024-16-20-35-thumb.jpg","https://i.ibb.co/Jk5VW2g/photo-178-23-06-2024-16-21-13-thumb.jpg","https://i.ibb.co/nrJQ0Zq/photo-179-23-06-2024-16-22-21-thumb.jpg","https://i.ibb.co/2gyhcGY/photo-181-23-06-2024-16-22-56.jpg","https://i.ibb.co/Nn1rk4H/photo-182-23-06-2024-16-23-28.jpg","https://i.ibb.co/M7hQyyB/photo-184-23-06-2024-16-23-52.jpg","https://i.ibb.co/p1Rhd9c/photo-187-23-06-2024-16-25-39-thumb.jpg","https://i.ibb.co/f4PG8x1/photo-186-23-06-2024-16-25-39.jpg","https://i.ibb.co/JpHKc9m/photo-188-23-06-2024-16-25-39-thumb.jpg","https://i.ibb.co/f4gjcnn/photo-189-23-06-2024-16-25-39.jpg","https://i.ibb.co/BCySqt9/photo-195-23-06-2024-16-26-24-thumb.jpg","https://i.ibb.co/dJrX2Fb/photo-196-23-06-2024-16-26-41-thumb.jpg","https://i.ibb.co/CVtsK4x/photo-197-23-06-2024-16-26-41-thumb.jpg","https://i.ibb.co/T269t0s/photo-198-23-06-2024-16-26-41.jpg","https://i.ibb.co/bzVPtbc/photo-199-23-06-2024-17-08-28.jpg","https://i.ibb.co/pnfghk5/photo-200-23-06-2024-17-08-44.jpg","https://i.ibb.co/6mMSMgg/photo-201-23-06-2024-17-08-44-thumb.jpg","https://i.ibb.co/8b8bhzs/photo-202-23-06-2024-17-08-44.jpg","https://i.ibb.co/RDfmvy8/photo-203-23-06-2024-17-08-44.jpg","https://i.ibb.co/98srcJM/photo-204-23-06-2024-17-08-53-thumb.jpg","https://i.ibb.co/4YWNrZN/photo-205-23-06-2024-17-09-09-thumb.jpg","https://i.ibb.co/ZdJNXY9/photo-206-23-06-2024-17-09-09-thumb.jpg","https://i.ibb.co/x81KqfW/photo-207-23-06-2024-17-09-21.jpg","https://i.ibb.co/svhg9zh/photo-208-23-06-2024-17-09-34.jpg","https://i.ibb.co/jJpZ82b/photo-298-23-06-2024-17-56-26.jpg","https://i.ibb.co/YX9nG2z/photo-299-23-06-2024-17-56-26.jpg","https://i.ibb.co/Tc1xVSR/photo-303-23-06-2024-17-57-23.jpg","https://i.ibb.co/SVvpJ8p/photo-304-23-06-2024-17-57-23.jpg","https://i.ibb.co/hVnK09h/photo-305-23-06-2024-17-57-23.jpg","https://i.ibb.co/gDVh9SW/photo-306-23-06-2024-17-57-23.jpg","https://i.ibb.co/phVWgnZ/photo-307-23-06-2024-17-57-36.jpg","https://i.ibb.co/5R7h2zw/photo-308-23-06-2024-17-58-00.jpg","https://i.ibb.co/H7pjqZF/photo-309-23-06-2024-17-58-00.jpg","https://i.ibb.co/XVTWzsb/photo-310-23-06-2024-17-58-00.jpg","https://i.ibb.co/CVsgcbB/photo-311-23-06-2024-17-58-00.jpg","https://i.ibb.co/0rYCvWr/photo-312-23-06-2024-17-58-00.jpg","https://i.ibb.co/tYgSTsZ/photo-313-23-06-2024-17-58-27.jpg","https://i.ibb.co/WghXq6P/photo-314-23-06-2024-17-58-56.jpg","https://i.ibb.co/pnYtsRS/photo-315-23-06-2024-17-58-56.jpg","https://i.ibb.co/S7Snd9w/photo-316-23-06-2024-17-58-56.jpg","https://i.ibb.co/s1yKFyC/photo-317-23-06-2024-17-58-56.jpg","https://i.ibb.co/q937cgg/photo-318-23-06-2024-17-58-56.jpg","https://i.ibb.co/qdWy7P1/photo-319-23-06-2024-17-58-56.jpg","https://i.ibb.co/rtfzbcm/photo-320-23-06-2024-17-59-12.jpg","https://i.ibb.co/5hHmBzT/photo-321-23-06-2024-17-59-23.jpg","https://i.ibb.co/xLqC3hM/photo-322-23-06-2024-17-59-31.jpg","https://i.ibb.co/Zh3Wkp7/photo-323-23-06-2024-17-59-49.jpg","https://i.ibb.co/d7yQy5B/photo-324-23-06-2024-17-59-49.jpg","https://i.ibb.co/chGZJ2x/photo-326-23-06-2024-17-59-49.jpg","https://i.ibb.co/1JWG08f/photo-209-23-06-2024-17-10-02-Sao-ch-p.jpg","https://i.ibb.co/J2NDRrX/photo-210-23-06-2024-17-10-02-Sao-ch-p.jpg","https://i.ibb.co/Y74cfgx/photo-214-23-06-2024-17-40-01-Sao-ch-p.jpg","https://i.ibb.co/0Dp7f70/photo-216-23-06-2024-17-40-09-Sao-ch-p.jpg","https://i.ibb.co/wCBGgPg/photo-217-23-06-2024-17-40-16-Sao-ch-p.jpg","https://i.ibb.co/t4x2J3d/photo-218-23-06-2024-17-40-51-Sao-ch-p.jpg","https://i.ibb.co/0Yvcqdn/photo-219-23-06-2024-17-40-51-Sao-ch-p.jpg","https://i.ibb.co/wWCFR14/photo-220-23-06-2024-17-40-51-Sao-ch-p.jpg","https://i.ibb.co/sQ9qBb2/photo-221-23-06-2024-17-41-10-Sao-ch-p.jpg","https://i.ibb.co/VJvhM68/photo-222-23-06-2024-17-41-10-Sao-ch-p.jpg","https://i.ibb.co/CwjhCZT/photo-223-23-06-2024-17-41-10-Sao-ch-p.jpg","https://i.ibb.co/TbKjhBJ/photo-224-23-06-2024-17-41-10-Sao-ch-p.jpg","https://i.ibb.co/svmn0tk/photo-225-23-06-2024-17-45-11-Sao-ch-p.jpg","https://i.ibb.co/6Xkc79d/photo-226-23-06-2024-17-45-12-Sao-ch-p.jpg","https://i.ibb.co/vHftjpz/photo-232-23-06-2024-17-45-46-Sao-ch-p.jpg","https://i.ibb.co/hFp4GgM/photo-233-23-06-2024-17-45-55-Sao-ch-p.jpg","https://i.ibb.co/p1FW7wt/photo-234-23-06-2024-17-46-08-Sao-ch-p.jpg","https://i.ibb.co/7WVgxng/photo-235-23-06-2024-17-46-13-Sao-ch-p.jpg","https://i.ibb.co/FJQRrym/photo-236-23-06-2024-17-46-21-Sao-ch-p.jpg","https://i.ibb.co/n7NYZt8/photo-237-23-06-2024-17-46-38-Sao-ch-p.jpg","https://i.ibb.co/dbfRYd1/photo-238-23-06-2024-17-46-38-Sao-ch-p.jpg","https://i.ibb.co/RSxF11X/photo-239-23-06-2024-17-46-38-Sao-ch-p.jpg","https://i.ibb.co/SdzCJbG/photo-240-23-06-2024-17-46-38-Sao-ch-p.jpg","https://i.ibb.co/XjgvH5F/photo-241-23-06-2024-17-46-57-Sao-ch-p.jpg","https://i.ibb.co/k187JCP/photo-242-23-06-2024-17-46-57-Sao-ch-p.jpg","https://i.ibb.co/WVSgf55/photo-243-23-06-2024-17-46-57-Sao-ch-p.jpg","https://i.ibb.co/8PHMwbf/photo-244-23-06-2024-17-48-18-Sao-ch-p.jpg","https://i.ibb.co/q7MNxRs/photo-245-23-06-2024-17-48-18-Sao-ch-p.jpg","https://i.ibb.co/9YnLsDx/photo-246-23-06-2024-17-48-18-Sao-ch-p.jpg","https://i.ibb.co/GVGmxb1/photo-247-23-06-2024-17-48-18-Sao-ch-p.jpg","https://i.ibb.co/54SrxzT/photo-248-23-06-2024-17-48-18-Sao-ch-p.jpg","https://i.ibb.co/929GNYj/photo-249-23-06-2024-17-48-43-Sao-ch-p.jpg","https://i.ibb.co/yQrVYCz/photo-250-23-06-2024-17-48-53-Sao-ch-p.jpg","https://i.ibb.co/VMWqsXW/photo-251-23-06-2024-17-48-53-Sao-ch-p.jpg","https://i.ibb.co/tDPFLdC/photo-252-23-06-2024-17-49-02-Sao-ch-p.jpg","https://i.ibb.co/mtLRKzT/photo-253-23-06-2024-17-49-41-Sao-ch-p.jpg","https://i.ibb.co/fv81fJz/photo-258-23-06-2024-17-49-59-Sao-ch-p.jpg","https://i.ibb.co/wRGrW3S/photo-259-23-06-2024-17-49-59-Sao-ch-p.jpg","https://i.ibb.co/WnYMsbr/photo-260-23-06-2024-17-49-59-Sao-ch-p.jpg","https://i.ibb.co/LNFLDcb/photo-261-23-06-2024-17-50-31-Sao-ch-p.jpg","https://i.ibb.co/SvVp3PS/photo-262-23-06-2024-17-50-31-Sao-ch-p.jpg","https://i.ibb.co/34HgK1L/photo-263-23-06-2024-17-50-31-Sao-ch-p.jpg","https://i.ibb.co/tQZQmNR/photo-264-23-06-2024-17-51-04-Sao-ch-p.jpg","https://i.ibb.co/X8QcjBx/photo-265-23-06-2024-17-51-04-Sao-ch-p.jpg","https://i.ibb.co/GpcD3Dm/photo-266-23-06-2024-17-51-04-Sao-ch-p.jpg","https://i.ibb.co/B4d0Sm3/photo-267-23-06-2024-17-51-04-Sao-ch-p.jpg","https://i.ibb.co/5cL60ft/photo-268-23-06-2024-17-51-16-Sao-ch-p.jpg","https://i.ibb.co/D9pv4B0/photo-269-23-06-2024-17-51-29-Sao-ch-p.jpg","https://i.ibb.co/Pm3Ggr2/photo-270-23-06-2024-17-51-59-Sao-ch-p.jpg","https://i.ibb.co/LZwGNHb/photo-271-23-06-2024-17-51-59-Sao-ch-p.jpg","https://i.ibb.co/BnpxFTt/photo-272-23-06-2024-17-51-59-Sao-ch-p.jpg","https://i.ibb.co/KmPktvM/photo-273-23-06-2024-17-52-14-Sao-ch-p.jpg","https://i.ibb.co/fQJNHLQ/photo-274-23-06-2024-17-52-14-Sao-ch-p.jpg","https://i.ibb.co/2dzH9X4/photo-275-23-06-2024-17-52-27-Sao-ch-p.jpg","https://i.ibb.co/K2bQKSB/photo-276-23-06-2024-17-52-27-Sao-ch-p.jpg","https://i.ibb.co/hWt7wv5/photo-277-23-06-2024-17-52-43-Sao-ch-p.jpg","https://i.ibb.co/5KNCnrR/photo-278-23-06-2024-17-52-44-Sao-ch-p.jpg","https://i.ibb.co/hWnb0fZ/photo-279-23-06-2024-17-52-44-Sao-ch-p.jpg","https://i.ibb.co/P4QqxKH/photo-280-23-06-2024-17-53-11-Sao-ch-p.jpg","https://i.ibb.co/bmJcmz1/photo-281-23-06-2024-17-53-18-Sao-ch-p.jpg","https://i.ibb.co/LtP77XK/photo-282-23-06-2024-17-53-29-Sao-ch-p.jpg","https://i.ibb.co/v3bncq2/photo-286-23-06-2024-17-54-14-Sao-ch-p.jpg","https://i.ibb.co/pPLhsvM/photo-287-23-06-2024-17-54-14-Sao-ch-p.jpg","https://i.ibb.co/1Z0Qngm/photo-287-23-06-2024-17-54-14-thumb.jpg","https://i.ibb.co/sJnTc6x/photo-288-23-06-2024-17-54-23-Sao-ch-p.jpg","https://i.ibb.co/FbVsH4f/photo-289-23-06-2024-17-55-04-Sao-ch-p.jpg","https://i.ibb.co/5vt2bF3/photo-290-23-06-2024-17-55-04-Sao-ch-p.jpg","https://i.ibb.co/TRtvrzb/photo-292-23-06-2024-17-55-31.jpg","https://i.ibb.co/xjxjCv9/photo-293-23-06-2024-17-55-31.jpg","https://i.ibb.co/TMNqFFR/photo-294-23-06-2024-17-55-31.jpg","https://i.ibb.co/yXrV6S8/photo-295-23-06-2024-17-55-31.jpg","https://i.ibb.co/1JHTTdQ/photo-296-23-06-2024-17-56-04.jpg","https://i.ibb.co/Gs46XGm/photo-297-23-06-2024-17-56-26.jpg",];const anhNongImages=["https://i.ibb.co/CVVxbH3/photo-2024-06-22-13-57-05-2.jpg","https://i.ibb.co/MBZp8sW/photo-2024-06-22-13-57-05-3.jpg","https://i.ibb.co/RNjLzr3/photo-2024-06-22-13-57-05.jpg","https://i.ibb.co/TqK8YJV/photo-2024-06-23-13-20-40-2.jpg","https://i.ibb.co/4g4sPdw/photo-2024-06-23-13-20-40.jpg","https://i.ibb.co/8X4vKpm/photo-2024-06-25-22-18-12-2.jpg","https://i.ibb.co/ZKmpBkT/photo-2024-06-25-22-18-12.jpg","https://i.ibb.co/ZNCgGHb/photo-2024-06-26-19-55-40.jpg","https://i.ibb.co/CsvFRcJ/photo-2024-06-28-13-28-29.jpg","https://i.ibb.co/zQYnCtj/photo-2024-06-29-13-54-47.jpg","https://i.ibb.co/8DZLjJX/photo-2024-07-02-15-30-31.jpg","https://i.ibb.co/C6J8wVS/photo-2024-07-04-14-48-16.jpg","https://i.ibb.co/5njjhyG/photo-2024-07-05-13-28-08.jpg","https://i.ibb.co/7NRpDVd/photo-2024-07-05-16-55-20.jpg","https://i.ibb.co/1ZTBM8F/photo-2024-07-07-11-38-49.jpg","https://i.ibb.co/HPgZR2d/photo-2024-07-07-12-01-11.jpg","https://i.ibb.co/Wzm1Kn1/photo-2024-07-09-19-26-44.jpg","https://i.ibb.co/sRPmjz3/photo-2024-07-09-20-09-22.jpg","https://i.ibb.co/cCxxfKn/photo-2024-07-10-17-20-55.jpg","https://i.ibb.co/RQr9WBb/photo-2024-07-20-15-04-44.jpg","https://i.ibb.co/5shzYm1/photo-2024-07-26-18-16-36.jpg","https://i.ibb.co/0FYvf0Y/photo-2024-07-26-20-22-04.jpg","https://i.ibb.co/FYKDS0k/photo-2024-07-29-18-46-37.jpg","https://i.ibb.co/rygHbZ2/photo-2024-07-31-13-27-12.jpg","https://i.ibb.co/PG99N7b/photo-1-2024-10-23-11-52-15.jpg","https://i.ibb.co/BPncGH7/photo-1-2024-10-23-11-22-02.jpg","https://i.ibb.co/Nr5qKL2/photo-1-2024-10-23-11-52-30.jpg","https://i.ibb.co/t3qMwZB/photo-2-2024-10-23-11-51-38.jpg","https://i.ibb.co/0jrgC38/photo-2-2024-10-23-11-52-30.jpg","https://i.ibb.co/H7gHRfp/photo-2-2024-10-23-11-52-15.jpg","https://i.ibb.co/xSsFcHq/photo-3-2024-10-23-11-22-02.jpg","https://i.ibb.co/WsNDbnK/photo-3-2024-10-23-11-52-15.jpg","https://i.ibb.co/RcJCBVD/photo-3-2024-10-23-11-52-30.jpg","https://i.ibb.co/Pt3cqrf/photo-4-2024-10-23-11-51-38.jpg","https://i.ibb.co/p2vNxfh/photo-4-2024-10-23-11-52-15.jpg","https://i.ibb.co/R9bZwr9/photo-4-2024-10-23-11-52-30.jpg","https://i.ibb.co/2jv4sMs/photo-5-2024-10-23-11-22-02.jpg","https://i.ibb.co/L0n93cz/photo-5-2024-10-23-11-52-15.jpg","https://i.ibb.co/WzXRhQg/photo-5-2024-10-23-11-52-30.jpg","https://i.ibb.co/hMqKzQ9/photo-6-2024-10-23-11-51-38.jpg","https://i.ibb.co/ZBmG87y/photo-6-2024-10-23-11-52-30.jpg","https://i.ibb.co/MB3Gct7/photo-7-2024-10-23-11-51-38.jpg","https://i.ibb.co/X8922pL/photo-7-2024-10-23-11-52-15.jpg","https://i.ibb.co/p4XzgtY/photo-7-2024-10-23-11-52-30.jpg","https://i.ibb.co/y6Pt5MW/photo-8-2024-10-23-11-51-38.jpg","https://i.ibb.co/b2BxRcW/photo-8-2024-10-23-11-52-15.jpg","https://i.ibb.co/n0Xhxs4/photo-9-2024-10-23-11-22-02.jpg","https://i.ibb.co/ZXQz03b/photo-9-2024-10-23-11-52-15.jpg","https://i.ibb.co/PQHwdMm/photo-9-2024-10-23-11-52-30.jpg","https://i.ibb.co/YXh9kKb/photo-10-2024-10-23-11-22-02.jpg","https://i.ibb.co/tbypMvJ/photo-10-2024-10-23-11-52-15.jpg","https://i.ibb.co/2yHwZhZ/photo-10-2024-10-23-11-52-30.jpg","https://i.ibb.co/X5ks6CP/photo-11-2024-10-23-11-22-02.jpg","https://i.ibb.co/vVNVr7n/photo-11-2024-10-23-11-52-15.jpg","https://i.ibb.co/865k7YW/photo-11-2024-10-23-11-52-30.jpg","https://i.ibb.co/k3hTjQD/photo-12-2024-10-23-11-22-02.jpg","https://i.ibb.co/Tk833Hn/photo-12-2024-10-23-11-52-15.jpg","https://i.ibb.co/3cPH7hj/photo-12-2024-10-23-11-52-30.jpg","https://i.ibb.co/dBv8yd2/photo-13-2024-10-23-11-22-02.jpg","https://i.ibb.co/SNmpdgf/photo-13-2024-10-23-11-52-15.jpg","https://i.ibb.co/71Y3C62/photo-14-2024-10-23-11-51-38.jpg","https://i.ibb.co/ykbKDdF/photo-14-2024-10-23-11-52-15.jpg","https://i.ibb.co/0sYx3Dn/photo-14-2024-10-23-11-52-30.jpg","https://i.ibb.co/12mwWRg/photo-15-2024-10-23-11-22-02.jpg","https://i.ibb.co/Bnytcwr/photo-15-2024-10-23-11-52-15.jpg","https://i.ibb.co/g7nCYc4/photo-15-2024-10-23-11-52-30.jpg","https://i.ibb.co/d2FxT6x/photo-16-2024-10-23-11-51-38.jpg","https://i.ibb.co/nP596XN/photo-16-2024-10-23-11-52-15.jpg","https://i.ibb.co/54G8SY8/photo-16-2024-10-23-11-52-30.jpg","https://i.ibb.co/7CS5z7s/photo-17-2024-10-23-11-22-02.jpg","https://i.ibb.co/d0Cvktp/photo-17-2024-10-23-11-52-15.jpg","https://i.ibb.co/vLcGbVx/photo-18-2024-10-23-11-51-38.jpg","https://i.ibb.co/hKvSffj/photo-18-2024-10-23-11-52-15.jpg","https://i.ibb.co/ZXQJP5M/photo-18-2024-10-23-11-52-30.jpg","https://i.ibb.co/gM42Djp/photo-19-2024-10-23-11-22-02.jpg","https://i.ibb.co/cQ5jYtH/photo-19-2024-10-23-11-52-15.jpg","https://i.ibb.co/tHxqtYY/photo-19-2024-10-23-11-52-30.jpg","https://i.ibb.co/fdC2Vqn/photo-20-2024-10-23-11-51-38.jpg","https://i.ibb.co/RCknckF/photo-20-2024-10-23-11-52-15.jpg","https://i.ibb.co/rMrN3cG/photo-21-2024-10-23-11-22-02.jpg","https://i.ibb.co/vJYf7L9/photo-21-2024-10-23-11-52-15.jpg","https://i.ibb.co/yP9ncXw/photo-21-2024-10-23-11-52-30.jpg","https://i.ibb.co/D7GbY8f/photo-22-2024-10-23-11-51-38.jpg","https://i.ibb.co/c67kgkx/photo-22-2024-10-23-11-52-15.jpg","https://i.ibb.co/MCpyBrv/photo-22-2024-10-23-11-52-30.jpg","https://i.ibb.co/HD57mqY/photo-23-2024-10-23-11-51-38.jpg","https://i.ibb.co/Nxzm4Yx/photo-23-2024-10-23-11-52-15.jpg","https://i.ibb.co/mcc9Jch/photo-23-2024-10-23-11-52-30.jpg","https://i.ibb.co/4jrXQNZ/photo-24-2024-10-23-11-51-38.jpg","https://i.ibb.co/YT4c4nJ/photo-24-2024-10-23-11-52-15.jpg","https://i.ibb.co/xqDhW0z/photo-24-2024-10-23-11-52-30.jpg","https://i.ibb.co/dct9kbk/photo-25-2024-10-23-11-51-38.jpg","https://i.ibb.co/g6pRYnX/photo-25-2024-10-23-11-52-15.jpg","https://i.ibb.co/8x69dFT/photo-25-2024-10-23-11-52-30.jpg","https://i.ibb.co/TKZmfVX/photo-26-2024-10-23-11-51-38.jpg","https://i.ibb.co/Dfkft9Q/photo-26-2024-10-23-11-52-15.jpg","https://i.ibb.co/WKQv69w/photo-26-2024-10-23-11-52-30.jpg","https://i.ibb.co/BjBdytt/photo-27-2024-10-23-11-22-02.jpg","https://i.ibb.co/M9kGpQd/photo-27-2024-10-23-11-52-15.jpg","https://i.ibb.co/Zdz7ccR/photo-27-2024-10-23-11-52-30.jpg","https://i.ibb.co/ZcjJLfm/photo-28-2024-10-23-11-51-38.jpg","https://i.ibb.co/yqBdFZ2/photo-28-2024-10-23-11-52-15.jpg","https://i.ibb.co/QYvQ7Lg/photo-28-2024-10-23-11-52-30.jpg","https://i.ibb.co/cFspDv7/photo-29-2024-10-23-11-22-02.jpg","https://i.ibb.co/23tXYk1/photo-29-2024-10-23-11-52-15.jpg","https://i.ibb.co/ZxcVz07/photo-29-2024-10-23-11-52-30.jpg","https://i.ibb.co/JvZS9tb/photo-30-2024-10-23-11-51-38.jpg","https://i.ibb.co/CzTtsR9/photo-30-2024-10-23-11-52-15.jpg","https://i.ibb.co/vwVW6Nd/photo-30-2024-10-23-11-52-30.jpg","https://i.ibb.co/JkYFptc/photo-31-2024-10-23-11-22-02.jpg","https://i.ibb.co/kMBRC35/photo-31-2024-10-23-11-52-15.jpg","https://i.ibb.co/kmfqKf4/photo-31-2024-10-23-11-52-30.jpg","https://i.ibb.co/1ffHXMs/photo-32-2024-10-23-11-51-38.jpg","https://i.ibb.co/fdc02bY/photo-32-2024-10-23-11-52-15.jpg","https://i.ibb.co/3c4BNyW/photo-32-2024-10-23-11-52-30.jpg","https://i.ibb.co/h2HCB93/photo-33-2024-10-23-11-52-15.jpg","https://i.ibb.co/c10kMTh/photo-33-2024-10-23-11-52-30.jpg","https://i.ibb.co/bNyRhZw/photo-34-2024-10-23-11-51-38.jpg","https://i.ibb.co/ydrVJgN/photo-34-2024-10-23-11-52-15.jpg","https://i.ibb.co/XxZDK60/photo-34-2024-10-23-11-52-30.jpg","https://i.ibb.co/zFh3ctK/photo-35-2024-10-23-11-52-15.jpg","https://i.ibb.co/g9zB1yT/photo-35-2024-10-23-11-52-30.jpg","https://i.ibb.co/CvJ5dtT/photo-36-2024-10-23-11-51-38.jpg","https://i.ibb.co/4jK2HKv/photo-36-2024-10-23-11-52-15.jpg","https://i.ibb.co/dfQ7HVP/photo-36-2024-10-23-11-52-30.jpg","https://i.ibb.co/z5zvrFM/photo-37-2024-10-23-11-22-02.jpg","https://i.ibb.co/7JS9cvr/photo-37-2024-10-23-11-52-15.jpg","https://i.ibb.co/MBp1GHC/photo-37-2024-10-23-11-52-30.jpg","https://i.ibb.co/1KSwRvG/photo-38-2024-10-23-11-51-38.jpg","https://i.ibb.co/8xvq1R8/photo-38-2024-10-23-11-52-15.jpg","https://i.ibb.co/B3G330L/photo-38-2024-10-23-11-52-30.jpg","https://i.ibb.co/R2gpfZK/photo-39-2024-10-23-11-22-02.jpg","https://i.ibb.co/R2mJy7H/photo-39-2024-10-23-11-52-15.jpg","https://i.ibb.co/1003y4f/photo-39-2024-10-23-11-52-30.jpg","https://i.ibb.co/6gvCGfr/photo-40-2024-10-23-11-22-02.jpg","https://i.ibb.co/dmBbHSn/photo-40-2024-10-23-11-52-15.jpg","https://i.ibb.co/VNb6F5w/photo-40-2024-10-23-11-52-30.jpg","https://i.ibb.co/pRnwn46/photo-41-2024-10-23-11-51-38.jpg","https://i.ibb.co/m5j7Jqh/photo-41-2024-10-23-11-52-15.jpg","https://i.ibb.co/qyvrhgn/photo-41-2024-10-23-11-52-30.jpg","https://i.ibb.co/Nm9Lv4q/photo-42-2024-10-23-11-52-15.jpg","https://i.ibb.co/XDHQbfZ/photo-42-2024-10-23-11-52-30.jpg","https://i.ibb.co/rx9jSZQ/photo-43-2024-10-23-11-22-02.jpg","https://i.ibb.co/kD7bhqN/photo-43-2024-10-23-11-52-15.jpg","https://i.ibb.co/0CMXh01/photo-43-2024-10-23-11-52-30.jpg","https://i.ibb.co/3vkh61X/photo-44-2024-10-23-11-51-38.jpg","https://i.ibb.co/7bydhNh/photo-44-2024-10-23-11-52-15.jpg","https://i.ibb.co/Tw21fCf/photo-45-2024-10-23-11-22-02.jpg","https://i.ibb.co/MZ1MsXK/photo-45-2024-10-23-11-52-15.jpg","https://i.ibb.co/0qZ2gsz/photo-46-2024-10-23-11-22-02.jpg","https://i.ibb.co/VSt9JFV/photo-46-2024-10-23-11-52-15.jpg","https://i.ibb.co/fDYSpwj/photo-47-2024-10-23-11-51-38.jpg","https://i.ibb.co/HXSWP3b/photo-47-2024-10-23-11-52-15.jpg","https://i.ibb.co/D1Shf39/photo-48-2024-10-23-11-22-02.jpg","https://i.ibb.co/xJyRkGQ/photo-49-2024-10-23-11-51-38.jpg","https://i.ibb.co/3kysnCy/photo-49-2024-10-23-11-52-15.jpg","https://i.ibb.co/qsbySLD/photo-50-2024-10-23-11-51-38.jpg","https://i.ibb.co/KVgNP74/photo-50-2024-10-23-11-52-15.jpg","https://i.ibb.co/PF1Zsjh/photo-51-2024-10-23-11-51-38.jpg","https://i.ibb.co/CwNr7Nc/photo-52-2024-10-23-11-22-02.jpg","https://i.ibb.co/QX2mDJy/photo-53-2024-10-23-11-22-02.jpg","https://i.ibb.co/BZJ6yxQ/photo-54-2024-10-23-11-51-38.jpg","https://i.ibb.co/R4mjsQ2/photo-56-2024-10-23-11-22-02.jpg","https://i.ibb.co/xjPKQNh/photo-56-2024-10-23-11-52-15.jpg","https://i.ibb.co/2SthkCW/photo-57-2024-10-23-11-51-38.jpg","https://i.ibb.co/nbNBYHB/photo-58-2024-10-23-11-22-02.jpg","https://i.ibb.co/R7v0JR9/photo-59-2024-10-23-11-22-02.jpg","https://i.ibb.co/mc5sv3q/photo-59-2024-10-23-11-52-15.jpg","https://i.ibb.co/gydKT26/photo-60-2024-10-23-11-22-02.jpg","https://i.ibb.co/mFF7pKK/photo-60-2024-10-23-11-52-15.jpg","https://i.ibb.co/VHd8YhC/photo-61-2024-10-23-11-22-02.jpg","https://i.ibb.co/Gxt9Hf1/photo-61-2024-10-23-11-52-15.jpg","https://i.ibb.co/j3xGxby/photo-62-2024-10-23-11-51-38.jpg","https://i.ibb.co/zh62WqQ/photo-62-2024-10-23-11-52-15.jpg","https://i.ibb.co/DW8MDSq/photo-63-2024-10-23-11-51-38.jpg","https://i.ibb.co/mzw0yyB/photo-63-2024-10-23-11-52-15.jpg","https://i.ibb.co/ZWRQgwt/photo-64-2024-10-23-11-22-02.jpg","https://i.ibb.co/CHy80WH/photo-64-2024-10-23-11-52-15.jpg","https://i.ibb.co/MfRjjXT/photo-65-2024-10-23-11-51-38.jpg","https://i.ibb.co/PZLrXKZ/photo-65-2024-10-23-11-52-15.jpg","https://i.ibb.co/qgzBNgS/photo-66-2024-10-23-11-22-02.jpg","https://i.ibb.co/CPN1PQh/photo-66-2024-10-23-11-52-15.jpg","https://i.ibb.co/RPFXJcc/photo-67-2024-10-23-11-22-02.jpg","https://i.ibb.co/8YMQbzB/photo-67-2024-10-23-11-52-15.jpg","https://i.ibb.co/QvW825T/photo-68-2024-10-23-11-51-38.jpg","https://i.ibb.co/6YYkbD9/photo-68-2024-10-23-11-52-15.jpg","https://i.ibb.co/4sqdRq1/photo-69-2024-10-23-11-22-02.jpg","https://i.ibb.co/sKPqPch/photo-69-2024-10-23-11-52-15.jpg","https://i.ibb.co/Cb7rq9P/photo-70-2024-10-23-11-22-02.jpg","https://i.ibb.co/tH9TTHD/photo-70-2024-10-23-11-52-15.jpg","https://i.ibb.co/ckRz8sW/photo-71-2024-10-23-11-51-38.jpg","https://i.ibb.co/4FhkH91/photo-71-2024-10-23-11-52-15.jpg","https://i.ibb.co/Yb4dF4b/photo-72-2024-10-23-11-51-38.jpg","https://i.ibb.co/6NQVtqQ/photo-73-2024-10-23-11-22-02.jpg","https://i.ibb.co/mvfsjWK/photo-73-2024-10-23-11-52-15.jpg","https://i.ibb.co/0GJddGM/photo-74-2024-10-23-11-51-38.jpg","https://i.ibb.co/LSLwNS2/photo-75-2024-10-23-11-22-02.jpg","https://i.ibb.co/gVTv9qg/photo-75-2024-10-23-11-52-15.jpg","https://i.ibb.co/2cDrw6c/photo-76-2024-10-23-11-51-38.jpg","https://i.ibb.co/xDbKFsp/photo-76-2024-10-23-11-52-15.jpg","https://i.ibb.co/Qnt3SfC/photo-77-2024-10-23-11-22-02.jpg","https://i.ibb.co/QcqpYw9/photo-77-2024-10-23-11-52-15.jpg","https://i.ibb.co/xJNFqHh/photo-78-2024-10-23-11-52-15.jpg","https://i.ibb.co/xJYpwQF/photo-79-2024-10-23-11-51-38.jpg","https://i.ibb.co/gRjYmL2/photo-79-2024-10-23-11-52-15.jpg","https://i.ibb.co/XkDTZV8/photo-80-2024-10-23-11-22-02.jpg","https://i.ibb.co/sJQR44r/photo-80-2024-10-23-11-52-15.jpg","https://i.ibb.co/VHVTCFK/photo-81-2024-10-23-11-22-02.jpg","https://i.ibb.co/kGmFyR8/photo-81-2024-10-23-11-52-15.jpg","https://i.ibb.co/3rbKbNC/photo-82-2024-10-23-11-51-38.jpg","https://i.ibb.co/VtYs1Ft/photo-82-2024-10-23-11-52-15.jpg","https://i.ibb.co/YdGBtTF/photo-83-2024-10-23-11-22-02.jpg","https://i.ibb.co/6mYrWpM/photo-83-2024-10-23-11-52-15.jpg","https://i.ibb.co/rtXhcR6/photo-84-2024-10-23-11-51-38.jpg","https://i.ibb.co/KjwQH8D/photo-84-2024-10-23-11-52-15.jpg","https://i.ibb.co/4dBy8kK/photo-85-2024-10-23-11-22-02.jpg","https://i.ibb.co/mh5Np3D/photo-85-2024-10-23-11-52-15.jpg","https://i.ibb.co/5jgGLph/photo-86-2024-10-23-11-22-02.jpg","https://i.ibb.co/3pydHGW/photo-86-2024-10-23-11-52-15.jpg","https://i.ibb.co/BsCm4Zj/photo-87-2024-10-23-11-51-38.jpg","https://i.ibb.co/3vDdrwr/photo-87-2024-10-23-11-52-15.jpg","https://i.ibb.co/Sw5ZVH1/photo-89-2024-10-23-11-52-15.jpg","https://i.ibb.co/6twPSN1/photo-90-2024-10-23-11-51-38.jpg","https://i.ibb.co/JK9yfb6/photo-90-2024-10-23-11-52-15.jpg","https://i.ibb.co/JtYVzkg/photo-91-2024-10-23-11-22-02.jpg","https://i.ibb.co/dK80wRM/photo-91-2024-10-23-11-52-15.jpg","https://i.ibb.co/F8Q2RQP/photo-92-2024-10-23-11-51-38.jpg","https://i.ibb.co/MSMCWJs/photo-92-2024-10-23-11-52-15.jpg","https://i.ibb.co/PF0C7MY/photo-93-2024-10-23-11-22-02.jpg","https://i.ibb.co/gPj9DgB/photo-93-2024-10-23-11-52-15.jpg","https://i.ibb.co/B6ZddPC/photo-94-2024-10-23-11-51-38.jpg","https://i.ibb.co/hdQf9sT/photo-94-2024-10-23-11-52-15.jpg","https://i.ibb.co/kcRrfp4/photo-95-2024-10-23-11-51-38.jpg","https://i.ibb.co/FnL87cT/photo-95-2024-10-23-11-52-15.jpg","https://i.ibb.co/FKs7rYX/photo-96-2024-10-23-11-51-38.jpg","https://i.ibb.co/nRdVX4Z/photo-96-2024-10-23-11-52-15.jpg","https://i.ibb.co/WxLNfwB/photo-97-2024-10-23-11-22-02.jpg","https://i.ibb.co/KxBmrT4/photo-97-2024-10-23-11-52-15.jpg","https://i.ibb.co/DYg1S19/photo-98-2024-10-23-11-22-02.jpg","https://i.ibb.co/nzJgzTt/photo-98-2024-10-23-11-52-15.jpg","https://i.ibb.co/N2SKVSV/photo-99-2024-10-23-11-51-38.jpg","https://i.ibb.co/VYSyXSj/photo-2024-09-05-18-37-46.jpg","https://i.ibb.co/gV7DLYq/photo-2024-09-05-18-55-27-2.jpg","https://i.ibb.co/6P3XcmJ/photo-2024-09-19-10-00-00.jpg","https://i.ibb.co/Yf3d0XD/photo-2024-09-25-14-53-12.jpg","https://i.ibb.co/NWJ9GXw/photo-2024-10-08-13-08-08.jpg","https://i.ibb.co/3SqQp9n/photo-2024-10-15-22-09-07.jpg","https://i.ibb.co/z8m3D3c/photo-2024-10-19-08-08-02.jpg","https://i.ibb.co/VHRkyQc/review-of-duc-toan-for-reup-be-ana-pga-chuan-mat-xinh-body-dep-vu-to-dam-tiep-cac-boss-3255192-origi.jpg","https://i.ibb.co/8YftK71/photo-5-2024-10-23-11-22-02.jpg","https://i.ibb.co/9sKrvrr/photo-5-2024-10-23-11-52-15.jpg","https://i.ibb.co/jyL34kM/photo-5-2024-10-23-11-52-30.jpg","https://i.ibb.co/Lhwhq9W/photo-6-2024-10-23-11-51-38.jpg","https://i.ibb.co/ZLjP2X8/photo-6-2024-10-23-11-52-30.jpg","https://i.ibb.co/pJcSpDp/photo-7-2024-10-23-11-51-38.jpg","https://i.ibb.co/Q8D8dCG/photo-7-2024-10-23-11-52-15.jpg","https://i.ibb.co/7JcNcDN/photo-7-2024-10-23-11-52-30.jpg","https://i.ibb.co/r3yhQ8Z/photo-8-2024-10-23-11-52-15.jpg","https://i.ibb.co/hY6jw6T/photo-9-2024-10-23-11-22-02.jpg","https://i.ibb.co/0fTgT8S/photo-9-2024-10-23-11-52-30.jpg","https://i.ibb.co/Gxt99Mr/photo-10-2024-10-23-11-52-15.jpg","https://i.ibb.co/m6m7z4Y/photo-11-2024-10-23-11-22-02.jpg","https://i.ibb.co/7z8qP2r/photo-11-2024-10-23-11-52-15.jpg","https://i.ibb.co/fHH0mMJ/photo-11-2024-10-23-11-52-30.jpg","https://i.ibb.co/wN1BqR3/photo-12-2024-10-23-11-22-02.jpg","https://i.ibb.co/5986MWf/photo-12-2024-10-23-11-52-15.jpg","https://i.ibb.co/rZmGvC3/photo-14-2024-10-23-11-51-38.jpg","https://i.ibb.co/44ZDr8r/photo-14-2024-10-23-11-52-15.jpg","https://i.ibb.co/Jskcg6f/photo-14-2024-10-23-11-52-30.jpg","https://i.ibb.co/Pt99432/photo-15-2024-10-23-11-22-02.jpg","https://i.ibb.co/DrGSf3Y/photo-15-2024-10-23-11-52-30.jpg","https://i.ibb.co/PQW9xhQ/photo-16-2024-10-23-11-51-38.jpg","https://i.ibb.co/ZSQCLwx/photo-16-2024-10-23-11-52-15.jpg","https://i.ibb.co/XtT4qfm/photo-16-2024-10-23-11-52-30.jpg","https://i.ibb.co/dp5Nr6k/photo-17-2024-10-23-11-22-02.jpg","https://i.ibb.co/h8tGGt9/photo-17-2024-10-23-11-52-15.jpg","https://i.ibb.co/BwTPBQ1/photo-18-2024-10-23-11-51-38.jpg","https://i.ibb.co/nwRxCpD/photo-18-2024-10-23-11-52-15.jpg","https://i.ibb.co/K07JMK8/photo-18-2024-10-23-11-52-30.jpg","https://i.ibb.co/34bdKZQ/photo-19-2024-10-23-11-22-02.jpg","https://i.ibb.co/Vv485HL/photo-20-2024-10-23-11-51-38.jpg","https://i.ibb.co/6YsFD2S/photo-20-2024-10-23-11-52-15.jpg","https://i.ibb.co/Y2H2hjc/photo-21-2024-10-23-11-22-02.jpg","https://i.ibb.co/Hrc6qgX/photo-21-2024-10-23-11-52-15.jpg","https://i.ibb.co/mz6Rm3Y/photo-21-2024-10-23-11-52-30.jpg","https://i.ibb.co/G03zXPt/photo-22-2024-10-23-11-52-15.jpg","https://i.ibb.co/HhygWWL/photo-22-2024-10-23-11-52-30.jpg","https://i.ibb.co/8cbkkB6/photo-23-2024-10-23-11-51-38.jpg","https://i.ibb.co/KmjBP7Y/photo-23-2024-10-23-11-52-15.jpg","https://i.ibb.co/VSDdwBn/photo-24-2024-10-23-11-51-38.jpg","https://i.ibb.co/tcht2V3/photo-25-2024-10-23-11-51-38.jpg","https://i.ibb.co/D9znnts/photo-25-2024-10-23-11-52-15.jpg","https://i.ibb.co/WW6G5zc/photo-25-2024-10-23-11-52-30.jpg","https://i.ibb.co/ZX9kF2P/photo-26-2024-10-23-11-51-38.jpg","https://i.ibb.co/HBthCXD/photo-27-2024-10-23-11-22-02.jpg","https://i.ibb.co/8jsvgp8/photo-27-2024-10-23-11-52-15.jpg","https://i.ibb.co/yXpRfRY/photo-28-2024-10-23-11-51-38.jpg","https://i.ibb.co/W0rJLvD/photo-28-2024-10-23-11-52-30.jpg","https://i.ibb.co/BtQVmfs/photo-30-2024-10-23-11-51-38.jpg","https://i.ibb.co/cYjPG1x/photo-30-2024-10-23-11-52-15.jpg","https://i.ibb.co/5WwmC9V/photo-30-2024-10-23-11-52-30.jpg","https://i.ibb.co/SfFcNJ9/photo-31-2024-10-23-11-52-15.jpg","https://i.ibb.co/dQ5D2GM/photo-31-2024-10-23-11-52-30.jpg","https://i.ibb.co/bJ7btzF/photo-32-2024-10-23-11-51-38.jpg","https://i.ibb.co/yXxbpVc/photo-32-2024-10-23-11-52-30.jpg","https://i.ibb.co/syw8M2x/photo-33-2024-10-23-11-52-15.jpg","https://i.ibb.co/DRd6F1P/photo-34-2024-10-23-11-52-15.jpg","https://i.ibb.co/bgh2gck/photo-35-2024-10-23-11-52-30.jpg","https://i.ibb.co/m4PYmxp/photo-36-2024-10-23-11-52-15.jpg","https://i.ibb.co/PYGCZ0C/photo-36-2024-10-23-11-52-30.jpg","https://i.ibb.co/HDrJ7wf/photo-37-2024-10-23-11-52-30.jpg","https://i.ibb.co/GR2ZWSM/photo-38-2024-10-23-11-51-38.jpg","https://i.ibb.co/R0wDbK2/photo-38-2024-10-23-11-52-15.jpg","https://i.ibb.co/YdvvQVC/photo-38-2024-10-23-11-52-30.jpg","https://i.ibb.co/ncjgPsG/photo-39-2024-10-23-11-52-30.jpg","https://i.ibb.co/0BLVGRz/photo-40-2024-10-23-11-22-02.jpg","https://i.ibb.co/xjPDHDw/photo-40-2024-10-23-11-52-15.jpg","https://i.ibb.co/sFgN3ff/photo-40-2024-10-23-11-52-30.jpg","https://i.ibb.co/QcbFmCm/photo-41-2024-10-23-11-51-38.jpg","https://i.ibb.co/Gv4XS42/photo-43-2024-10-23-11-22-02.jpg","https://i.ibb.co/091Nsdr/photo-43-2024-10-23-11-52-15.jpg","https://i.ibb.co/fYY996j/photo-44-2024-10-23-11-51-38.jpg","https://i.ibb.co/pjSHRhc/photo-44-2024-10-23-11-52-15.jpg","https://i.ibb.co/WyBRncv/photo-45-2024-10-23-11-22-02.jpg","https://i.ibb.co/SvrxbV1/photo-45-2024-10-23-11-52-15.jpg","https://i.ibb.co/hCtwGhB/photo-46-2024-10-23-11-52-15.jpg","https://i.ibb.co/ZBL16zc/photo-47-2024-10-23-11-51-38.jpg","https://i.ibb.co/F8htkCL/photo-48-2024-10-23-11-22-02.jpg","https://i.ibb.co/47jG43K/photo-49-2024-10-23-11-51-38.jpg","https://i.ibb.co/KNDSTNF/photo-50-2024-10-23-11-52-15.jpg","https://i.ibb.co/GPhbK9W/photo-51-2024-10-23-11-51-38.jpg","https://i.ibb.co/55PGJHx/photo-52-2024-10-23-11-22-02.jpg","https://i.ibb.co/D1b6Ngv/photo-53-2024-10-23-11-22-02.jpg","https://i.ibb.co/YPc3hBG/photo-56-2024-10-23-11-22-02.jpg","https://i.ibb.co/yVJ0YX6/photo-56-2024-10-23-11-52-15.jpg","https://i.ibb.co/Dfg6cwr/photo-60-2024-10-23-11-52-15.jpg","https://i.ibb.co/0GmtgRX/photo-61-2024-10-23-11-22-02.jpg","https://i.ibb.co/kGQtzb0/photo-61-2024-10-23-11-52-15.jpg","https://i.ibb.co/FbGD5wD/photo-62-2024-10-23-11-51-38.jpg","https://i.ibb.co/7VHyZZS/photo-64-2024-10-23-11-52-15.jpg","https://i.ibb.co/y4sDqq2/photo-65-2024-10-23-11-52-15.jpg","https://i.ibb.co/mS9Th4H/photo-66-2024-10-23-11-22-02.jpg","https://i.ibb.co/drpJkD2/photo-66-2024-10-23-11-52-15.jpg","https://i.ibb.co/9cmdkmG/photo-67-2024-10-23-11-22-02.jpg","https://i.ibb.co/t8j6CZj/photo-67-2024-10-23-11-52-15.jpg","https://i.ibb.co/rF2f6Y1/photo-68-2024-10-23-11-51-38.jpg","https://i.ibb.co/rcGHtcM/photo-68-2024-10-23-11-52-15.jpg","https://i.ibb.co/8KyjxBJ/photo-69-2024-10-23-11-22-02.jpg","https://i.ibb.co/0V4LLd7/photo-69-2024-10-23-11-52-15.jpg","https://i.ibb.co/Tcwy7ZX/photo-70-2024-10-23-11-22-02.jpg","https://i.ibb.co/fChx501/photo-70-2024-10-23-11-52-15.jpg","https://i.ibb.co/FY3XVyj/photo-71-2024-10-23-11-51-38.jpg","https://i.ibb.co/3fWdpNT/photo-71-2024-10-23-11-52-15.jpg","https://i.ibb.co/LQ40dnq/photo-72-2024-10-23-11-51-38.jpg","https://i.ibb.co/zGkqhv7/photo-73-2024-10-23-11-22-02.jpg","https://i.ibb.co/68Sn0GT/photo-73-2024-10-23-11-52-15.jpg","https://i.ibb.co/x1ccJNy/photo-75-2024-10-23-11-22-02.jpg","https://i.ibb.co/Xt1rVM5/photo-75-2024-10-23-11-52-15.jpg","https://i.ibb.co/ZcQKwg2/photo-76-2024-10-23-11-51-38.jpg","https://i.ibb.co/yPWVScj/photo-76-2024-10-23-11-52-15.jpg","https://i.ibb.co/3yLk4n4/photo-77-2024-10-23-11-22-02.jpg","https://i.ibb.co/2sXtdq0/photo-77-2024-10-23-11-52-15.jpg","https://i.ibb.co/GVDRKfG/photo-78-2024-10-23-11-52-15.jpg","https://i.ibb.co/yNr8tZj/photo-79-2024-10-23-11-51-38.jpg","https://i.ibb.co/N6NKT3c/photo-79-2024-10-23-11-52-15.jpg","https://i.ibb.co/8d7HBkN/photo-80-2024-10-23-11-52-15.jpg","https://i.ibb.co/KrZjh4S/photo-81-2024-10-23-11-22-02.jpg","https://i.ibb.co/fH5wrK3/photo-81-2024-10-23-11-52-15.jpg","https://i.ibb.co/w76YbQ0/photo-82-2024-10-23-11-51-38.jpg","https://i.ibb.co/WGs8pVb/photo-85-2024-10-23-11-52-15.jpg","https://i.ibb.co/j8vfvgZ/photo-86-2024-10-23-11-22-02.jpg","https://i.ibb.co/XxG4yxw/photo-86-2024-10-23-11-52-15.jpg","https://i.ibb.co/QKQCMwh/photo-87-2024-10-23-11-52-15.jpg","https://i.ibb.co/k08rdrM/photo-88-2024-10-23-11-51-38.jpg","https://i.ibb.co/6b9PGtD/photo-90-2024-10-23-11-52-15.jpg","https://i.ibb.co/kGzjh4t/photo-91-2024-10-23-11-52-15.jpg","https://i.ibb.co/nB1D576/photo-92-2024-10-23-11-51-38.jpg","https://i.ibb.co/M6h9Q86/photo-93-2024-10-23-11-22-02.jpg","https://i.ibb.co/rH5pt2y/photo-95-2024-10-23-11-51-38.jpg","https://i.ibb.co/RHMf0Sb/photo-96-2024-10-23-11-52-15.jpg","https://i.ibb.co/c1ZRRpf/photo-97-2024-10-23-11-22-02.jpg","https://i.ibb.co/znQ14n4/photo-97-2024-10-23-11-52-15.jpg","https://i.ibb.co/QJYHGfZ/photo-98-2024-10-23-11-22-02.jpg","https://i.ibb.co/DYN5XmR/photo-98-2024-10-23-11-52-15.jpg","https://i.ibb.co/0c8sQYB/photo-99-2024-10-23-11-51-38.jpg","https://i.ibb.co/7gT51Mr/458315545-2877650585726341-611499681677932774-n.jpg","https://i.ibb.co/pnxwnqv/photo-2024-08-04-17-39-11.jpg","https://i.ibb.co/fHQg4kL/photo-2024-08-24-12-50-36.jpg","https://i.ibb.co/jMtmyhN/photo-2024-08-31-19-07-27.jpg","https://i.ibb.co/Bspg1wg/photo-2024-09-01-12-47-45.jpg","https://i.ibb.co/MSHYgN1/photo-2024-09-08-19-47-21.jpg","https://i.ibb.co/87HFTwh/photo-2024-09-09-20-28-28.jpg","https://i.ibb.co/PZNCxN3/photo-2024-09-14-15-02-36.jpg","https://i.ibb.co/r3pfQKw/photo-2024-09-14-19-29-52.jpg","https://i.ibb.co/HxjFYVm/photo-2024-09-15-16-58-32.jpg",];
+
+      // ============================================
+      // 4. Chuyển đổi từng mảng URL thành mảng đối tượng ảnh,
+      //     gắn thêm thuộc tính "category" để phân biệt
+      // ============================================
+      const formatPhotos = (arr, category, labelPrefix) =>
+        arr.map((url, index) => ({
+          image: url,
+          title: `${labelPrefix} ${index + 1}`,
+          category: category,
+        }));
+
+      const photosAnhGaiXinh = formatPhotos(
+        anhGaiXinhImages,
+        "anhGaiXinh",
+        "Ảnh gái xinh"
+      );
+      const photosHotTiktok = formatPhotos(
+        hotTiktokImages,
+        "hotTiktok",
+        "Hot Tiktok"
+      );
+      const photosAnhSexy = formatPhotos(anhSexyImages, "anhSexy", "Ảnh sexy");
+      const photosAnhNong = formatPhotos(anhNongImages, "anhNong", "Ảnh nóng");
+
+      // ============================================
+      // 5. Gộp tất cả ảnh thành 1 mảng để hỗ trợ Modal chuyển ảnh
+      // ============================================
+      const photos = [
+        ...photosAnhGaiXinh,
+        ...photosHotTiktok,
+        ...photosAnhSexy,
+        ...photosAnhNong,
+      ];
+
+      // Đồng thời, tạo đối tượng chứa các nhóm ảnh theo danh mục
+      const groups = {
+        anhGaiXinh: photosAnhGaiXinh,
+        hotTiktok: photosHotTiktok,
+        anhSexy: photosAnhSexy,
+        anhNong: photosAnhNong,
+      };
+
+      // ============================================
+      // 6. Hàm render ảnh cho từng danh mục
+      // ============================================
+      function renderPhotos() {
+        Object.keys(groups).forEach((category) => {
+          const container = document.getElementById(category + "-photos");
+          if (container) {
+            groups[category].forEach((photo) => {
+              const col = document.createElement("div");
+              col.className = "col-4 p-0 photo-col";
+              col.innerHTML = `
+                <div class="photo-card">
+                  <img src="${photo.image}" alt="" loading="lazy" class="photo-img">
+                  <div class="photo-info">
+                    <p class="photo-title">${photo.title}</p>
+                  </div>
+                </div>`;
+              container.appendChild(col);
+            });
+          }
+        });
+
+        // Gán sự kiện click cho tất cả ảnh để mở Modal
+        document.querySelectorAll(".photo-img").forEach((img) => {
+          img.addEventListener("click", function () {
+            currentIndex = photos.findIndex((p) => p.image === this.src);
+            document.getElementById("modalImage").src = this.src;
+            new bootstrap.Modal(document.getElementById("imageModal")).show();
+          });
+        });
+      }
+
+      // ============================================
+      // 7. Cài đặt chuyển ảnh trong Modal
+      // ============================================
+      let currentIndex = 0;
+      document.addEventListener("DOMContentLoaded", () => {
+        renderPhotos();
+
+        document
+          .getElementById("nextButton")
+          .addEventListener("click", function () {
+            currentIndex = (currentIndex + 1) % photos.length;
+            document.getElementById("modalImage").src =
+              photos[currentIndex].image;
+          });
+
+        document
+          .getElementById("prevButton")
+          .addEventListener("click", function () {
+            currentIndex = (currentIndex - 1 + photos.length) % photos.length;
+            document.getElementById("modalImage").src =
+              photos[currentIndex].image;
+          });
+      });
+    </script>
+  </body>
+</html><!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thư viện ảnh hiện đại</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <script
+    type="module"
+    src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+  ></script>
+  <script
+    nomodule
+    src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+  ></script>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Roboto:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* Global Styles */
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        /* Màu nền gốc: xanh đen (navy/dark) */
+        background: #0b0f1a;
+
+        /* Gradient radial để tạo chiều sâu mờ ở trung tâm */
+        background: radial-gradient(
+          circle at center,
+          rgba(11, 15, 26, 0.7) 0%,
+          /* Màu hơi trong suốt ở tâm */ rgba(11, 15, 26, 1) 100%
+            /* Màu đậm hơn ở ngoài rìa */
+        );
+
+        /* Đặt chiều cao full màn hình */
+        min-height: 100vh;
+
+        /* Đảm bảo phần tử con được hiển thị phía trên */
+        position: relative;
+
+        color: #fff; /* Màu chữ mặc định (trắng) trên nền tối */
+      }
+
+      /* Lớp phủ sao (starfield) tạo thêm độ sâu */
+      body::before {
+        content: "";
+        position: absolute;
+        z-index: -1; /* Đẩy lớp phủ ra phía sau nội dung */
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+
+        /* Thay đường dẫn ảnh sao, hoặc bạn có thể dùng ảnh bokeh, particle... */
+        background: url("https://i.ibb.co/ycBpNQyM/pngtree-light-effect-background-halo-radial-image-2419979.jpg")
+          no-repeat center center;
+        background-size: cover;
+
+        /* Độ trong suốt để hòa trộn với nền phía dưới */
+        opacity: 0.2;
+        pointer-events: none;
+      }
+      .container {
+        padding-bottom: 80px;
+      }
+     
+      h1 {
+        position: relative;
+
+        text-align: center;
+        font-size: 2.5rem;
+
+        border-radius: 8px;
+        background: linear-gradient(
+          45deg,
+          #ff5252,
+          #ff9800,
+          #4caf50,
+          #2196f3,
+          #9c27b0
+        );
+        background-size: 300%;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        animation: gradientAnimation 5s ease infinite, slideIn 1s ease-out;
+      }
+      @keyframes gradientAnimation {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+      @keyframes slideIn {
+        0% {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .category-tabs {
+    display: flex;
+    justify-content: center; /* Căn giữa các mục */
+    flex-wrap: wrap; /* Đảm bảo không bị tràn dòng */
+    width: 100%; /* Chiếm toàn bộ chiều rộng */
+    padding: 10px 0;
+    gap: 15px; /* Thêm khoảng cách giữa các tab */
+}
+
+
+.category-tabs .nav-item {
+    flex: 1;
+    text-align: center;
+    min-width: 120px; /* Đảm bảo không quá nhỏ */
+    max-width: 180px; /* Giới hạn kích thước tối đa */
+}
+
+
+
+.category-tabs::-webkit-scrollbar {
+    display: none;
+}
+
+
+
+.category-tabs .nav-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-width: 120px;
+    font-weight: bold;
+    background: linear-gradient(90deg, #ff5e00, #efefef, #7a00ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+    padding: 12px 18px;
+    transition: background-color 0.4s ease, transform 0.4s ease;
+}
+
+/* Bỏ viền khi hover */
+.category-tabs .nav-link:hover {
+    transform: scale(1.1);
+    background-color: transparent !important; /* Không có hiệu ứng nền */
+    box-shadow: none !important; /* Không có viền hoặc shadow */
+    border: none !important; /* Bỏ luôn border nếu có */
+}
+
+/* Bỏ viền khi tab được chọn */
+.category-tabs .nav-link.active {
+    color: #fff;
+    background-color: rgba(255, 255, 255, 0.2);
+    border: none;
+    outline: none; /* Chặn trình duyệt tự động thêm viền */
+}
+
+/* Bỏ viền khi focus */
+.category-tabs .nav-link:focus {
+    outline: none !important; /* Chặn viền trắng khi click vào */
+    box-shadow: none !important;
+    border: none !important;
+}
+
+.nav-link {
+  border: none;
+   background: linear-gradient(90deg, #0544b9, #efefef, #ff0000);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+      /* Photo Gallery Styles */
+      .photo-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px; /* Khoảng cách giữa các ảnh (hàng ngang và dọc) */
+        justify-content: center;
+      }
+      .photo-card {
+        position: relative; /* Để định vị tiêu đề */
+        background-color: #fff;
+        border: 1px solid #ccc; /* Viền cho ảnh nhỏ */
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        cursor: pointer;
+      }
+      .photo-card img {
+        width: 100%;
+        height: 270px; /* Chiều cao cố định cho ảnh nhỏ */
+        object-fit: cover;
+        display: block;
+      }
+      /* Hiệu ứng cho tiêu đề ảnh: ẩn mặc định, xuất hiện khi hover */
+      .photo-info {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 5px;
+        background: rgba(0, 0, 0, 0.6);
+        transform: translateY(100%);
+        transition: transform 0.3s ease;
+        text-align: center;
+      }
+      .photo-card:hover .photo-info {
+        transform: translateY(0);
+      }
+      .photo-title {
+        margin: 0;
+        font-size: 1rem;
+        /* Hiệu ứng gradient động cho tiêu đề ảnh */
+        background: linear-gradient(45deg, #ff5252, #ff9800);
+        background-size: 200%;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: textGradient 3s ease infinite;
+      }
+      @keyframes textGradient {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      /* Hiệu ứng riêng cho từng danh mục ảnh */
+      /* 1. Ảnh gái xinh: phóng to nhẹ, bóng mờ màu hồng */
+      #anhGaiXinh-photos .photo-card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 10px 20px rgba(255, 182, 193, 0.6);
+      }
+      /* 2. Hot Tiktok: phóng to + xoay nhẹ, bóng mờ màu cam */
+      #hotTiktok-photos .photo-card:hover {
+        transform: scale(1.05) rotate(2deg);
+        box-shadow: 0 10px 20px rgba(255, 165, 0, 0.6);
+      }
+      /* 3. Ảnh sexy: phóng to, thêm viền đỏ và bóng mờ đỏ */
+      #anhSexy-photos .photo-card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 10px 20px rgba(0, 255, 149, 0.6);
+        border: 2px solid #00fff2;
+      }
+      /* 4. Ảnh nóng: phóng to + xoay nhẹ (ngược), tăng độ sáng, bóng mờ đỏ cam */
+      #anhNong-photos .photo-card:hover {
+        transform: scale(1.05) rotate(-1deg);
+        box-shadow: 0 10px 20px rgba(255, 69, 0, 0.6);
+        filter: brightness(1.1);
+      }
+      .photo-col {
+        flex: 0 0 calc(33.333% - 10px);
+        max-width: calc(33.333% - 10px);
+      }
+
+      @media (max-width: 768px) {
+        .photo-col {
+          flex: 0 0 calc(50% - 2px);
+          max-width: calc(50% - 2px);
+        }
+        h1 {
+          font-size: 3.5rem;
+        }
+      }
+      @media (max-width: 480px) {
+        .photo-col {
+          flex: 0 0 calc(50% - 2px);
+          max-width: calc(50% - 2px);
+        }
+      }
+      .nav-link.active {
+      background: linear-gradient(90deg, #10b905, #efefef, #7a00ff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        text-align: center;
+        border: none;
+
+       }
+      #modalImage {
+        border-radius: 12px;
+      }
+      .content-footer {
+        background: linear-gradient(90deg, #10b905, #efefef, #7a00ff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        text-align: center;
+        padding: 1.5rem 0;
+        margin-top: 2rem;
+        border-top: 1px solid #444;
+        font-size: 0.9rem;
+        letter-spacing: 0.5px;
+      }
+      .footer-container p {
+        margin: 0.5rem;
+      }
+      .footer-container a {
+        color: #ffc107;
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+      .footer-container a:hover {
+        color: #ffdd57;
+      }
+      @keyframes rotateIcon {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.icon-dynamic {
+  display: inline-block;
+  animation: rotateIcon 4s linear infinite;
+}
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem; /* Giảm khoảng cách giữa các icon */
+  margin-top: 0.3rem; /* Giảm khoảng cách phía trên */
+  margin-bottom: 0rem; /* Giảm khoảng cách phía dưới */
+}
+
+.content-footer {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem; /* Giảm khoảng cách giữa icon và footer */
+}
+
+    </style>
+  </head>
+  <body>
+    
+
+    <div id="navbar-placeholder"></div>
+    <script src="menu.js"></script>
+    <div class="container py-3">
+      <h1>📸 Thư viện ảnh</h1>
+      
+      <!-- Các Tab (Categories) -->
+      <ul
+        class="nav nav-tabs category-tabs justify-content-center mb-3"
+        id="myTab"
+      >
+       <!-- Nav tabs -->
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a class="nav-link active" data-bs-toggle="tab" href="#anhGaiXinh">Gái xinh</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" data-bs-toggle="tab" href="#hotTiktok">Hot Tiktok</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" data-bs-toggle="tab" href="#anhSexy">Ảnh sexy</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" data-bs-toggle="tab" href="#anhNong">Ảnh nóng</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" data-bs-toggle="tab" href="#noitieng">Nổi Tiếng</a>
+  </li>
+</ul>
+
+<!-- Tab contents -->
+<div class="tab-content">
+  <!-- Tab: Ảnh gái xinh -->
+  <div class="tab-pane fade show active" id="anhGaiXinh">
+    <div class="row g-0 photo-container" id="anhGaiXinh-photos">
+      <!-- Các ảnh cho "Ảnh gái xinh" sẽ được render tại đây -->
+    </div>
+  </div>
+  <!-- Tab: Hot Tiktok -->
+  <div class="tab-pane fade" id="hotTiktok">
+    <div class="row g-0 photo-container" id="hotTiktok-photos">
+      <!-- Các ảnh cho "Hot Tiktok" -->
+    </div>
+  </div>
+  <!-- Tab: Ảnh sexy -->
+  <div class="tab-pane fade" id="anhSexy">
+    <div class="row g-0 photo-container" id="anhSexy-photos">
+      <!-- Các ảnh cho "Ảnh sexy" -->
+    </div>
+  </div>
+  <!-- Tab: Ảnh nóng -->
+  <div class="tab-pane fade" id="anhNong">
+    <div class="row g-0 photo-container" id="anhNong-photos">
+      <!-- Các ảnh cho "Ảnh nóng" -->
+    </div>
+  </div>
+  <!-- Tab: Người Nổi Tiếng -->
+  <div class="tab-pane fade" id="noitieng">
+    <div class="row g-0 photo-container" id="noitieng-photos">
+      <!-- Thêm các ảnh khác nếu cần -->
+    </div>
+  </div>
+</div>
+
+    <!-- Modal hiển thị ảnh lớn kèm nút Prev & Next -->
+    <div
+      class="modal fade"
+      id="imageModal"
+      tabindex="-1"
+      aria-labelledby="imageModalLabel"
+      aria-hidden="true"
+    >
+      <div
+        class="modal-dialog modal-dialog-centered modal-lg position-relative"
+      >
+        <div class="modal-content">
+          <div class="modal-body p-0 position-relative">
+            <img id="modalImage" src="" alt="" class="img-fluid w-100" />
+            <!-- Nút Prev -->
+            <button
+              id="prevButton"
+              class="btn btn-secondary position-absolute"
+              style="
+                top: 50%;
+                left: 10px;
+                transform: translateY(-50%);
+                z-index: 10;
+              "
+            >
+              Prev
+            </button>
+            <!-- Nút Next -->
+            <button
+              id="nextButton"
+              class="btn btn-secondary position-absolute"
+              style="
+                top: 50%;
+                right: 10px;
+                transform: translateY(-50%);
+                z-index: 10;
+              "
+            >
+              Next
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="navbar-placeholder"></div>
+
+    <script src="menu.js"></script>
+    <div
+    style="
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1rem;
+    "
+  >
+    <a href="#" style="color: #4267b2; text-decoration: none">
+      <ion-icon
+        class="icon-dynamic"
+        name="logo-facebook"
+        style="font-size: 2rem"
+      ></ion-icon>
+    </a>
+    <a href="#" style="color: #25d366; text-decoration: none">
+      <ion-icon
+        class="icon-dynamic"
+        name="logo-whatsapp"
+        style="font-size: 2rem"
+      ></ion-icon>
+    </a>
+    <a href="#" style="color: #e1306c; text-decoration: none">
+      <ion-icon
+        class="icon-dynamic"
+        name="logo-instagram"
+        style="font-size: 2rem"
+      ></ion-icon>
+    </a>
+    <a href="#" style="color: #69c9d0; text-decoration: none">
+      <ion-icon
+        class="icon-dynamic"
+        name="logo-tiktok"
+        style="font-size: 2rem"
+      ></ion-icon>
+    </a>
+    <a href="#" style="color: #0077b5; text-decoration: none">
+      <ion-icon
+        class="icon-dynamic"
+        name="logo-linkedin"
+        style="font-size: 2rem"
+      ></ion-icon>
+    </a>
+  </div>
+
+  <!-- Footer -->
+  <footer class="content-footer">
+    <div class="footer-container">
+      <p>
+        &copy; 2023 <strong>Dangcapgaigoi</strong>. All rights reserved.
+      </p>
+      <p>
+        Designed by
+        <a href="https://dangcapgaigoi.com" target="_blank"
+          >Dangcapgaigoi Team</a
+        >
+      </p>
+    </div>
+  </footer>
+
+    <!-- Bootstrap Bundle JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+  const noiTiengLink = document.querySelector('a[href="#noitieng"]');
+  if (noiTiengLink) {
+    noiTiengLink.addEventListener("click", function (e) {
+      e.preventDefault();
+      alert("Bạn chưa được truy cập chức năng này");
+    });
+  }
+});
+
+      fetch("navbar.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("navbar-placeholder").innerHTML = data;
+        });
+      // ============================================
+      // 1. Xác định danh mục (tabs) của bạn
+      // ============================================
+      // Ví dụ: "anhGaiXinh", "hotTiktok", "anhSexy", "anhNong"
+      const categories = ["anhGaiXinh", "hotTiktok", "anhSexy", "anhNong"];
+
+      // ============================================
+      // 2. Khai báo mảng ảnh cho các danh mục khác (nếu có)
+      // Ví dụ: bạn có thể có một số ảnh cho các mục khác –
+      // nếu không có, bạn có thể để mảng rỗng hoặc bỏ qua.
+      // ============================================
+const anhGaiXinhImages=["https://i.ibb.co/K2F6fxp/photo-360-23-06-2024-18-06-52.jpg","https://i.ibb.co/YDySRRw/photo-361-23-06-2024-18-06-52.jpg","https://i.ibb.co/Sf3hfJk/photo-362-23-06-2024-18-07-57.jpg","https://i.ibb.co/484B0s1/photo-363-23-06-2024-18-07-57.jpg","https://i.ibb.co/1zLxYyn/photo-368-23-06-2024-18-09-20.jpg","https://i.ibb.co/023NYtX/photo-369-23-06-2024-18-09-35.jpg","https://i.ibb.co/QNCkBtV/photo-370-23-06-2024-18-09-35.jpg","https://i.ibb.co/R9F2YLm/photo-371-23-06-2024-18-09-35.jpg","https://i.ibb.co/KwYf0DC/photo-372-23-06-2024-18-09-46.jpg","https://i.ibb.co/CK1ngZP/photo-373-23-06-2024-18-09-46.jpg","https://i.ibb.co/N3Kb5H0/photo-374-23-06-2024-18-09-54.jpg","https://i.ibb.co/jLhpXKb/photo-383-23-06-2024-18-14-25.jpg","https://i.ibb.co/yWstjfm/photo-387-23-06-2024-18-15-52.jpg","https://i.ibb.co/tPKmtRy/photo-386-23-06-2024-18-15-52.jpg","https://i.ibb.co/T2KrQtb/photo-391-23-06-2024-18-17-07.jpg","https://i.ibb.co/StS8gvD/photo-393-23-06-2024-18-17-42.jpg","https://i.ibb.co/j68ggCS/photo-394-23-06-2024-18-17-51.jpg","https://i.ibb.co/vxWNg21/photo-396-23-06-2024-18-18-26.jpg","https://i.ibb.co/hDX5csj/photo-401-23-06-2024-18-19-56.jpg","https://i.ibb.co/3hpsgPx/photo-402-23-06-2024-18-20-40.jpg","https://i.ibb.co/Yjx58pw/photo-403-23-06-2024-18-20-55.jpg","https://i.ibb.co/b1YmpJ4/photo-404-23-06-2024-18-20-55.jpg","https://i.ibb.co/qFN49qn/photo-405-23-06-2024-18-20-55.jpg","https://i.ibb.co/XfHCFrh/photo-407-23-06-2024-18-21-13.jpg","https://i.ibb.co/VjDP3t9/photo-409-23-06-2024-18-22-02.jpg","https://i.ibb.co/xXtZxkL/photo-411-23-06-2024-18-22-24.jpg","https://i.ibb.co/Ybj2jY8/photo-410-23-06-2024-18-22-13.jpg","https://i.ibb.co/wwkFTCD/photo-413-23-06-2024-18-23-45.jpg","https://i.ibb.co/QfS8gKg/photo-414-23-06-2024-18-23-45.jpg","https://i.ibb.co/G2xd22z/photo-415-23-06-2024-18-23-45.jpg","https://i.ibb.co/WPgnzfV/photo-416-23-06-2024-18-24-02.jpg","https://i.ibb.co/6rj7kqT/photo-417-23-06-2024-18-24-02.jpg","https://i.ibb.co/WyXtTyY/photo-424-23-06-2024-18-25-01.jpg","https://i.ibb.co/HGXbfby/photo-425-23-06-2024-18-25-11.jpg","https://i.ibb.co/6ZHzBnL/photo-426-23-06-2024-18-25-11.jpg","https://i.ibb.co/kmwkF08/photo-427-23-06-2024-18-25-29.jpg","https://i.ibb.co/Ns2FNk5/photo-428-23-06-2024-18-25-29.jpg","https://i.ibb.co/MBDjSHf/photo-429-23-06-2024-18-25-29.jpg","https://i.ibb.co/250ghm7/photo-430-23-06-2024-18-25-29.jpg","https://i.ibb.co/yYWpj3m/photo-431-23-06-2024-18-25-29.jpg","https://i.ibb.co/tY6XwFB/photo-432-23-06-2024-18-25-51.jpg","https://i.ibb.co/pxZrvF3/photo-435-23-06-2024-18-26-15.jpg","https://i.ibb.co/5h2rjtx/photo-436-23-06-2024-18-26-15.jpg","https://i.ibb.co/8X0yrwh/photo-437-23-06-2024-18-26-32.jpg","https://i.ibb.co/FK4V14J/photo-438-23-06-2024-18-26-32.jpg","https://i.ibb.co/1ntQMVq/photo-439-23-06-2024-18-26-32.jpg","https://i.ibb.co/3RxYPP5/photo-440-23-06-2024-18-26-40.jpg","https://i.ibb.co/FVmb8j2/photo-441-23-06-2024-18-26-55.jpg","https://i.ibb.co/2P6z40D/photo-442-23-06-2024-18-26-55.jpg","https://i.ibb.co/TTVmBpF/photo-443-23-06-2024-18-26-55.jpg","https://i.ibb.co/PMJDQ4Q/photo-444-23-06-2024-18-27-10.jpg","https://i.ibb.co/6gp8d4r/photo-445-23-06-2024-18-27-10.jpg","https://i.ibb.co/n6YXsZV/photo-446-23-06-2024-18-27-10.jpg","https://i.ibb.co/CMYJp9D/photo-447-23-06-2024-18-27-33.jpg","https://i.ibb.co/S6cPWYJ/photo-448-23-06-2024-18-27-34.jpg","https://i.ibb.co/wNtFcLk/photo-449-23-06-2024-18-27-34.jpg","https://i.ibb.co/Y0dntqX/photo-451-23-06-2024-18-27-34.jpg","https://i.ibb.co/8Mnck33/photo-450-23-06-2024-18-27-34.jpg","https://i.ibb.co/7jg9zPk/photo-452-23-06-2024-18-28-06.jpg","https://i.ibb.co/NsVxqjj/photo-454-23-06-2024-18-28-06.jpg","https://i.ibb.co/qYkLL8g/photo-455-23-06-2024-18-28-06.jpg","https://i.ibb.co/Hpfsb5W/photo-456-23-06-2024-18-28-19.jpg","https://i.ibb.co/C55Qqc7/photo-457-23-06-2024-18-28-19.jpg","https://i.ibb.co/W2yHxBm/photo-458-23-06-2024-18-28-19.jpg","https://i.ibb.co/TW0z7Bq/photo-460-23-06-2024-18-28-37.jpg","https://i.ibb.co/K2hnwjs/photo-461-23-06-2024-18-28-37.jpg","https://i.ibb.co/pjknsPV/photo-462-23-06-2024-18-28-37.jpg","https://i.ibb.co/VgL2TrG/photo-463-23-06-2024-18-28-44.jpg","https://i.ibb.co/PGzKDXR/photo-464-23-06-2024-18-28-54.jpg","https://i.ibb.co/G2fY244/photo-465-23-06-2024-18-29-03.jpg","https://i.ibb.co/tbHmW1D/photo-466-23-06-2024-18-29-09.jpg","https://i.ibb.co/VBk6vG0/photo-467-23-06-2024-18-29-18.jpg","https://i.ibb.co/pRBHxqV/photo-468-23-06-2024-18-29-40.jpg","https://i.ibb.co/KXxvhXx/photo-469-23-06-2024-18-29-40.jpg","https://i.ibb.co/tpQFK52/photo-471-23-06-2024-18-29-41.jpg","https://i.ibb.co/Qnvrk3Q/photo-412-23-06-2024-18-22-44.jpg","https://i.ibb.co/MPvxB6s/photo-453-23-06-2024-18-28-06.jpg","https://i.ibb.co/LrgPGpx/photo-459-23-06-2024-18-28-37.jpg","https://i.ibb.co/hHCbG9h/photo-472-23-06-2024-18-29-52.jpg","https://i.ibb.co/8BYkWwx/photo-473-23-06-2024-18-30-02.jpg","https://i.ibb.co/3kdhsnf/photo-474-23-06-2024-18-30-02.jpg","https://i.ibb.co/y5HtHm7/photo-475-23-06-2024-18-30-10.jpg","https://i.ibb.co/873XLC6/photo-476-23-06-2024-18-30-17.jpg","https://i.ibb.co/NVD30JF/photo-478-23-06-2024-18-30-26.jpg","https://i.ibb.co/g67zDPL/photo-479-23-06-2024-18-30-46.jpg","https://i.ibb.co/0Y7QgLr/photo-480-23-06-2024-18-30-46.jpg","https://i.ibb.co/qNcZbw8/photo-481-23-06-2024-18-30-46.jpg","https://i.ibb.co/612XhHK/photo-482-23-06-2024-18-30-46.jpg","https://i.ibb.co/ysjBRK2/photo-483-23-06-2024-18-30-46.jpg","https://i.ibb.co/wgjLkyZ/photo-484-23-06-2024-18-31-09.jpg","https://i.ibb.co/Rghqz7n/photo-518-23-06-2024-18-36-35.jpg","https://i.ibb.co/Zgdz1gK/photo-519-23-06-2024-18-37-03.jpg","https://i.ibb.co/yNPmRbw/photo-520-23-06-2024-18-37-03.jpg","https://i.ibb.co/bXQbVkj/photo-521-23-06-2024-18-37-03.jpg","https://i.ibb.co/XZsyXs3/photo-522-23-06-2024-18-37-03.jpg","https://i.ibb.co/RTgsTDq/photo-523-23-06-2024-18-37-28.jpg","https://i.ibb.co/RzQVbVv/photo-524-23-06-2024-18-37-28.jpg","https://i.ibb.co/fDRCDqv/photo-525-23-06-2024-18-37-40.jpg","https://i.ibb.co/5rGMWgV/photo-526-23-06-2024-18-38-11.jpg","https://i.ibb.co/Xz74JNC/photo-527-23-06-2024-18-38-11.jpg","https://i.ibb.co/ZL2vQ18/photo-528-23-06-2024-18-38-11.jpg","https://i.ibb.co/2K1133G/photo-529-23-06-2024-18-38-11.jpg","https://i.ibb.co/CJyynqH/photo-530-23-06-2024-18-39-00.jpg","https://i.ibb.co/B3Rb7Qh/photo-531-23-06-2024-18-39-10.jpg","https://i.ibb.co/PhG7n77/photo-532-23-06-2024-18-40-26.jpg","https://i.ibb.co/tYb0Bnt/photo-533-23-06-2024-18-40-36.jpg","https://i.ibb.co/FBzh4Yk/photo-534-23-06-2024-18-41-56.jpg","https://i.ibb.co/qgWcdVK/photo-535-23-06-2024-18-42-02.jpg","https://i.ibb.co/zZDG4B6/photo-536-23-06-2024-18-42-08.jpg","https://i.ibb.co/sVjmdmX/photo-537-23-06-2024-18-42-16.jpg","https://i.ibb.co/zHR4QST/photo-538-23-06-2024-18-42-31.jpg","https://i.ibb.co/kDFFKzC/photo-539-23-06-2024-18-49-29.jpg","https://i.ibb.co/TtxDXK7/photo-540-23-06-2024-18-49-29.jpg","https://i.ibb.co/7kzV0Ln/photo-541-23-06-2024-18-49-29.jpg","https://i.ibb.co/StGJKsg/photo-543-23-06-2024-18-50-58.jpg","https://i.ibb.co/mz5JBKz/photo-549-23-06-2024-18-51-05.jpg",];const hotTiktokImages=["https://i.ibb.co/MRsjWpb/photo-2-23-06-2024-15-02-26.jpg","https://i.ibb.co/6nwPB9r/photo-5-23-06-2024-15-14-03.jpg","https://i.ibb.co/ggMVFBk/photo-6-23-06-2024-15-17-01.jpg","https://i.ibb.co/WBcy3SM/photo-7-23-06-2024-15-17-01.jpg","https://i.ibb.co/Rz8DmrP/photo-8-23-06-2024-15-17-01.jpg","https://i.ibb.co/zXGMmdB/photo-9-23-06-2024-15-17-01.jpg","https://i.ibb.co/FgSKFhq/photo-12-23-06-2024-15-17-01-thumb.jpg","https://i.ibb.co/dghG2pL/photo-10-23-06-2024-15-17-01.jpg","https://i.ibb.co/0JsHR5N/photo-14-23-06-2024-15-23-14.jpg","https://i.ibb.co/HpFgnwm/photo-18-23-06-2024-15-37-18.jpg","https://i.ibb.co/fpBWS5H/photo-19-23-06-2024-15-37-18.jpg","https://i.ibb.co/fNHBFmj/photo-20-23-06-2024-15-37-18.jpg","https://i.ibb.co/g9nm61x/photo-28-23-06-2024-15-38-55.jpg","https://i.ibb.co/xSb5jPB/photo-29-23-06-2024-15-38-55.jpg","https://i.ibb.co/7WXxJ9F/photo-30-23-06-2024-15-39-06-thumb.jpg","https://i.ibb.co/rw4wdMK/photo-31-23-06-2024-15-39-40.jpg","https://i.ibb.co/XWv7g1m/photo-32-23-06-2024-15-39-40.jpg","https://i.ibb.co/Db8QZ0Z/photo-33-23-06-2024-15-39-51.jpg","https://i.ibb.co/RbTDH2s/photo-34-23-06-2024-15-40-03.jpg","https://i.ibb.co/wr6z51F/photo-36-23-06-2024-15-40-12.jpg","https://i.ibb.co/gTcVktG/photo-37-23-06-2024-15-40-22.jpg","https://i.ibb.co/XJ54tkm/photo-38-23-06-2024-15-42-25.jpg","https://i.ibb.co/DKb3hZz/photo-39-23-06-2024-15-42-25.jpg","https://i.ibb.co/HFTzfH4/photo-40-23-06-2024-15-42-25.jpg","https://i.ibb.co/sv66cF3/photo-41-23-06-2024-15-42-53.jpg","https://i.ibb.co/vjHxgN4/photo-42-23-06-2024-15-42-53.jpg","https://i.ibb.co/NsWFr94/photo-43-23-06-2024-15-42-53.jpg","https://i.ibb.co/9p3hK1b/photo-44-23-06-2024-15-44-07.jpg","https://i.ibb.co/ZJn3YpL/photo-45-23-06-2024-15-44-07.jpg","https://i.ibb.co/dW6bdzt/photo-46-23-06-2024-15-44-07.jpg","https://i.ibb.co/GT3wfJ1/photo-47-23-06-2024-15-44-25.jpg","https://i.ibb.co/VQLPjMB/photo-48-23-06-2024-15-44-37.jpg","https://i.ibb.co/chY2sxS/photo-49-23-06-2024-15-44-55.jpg","https://i.ibb.co/FqcMhjL/photo-50-23-06-2024-15-44-55.jpg","https://i.ibb.co/RQN6VcH/photo-51-23-06-2024-15-44-55.jpg","https://i.ibb.co/23QcyRz/photo-52-23-06-2024-15-46-49.jpg","https://i.ibb.co/w4342wJ/photo-53-23-06-2024-15-47-41.jpg","https://i.ibb.co/P4G1j51/photo-54-23-06-2024-15-47-41.jpg","https://i.ibb.co/xg2BPpL/photo-56-23-06-2024-15-48-57.jpg","https://i.ibb.co/KqWncBF/photo-57-23-06-2024-15-49-11.jpg","https://i.ibb.co/W6Y6wwk/photo-58-23-06-2024-15-49-11.jpg","https://i.ibb.co/84n0xYB/photo-59-23-06-2024-15-49-28.jpg","https://i.ibb.co/34cXfbt/photo-60-23-06-2024-15-49-28.jpg","https://i.ibb.co/7jzGL6j/photo-61-23-06-2024-15-49-28.jpg","https://i.ibb.co/68rrSMC/photo-62-23-06-2024-15-49-39.jpg","https://i.ibb.co/T0vD3Tp/photo-63-23-06-2024-15-50-50.jpg","https://i.ibb.co/Smqsv40/photo-64-23-06-2024-15-50-50.jpg","https://i.ibb.co/SvGJWsn/photo-65-23-06-2024-15-50-50.jpg","https://i.ibb.co/68QSzp0/photo-66-23-06-2024-15-51-09.jpg","https://i.ibb.co/Vt4mJYN/photo-67-23-06-2024-15-51-31.jpg","https://i.ibb.co/GM7nScX/photo-68-23-06-2024-15-51-31.jpg","https://i.ibb.co/ZgW3Sq2/photo-69-23-06-2024-15-51-31.jpg","https://i.ibb.co/CMK51Yq/photo-70-23-06-2024-15-51-48.jpg","https://i.ibb.co/X3sCF8L/photo-71-23-06-2024-15-51-48.jpg","https://i.ibb.co/L5WmnWR/photo-72-23-06-2024-15-52-01.jpg","https://i.ibb.co/9cYsS0n/photo-73-23-06-2024-15-52-30.jpg","https://i.ibb.co/MBPBQhY/photo-74-23-06-2024-15-52-30.jpg","https://i.ibb.co/KxLDtbS/photo-75-23-06-2024-15-53-17.jpg","https://i.ibb.co/4SS2tnZ/photo-76-23-06-2024-15-53-17.jpg","https://i.ibb.co/54P8dsf/photo-77-23-06-2024-15-53-17.jpg","https://i.ibb.co/ScpsJHV/photo-78-23-06-2024-15-53-17.jpg","https://i.ibb.co/WK8kbyC/photo-79-23-06-2024-15-53-26.jpg","https://i.ibb.co/qYZ6pt4/photo-80-23-06-2024-15-54-48.jpg","https://i.ibb.co/QvkwTVC/photo-81-23-06-2024-15-55-23.jpg","https://i.ibb.co/s1ZHgy3/photo-83-23-06-2024-15-56-40.jpg","https://i.ibb.co/NWyzh2v/photo-84-23-06-2024-15-56-40.jpg","https://i.ibb.co/wW7vtj6/photo-85-23-06-2024-15-57-11.jpg","https://i.ibb.co/WtNgNk8/photo-86-23-06-2024-15-57-30.jpg","https://i.ibb.co/yd5DPmy/photo-87-23-06-2024-15-57-40.jpg","https://i.ibb.co/TP6chtT/photo-88-23-06-2024-15-58-41.jpg","https://i.ibb.co/mqL8Phw/photo-97-23-06-2024-16-01-45.jpg","https://i.ibb.co/P9fdD7S/photo-96-23-06-2024-15-59-55.jpg","https://i.ibb.co/61FD3VM/photo-98-23-06-2024-16-02-09.jpg","https://i.ibb.co/FB4nTnP/photo-100-23-06-2024-16-04-42.jpg","https://i.ibb.co/58P88bN/photo-101-23-06-2024-16-04-42-thumb.jpg","https://i.ibb.co/qnSLTVv/photo-104-23-06-2024-16-05-45.jpg","https://i.ibb.co/1XLpgLh/photo-105-23-06-2024-16-06-41-thumb.jpg","https://i.ibb.co/Jq4n3rS/photo-106-23-06-2024-16-06-41-thumb.jpg","https://i.ibb.co/h9dY2KH/photo-107-23-06-2024-16-06-41-thumb.jpg","https://i.ibb.co/ZTZ13Bd/photo-108-23-06-2024-16-07-03-thumb.jpg","https://i.ibb.co/KNbdJbr/photo-109-23-06-2024-16-07-10-thumb.jpg","https://i.ibb.co/5k0r41L/photo-110-23-06-2024-16-07-18-thumb.jpg","https://i.ibb.co/zRgSrBm/photo-111-23-06-2024-16-07-31.jpg","https://i.ibb.co/HV5QD09/photo-112-23-06-2024-16-07-31.jpg","https://i.ibb.co/jw9h8H1/photo-113-23-06-2024-16-07-31.jpg","https://i.ibb.co/JBqZthP/photo-114-23-06-2024-16-07-57.jpg","https://i.ibb.co/wKxkQfw/photo-115-23-06-2024-16-07-57.jpg","https://i.ibb.co/jgk5Lt4/photo-116-23-06-2024-16-07-57-thumb.jpg","https://i.ibb.co/09NLRtH/photo-117-23-06-2024-16-07-57.jpg","https://i.ibb.co/RTqVnJC/photo-118-23-06-2024-16-07-57.jpg","https://i.ibb.co/HBMLRwC/photo-327-23-06-2024-18-00-07.jpg","https://i.ibb.co/ZLpVxkP/photo-328-23-06-2024-18-00-07.jpg","https://i.ibb.co/RSLV9wc/photo-329-23-06-2024-18-00-07.jpg","https://i.ibb.co/PNJKsfs/photo-330-23-06-2024-18-00-07.jpg","https://i.ibb.co/WFNX7rP/photo-332-23-06-2024-18-00-55.jpg","https://i.ibb.co/3WmNy8t/photo-333-23-06-2024-18-00-55.jpg","https://i.ibb.co/CnzdNM0/photo-335-23-06-2024-18-02-59.jpg","https://i.ibb.co/rdZDKLc/photo-336-23-06-2024-18-03-23.jpg","https://i.ibb.co/YcdY1jx/photo-337-23-06-2024-18-03-23.jpg","https://i.ibb.co/NmcrtrC/photo-338-23-06-2024-18-03-33.jpg","https://i.ibb.co/t80qYtr/photo-339-23-06-2024-18-03-56.jpg","https://i.ibb.co/Ns64WPc/photo-340-23-06-2024-18-03-56.jpg","https://i.ibb.co/G57vn9P/photo-341-23-06-2024-18-03-56.jpg","https://i.ibb.co/PmJtWLD/photo-342-23-06-2024-18-03-56.jpg","https://i.ibb.co/vcnwsG4/photo-343-23-06-2024-18-03-56.jpg","https://i.ibb.co/whzK7pt/photo-344-23-06-2024-18-03-56.jpg","https://i.ibb.co/XYmyvmg/photo-349-23-06-2024-18-04-25.jpg","https://i.ibb.co/BwQC9WS/photo-351-23-06-2024-18-04-48.jpg","https://i.ibb.co/j8wNrBQ/photo-356-23-06-2024-18-05-55.jpg","https://i.ibb.co/7pSnjsL/photo-357-23-06-2024-18-06-51.jpg","https://i.ibb.co/9gF42p3/photo-358-23-06-2024-18-06-52.jpg","https://i.ibb.co/0DZJLQQ/photo-359-23-06-2024-18-06-52.jpg","https://i.ibb.co/Qdmbv56/photo-119-23-06-2024-16-08-05.jpg","https://i.ibb.co/3ykgsgT/photo-121-23-06-2024-16-08-23.jpg","https://i.ibb.co/XL4HnZ6/photo-123-23-06-2024-16-08-46-thumb.jpg","https://i.ibb.co/dbqgsWR/photo-124-23-06-2024-16-08-46.jpg","https://i.ibb.co/cLQSBtk/photo-125-23-06-2024-16-08-46-thumb.jpg","https://i.ibb.co/b5YchBD/photo-126-23-06-2024-16-08-53-thumb.jpg","https://i.ibb.co/x7GT3FH/photo-127-23-06-2024-16-09-02-thumb.jpg","https://i.ibb.co/k29cBSb/photo-128-23-06-2024-16-09-21-thumb.jpg","https://i.ibb.co/d6b3nTL/photo-129-23-06-2024-16-09-21-thumb.jpg","https://i.ibb.co/K5HXs5s/photo-130-23-06-2024-16-09-21-thumb.jpg","https://i.ibb.co/7VXmNpb/photo-131-23-06-2024-16-09-21.jpg","https://i.ibb.co/JkdBRwH/photo-132-23-06-2024-16-09-39.jpg","https://i.ibb.co/HtnGbc0/photo-133-23-06-2024-16-09-39-thumb.jpg","https://i.ibb.co/Sx5FdWT/photo-134-23-06-2024-16-09-39-thumb.jpg","https://i.ibb.co/qrhvq8x/photo-135-23-06-2024-16-09-39-thumb.jpg","https://i.ibb.co/t2XRmpY/photo-136-23-06-2024-16-09-39-thumb.jpg","https://i.ibb.co/vXdmK71/photo-141-23-06-2024-16-10-20.jpg","https://i.ibb.co/3ztPq25/photo-142-23-06-2024-16-10-20.jpg","https://i.ibb.co/PrY9npf/photo-147-23-06-2024-16-10-51.jpg","https://i.ibb.co/0mCntNr/photo-148-23-06-2024-16-10-51.jpg",];const anhSexyImages=["https://i.ibb.co/9HTZBn3/photo-149-23-06-2024-16-11-00-thumb.jpg","https://i.ibb.co/0rfP8d8/photo-150-23-06-2024-16-11-00-thumb.jpg","https://i.ibb.co/NxL76g8/photo-151-23-06-2024-16-11-12-thumb.jpg","https://i.ibb.co/Jxfx0Hr/photo-156-23-06-2024-16-11-36.jpg","https://i.ibb.co/qW4NTkp/photo-157-23-06-2024-16-11-37.jpg","https://i.ibb.co/8mN3qkm/photo-158-23-06-2024-16-11-37.jpg","https://i.ibb.co/NYCXCPK/photo-163-23-06-2024-16-13-50.jpg","https://i.ibb.co/K6ngyBW/photo-165-23-06-2024-16-14-53.jpg","https://i.ibb.co/k1TCjnW/photo-166-23-06-2024-16-15-37-thumb.jpg","https://i.ibb.co/5ByN6fm/photo-167-23-06-2024-16-16-19.jpg","https://i.ibb.co/jb6N5hx/photo-168-23-06-2024-16-16-31-thumb.jpg","https://i.ibb.co/XCvNdwp/photo-169-23-06-2024-16-18-02-thumb.jpg","https://i.ibb.co/RyrpJVz/photo-170-23-06-2024-16-18-35-thumb.jpg","https://i.ibb.co/y4fz02F/photo-171-23-06-2024-16-19-26-thumb.jpg","https://i.ibb.co/jRhK8FC/photo-172-23-06-2024-16-20-25-thumb.jpg","https://i.ibb.co/VNxrp1j/photo-173-23-06-2024-16-20-25-thumb.jpg","https://i.ibb.co/LP6JKB6/photo-174-23-06-2024-16-20-25-thumb.jpg","https://i.ibb.co/ZTYFXbh/photo-175-23-06-2024-16-20-25-thumb.jpg","https://i.ibb.co/NZm2yM4/photo-176-23-06-2024-16-20-35-thumb.jpg","https://i.ibb.co/Jk5VW2g/photo-178-23-06-2024-16-21-13-thumb.jpg","https://i.ibb.co/nrJQ0Zq/photo-179-23-06-2024-16-22-21-thumb.jpg","https://i.ibb.co/2gyhcGY/photo-181-23-06-2024-16-22-56.jpg","https://i.ibb.co/Nn1rk4H/photo-182-23-06-2024-16-23-28.jpg","https://i.ibb.co/M7hQyyB/photo-184-23-06-2024-16-23-52.jpg","https://i.ibb.co/p1Rhd9c/photo-187-23-06-2024-16-25-39-thumb.jpg","https://i.ibb.co/f4PG8x1/photo-186-23-06-2024-16-25-39.jpg","https://i.ibb.co/JpHKc9m/photo-188-23-06-2024-16-25-39-thumb.jpg","https://i.ibb.co/f4gjcnn/photo-189-23-06-2024-16-25-39.jpg","https://i.ibb.co/BCySqt9/photo-195-23-06-2024-16-26-24-thumb.jpg","https://i.ibb.co/dJrX2Fb/photo-196-23-06-2024-16-26-41-thumb.jpg","https://i.ibb.co/CVtsK4x/photo-197-23-06-2024-16-26-41-thumb.jpg","https://i.ibb.co/T269t0s/photo-198-23-06-2024-16-26-41.jpg","https://i.ibb.co/bzVPtbc/photo-199-23-06-2024-17-08-28.jpg","https://i.ibb.co/pnfghk5/photo-200-23-06-2024-17-08-44.jpg","https://i.ibb.co/6mMSMgg/photo-201-23-06-2024-17-08-44-thumb.jpg","https://i.ibb.co/8b8bhzs/photo-202-23-06-2024-17-08-44.jpg","https://i.ibb.co/RDfmvy8/photo-203-23-06-2024-17-08-44.jpg","https://i.ibb.co/98srcJM/photo-204-23-06-2024-17-08-53-thumb.jpg","https://i.ibb.co/4YWNrZN/photo-205-23-06-2024-17-09-09-thumb.jpg","https://i.ibb.co/ZdJNXY9/photo-206-23-06-2024-17-09-09-thumb.jpg","https://i.ibb.co/x81KqfW/photo-207-23-06-2024-17-09-21.jpg","https://i.ibb.co/svhg9zh/photo-208-23-06-2024-17-09-34.jpg","https://i.ibb.co/jJpZ82b/photo-298-23-06-2024-17-56-26.jpg","https://i.ibb.co/YX9nG2z/photo-299-23-06-2024-17-56-26.jpg","https://i.ibb.co/Tc1xVSR/photo-303-23-06-2024-17-57-23.jpg","https://i.ibb.co/SVvpJ8p/photo-304-23-06-2024-17-57-23.jpg","https://i.ibb.co/hVnK09h/photo-305-23-06-2024-17-57-23.jpg","https://i.ibb.co/gDVh9SW/photo-306-23-06-2024-17-57-23.jpg","https://i.ibb.co/phVWgnZ/photo-307-23-06-2024-17-57-36.jpg","https://i.ibb.co/5R7h2zw/photo-308-23-06-2024-17-58-00.jpg","https://i.ibb.co/H7pjqZF/photo-309-23-06-2024-17-58-00.jpg","https://i.ibb.co/XVTWzsb/photo-310-23-06-2024-17-58-00.jpg","https://i.ibb.co/CVsgcbB/photo-311-23-06-2024-17-58-00.jpg","https://i.ibb.co/0rYCvWr/photo-312-23-06-2024-17-58-00.jpg","https://i.ibb.co/tYgSTsZ/photo-313-23-06-2024-17-58-27.jpg","https://i.ibb.co/WghXq6P/photo-314-23-06-2024-17-58-56.jpg","https://i.ibb.co/pnYtsRS/photo-315-23-06-2024-17-58-56.jpg","https://i.ibb.co/S7Snd9w/photo-316-23-06-2024-17-58-56.jpg","https://i.ibb.co/s1yKFyC/photo-317-23-06-2024-17-58-56.jpg","https://i.ibb.co/q937cgg/photo-318-23-06-2024-17-58-56.jpg","https://i.ibb.co/qdWy7P1/photo-319-23-06-2024-17-58-56.jpg","https://i.ibb.co/rtfzbcm/photo-320-23-06-2024-17-59-12.jpg","https://i.ibb.co/5hHmBzT/photo-321-23-06-2024-17-59-23.jpg","https://i.ibb.co/xLqC3hM/photo-322-23-06-2024-17-59-31.jpg","https://i.ibb.co/Zh3Wkp7/photo-323-23-06-2024-17-59-49.jpg","https://i.ibb.co/d7yQy5B/photo-324-23-06-2024-17-59-49.jpg","https://i.ibb.co/chGZJ2x/photo-326-23-06-2024-17-59-49.jpg","https://i.ibb.co/1JWG08f/photo-209-23-06-2024-17-10-02-Sao-ch-p.jpg","https://i.ibb.co/J2NDRrX/photo-210-23-06-2024-17-10-02-Sao-ch-p.jpg","https://i.ibb.co/Y74cfgx/photo-214-23-06-2024-17-40-01-Sao-ch-p.jpg","https://i.ibb.co/0Dp7f70/photo-216-23-06-2024-17-40-09-Sao-ch-p.jpg","https://i.ibb.co/wCBGgPg/photo-217-23-06-2024-17-40-16-Sao-ch-p.jpg","https://i.ibb.co/t4x2J3d/photo-218-23-06-2024-17-40-51-Sao-ch-p.jpg","https://i.ibb.co/0Yvcqdn/photo-219-23-06-2024-17-40-51-Sao-ch-p.jpg","https://i.ibb.co/wWCFR14/photo-220-23-06-2024-17-40-51-Sao-ch-p.jpg","https://i.ibb.co/sQ9qBb2/photo-221-23-06-2024-17-41-10-Sao-ch-p.jpg","https://i.ibb.co/VJvhM68/photo-222-23-06-2024-17-41-10-Sao-ch-p.jpg","https://i.ibb.co/CwjhCZT/photo-223-23-06-2024-17-41-10-Sao-ch-p.jpg","https://i.ibb.co/TbKjhBJ/photo-224-23-06-2024-17-41-10-Sao-ch-p.jpg","https://i.ibb.co/svmn0tk/photo-225-23-06-2024-17-45-11-Sao-ch-p.jpg","https://i.ibb.co/6Xkc79d/photo-226-23-06-2024-17-45-12-Sao-ch-p.jpg","https://i.ibb.co/vHftjpz/photo-232-23-06-2024-17-45-46-Sao-ch-p.jpg","https://i.ibb.co/hFp4GgM/photo-233-23-06-2024-17-45-55-Sao-ch-p.jpg","https://i.ibb.co/p1FW7wt/photo-234-23-06-2024-17-46-08-Sao-ch-p.jpg","https://i.ibb.co/7WVgxng/photo-235-23-06-2024-17-46-13-Sao-ch-p.jpg","https://i.ibb.co/FJQRrym/photo-236-23-06-2024-17-46-21-Sao-ch-p.jpg","https://i.ibb.co/n7NYZt8/photo-237-23-06-2024-17-46-38-Sao-ch-p.jpg","https://i.ibb.co/dbfRYd1/photo-238-23-06-2024-17-46-38-Sao-ch-p.jpg","https://i.ibb.co/RSxF11X/photo-239-23-06-2024-17-46-38-Sao-ch-p.jpg","https://i.ibb.co/SdzCJbG/photo-240-23-06-2024-17-46-38-Sao-ch-p.jpg","https://i.ibb.co/XjgvH5F/photo-241-23-06-2024-17-46-57-Sao-ch-p.jpg","https://i.ibb.co/k187JCP/photo-242-23-06-2024-17-46-57-Sao-ch-p.jpg","https://i.ibb.co/WVSgf55/photo-243-23-06-2024-17-46-57-Sao-ch-p.jpg","https://i.ibb.co/8PHMwbf/photo-244-23-06-2024-17-48-18-Sao-ch-p.jpg","https://i.ibb.co/q7MNxRs/photo-245-23-06-2024-17-48-18-Sao-ch-p.jpg","https://i.ibb.co/9YnLsDx/photo-246-23-06-2024-17-48-18-Sao-ch-p.jpg","https://i.ibb.co/GVGmxb1/photo-247-23-06-2024-17-48-18-Sao-ch-p.jpg","https://i.ibb.co/54SrxzT/photo-248-23-06-2024-17-48-18-Sao-ch-p.jpg","https://i.ibb.co/929GNYj/photo-249-23-06-2024-17-48-43-Sao-ch-p.jpg","https://i.ibb.co/yQrVYCz/photo-250-23-06-2024-17-48-53-Sao-ch-p.jpg","https://i.ibb.co/VMWqsXW/photo-251-23-06-2024-17-48-53-Sao-ch-p.jpg","https://i.ibb.co/tDPFLdC/photo-252-23-06-2024-17-49-02-Sao-ch-p.jpg","https://i.ibb.co/mtLRKzT/photo-253-23-06-2024-17-49-41-Sao-ch-p.jpg","https://i.ibb.co/fv81fJz/photo-258-23-06-2024-17-49-59-Sao-ch-p.jpg","https://i.ibb.co/wRGrW3S/photo-259-23-06-2024-17-49-59-Sao-ch-p.jpg","https://i.ibb.co/WnYMsbr/photo-260-23-06-2024-17-49-59-Sao-ch-p.jpg","https://i.ibb.co/LNFLDcb/photo-261-23-06-2024-17-50-31-Sao-ch-p.jpg","https://i.ibb.co/SvVp3PS/photo-262-23-06-2024-17-50-31-Sao-ch-p.jpg","https://i.ibb.co/34HgK1L/photo-263-23-06-2024-17-50-31-Sao-ch-p.jpg","https://i.ibb.co/tQZQmNR/photo-264-23-06-2024-17-51-04-Sao-ch-p.jpg","https://i.ibb.co/X8QcjBx/photo-265-23-06-2024-17-51-04-Sao-ch-p.jpg","https://i.ibb.co/GpcD3Dm/photo-266-23-06-2024-17-51-04-Sao-ch-p.jpg","https://i.ibb.co/B4d0Sm3/photo-267-23-06-2024-17-51-04-Sao-ch-p.jpg","https://i.ibb.co/5cL60ft/photo-268-23-06-2024-17-51-16-Sao-ch-p.jpg","https://i.ibb.co/D9pv4B0/photo-269-23-06-2024-17-51-29-Sao-ch-p.jpg","https://i.ibb.co/Pm3Ggr2/photo-270-23-06-2024-17-51-59-Sao-ch-p.jpg","https://i.ibb.co/LZwGNHb/photo-271-23-06-2024-17-51-59-Sao-ch-p.jpg","https://i.ibb.co/BnpxFTt/photo-272-23-06-2024-17-51-59-Sao-ch-p.jpg","https://i.ibb.co/KmPktvM/photo-273-23-06-2024-17-52-14-Sao-ch-p.jpg","https://i.ibb.co/fQJNHLQ/photo-274-23-06-2024-17-52-14-Sao-ch-p.jpg","https://i.ibb.co/2dzH9X4/photo-275-23-06-2024-17-52-27-Sao-ch-p.jpg","https://i.ibb.co/K2bQKSB/photo-276-23-06-2024-17-52-27-Sao-ch-p.jpg","https://i.ibb.co/hWt7wv5/photo-277-23-06-2024-17-52-43-Sao-ch-p.jpg","https://i.ibb.co/5KNCnrR/photo-278-23-06-2024-17-52-44-Sao-ch-p.jpg","https://i.ibb.co/hWnb0fZ/photo-279-23-06-2024-17-52-44-Sao-ch-p.jpg","https://i.ibb.co/P4QqxKH/photo-280-23-06-2024-17-53-11-Sao-ch-p.jpg","https://i.ibb.co/bmJcmz1/photo-281-23-06-2024-17-53-18-Sao-ch-p.jpg","https://i.ibb.co/LtP77XK/photo-282-23-06-2024-17-53-29-Sao-ch-p.jpg","https://i.ibb.co/v3bncq2/photo-286-23-06-2024-17-54-14-Sao-ch-p.jpg","https://i.ibb.co/pPLhsvM/photo-287-23-06-2024-17-54-14-Sao-ch-p.jpg","https://i.ibb.co/1Z0Qngm/photo-287-23-06-2024-17-54-14-thumb.jpg","https://i.ibb.co/sJnTc6x/photo-288-23-06-2024-17-54-23-Sao-ch-p.jpg","https://i.ibb.co/FbVsH4f/photo-289-23-06-2024-17-55-04-Sao-ch-p.jpg","https://i.ibb.co/5vt2bF3/photo-290-23-06-2024-17-55-04-Sao-ch-p.jpg","https://i.ibb.co/TRtvrzb/photo-292-23-06-2024-17-55-31.jpg","https://i.ibb.co/xjxjCv9/photo-293-23-06-2024-17-55-31.jpg","https://i.ibb.co/TMNqFFR/photo-294-23-06-2024-17-55-31.jpg","https://i.ibb.co/yXrV6S8/photo-295-23-06-2024-17-55-31.jpg","https://i.ibb.co/1JHTTdQ/photo-296-23-06-2024-17-56-04.jpg","https://i.ibb.co/Gs46XGm/photo-297-23-06-2024-17-56-26.jpg",];const anhNongImages=["https://i.ibb.co/CVVxbH3/photo-2024-06-22-13-57-05-2.jpg","https://i.ibb.co/MBZp8sW/photo-2024-06-22-13-57-05-3.jpg","https://i.ibb.co/RNjLzr3/photo-2024-06-22-13-57-05.jpg","https://i.ibb.co/TqK8YJV/photo-2024-06-23-13-20-40-2.jpg","https://i.ibb.co/4g4sPdw/photo-2024-06-23-13-20-40.jpg","https://i.ibb.co/8X4vKpm/photo-2024-06-25-22-18-12-2.jpg","https://i.ibb.co/ZKmpBkT/photo-2024-06-25-22-18-12.jpg","https://i.ibb.co/ZNCgGHb/photo-2024-06-26-19-55-40.jpg","https://i.ibb.co/CsvFRcJ/photo-2024-06-28-13-28-29.jpg","https://i.ibb.co/zQYnCtj/photo-2024-06-29-13-54-47.jpg","https://i.ibb.co/8DZLjJX/photo-2024-07-02-15-30-31.jpg","https://i.ibb.co/C6J8wVS/photo-2024-07-04-14-48-16.jpg","https://i.ibb.co/5njjhyG/photo-2024-07-05-13-28-08.jpg","https://i.ibb.co/7NRpDVd/photo-2024-07-05-16-55-20.jpg","https://i.ibb.co/1ZTBM8F/photo-2024-07-07-11-38-49.jpg","https://i.ibb.co/HPgZR2d/photo-2024-07-07-12-01-11.jpg","https://i.ibb.co/Wzm1Kn1/photo-2024-07-09-19-26-44.jpg","https://i.ibb.co/sRPmjz3/photo-2024-07-09-20-09-22.jpg","https://i.ibb.co/cCxxfKn/photo-2024-07-10-17-20-55.jpg","https://i.ibb.co/RQr9WBb/photo-2024-07-20-15-04-44.jpg","https://i.ibb.co/5shzYm1/photo-2024-07-26-18-16-36.jpg","https://i.ibb.co/0FYvf0Y/photo-2024-07-26-20-22-04.jpg","https://i.ibb.co/FYKDS0k/photo-2024-07-29-18-46-37.jpg","https://i.ibb.co/rygHbZ2/photo-2024-07-31-13-27-12.jpg","https://i.ibb.co/PG99N7b/photo-1-2024-10-23-11-52-15.jpg","https://i.ibb.co/BPncGH7/photo-1-2024-10-23-11-22-02.jpg","https://i.ibb.co/Nr5qKL2/photo-1-2024-10-23-11-52-30.jpg","https://i.ibb.co/t3qMwZB/photo-2-2024-10-23-11-51-38.jpg","https://i.ibb.co/0jrgC38/photo-2-2024-10-23-11-52-30.jpg","https://i.ibb.co/H7gHRfp/photo-2-2024-10-23-11-52-15.jpg","https://i.ibb.co/xSsFcHq/photo-3-2024-10-23-11-22-02.jpg","https://i.ibb.co/WsNDbnK/photo-3-2024-10-23-11-52-15.jpg","https://i.ibb.co/RcJCBVD/photo-3-2024-10-23-11-52-30.jpg","https://i.ibb.co/Pt3cqrf/photo-4-2024-10-23-11-51-38.jpg","https://i.ibb.co/p2vNxfh/photo-4-2024-10-23-11-52-15.jpg","https://i.ibb.co/R9bZwr9/photo-4-2024-10-23-11-52-30.jpg","https://i.ibb.co/2jv4sMs/photo-5-2024-10-23-11-22-02.jpg","https://i.ibb.co/L0n93cz/photo-5-2024-10-23-11-52-15.jpg","https://i.ibb.co/WzXRhQg/photo-5-2024-10-23-11-52-30.jpg","https://i.ibb.co/hMqKzQ9/photo-6-2024-10-23-11-51-38.jpg","https://i.ibb.co/ZBmG87y/photo-6-2024-10-23-11-52-30.jpg","https://i.ibb.co/MB3Gct7/photo-7-2024-10-23-11-51-38.jpg","https://i.ibb.co/X8922pL/photo-7-2024-10-23-11-52-15.jpg","https://i.ibb.co/p4XzgtY/photo-7-2024-10-23-11-52-30.jpg","https://i.ibb.co/y6Pt5MW/photo-8-2024-10-23-11-51-38.jpg","https://i.ibb.co/b2BxRcW/photo-8-2024-10-23-11-52-15.jpg","https://i.ibb.co/n0Xhxs4/photo-9-2024-10-23-11-22-02.jpg","https://i.ibb.co/ZXQz03b/photo-9-2024-10-23-11-52-15.jpg","https://i.ibb.co/PQHwdMm/photo-9-2024-10-23-11-52-30.jpg","https://i.ibb.co/YXh9kKb/photo-10-2024-10-23-11-22-02.jpg","https://i.ibb.co/tbypMvJ/photo-10-2024-10-23-11-52-15.jpg","https://i.ibb.co/2yHwZhZ/photo-10-2024-10-23-11-52-30.jpg","https://i.ibb.co/X5ks6CP/photo-11-2024-10-23-11-22-02.jpg","https://i.ibb.co/vVNVr7n/photo-11-2024-10-23-11-52-15.jpg","https://i.ibb.co/865k7YW/photo-11-2024-10-23-11-52-30.jpg","https://i.ibb.co/k3hTjQD/photo-12-2024-10-23-11-22-02.jpg","https://i.ibb.co/Tk833Hn/photo-12-2024-10-23-11-52-15.jpg","https://i.ibb.co/3cPH7hj/photo-12-2024-10-23-11-52-30.jpg","https://i.ibb.co/dBv8yd2/photo-13-2024-10-23-11-22-02.jpg","https://i.ibb.co/SNmpdgf/photo-13-2024-10-23-11-52-15.jpg","https://i.ibb.co/71Y3C62/photo-14-2024-10-23-11-51-38.jpg","https://i.ibb.co/ykbKDdF/photo-14-2024-10-23-11-52-15.jpg","https://i.ibb.co/0sYx3Dn/photo-14-2024-10-23-11-52-30.jpg","https://i.ibb.co/12mwWRg/photo-15-2024-10-23-11-22-02.jpg","https://i.ibb.co/Bnytcwr/photo-15-2024-10-23-11-52-15.jpg","https://i.ibb.co/g7nCYc4/photo-15-2024-10-23-11-52-30.jpg","https://i.ibb.co/d2FxT6x/photo-16-2024-10-23-11-51-38.jpg","https://i.ibb.co/nP596XN/photo-16-2024-10-23-11-52-15.jpg","https://i.ibb.co/54G8SY8/photo-16-2024-10-23-11-52-30.jpg","https://i.ibb.co/7CS5z7s/photo-17-2024-10-23-11-22-02.jpg","https://i.ibb.co/d0Cvktp/photo-17-2024-10-23-11-52-15.jpg","https://i.ibb.co/vLcGbVx/photo-18-2024-10-23-11-51-38.jpg","https://i.ibb.co/hKvSffj/photo-18-2024-10-23-11-52-15.jpg","https://i.ibb.co/ZXQJP5M/photo-18-2024-10-23-11-52-30.jpg","https://i.ibb.co/gM42Djp/photo-19-2024-10-23-11-22-02.jpg","https://i.ibb.co/cQ5jYtH/photo-19-2024-10-23-11-52-15.jpg","https://i.ibb.co/tHxqtYY/photo-19-2024-10-23-11-52-30.jpg","https://i.ibb.co/fdC2Vqn/photo-20-2024-10-23-11-51-38.jpg","https://i.ibb.co/RCknckF/photo-20-2024-10-23-11-52-15.jpg","https://i.ibb.co/rMrN3cG/photo-21-2024-10-23-11-22-02.jpg","https://i.ibb.co/vJYf7L9/photo-21-2024-10-23-11-52-15.jpg","https://i.ibb.co/yP9ncXw/photo-21-2024-10-23-11-52-30.jpg","https://i.ibb.co/D7GbY8f/photo-22-2024-10-23-11-51-38.jpg","https://i.ibb.co/c67kgkx/photo-22-2024-10-23-11-52-15.jpg","https://i.ibb.co/MCpyBrv/photo-22-2024-10-23-11-52-30.jpg","https://i.ibb.co/HD57mqY/photo-23-2024-10-23-11-51-38.jpg","https://i.ibb.co/Nxzm4Yx/photo-23-2024-10-23-11-52-15.jpg","https://i.ibb.co/mcc9Jch/photo-23-2024-10-23-11-52-30.jpg","https://i.ibb.co/4jrXQNZ/photo-24-2024-10-23-11-51-38.jpg","https://i.ibb.co/YT4c4nJ/photo-24-2024-10-23-11-52-15.jpg","https://i.ibb.co/xqDhW0z/photo-24-2024-10-23-11-52-30.jpg","https://i.ibb.co/dct9kbk/photo-25-2024-10-23-11-51-38.jpg","https://i.ibb.co/g6pRYnX/photo-25-2024-10-23-11-52-15.jpg","https://i.ibb.co/8x69dFT/photo-25-2024-10-23-11-52-30.jpg","https://i.ibb.co/TKZmfVX/photo-26-2024-10-23-11-51-38.jpg","https://i.ibb.co/Dfkft9Q/photo-26-2024-10-23-11-52-15.jpg","https://i.ibb.co/WKQv69w/photo-26-2024-10-23-11-52-30.jpg","https://i.ibb.co/BjBdytt/photo-27-2024-10-23-11-22-02.jpg","https://i.ibb.co/M9kGpQd/photo-27-2024-10-23-11-52-15.jpg","https://i.ibb.co/Zdz7ccR/photo-27-2024-10-23-11-52-30.jpg","https://i.ibb.co/ZcjJLfm/photo-28-2024-10-23-11-51-38.jpg","https://i.ibb.co/yqBdFZ2/photo-28-2024-10-23-11-52-15.jpg","https://i.ibb.co/QYvQ7Lg/photo-28-2024-10-23-11-52-30.jpg","https://i.ibb.co/cFspDv7/photo-29-2024-10-23-11-22-02.jpg","https://i.ibb.co/23tXYk1/photo-29-2024-10-23-11-52-15.jpg","https://i.ibb.co/ZxcVz07/photo-29-2024-10-23-11-52-30.jpg","https://i.ibb.co/JvZS9tb/photo-30-2024-10-23-11-51-38.jpg","https://i.ibb.co/CzTtsR9/photo-30-2024-10-23-11-52-15.jpg","https://i.ibb.co/vwVW6Nd/photo-30-2024-10-23-11-52-30.jpg","https://i.ibb.co/JkYFptc/photo-31-2024-10-23-11-22-02.jpg","https://i.ibb.co/kMBRC35/photo-31-2024-10-23-11-52-15.jpg","https://i.ibb.co/kmfqKf4/photo-31-2024-10-23-11-52-30.jpg","https://i.ibb.co/1ffHXMs/photo-32-2024-10-23-11-51-38.jpg","https://i.ibb.co/fdc02bY/photo-32-2024-10-23-11-52-15.jpg","https://i.ibb.co/3c4BNyW/photo-32-2024-10-23-11-52-30.jpg","https://i.ibb.co/h2HCB93/photo-33-2024-10-23-11-52-15.jpg","https://i.ibb.co/c10kMTh/photo-33-2024-10-23-11-52-30.jpg","https://i.ibb.co/bNyRhZw/photo-34-2024-10-23-11-51-38.jpg","https://i.ibb.co/ydrVJgN/photo-34-2024-10-23-11-52-15.jpg","https://i.ibb.co/XxZDK60/photo-34-2024-10-23-11-52-30.jpg","https://i.ibb.co/zFh3ctK/photo-35-2024-10-23-11-52-15.jpg","https://i.ibb.co/g9zB1yT/photo-35-2024-10-23-11-52-30.jpg","https://i.ibb.co/CvJ5dtT/photo-36-2024-10-23-11-51-38.jpg","https://i.ibb.co/4jK2HKv/photo-36-2024-10-23-11-52-15.jpg","https://i.ibb.co/dfQ7HVP/photo-36-2024-10-23-11-52-30.jpg","https://i.ibb.co/z5zvrFM/photo-37-2024-10-23-11-22-02.jpg","https://i.ibb.co/7JS9cvr/photo-37-2024-10-23-11-52-15.jpg","https://i.ibb.co/MBp1GHC/photo-37-2024-10-23-11-52-30.jpg","https://i.ibb.co/1KSwRvG/photo-38-2024-10-23-11-51-38.jpg","https://i.ibb.co/8xvq1R8/photo-38-2024-10-23-11-52-15.jpg","https://i.ibb.co/B3G330L/photo-38-2024-10-23-11-52-30.jpg","https://i.ibb.co/R2gpfZK/photo-39-2024-10-23-11-22-02.jpg","https://i.ibb.co/R2mJy7H/photo-39-2024-10-23-11-52-15.jpg","https://i.ibb.co/1003y4f/photo-39-2024-10-23-11-52-30.jpg","https://i.ibb.co/6gvCGfr/photo-40-2024-10-23-11-22-02.jpg","https://i.ibb.co/dmBbHSn/photo-40-2024-10-23-11-52-15.jpg","https://i.ibb.co/VNb6F5w/photo-40-2024-10-23-11-52-30.jpg","https://i.ibb.co/pRnwn46/photo-41-2024-10-23-11-51-38.jpg","https://i.ibb.co/m5j7Jqh/photo-41-2024-10-23-11-52-15.jpg","https://i.ibb.co/qyvrhgn/photo-41-2024-10-23-11-52-30.jpg","https://i.ibb.co/Nm9Lv4q/photo-42-2024-10-23-11-52-15.jpg","https://i.ibb.co/XDHQbfZ/photo-42-2024-10-23-11-52-30.jpg","https://i.ibb.co/rx9jSZQ/photo-43-2024-10-23-11-22-02.jpg","https://i.ibb.co/kD7bhqN/photo-43-2024-10-23-11-52-15.jpg","https://i.ibb.co/0CMXh01/photo-43-2024-10-23-11-52-30.jpg","https://i.ibb.co/3vkh61X/photo-44-2024-10-23-11-51-38.jpg","https://i.ibb.co/7bydhNh/photo-44-2024-10-23-11-52-15.jpg","https://i.ibb.co/Tw21fCf/photo-45-2024-10-23-11-22-02.jpg","https://i.ibb.co/MZ1MsXK/photo-45-2024-10-23-11-52-15.jpg","https://i.ibb.co/0qZ2gsz/photo-46-2024-10-23-11-22-02.jpg","https://i.ibb.co/VSt9JFV/photo-46-2024-10-23-11-52-15.jpg","https://i.ibb.co/fDYSpwj/photo-47-2024-10-23-11-51-38.jpg","https://i.ibb.co/HXSWP3b/photo-47-2024-10-23-11-52-15.jpg","https://i.ibb.co/D1Shf39/photo-48-2024-10-23-11-22-02.jpg","https://i.ibb.co/xJyRkGQ/photo-49-2024-10-23-11-51-38.jpg","https://i.ibb.co/3kysnCy/photo-49-2024-10-23-11-52-15.jpg","https://i.ibb.co/qsbySLD/photo-50-2024-10-23-11-51-38.jpg","https://i.ibb.co/KVgNP74/photo-50-2024-10-23-11-52-15.jpg","https://i.ibb.co/PF1Zsjh/photo-51-2024-10-23-11-51-38.jpg","https://i.ibb.co/CwNr7Nc/photo-52-2024-10-23-11-22-02.jpg","https://i.ibb.co/QX2mDJy/photo-53-2024-10-23-11-22-02.jpg","https://i.ibb.co/BZJ6yxQ/photo-54-2024-10-23-11-51-38.jpg","https://i.ibb.co/R4mjsQ2/photo-56-2024-10-23-11-22-02.jpg","https://i.ibb.co/xjPKQNh/photo-56-2024-10-23-11-52-15.jpg","https://i.ibb.co/2SthkCW/photo-57-2024-10-23-11-51-38.jpg","https://i.ibb.co/nbNBYHB/photo-58-2024-10-23-11-22-02.jpg","https://i.ibb.co/R7v0JR9/photo-59-2024-10-23-11-22-02.jpg","https://i.ibb.co/mc5sv3q/photo-59-2024-10-23-11-52-15.jpg","https://i.ibb.co/gydKT26/photo-60-2024-10-23-11-22-02.jpg","https://i.ibb.co/mFF7pKK/photo-60-2024-10-23-11-52-15.jpg","https://i.ibb.co/VHd8YhC/photo-61-2024-10-23-11-22-02.jpg","https://i.ibb.co/Gxt9Hf1/photo-61-2024-10-23-11-52-15.jpg","https://i.ibb.co/j3xGxby/photo-62-2024-10-23-11-51-38.jpg","https://i.ibb.co/zh62WqQ/photo-62-2024-10-23-11-52-15.jpg","https://i.ibb.co/DW8MDSq/photo-63-2024-10-23-11-51-38.jpg","https://i.ibb.co/mzw0yyB/photo-63-2024-10-23-11-52-15.jpg","https://i.ibb.co/ZWRQgwt/photo-64-2024-10-23-11-22-02.jpg","https://i.ibb.co/CHy80WH/photo-64-2024-10-23-11-52-15.jpg","https://i.ibb.co/MfRjjXT/photo-65-2024-10-23-11-51-38.jpg","https://i.ibb.co/PZLrXKZ/photo-65-2024-10-23-11-52-15.jpg","https://i.ibb.co/qgzBNgS/photo-66-2024-10-23-11-22-02.jpg","https://i.ibb.co/CPN1PQh/photo-66-2024-10-23-11-52-15.jpg","https://i.ibb.co/RPFXJcc/photo-67-2024-10-23-11-22-02.jpg","https://i.ibb.co/8YMQbzB/photo-67-2024-10-23-11-52-15.jpg","https://i.ibb.co/QvW825T/photo-68-2024-10-23-11-51-38.jpg","https://i.ibb.co/6YYkbD9/photo-68-2024-10-23-11-52-15.jpg","https://i.ibb.co/4sqdRq1/photo-69-2024-10-23-11-22-02.jpg","https://i.ibb.co/sKPqPch/photo-69-2024-10-23-11-52-15.jpg","https://i.ibb.co/Cb7rq9P/photo-70-2024-10-23-11-22-02.jpg","https://i.ibb.co/tH9TTHD/photo-70-2024-10-23-11-52-15.jpg","https://i.ibb.co/ckRz8sW/photo-71-2024-10-23-11-51-38.jpg","https://i.ibb.co/4FhkH91/photo-71-2024-10-23-11-52-15.jpg","https://i.ibb.co/Yb4dF4b/photo-72-2024-10-23-11-51-38.jpg","https://i.ibb.co/6NQVtqQ/photo-73-2024-10-23-11-22-02.jpg","https://i.ibb.co/mvfsjWK/photo-73-2024-10-23-11-52-15.jpg","https://i.ibb.co/0GJddGM/photo-74-2024-10-23-11-51-38.jpg","https://i.ibb.co/LSLwNS2/photo-75-2024-10-23-11-22-02.jpg","https://i.ibb.co/gVTv9qg/photo-75-2024-10-23-11-52-15.jpg","https://i.ibb.co/2cDrw6c/photo-76-2024-10-23-11-51-38.jpg","https://i.ibb.co/xDbKFsp/photo-76-2024-10-23-11-52-15.jpg","https://i.ibb.co/Qnt3SfC/photo-77-2024-10-23-11-22-02.jpg","https://i.ibb.co/QcqpYw9/photo-77-2024-10-23-11-52-15.jpg","https://i.ibb.co/xJNFqHh/photo-78-2024-10-23-11-52-15.jpg","https://i.ibb.co/xJYpwQF/photo-79-2024-10-23-11-51-38.jpg","https://i.ibb.co/gRjYmL2/photo-79-2024-10-23-11-52-15.jpg","https://i.ibb.co/XkDTZV8/photo-80-2024-10-23-11-22-02.jpg","https://i.ibb.co/sJQR44r/photo-80-2024-10-23-11-52-15.jpg","https://i.ibb.co/VHVTCFK/photo-81-2024-10-23-11-22-02.jpg","https://i.ibb.co/kGmFyR8/photo-81-2024-10-23-11-52-15.jpg","https://i.ibb.co/3rbKbNC/photo-82-2024-10-23-11-51-38.jpg","https://i.ibb.co/VtYs1Ft/photo-82-2024-10-23-11-52-15.jpg","https://i.ibb.co/YdGBtTF/photo-83-2024-10-23-11-22-02.jpg","https://i.ibb.co/6mYrWpM/photo-83-2024-10-23-11-52-15.jpg","https://i.ibb.co/rtXhcR6/photo-84-2024-10-23-11-51-38.jpg","https://i.ibb.co/KjwQH8D/photo-84-2024-10-23-11-52-15.jpg","https://i.ibb.co/4dBy8kK/photo-85-2024-10-23-11-22-02.jpg","https://i.ibb.co/mh5Np3D/photo-85-2024-10-23-11-52-15.jpg","https://i.ibb.co/5jgGLph/photo-86-2024-10-23-11-22-02.jpg","https://i.ibb.co/3pydHGW/photo-86-2024-10-23-11-52-15.jpg","https://i.ibb.co/BsCm4Zj/photo-87-2024-10-23-11-51-38.jpg","https://i.ibb.co/3vDdrwr/photo-87-2024-10-23-11-52-15.jpg","https://i.ibb.co/Sw5ZVH1/photo-89-2024-10-23-11-52-15.jpg","https://i.ibb.co/6twPSN1/photo-90-2024-10-23-11-51-38.jpg","https://i.ibb.co/JK9yfb6/photo-90-2024-10-23-11-52-15.jpg","https://i.ibb.co/JtYVzkg/photo-91-2024-10-23-11-22-02.jpg","https://i.ibb.co/dK80wRM/photo-91-2024-10-23-11-52-15.jpg","https://i.ibb.co/F8Q2RQP/photo-92-2024-10-23-11-51-38.jpg","https://i.ibb.co/MSMCWJs/photo-92-2024-10-23-11-52-15.jpg","https://i.ibb.co/PF0C7MY/photo-93-2024-10-23-11-22-02.jpg","https://i.ibb.co/gPj9DgB/photo-93-2024-10-23-11-52-15.jpg","https://i.ibb.co/B6ZddPC/photo-94-2024-10-23-11-51-38.jpg","https://i.ibb.co/hdQf9sT/photo-94-2024-10-23-11-52-15.jpg","https://i.ibb.co/kcRrfp4/photo-95-2024-10-23-11-51-38.jpg","https://i.ibb.co/FnL87cT/photo-95-2024-10-23-11-52-15.jpg","https://i.ibb.co/FKs7rYX/photo-96-2024-10-23-11-51-38.jpg","https://i.ibb.co/nRdVX4Z/photo-96-2024-10-23-11-52-15.jpg","https://i.ibb.co/WxLNfwB/photo-97-2024-10-23-11-22-02.jpg","https://i.ibb.co/KxBmrT4/photo-97-2024-10-23-11-52-15.jpg","https://i.ibb.co/DYg1S19/photo-98-2024-10-23-11-22-02.jpg","https://i.ibb.co/nzJgzTt/photo-98-2024-10-23-11-52-15.jpg","https://i.ibb.co/N2SKVSV/photo-99-2024-10-23-11-51-38.jpg","https://i.ibb.co/VYSyXSj/photo-2024-09-05-18-37-46.jpg","https://i.ibb.co/gV7DLYq/photo-2024-09-05-18-55-27-2.jpg","https://i.ibb.co/6P3XcmJ/photo-2024-09-19-10-00-00.jpg","https://i.ibb.co/Yf3d0XD/photo-2024-09-25-14-53-12.jpg","https://i.ibb.co/NWJ9GXw/photo-2024-10-08-13-08-08.jpg","https://i.ibb.co/3SqQp9n/photo-2024-10-15-22-09-07.jpg","https://i.ibb.co/z8m3D3c/photo-2024-10-19-08-08-02.jpg","https://i.ibb.co/VHRkyQc/review-of-duc-toan-for-reup-be-ana-pga-chuan-mat-xinh-body-dep-vu-to-dam-tiep-cac-boss-3255192-origi.jpg","https://i.ibb.co/8YftK71/photo-5-2024-10-23-11-22-02.jpg","https://i.ibb.co/9sKrvrr/photo-5-2024-10-23-11-52-15.jpg","https://i.ibb.co/jyL34kM/photo-5-2024-10-23-11-52-30.jpg","https://i.ibb.co/Lhwhq9W/photo-6-2024-10-23-11-51-38.jpg","https://i.ibb.co/ZLjP2X8/photo-6-2024-10-23-11-52-30.jpg","https://i.ibb.co/pJcSpDp/photo-7-2024-10-23-11-51-38.jpg","https://i.ibb.co/Q8D8dCG/photo-7-2024-10-23-11-52-15.jpg","https://i.ibb.co/7JcNcDN/photo-7-2024-10-23-11-52-30.jpg","https://i.ibb.co/r3yhQ8Z/photo-8-2024-10-23-11-52-15.jpg","https://i.ibb.co/hY6jw6T/photo-9-2024-10-23-11-22-02.jpg","https://i.ibb.co/0fTgT8S/photo-9-2024-10-23-11-52-30.jpg","https://i.ibb.co/Gxt99Mr/photo-10-2024-10-23-11-52-15.jpg","https://i.ibb.co/m6m7z4Y/photo-11-2024-10-23-11-22-02.jpg","https://i.ibb.co/7z8qP2r/photo-11-2024-10-23-11-52-15.jpg","https://i.ibb.co/fHH0mMJ/photo-11-2024-10-23-11-52-30.jpg","https://i.ibb.co/wN1BqR3/photo-12-2024-10-23-11-22-02.jpg","https://i.ibb.co/5986MWf/photo-12-2024-10-23-11-52-15.jpg","https://i.ibb.co/rZmGvC3/photo-14-2024-10-23-11-51-38.jpg","https://i.ibb.co/44ZDr8r/photo-14-2024-10-23-11-52-15.jpg","https://i.ibb.co/Jskcg6f/photo-14-2024-10-23-11-52-30.jpg","https://i.ibb.co/Pt99432/photo-15-2024-10-23-11-22-02.jpg","https://i.ibb.co/DrGSf3Y/photo-15-2024-10-23-11-52-30.jpg","https://i.ibb.co/PQW9xhQ/photo-16-2024-10-23-11-51-38.jpg","https://i.ibb.co/ZSQCLwx/photo-16-2024-10-23-11-52-15.jpg","https://i.ibb.co/XtT4qfm/photo-16-2024-10-23-11-52-30.jpg","https://i.ibb.co/dp5Nr6k/photo-17-2024-10-23-11-22-02.jpg","https://i.ibb.co/h8tGGt9/photo-17-2024-10-23-11-52-15.jpg","https://i.ibb.co/BwTPBQ1/photo-18-2024-10-23-11-51-38.jpg","https://i.ibb.co/nwRxCpD/photo-18-2024-10-23-11-52-15.jpg","https://i.ibb.co/K07JMK8/photo-18-2024-10-23-11-52-30.jpg","https://i.ibb.co/34bdKZQ/photo-19-2024-10-23-11-22-02.jpg","https://i.ibb.co/Vv485HL/photo-20-2024-10-23-11-51-38.jpg","https://i.ibb.co/6YsFD2S/photo-20-2024-10-23-11-52-15.jpg","https://i.ibb.co/Y2H2hjc/photo-21-2024-10-23-11-22-02.jpg","https://i.ibb.co/Hrc6qgX/photo-21-2024-10-23-11-52-15.jpg","https://i.ibb.co/mz6Rm3Y/photo-21-2024-10-23-11-52-30.jpg","https://i.ibb.co/G03zXPt/photo-22-2024-10-23-11-52-15.jpg","https://i.ibb.co/HhygWWL/photo-22-2024-10-23-11-52-30.jpg","https://i.ibb.co/8cbkkB6/photo-23-2024-10-23-11-51-38.jpg","https://i.ibb.co/KmjBP7Y/photo-23-2024-10-23-11-52-15.jpg","https://i.ibb.co/VSDdwBn/photo-24-2024-10-23-11-51-38.jpg","https://i.ibb.co/tcht2V3/photo-25-2024-10-23-11-51-38.jpg","https://i.ibb.co/D9znnts/photo-25-2024-10-23-11-52-15.jpg","https://i.ibb.co/WW6G5zc/photo-25-2024-10-23-11-52-30.jpg","https://i.ibb.co/ZX9kF2P/photo-26-2024-10-23-11-51-38.jpg","https://i.ibb.co/HBthCXD/photo-27-2024-10-23-11-22-02.jpg","https://i.ibb.co/8jsvgp8/photo-27-2024-10-23-11-52-15.jpg","https://i.ibb.co/yXpRfRY/photo-28-2024-10-23-11-51-38.jpg","https://i.ibb.co/W0rJLvD/photo-28-2024-10-23-11-52-30.jpg","https://i.ibb.co/BtQVmfs/photo-30-2024-10-23-11-51-38.jpg","https://i.ibb.co/cYjPG1x/photo-30-2024-10-23-11-52-15.jpg","https://i.ibb.co/5WwmC9V/photo-30-2024-10-23-11-52-30.jpg","https://i.ibb.co/SfFcNJ9/photo-31-2024-10-23-11-52-15.jpg","https://i.ibb.co/dQ5D2GM/photo-31-2024-10-23-11-52-30.jpg","https://i.ibb.co/bJ7btzF/photo-32-2024-10-23-11-51-38.jpg","https://i.ibb.co/yXxbpVc/photo-32-2024-10-23-11-52-30.jpg","https://i.ibb.co/syw8M2x/photo-33-2024-10-23-11-52-15.jpg","https://i.ibb.co/DRd6F1P/photo-34-2024-10-23-11-52-15.jpg","https://i.ibb.co/bgh2gck/photo-35-2024-10-23-11-52-30.jpg","https://i.ibb.co/m4PYmxp/photo-36-2024-10-23-11-52-15.jpg","https://i.ibb.co/PYGCZ0C/photo-36-2024-10-23-11-52-30.jpg","https://i.ibb.co/HDrJ7wf/photo-37-2024-10-23-11-52-30.jpg","https://i.ibb.co/GR2ZWSM/photo-38-2024-10-23-11-51-38.jpg","https://i.ibb.co/R0wDbK2/photo-38-2024-10-23-11-52-15.jpg","https://i.ibb.co/YdvvQVC/photo-38-2024-10-23-11-52-30.jpg","https://i.ibb.co/ncjgPsG/photo-39-2024-10-23-11-52-30.jpg","https://i.ibb.co/0BLVGRz/photo-40-2024-10-23-11-22-02.jpg","https://i.ibb.co/xjPDHDw/photo-40-2024-10-23-11-52-15.jpg","https://i.ibb.co/sFgN3ff/photo-40-2024-10-23-11-52-30.jpg","https://i.ibb.co/QcbFmCm/photo-41-2024-10-23-11-51-38.jpg","https://i.ibb.co/Gv4XS42/photo-43-2024-10-23-11-22-02.jpg","https://i.ibb.co/091Nsdr/photo-43-2024-10-23-11-52-15.jpg","https://i.ibb.co/fYY996j/photo-44-2024-10-23-11-51-38.jpg","https://i.ibb.co/pjSHRhc/photo-44-2024-10-23-11-52-15.jpg","https://i.ibb.co/WyBRncv/photo-45-2024-10-23-11-22-02.jpg","https://i.ibb.co/SvrxbV1/photo-45-2024-10-23-11-52-15.jpg","https://i.ibb.co/hCtwGhB/photo-46-2024-10-23-11-52-15.jpg","https://i.ibb.co/ZBL16zc/photo-47-2024-10-23-11-51-38.jpg","https://i.ibb.co/F8htkCL/photo-48-2024-10-23-11-22-02.jpg","https://i.ibb.co/47jG43K/photo-49-2024-10-23-11-51-38.jpg","https://i.ibb.co/KNDSTNF/photo-50-2024-10-23-11-52-15.jpg","https://i.ibb.co/GPhbK9W/photo-51-2024-10-23-11-51-38.jpg","https://i.ibb.co/55PGJHx/photo-52-2024-10-23-11-22-02.jpg","https://i.ibb.co/D1b6Ngv/photo-53-2024-10-23-11-22-02.jpg","https://i.ibb.co/YPc3hBG/photo-56-2024-10-23-11-22-02.jpg","https://i.ibb.co/yVJ0YX6/photo-56-2024-10-23-11-52-15.jpg","https://i.ibb.co/Dfg6cwr/photo-60-2024-10-23-11-52-15.jpg","https://i.ibb.co/0GmtgRX/photo-61-2024-10-23-11-22-02.jpg","https://i.ibb.co/kGQtzb0/photo-61-2024-10-23-11-52-15.jpg","https://i.ibb.co/FbGD5wD/photo-62-2024-10-23-11-51-38.jpg","https://i.ibb.co/7VHyZZS/photo-64-2024-10-23-11-52-15.jpg","https://i.ibb.co/y4sDqq2/photo-65-2024-10-23-11-52-15.jpg","https://i.ibb.co/mS9Th4H/photo-66-2024-10-23-11-22-02.jpg","https://i.ibb.co/drpJkD2/photo-66-2024-10-23-11-52-15.jpg","https://i.ibb.co/9cmdkmG/photo-67-2024-10-23-11-22-02.jpg","https://i.ibb.co/t8j6CZj/photo-67-2024-10-23-11-52-15.jpg","https://i.ibb.co/rF2f6Y1/photo-68-2024-10-23-11-51-38.jpg","https://i.ibb.co/rcGHtcM/photo-68-2024-10-23-11-52-15.jpg","https://i.ibb.co/8KyjxBJ/photo-69-2024-10-23-11-22-02.jpg","https://i.ibb.co/0V4LLd7/photo-69-2024-10-23-11-52-15.jpg","https://i.ibb.co/Tcwy7ZX/photo-70-2024-10-23-11-22-02.jpg","https://i.ibb.co/fChx501/photo-70-2024-10-23-11-52-15.jpg","https://i.ibb.co/FY3XVyj/photo-71-2024-10-23-11-51-38.jpg","https://i.ibb.co/3fWdpNT/photo-71-2024-10-23-11-52-15.jpg","https://i.ibb.co/LQ40dnq/photo-72-2024-10-23-11-51-38.jpg","https://i.ibb.co/zGkqhv7/photo-73-2024-10-23-11-22-02.jpg","https://i.ibb.co/68Sn0GT/photo-73-2024-10-23-11-52-15.jpg","https://i.ibb.co/x1ccJNy/photo-75-2024-10-23-11-22-02.jpg","https://i.ibb.co/Xt1rVM5/photo-75-2024-10-23-11-52-15.jpg","https://i.ibb.co/ZcQKwg2/photo-76-2024-10-23-11-51-38.jpg","https://i.ibb.co/yPWVScj/photo-76-2024-10-23-11-52-15.jpg","https://i.ibb.co/3yLk4n4/photo-77-2024-10-23-11-22-02.jpg","https://i.ibb.co/2sXtdq0/photo-77-2024-10-23-11-52-15.jpg","https://i.ibb.co/GVDRKfG/photo-78-2024-10-23-11-52-15.jpg","https://i.ibb.co/yNr8tZj/photo-79-2024-10-23-11-51-38.jpg","https://i.ibb.co/N6NKT3c/photo-79-2024-10-23-11-52-15.jpg","https://i.ibb.co/8d7HBkN/photo-80-2024-10-23-11-52-15.jpg","https://i.ibb.co/KrZjh4S/photo-81-2024-10-23-11-22-02.jpg","https://i.ibb.co/fH5wrK3/photo-81-2024-10-23-11-52-15.jpg","https://i.ibb.co/w76YbQ0/photo-82-2024-10-23-11-51-38.jpg","https://i.ibb.co/WGs8pVb/photo-85-2024-10-23-11-52-15.jpg","https://i.ibb.co/j8vfvgZ/photo-86-2024-10-23-11-22-02.jpg","https://i.ibb.co/XxG4yxw/photo-86-2024-10-23-11-52-15.jpg","https://i.ibb.co/QKQCMwh/photo-87-2024-10-23-11-52-15.jpg","https://i.ibb.co/k08rdrM/photo-88-2024-10-23-11-51-38.jpg","https://i.ibb.co/6b9PGtD/photo-90-2024-10-23-11-52-15.jpg","https://i.ibb.co/kGzjh4t/photo-91-2024-10-23-11-52-15.jpg","https://i.ibb.co/nB1D576/photo-92-2024-10-23-11-51-38.jpg","https://i.ibb.co/M6h9Q86/photo-93-2024-10-23-11-22-02.jpg","https://i.ibb.co/rH5pt2y/photo-95-2024-10-23-11-51-38.jpg","https://i.ibb.co/RHMf0Sb/photo-96-2024-10-23-11-52-15.jpg","https://i.ibb.co/c1ZRRpf/photo-97-2024-10-23-11-22-02.jpg","https://i.ibb.co/znQ14n4/photo-97-2024-10-23-11-52-15.jpg","https://i.ibb.co/QJYHGfZ/photo-98-2024-10-23-11-22-02.jpg","https://i.ibb.co/DYN5XmR/photo-98-2024-10-23-11-52-15.jpg","https://i.ibb.co/0c8sQYB/photo-99-2024-10-23-11-51-38.jpg","https://i.ibb.co/7gT51Mr/458315545-2877650585726341-611499681677932774-n.jpg","https://i.ibb.co/pnxwnqv/photo-2024-08-04-17-39-11.jpg","https://i.ibb.co/fHQg4kL/photo-2024-08-24-12-50-36.jpg","https://i.ibb.co/jMtmyhN/photo-2024-08-31-19-07-27.jpg","https://i.ibb.co/Bspg1wg/photo-2024-09-01-12-47-45.jpg","https://i.ibb.co/MSHYgN1/photo-2024-09-08-19-47-21.jpg","https://i.ibb.co/87HFTwh/photo-2024-09-09-20-28-28.jpg","https://i.ibb.co/PZNCxN3/photo-2024-09-14-15-02-36.jpg","https://i.ibb.co/r3pfQKw/photo-2024-09-14-19-29-52.jpg","https://i.ibb.co/HxjFYVm/photo-2024-09-15-16-58-32.jpg",];
+
+      // ============================================
+      // 4. Chuyển đổi từng mảng URL thành mảng đối tượng ảnh,
+      //     gắn thêm thuộc tính "category" để phân biệt
+      // ============================================
+      const formatPhotos = (arr, category, labelPrefix) =>
+        arr.map((url, index) => ({
+          image: url,
+          title: `${labelPrefix} ${index + 1}`,
+          category: category,
+        }));
+
+      const photosAnhGaiXinh = formatPhotos(
+        anhGaiXinhImages,
+        "anhGaiXinh",
+        "Ảnh gái xinh"
+      );
+      const photosHotTiktok = formatPhotos(
+        hotTiktokImages,
+        "hotTiktok",
+        "Hot Tiktok"
+      );
+      const photosAnhSexy = formatPhotos(anhSexyImages, "anhSexy", "Ảnh sexy");
+      const photosAnhNong = formatPhotos(anhNongImages, "anhNong", "Ảnh nóng");
+
+      // ============================================
+      // 5. Gộp tất cả ảnh thành 1 mảng để hỗ trợ Modal chuyển ảnh
+      // ============================================
+      const photos = [
+        ...photosAnhGaiXinh,
+        ...photosHotTiktok,
+        ...photosAnhSexy,
+        ...photosAnhNong,
+      ];
+
+      // Đồng thời, tạo đối tượng chứa các nhóm ảnh theo danh mục
+      const groups = {
+        anhGaiXinh: photosAnhGaiXinh,
+        hotTiktok: photosHotTiktok,
+        anhSexy: photosAnhSexy,
+        anhNong: photosAnhNong,
+      };
+
+      // ============================================
+      // 6. Hàm render ảnh cho từng danh mục
+      // ============================================
+      function renderPhotos() {
+        Object.keys(groups).forEach((category) => {
+          const container = document.getElementById(category + "-photos");
+          if (container) {
+            groups[category].forEach((photo) => {
+              const col = document.createElement("div");
+              col.className = "col-4 p-0 photo-col";
+              col.innerHTML = `
+                <div class="photo-card">
+                  <img src="${photo.image}" alt="" loading="lazy" class="photo-img">
+                  <div class="photo-info">
+                    <p class="photo-title">${photo.title}</p>
+                  </div>
+                </div>`;
+              container.appendChild(col);
+            });
+          }
+        });
+
+        // Gán sự kiện click cho tất cả ảnh để mở Modal
+        document.querySelectorAll(".photo-img").forEach((img) => {
+          img.addEventListener("click", function () {
+            currentIndex = photos.findIndex((p) => p.image === this.src);
+            document.getElementById("modalImage").src = this.src;
+            new bootstrap.Modal(document.getElementById("imageModal")).show();
+          });
+        });
+      }
+
+      // ============================================
+      // 7. Cài đặt chuyển ảnh trong Modal
+      // ============================================
+      let currentIndex = 0;
+      document.addEventListener("DOMContentLoaded", () => {
+        renderPhotos();
+
+        document
+          .getElementById("nextButton")
+          .addEventListener("click", function () {
+            currentIndex = (currentIndex + 1) % photos.length;
+            document.getElementById("modalImage").src =
+              photos[currentIndex].image;
+          });
+
+        document
+          .getElementById("prevButton")
+          .addEventListener("click", function () {
+            currentIndex = (currentIndex - 1 + photos.length) % photos.length;
+            document.getElementById("modalImage").src =
+              photos[currentIndex].image;
+          });
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=no, user-scalable=no"
+    />
+    <title>OP Love Profile</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Bootstrap Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+    />
+
+    <!-- Google Font Montserrat -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* Cấu hình cơ bản */
+      html,
+      body {
+        overflow-x: hidden !important;
+        padding-bottom: 80px !important;
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        transition: background-color 0.3s, color 0.3s;
+        font-family: "Montserrat", sans-serif;
+      }
+
+      /* ===== BOTTOM NAV ===== */
+      .bottom-nav {
+        position: fixed !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        background: #222 !important;
+        height: 95px !important;
+        display: flex !important;
+        font-weight: 700 !important;
+        align-items: center !important;
+        padding: 0.75rem 10px !important;
+        border-top: 2px solid #444 !important;
+        z-index: 100002 !important;
+        box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.2),
+          0 0 10px 2px rgba(255, 255, 255, 0.3) !important;
+        gap: 30px !important;
+        scroll-snap-type: x mandatory !important;
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+        white-space: nowrap !important;
+        scroll-behavior: smooth !important;
+        padding-bottom: env(safe-area-inset-bottom) !important;
+        -webkit-overflow-scrolling: touch !important;
+        touch-action: pan-x !important;
+      }
+
+      /* Điều chỉnh kích thước logo cho các nút điều hướng */
+      .bottom-nav .nav-btn img {
+        width: 40px;
+        height: 40px;
+        object-fit: contain;
+      }
+
+      /* Style cho các nút điều hướng */
+      .nav-btn {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+        z-index: 100002 !important;
+        padding: 0.75rem 0;
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: #fff; /* Màu chữ đồng bộ */
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: relative;
+        text-decoration: none; /* Loại bỏ gạch chân */
+      }
+      .nav-btn i.icon-3d {
+        font-size: 1.9rem;
+        color: #ff5fa5;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+      }
+      .nav-btn i {
+        font-size: 1.7rem;
+        color: #ff5fa5;
+        transition: transform 0.3s ease, color 0.3s ease;
+      }
+      /* Hiệu ứng hover cho nút điều hướng */
+      .nav-btn:hover {
+        color: #8400ff;
+      }
+      .nav-btn:hover i {
+        transform: scale(1.2);
+        color: #ffe066;
+      }
+      /* Đánh dấu mục đã chọn (active) */
+      .nav-btn.active i {
+        color: #ffe066;
+        animation: glow 1.2s infinite alternate;
+      }
+      @keyframes glow {
+        0% {
+          text-shadow: 0 0 10px #ff69b4, 0 0 20px #ff69b4;
+        }
+        100% {
+          text-shadow: 0 0 20px #ff69b4, 0 0 30px #ff69b4;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Thanh điều hướng -->
+    <div class="bottom-nav">
+      <a href="index.html" class="nav-btn">
+        <img src="https://i.ibb.co/7JMBcSLM/5684646.png" alt="Trang chủ" />
+        <span>Trang chủ</span>
+      </a>
+      <a href="review.html" class="nav-btn">
+        <img
+          src="https://i.ibb.co/SwbKL5LF/3668636-premium-rate-rating-icon.png"
+          alt="Đánh giá"
+        />
+        <span>Đánh giá</span>
+      </a>
+      <a href="profile.html" class="nav-btn">
+        <img
+          src="https://i.ibb.co/yn0NTF8T/3631712-cash-money-wallet-icon.png"
+          alt="Tài khoản tôi"
+        />
+        <span>Tài khoản tôi</span>
+      </a>
+      <a href="services.html" class="nav-btn">
+        <img src="https://i.ibb.co/WRcbXqY/6091783.png" alt="Dịch Vụ" />
+        <span>Dịch Vụ</span>
+      </a>
+      <a href="booking.html" class="nav-btn">
+        <img src="https://i.ibb.co/209QjsY8/5695442.png" alt="Booking" />
+        <span>Booking</span>
+      </a>
+      <a href="photos.html" class="nav-btn">
+        <img src="https://i.ibb.co/d4bTk40m/8341973.png" alt="Thư Viện Ảnh" />
+        <span>Thư Viện Ảnh</span>
+      </a>
+      <a href="video.html" class="nav-btn">
+        <img
+          src="https://i.ibb.co/XkVNCPPQ/7793060-flowchart-video-gallery-movies-icon.png"
+          alt="Video Nổi Bật"
+        />
+        <span>Video Nổi Bật</span>
+      </a>
+      <a href="private-connection.html" class="nav-btn">
+        <img src="https://i.ibb.co/3yyX9n08/5337863.png" alt="Kết Nối 18+" />
+        <span>Kết Nối 18+</span>
+      </a>
+    </div>
+
+    <script>
+      // Khi click vào một mục, đánh dấu active và lưu vào localStorage
+      document.querySelectorAll(".nav-btn").forEach(function (btn) {
+        btn.addEventListener("click", function (e) {
+          e.preventDefault();
+          // Xóa lớp active ở tất cả các nút
+          document.querySelectorAll(".nav-btn").forEach(function (item) {
+            item.classList.remove("active");
+          });
+          // Thêm active cho nút vừa click
+          this.classList.add("active");
+          // Lưu href của nút active vào localStorage
+          localStorage.setItem("activeNav", this.getAttribute("href"));
+        });
+      });
+
+      // Lưu vị trí cuộn của thanh bottom nav khi người dùng cuộn
+      const bottomNav = document.querySelector(".bottom-nav");
+      bottomNav.addEventListener("scroll", function () {
+        localStorage.setItem("bottomNavScroll", bottomNav.scrollLeft);
+      });
+
+      // Khi trang load, khôi phục nút active và vị trí cuộn
+      document.addEventListener("DOMContentLoaded", function () {
+        const savedActiveNav = localStorage.getItem("activeNav");
+        if (savedActiveNav) {
+          const activeElement = document.querySelector(
+            '.nav-btn[href="' + savedActiveNav + '"]'
+          );
+          if (activeElement) {
+            activeElement.classList.add("active");
+          }
+        }
+        const savedScroll = localStorage.getItem("bottomNavScroll");
+        if (savedScroll) {
+          bottomNav.scrollLeft = savedScroll;
+        }
+      });
+    </script>
+  </body>
+</html>

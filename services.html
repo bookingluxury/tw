@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Bảng Giá Dịch Vụ - Dark Mode</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Google Fonts: Roboto -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Font Awesome cho icon -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      /* Base styles */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Roboto", sans-serif;
+        background: #000;
+        background: radial-gradient(circle at center, #000 0%, #111 100%);
+        color: #fff;
+        min-height: 100vh;
+        padding: 5px;
+        position: relative;
+      }
+      body::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url("https://i.ibb.co/ycBpNQyM/pngtree-light-effect-background-halo-radial-image-2419979.jpg")
+          no-repeat center center;
+        background-size: cover;
+        opacity: 0.1;
+        z-index: -1;
+        pointer-events: none;
+      }
+      /* Logo */
+      .logo-top {
+        width: 500px;
+        height: 120px;
+        background: url("https://i.ibb.co/P4Jg4Qh/1-removebg-preview.png")
+          no-repeat center/contain;
+        margin: 0 auto 20px;
+        transition: transform 0.3s ease;
+        backdrop-filter: blur(5px);
+      }
+      @media (max-width: 600px) {
+        .logo-top {
+          width: 100%;
+          height: auto;
+          max-height: 100px;
+        }
+      }
+      .logo-top:hover {
+        transform: scale(1.05);
+      }
+      /* Tiêu đề chính */
+      h1 {
+ 
+        background: linear-gradient(90deg, #000000, #000000, #0eff45, #007bff);
+    -webkit-background-clip: text;
+    color: transparent;
+    animation: textAnimation 3slinear infinite;
+  text-align: center;
+  padding: 1.8rem;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+  
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Hiệu ứng nổi */
+      }
+
+      @keyframes gradientAnimation {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+      /* Marquee */
+      .scrolling-text {
+        position: relative;
+        height: 50px;
+        overflow: hidden;
+        background: #000;
+        border: 1px solid #444;
+        border-radius: 4px;
+        margin-bottom: 20px;
+        padding: 10px;
+      }
+      .scrolling-text::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 40%;
+        background: rgba(255, 255, 255, 0.05);
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
+        pointer-events: none;
+      }
+      .scrolling-content {
+        position: absolute;
+        width: 100%;
+        animation: scrollUp 15s linear infinite;
+      }
+      @keyframes scrollUp {
+        0% {
+          transform: translateY(100%);
+        }
+        100% {
+          transform: translateY(-100%);
+        }
+      }
+      .scrolling-text span {
+        display: block;
+        font-size: 18px;
+        font-weight: 700;
+        text-align: center;
+        background: linear-gradient(90deg, #fff3e5, #94abeb, #ff993a);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        text-align: center;
+        margin-bottom: 5px;
+        transition: color 0.3s;
+      }
+      .scrolling-text span:hover {
+        color: #ff7f50;
+      }
+      /* Container chính */
+      #content {
+        max-width: 1000px;
+        margin: 0 auto;
+        background: #111;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
+        padding: 0px;
+        animation: fadeInUp 1s ease-out;
+      }
+      @keyframes fadeInUp {
+        0% {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      /* Bảng giá dịch vụ */
+      .pricing-table {
+        width: 100%;
+        table-layout: fixed;
+        border-collapse: collapse;
+      }
+      .pricing-table th,
+      .pricing-table td {
+        padding: 15px;
+        border: 1px solid #333;
+        text-align: center;
+        overflow-wrap: break-word;
+      }
+      .pricing-table th {
+        text-align: center;
+        background: linear-gradient(90deg, #b92005, #00eeff, #f700ff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        font-size: 18px;
+        font-weight: 700;
+        text-transform: uppercase;
+      }
+      .pricing-table td {
+    
+        background: linear-gradient(90deg, #10b905, #efefef, #c48dff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        text-align: center;
+
+        font-size: 16px;
+
+        transition: background 0.3s, transform 0.3s;
+      }
+      .pricing-table td:hover {
+       
+        transform: scale(1.02);
+      }
+      /* Ô Giá */
+      .pricing-table .price {
+        font-size: 16px;
+        font-weight: 700;
+        color: #fff;
+      }
+      /* Điều chỉnh chiều rộng cột */
+      .pricing-table th:nth-child(3),
+      .pricing-table td:nth-child(3) {
+        width: 20%;
+      }
+      .pricing-table th:nth-child(4),
+      .pricing-table td:nth-child(4) {
+        width: 50%;
+      }
+      /* Promotion Card: mở rộng ô khuyến mãi */
+      .card.full-width {
+        width: 100%;
+        margin-top: 20px;
+        background: #000;
+        border-radius: 12px;
+        padding: 40px 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
+      }
+      .card.full-width h2 {
+        text-align: center;
+        font-size: 24px;
+        background: linear-gradient(90deg, #00ffc8, #ff0000, #00ffc8);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        text-align: center;
+      }
+      .card.full-width .image-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+        margin-bottom: 15px;
+      }
+      .card.full-width .image-group img {
+        width: 150px;
+        border-radius: 4px;
+        border: 1px solid #444;
+      }
+      .card.full-width p {
+        background: linear-gradient(90deg, #ff5e00, #efefef, #7a00ff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        text-align: center;
+        font-size: 16px;
+        text-align: center;
+        margin-bottom: 15px;
+        overflow-wrap: break-word;
+      }
+      /* Social Media Icons */
+      .icon-dynamic {
+        display: inline-block;
+        animation: rotateIcon 4s linear infinite;
+        transition: transform 0.3s;
+      }
+      .icon-dynamic:hover {
+        transform: scale(1.2);
+      }
+      @keyframes rotateIcon {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+      .content-footer {
+        background: linear-gradient(90deg, #10b905, #efefef, #7a00ff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        text-align: center;
+        padding: 1.5rem 0;
+        margin-top: 2rem;
+        border-top: 1px solid #444;
+        font-size: 0.9rem;
+        letter-spacing: 0.5px;
+      }
+      .footer-container p {
+        margin: 0.5rem;
+      }
+      .footer-container a {
+        color: #fff;
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+      .footer-container a:hover {
+        color: #ccc;
+      }
+      /* Responsive: Điều chỉnh kích thước cho điện thoại */
+      @media (max-width: 600px) {
+        h1 {
+          font-size: 28px;
+        }
+        .pricing-table th,
+        .pricing-table td {
+          font-size: 14px;
+          padding: 10px;
+        }
+        .pricing-table .price {
+          font-size: 14px;
+        }
+        .scrolling-text span {
+          font-size: 14px;
+        }
+        .card.full-width {
+          padding: 30px 10px;
+        }
+        .card.full-width h2 {
+          font-size: 20px;
+        }
+        .card.full-width .image-group img {
+          width: 120px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Logo -->
+    <div class="logo-top"></div>
+    <div id="navbar-placeholder"></div>
+    <script src="menu.js"></script>
+    <h1>Bảng Giá Dịch Vụ</h1>
+    <!-- Marquee -->
+    <div class="scrolling-text">
+      <div class="scrolling-content">
+        <span
+          ><i class="fas fa-bolt"></i> Dịch vụ nhanh chóng và chuyên
+          nghiệp</span
+        >
+        <span
+          ><i class="fas fa-star"></i> Chất lượng vượt trội, giá cả phải
+          chăng</span
+        >
+        <span
+          ><i class="fas fa-heart"></i> Trải nghiệm đẳng cấp với phong cách hiện
+          đại</span
+        >
+        <span
+          ><i class="fas fa-thumbs-up"></i> Cam kết hài lòng 100% từ khách
+          hàng</span
+        >
+      </div>
+    </div>
+    <!-- Bảng giá dịch vụ (không có cột "Chọn Gói") -->
+    <div id="content">
+      <table class="pricing-table">
+        <thead>
+          <tr>
+            <th>Gói Dịch Vụ</th>
+            <th>Thời Gian</th>
+            <th>Giá</th>
+            <th>Mô Tả</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Basic Service</td>
+            <td>60 phút</td>
+            <td class="price">1.800TWD</td>
+            <td>
+              Tắm chung thư giãn, massage nhẹ nhàng, HJ và BJ chuyên nghiệp,
+              quan hệ 2 lần.
+            </td>
+          </tr>
+          <tr>
+            <td>Special Service</td>
+            <td>90 phút</td>
+            <td class="price">2.700TWD</td>
+            <td>
+              Massage kết hợp, HJ và BJ với kỹ thuật nóng/lạnh, quan hệ 3 lần,
+              đổi nhân viên 1 lần nếu chưa hài lòng.
+            </td>
+          </tr>
+          <tr>
+            <td>Diamond Service</td>
+            <td>180 phút</td>
+            <td class="price">3.500TWD</td>
+            <td>
+              Tắm chung, sử dụng đồ chơi cao cấp, massage kỹ thuật Nuru với dầu
+              đặc biệt, HJ &amp; BJ, quan hệ không giới hạn, đổi nhân viên 3 lần
+              nếu chưa hài lòng.
+            </td>
+          </tr>
+          <tr>
+            <td>Platinum Service</td>
+            <td>8 tiếng</td>
+            <td class="price">8.000TWD</td>
+            <td>
+              Tận hưởng toàn diện bao gồm tất cả các gói dịch vụ, phục vụ tận
+              tình chu đáo, đổi nhân viên không giới hạn, hài lòng tuyệt đối.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <!-- Promotion Card -->
+      <div class="card full-width">
+        <h2>Khuyến mãi đặc biệt</h2>
+       <br><div class="image-group">
+          <img src="https://i.ibb.co/nN300Y9j/67c151e145baf-img-0258.jpg" alt="Khuyến mãi 1" />
+          <img
+            src="https://i.ibb.co/mVYnQzPB/review-of-levi-for-video-sex-han-baby-nang-dam-nu-dang-dep-mong-to-mat-xinh-2056818-original.jpg"
+            alt="Khuyến mãi 2"
+          />
+          <img
+            src="https://i.ibb.co/NTZ2yJS/photo-2024-11-08-17-50-13.jpg"
+            alt="Khuyến mãi 3"
+          />
+          <img
+            src="https://i.ibb.co/WvmjHRV3/review-of-qua-tuyet-voi-for-reup-tieu-vy-xinh-dam-ngoan-3034885-original.jpg"
+            alt="Khuyến mãi 4"
+          />
+          <img
+            src="https://i.ibb.co/rf54ZjMH/review-of-me-gai-dep-for-thu-ky-new-xinh-dep-sac-sao-ky-nang-dinh-cao-3218972-original.jpg"
+            alt="Khuyến mãi 5"
+          />
+          <img
+            src="https://i.ibb.co/PGHj3xzV/review-of-anhmegai-for-be-linna-hot-teen-tre-trung-xinh-xan-hang-moi-tin-vua-di-lam-3207712-original.jpg"
+            alt="Khuyến mãi 6"
+          />
+          <img
+          src="https://i.ibb.co/fGtwVWzr/review-of-thanh-bui-tien-for-reup-tieu-linh-2k4-xinh-tuoi-dang-nuot-na-vu-dep-bym-non-to-3203402-ori.jpg"
+          alt="Khuyến mãi 9"
+        />
+          <img
+            src="https://i.ibb.co/zJfm74N/reup-bao-vy-2k3-cuc-pham-gai-xinh-trang-treo-body-cuc-nuot-3230131-original.jpg"
+            alt="Khuyến mãi 7"
+          />
+          <img
+            src="https://i.ibb.co/tz34g6N/reup-bao-vy-2k3-cuc-pham-gai-xinh-trang-treo-body-cuc-nuot-3230130-original.jpg"
+            alt="Khuyến mãi 8"
+          />
+   
+        </div>
+        <p>
+          <strong>Chi tiết:</strong> Tất cả các gói có quà tặng kèm theo nếu
+          khách hàng có nhu cầu. Khách hàng có thể chọn cosplay theo mã số trang
+          phục.
+        </p>
+      </div>
+     
+    <div
+      style="
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-top: 1rem;
+      "
+    >
+      <a href="#" style="color: #4267b2; text-decoration: none">
+        <ion-icon
+          class="icon-dynamic"
+          name="logo-facebook"
+          style="font-size: 2rem"
+        ></ion-icon>
+      </a>
+      <a href="#" style="color: #25d366; text-decoration: none">
+        <ion-icon
+          class="icon-dynamic"
+          name="logo-whatsapp"
+          style="font-size: 2rem"
+        ></ion-icon>
+      </a>
+      <a href="#" style="color: #e1306c; text-decoration: none">
+        <ion-icon
+          class="icon-dynamic"
+          name="logo-instagram"
+          style="font-size: 2rem"
+        ></ion-icon>
+      </a>
+      <a href="#" style="color: #69c9d0; text-decoration: none">
+        <ion-icon
+          class="icon-dynamic"
+          name="logo-tiktok"
+          style="font-size: 2rem"
+        ></ion-icon>
+      </a>
+      <a href="#" style="color: #0077b5; text-decoration: none">
+        <ion-icon
+          class="icon-dynamic"
+          name="logo-linkedin"
+          style="font-size: 2rem"
+        ></ion-icon>
+      </a>
+    </div>
+    <!-- Footer cuối trang -->
+    <footer class="content-footer">
+      <div class="footer-container">
+        <p>&copy; 2023 <strong>Dangcapgaigoi</strong>. All rights reserved.</p>
+        <p>
+          Designed by
+          <a href="https://dangcapgaigoi.com" target="_blank"
+            >Dangcapgaigoi Team</a
+          >
+        </p>
+      </div>
+    </footer>
+    <!-- Ionicons -->
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
+  </body>
+</html>
