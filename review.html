@@ -6,7 +6,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no"
     />
-    <title>Sảnh Đánh Giá</title>
+    <title>Sảnh Đánh Giá - Giao Diện Nâng Cấp</title>
     <!-- Font Awesome cho icon (phiên bản 4.7) -->
     <link
       rel="stylesheet"
@@ -19,16 +19,18 @@
     />
     <style>
       :root {
-        --primary-color: #6a82fb;
-        --secondary-color: #fc5c7d;
-        --tertiary-color: #ff9a9e;
-        --accent-color: #007bff;
-        --text-color: #333;
-        --bg-color: #f9f9f9;
-        --card-bg: #fff;
-        --hover-bg: #e0e0e0;
-        --nav-bg: #e9ecef;
-        --hover-nav-bg: #ced4da;
+        /* Màu sắc mới */
+        --primary-color: #1abc9c; /* Xanh ngọc */
+        --secondary-color: #16a085; /* Xanh đậm */
+        --tertiary-color: #2ecc71; /* Xanh lá tươi sáng */
+        --accent-color: #e74c3c; /* Điểm nhấn đỏ */
+        --text-color: #ecf0f1; /* Màu chữ sáng */
+        --bg-color: #34495e; /* Nền tổng thể */
+        --card-bg: #2c3e50; /* Nền thẻ card */
+        --hover-bg: #34495e; /* Hiệu ứng hover cho card */
+        --nav-bg: #2c3e50; /* Nền sidebar */
+        --hover-nav-bg: #1abc9c; /* Hiệu ứng hover sidebar */
+        --transition-speed: 0.3s;
       }
       /* Reset & Global Styles */
       * {
@@ -37,35 +39,34 @@
         padding: 0;
       }
       body {
-        background-color: var(--bg-color);
+        font-family: "Roboto", sans-serif;
+        background: radial-gradient(
+          circle at center,
+          rgba(52, 73, 94, 0.8) 0%,
+          rgba(52, 73, 94, 1) 100%
+        );
+        min-height: 100vh;
         color: var(--text-color);
-        line-height: 1.6;
+        position: relative;
+      }
+      body::before {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url("https://i.ibb.co/ycBpNQyM/pngtree-light-effect-background-halo-radial-image-2419979.jpg")
+          no-repeat center center;
+        background-size: cover;
+        opacity: 0.2;
+        pointer-events: none;
       }
       a {
         text-decoration: none;
       }
-      /* Logo Top */
-      .logo-top {
-        width: 400px;
-        height: 120px;
-        background: url("https://i.ibb.co/DgYWjtjM/logo-490c306a.png") no-repeat
-          center/contain;
-        margin: 20px auto;
-        padding: 5px;
-        backdrop-filter: blur(5px);
-        transition: transform 0.3s ease;
-      }
-      .logo-top:hover {
-        transform: scale(1.05);
-      }
-      @media (max-width: 600px) {
-        .logo-top {
-          width: 250px;
-          height: 80px;
-        }
-      }
-      /* Header Gradient */
-      .review-header {
+      header {
         background: linear-gradient(
           270deg,
           var(--primary-color),
@@ -76,7 +77,6 @@
         animation: gradientAnimation 8s ease infinite;
         padding: 30px 0;
         text-align: center;
-        color: #fff;
         font-size: 2.5rem;
         font-weight: 700;
         letter-spacing: 2px;
@@ -94,33 +94,33 @@
           background-position: 0% 50%;
         }
       }
-      /* Sidebar */
-      .sidebar {
-        background: var(--card-bg);
-        padding: 0px;
-        box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+      /* Layout chính sử dụng Flexbox */
+      .container {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 0 15px;
+      }
+      aside {
+        flex: 0 0 150px;
+        background: var(--nav-bg);
         border-radius: 10px;
-        margin-right: 10px;
+        box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+        margin: 10px;
       }
-      .sidebar a {
+      nav a {
         display: block;
-        padding: 10px 1px;
-        margin-bottom: 10px;
+        padding: 12px 15px;
+        font-weight: 500;
         color: var(--text-color);
-        background: var(--card-bg);
-        border-radius: 0px;
-        font-weight: bold;
         position: relative;
-        overflow: hidden;
-        transition: all 0.3s ease;
+        transition: background var(--transition-speed),
+          transform var(--transition-speed);
       }
-      /* Icon cho sidebar */
-      .sidebar a i {
+      nav a i {
         margin-right: 8px;
         font-size: 1.2em;
       }
-      /* Hiệu ứng Underline di chuyển */
-      .sidebar a::after {
+      nav a::after {
         content: "";
         position: absolute;
         bottom: 0;
@@ -130,52 +130,44 @@
         background: var(--accent-color);
         transform: scaleX(0);
         transform-origin: left;
-        transition: transform 0.3s ease;
+        transition: transform var(--transition-speed);
       }
-      /* Hiệu ứng khi hover */
-      .sidebar a:hover {
-        background: linear-gradient(
-          90deg,
-          var(--primary-color),
-          var(--secondary-color)
-        );
-        color: #fff;
+      nav a:hover {
+        background: var(--hover-nav-bg);
+        color: var(--text-color);
         transform: scale(1.03);
       }
-      .sidebar a:hover::after {
+      nav a:hover::after {
         transform: scaleX(1);
       }
-      /* Mục đang active */
-      .sidebar a.active {
-        background: linear-gradient(
-          90deg,
-          var(--primary-color),
-          var(--secondary-color)
-        );
-        color: #fff;
+      nav a.active {
+        background: var(--hover-nav-bg);
+        color: var(--text-color);
       }
-      /* Main Content - Sử dụng CSS Grid */
-      .main-content {
-        width: 75%;
+      main {
+        flex: 1;
+        margin: 10px;
+      }
+      /* Grid cho review cards */
+      .review-grid {
         display: grid;
-        grid-gap: 5px; /* Giảm khoảng cách giữa các review */
-        grid-template-columns: repeat(2, minmax(100px, 1fr));
-        justify-items: center;
+        grid-gap: 10px;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
         padding-bottom: 10px;
-        margin-top: 20px; /* Tạo khoảng cách với phần phía trên */
+        margin-top: 20px;
       }
-      @media (min-width: 768px) {
-        .main-content {
-          flex: 1;
-          display: grid;
-          grid-gap: 5px; /* Giảm khoảng cách giữa các review */
-          grid-template-columns: repeat(3, minmax(150px, 1fr));
-          justify-items: center;
-          padding-bottom: 10px;
-          margin-top: 20px; /* Tạo khoảng cách phía trên */
-        }
+      .review-card {
+        position: relative;
+        background: var(--card-bg);
+        border-radius: 10px;
+        overflow: hidden;
+        cursor: pointer;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+        transition: transform var(--transition-speed);
       }
-      /* Hiệu ứng Shine cho review card */
+      .review-card:hover {
+        transform: scale(1.03);
+      }
       .review-card::before {
         content: "";
         position: absolute;
@@ -205,34 +197,28 @@
         }
       }
       .review-card img {
-        width: 120px;
-        height: 170px;
-        border-radius: 10px;
+        width: 100%;
+        height: 220px;
         object-fit: cover;
-        border: 2px solid var(--secondary-color);
+        border-bottom: 2px solid var(--secondary-color);
         transition: transform 0.2s ease;
       }
-      .review-card:hover img {
-        transform: scale(1.05);
-      }
-      /* Tiêu đề đánh giá với hiệu ứng gradient text */
       .review-card span {
         display: block;
-        margin-top: 8px;
+        padding: 8px;
+        text-align: center;
         font-size: 1.1rem;
         font-weight: 600;
-        text-align: center; /* Căn giữa tiêu đề */
-        background: linear-gradient(90deg, #ff9a9e, #fc5c7d, #6a82fb);
+        background: linear-gradient(
+          90deg,
+          var(--tertiary-color),
+          var(--primary-color)
+        );
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
       }
-      .review-card p {
-        margin-top: 4px;
-        font-size: 0.9rem;
-        color: #666;
-      }
-      /* Review Detail Modal (Overlay) */
-      .review-detail-overlay {
+      /* Modal overlay */
+      .modal-overlay {
         position: fixed;
         top: 0;
         left: 0;
@@ -253,14 +239,13 @@
           opacity: 1;
         }
       }
-      .review-detail {
+      .modal {
         background: var(--card-bg);
         padding: 20px;
         border-radius: 10px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         width: 90%;
         max-width: 450px;
-        position: relative;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         animation: zoomIn 0.3s ease;
       }
       @keyframes zoomIn {
@@ -273,21 +258,20 @@
           opacity: 1;
         }
       }
-      .review-detail .header {
+      .modal header {
         display: flex;
         justify-content: space-between;
         align-items: center;
         margin-bottom: 15px;
       }
-      .review-detail h2 {
+      .modal h2 {
         font-size: 1.8rem;
         color: var(--text-color);
       }
-      .review-detail .balance {
+      .modal .balance {
         font-size: 1rem;
-        color: #e67e22;
+        color: var(--accent-color);
       }
-      /* Tab Header cho Modal */
       .tab-header {
         display: flex;
         justify-content: center;
@@ -297,75 +281,26 @@
         background: #f1f1f1;
         border: none;
         padding: 8px 16px;
-        cursor: pointer;
         margin: 0 3px;
         border-radius: 4px;
         font-size: 0.9rem;
-        transition: background 0.3s, color 0.3s;
+        cursor: pointer;
+        transition: background var(--transition-speed),
+          color var(--transition-speed);
       }
       .tab.active {
         background: var(--primary-color);
         color: #fff;
       }
-      /* Nội dung các tab */
-      #currentTab {
-      }
-      #historyTab {
-        display: none;
-      }
-      #historyTab .history-inside {
-        max-height: 250px;
-        overflow-y: auto;
-        margin-bottom: 15px;
-      }
-      /* CSS cho bảng lịch sử sử dụng CSS counters để đánh số tự động */
-      .history-table {
-        counter-reset: rowNumber;
-        width: 100%;
-        border-collapse: collapse;
+      .modal .content {
         font-size: 0.9rem;
       }
-      .history-table thead th {
-        background: #f1f1f1;
-        font-weight: 600;
-        padding: 8px;
-        border: 1px solid #ddd;
-      }
-      .history-table tbody tr {
-        counter-increment: rowNumber;
-      }
-      .history-table tbody tr td {
-        padding: 8px;
-        text-align: center;
-        border: 1px solid #ddd;
-      }
-      /* Đánh số tự động cho cột đầu tiên (STT) */
-      .history-table tbody tr td:first-child::before {
-        content: counter(rowNumber);
-        margin-right: 5px;
-      }
-      .history-table tbody tr:nth-child(even) {
-        background: #fbfbfb;
-      }
-      /* Timer, Options & Buttons */
-      .timer {
-        color: #e74c3c;
-        font-weight: bold;
-        font-size: 1.4rem;
-        margin-bottom: 8px;
-        text-align: center;
-      }
-      .live-period-label {
-        font-size: 1.1rem;
-        font-weight: 600;
-        text-align: center;
-        margin-bottom: 8px;
-      }
+      /* Các style chung cho form, buttons và bảng lịch sử */
       .options {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         gap: 10px;
-        margin-bottom: 15px;
+        margin: 15px 0;
       }
       .option {
         padding: 15px;
@@ -373,9 +308,10 @@
         text-align: center;
         border-radius: 6px;
         cursor: pointer;
-        transition: background 0.3s, transform 0.3s;
         font-size: 1.1rem;
         font-weight: 600;
+        transition: background var(--transition-speed),
+          transform var(--transition-speed);
       }
       .option:hover {
         background: #ddd;
@@ -385,45 +321,35 @@
         background: var(--accent-color);
         color: #fff;
       }
-      .submit-button,
-      .close-button {
+      .btn {
         padding: 10px 18px;
         border: none;
         border-radius: 6px;
         font-size: 1rem;
         font-weight: bold;
         cursor: pointer;
+        transition: background var(--transition-speed), transform 0.2s;
         margin-right: 8px;
-        transition: background 0.3s, transform 0.2s;
       }
-      .submit-button {
+      .btn-submit {
         background: #27ae60;
         color: #fff;
       }
-      .submit-button:hover {
+      .btn-submit:hover {
         background: #219150;
         transform: scale(1.03);
       }
-      .close-button {
+      .btn-close {
         background: #e74c3c;
         color: #fff;
       }
-      .close-button:hover {
+      .btn-close:hover {
         background: #c0392b;
         transform: scale(1.03);
       }
-      /* Hiển thị đáp án đã chọn */
-      #selectedOptionDisplay {
-        text-align: center;
-        font-size: 1.1rem;
-        font-weight: bold;
-        color: var(--accent-color);
-        margin-bottom: 15px;
-      }
-      /* Ô nhập số tiền cược */
       .bet-amount {
-        margin-bottom: 15px;
         text-align: center;
+        margin-bottom: 15px;
       }
       .bet-amount label {
         margin-right: 8px;
@@ -437,102 +363,83 @@
         border: 1px solid #ccc;
         border-radius: 4px;
       }
-      /* History Section (trang chính) */
-      .history {
-        margin: 20px;
-        margin-bottom: 120px;
+      .timer,
+      .live-period-label {
+        text-align: center;
+        margin-bottom: 10px;
+      }
+      .timer {
+        font-size: 1.4rem;
+        color: var(--accent-color);
+        font-weight: bold;
+      }
+      /* Bảng lịch sử */
+      .history-section {
         background: var(--card-bg);
         padding: 15px;
         border-radius: 6px;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        font-size: 0.9rem;
+        margin: 20px 10px 120px;
         overflow-x: auto;
       }
-      .history h3 {
+      .history-section h3 {
         margin-bottom: 10px;
         font-size: 1.4rem;
         text-align: center;
         color: var(--text-color);
       }
+      .history-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.9rem;
+      }
+      .history-table th,
+      .history-table td {
+        padding: 8px;
+        text-align: center;
+        border: 1px solid #ddd;
+      }
+      .history-table thead {
+        background: #f1f1f1;
+        font-weight: 600;
+      }
+      .history-table tbody tr:nth-child(even) {
+        background: #fbfbfb;
+      }
       /* Responsive */
       @media (max-width: 768px) {
-        .container {
-          flex-direction: column;
+        aside {
+          flex: 0 0 35%;
+          margin: 10px 5px;
         }
-        .sidebar {
-          width: 100%;
-          margin-bottom: 20px;
-        }
-      }
-      /* Container bố trí Sidebar và Main-content */
-      .container {
-        display: flex;
-        /* Mặc định sẽ không wrap để các phần luôn nằm trong 1 hàng */
-        flex-wrap: nowrap;
-      }
-      /* Desktop layout (từ 768px trở lên): Sidebar có chiều rộng cố định, main-content chiếm phần còn lại */
-      @media (min-width: 768px) {
-        .container {
-          flex-direction: row;
-          align-items: flex-start;
-        }
-        .sidebar {
-          width: 150px;
-          margin-right: 20px;
-        }
-        .main-content {
-          flex: 1;
-          display: grid;
-          grid-gap: 5px;
-          grid-template-columns: repeat(3, minmax(150px, 1fr));
-          justify-items: center;
-          padding-bottom: 10px;
-          margin-top: 20px;
-        }
-      }
-      /* Mobile layout (dưới 768px): Sidebar chiếm 35% và main-content chiếm 65% */
-      @media (max-width: 767px) {
-        .container {
-          flex-direction: row;
-          /* Ép 2 phần nằm trên 1 hàng */
-          flex-wrap: nowrap;
-        }
-        .sidebar {
-          width: 35%;
-          margin-right: 10px;
-        }
-        .main-content {
-          width: 75%;
-          display: grid;
-          grid-gap: 5px;
-          grid-template-columns: repeat(2, minmax(100px, 1fr));
-          justify-items: center;
-          padding-bottom: 10px;
-          margin-top: 20px;
+        main {
+          flex: 0 0 60%;
+          margin: 10px 5px;
         }
       }
     </style>
   </head>
   <body>
-    <div class="logo-top"></div>
-    <!-- Tiêu đề Sảnh Đánh Giá -->
-    <div class="review-header">Sảnh Đánh Giá</div>
+    <div id="navbar-placeholder"></div>
+    <script src="menu.js"></script>
     <div class="container">
-      <!-- Sidebar -->
-      <div class="sidebar">
-        <a href="#" class="active" onclick="showReview('all')">
-          <i class="fa fa-th-large"></i> Tất cả
-        </a>
-        <a href="#" onclick="showReview('Đánh Giá 1')">
-          <i class="fa fa-star"></i> Đánh Giá 1
-        </a>
-        <a href="#" onclick="showReview('Đánh Giá 2')">
-          <i class="fa fa-heart"></i> Đánh Giá 2
-        </a>
-        <a href="#" onclick="showReview('Đánh Giá 3')">
-          <i class="fa fa-smile-o"></i> Đánh Giá 3
-        </a>
-      </div>
+      <!-- Sidebar sử dụng thẻ aside và nav -->
+      <aside>
+        <nav>
+          <a href="#" class="active" onclick="showReview('all')">
+            <i class="fa fa-th-large"></i> Tất cả
+          </a>
+          <a href="#" onclick="showReview('Đánh Giá 1')">
+            <i class="fa fa-star"></i> Đánh Giá 1
+          </a>
+          <a href="#" onclick="showReview('Đánh Giá 2')">
+            <i class="fa fa-heart"></i> Đánh Giá 2
+          </a>
+          <a href="#" onclick="showReview('Đánh Giá 3')">
+            <i class="fa fa-smile-o"></i> Đánh Giá 3
+          </a>
+        </nav>
+      </aside>
       <!-- Main Content (Review Cards) -->
       <div class="main-content" id="mainContent">
         <div
@@ -749,8 +656,7 @@
         </tbody>
       </table>
     </div>
-    <div id="navbar-placeholder"></div>
-    <script src="menu.js"></script>
+
     <script>
       fetch("navbar.html")
         .then((response) => response.text())
