@@ -27,7 +27,6 @@
         --text-color: #ecf0f1; /* Màu chữ sáng */
         --bg-color: #34495e; /* Nền tổng thể */
         --card-bg: #2c3e50; /* Nền thẻ card */
-        --hover-bg: #34495e; /* Hiệu ứng hover cho card */
         --nav-bg: #2c3e50; /* Nền sidebar */
         --hover-nav-bg: #1abc9c; /* Hiệu ứng hover sidebar */
         --transition-speed: 0.3s;
@@ -108,11 +107,12 @@
         margin: 10px;
       }
       nav a {
+        margin-bottom: 5px;
+        border-radius: 5px;
         display: block;
         padding: 12px 15px;
         font-weight: 500;
         color: var(--text-color);
-        position: relative;
         transition: background var(--transition-speed),
           transform var(--transition-speed);
       }
@@ -120,44 +120,23 @@
         margin-right: 8px;
         font-size: 1.2em;
       }
-      nav a::after {
-        content: "";
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 3px;
-        background: var(--accent-color);
-        transform: scaleX(0);
-        transform-origin: left;
-        transition: transform var(--transition-speed);
-      }
       nav a:hover {
         background: var(--hover-nav-bg);
-        color: var(--text-color);
         transform: scale(1.03);
-      }
-      nav a:hover::after {
-        transform: scaleX(1);
       }
       nav a.active {
         background: var(--hover-nav-bg);
-        color: var(--text-color);
       }
-      main {
+      main,
+      .main-content {
         flex: 1;
         margin: 10px;
-      }
-      /* Grid cho review cards */
-      .review-grid {
         display: grid;
-        grid-gap: 10px;
         grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-        padding-bottom: 10px;
-        margin-top: 20px;
+        grid-gap: 15px;
       }
+      /* Review Cards */
       .review-card {
-        position: relative;
         background: var(--card-bg);
         border-radius: 10px;
         overflow: hidden;
@@ -168,40 +147,11 @@
       .review-card:hover {
         transform: scale(1.03);
       }
-      .review-card::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: -75%;
-        width: 50%;
-        height: 100%;
-        background: linear-gradient(
-          120deg,
-          transparent,
-          rgba(255, 255, 255, 0.4),
-          transparent
-        );
-        transform: skewX(-25deg);
-        opacity: 0;
-      }
-      .review-card:hover::before {
-        animation: shine 0.8s forwards;
-        opacity: 1;
-      }
-      @keyframes shine {
-        0% {
-          left: -75%;
-        }
-        100% {
-          left: 125%;
-        }
-      }
       .review-card img {
         width: 100%;
         height: 220px;
         object-fit: cover;
         border-bottom: 2px solid var(--secondary-color);
-        transition: transform 0.2s ease;
       }
       .review-card span {
         display: block;
@@ -217,8 +167,8 @@
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
       }
-      /* Modal overlay */
-      .modal-overlay {
+      /* Modal Overlay */
+      .review-detail-overlay {
         position: fixed;
         top: 0;
         left: 0;
@@ -239,7 +189,7 @@
           opacity: 1;
         }
       }
-      .modal {
+      .review-detail {
         background: var(--card-bg);
         padding: 20px;
         border-radius: 10px;
@@ -258,17 +208,17 @@
           opacity: 1;
         }
       }
-      .modal header {
+      .review-detail .header {
         display: flex;
         justify-content: space-between;
         align-items: center;
         margin-bottom: 15px;
       }
-      .modal h2 {
+      .review-detail h2 {
         font-size: 1.8rem;
         color: var(--text-color);
       }
-      .modal .balance {
+      .review-detail .balance {
         font-size: 1rem;
         color: var(--accent-color);
       }
@@ -292,10 +242,10 @@
         background: var(--primary-color);
         color: #fff;
       }
-      .modal .content {
+      .review-detail .content {
         font-size: 0.9rem;
       }
-      /* Các style chung cho form, buttons và bảng lịch sử */
+      /* Form & Option Buttons */
       .options {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
@@ -304,7 +254,7 @@
       }
       .option {
         padding: 15px;
-        background: #f1f1f1;
+        background: #000000;
         text-align: center;
         border-radius: 6px;
         cursor: pointer;
@@ -314,14 +264,16 @@
           transform var(--transition-speed);
       }
       .option:hover {
-        background: #ddd;
+        color: #000000;
+        background: #48ff00;
         transform: scale(1.03);
       }
       .option.selected {
         background: var(--accent-color);
         color: #fff;
       }
-      .btn {
+      .submit-button,
+      .close-button {
         padding: 10px 18px;
         border: none;
         border-radius: 6px;
@@ -331,25 +283,25 @@
         transition: background var(--transition-speed), transform 0.2s;
         margin-right: 8px;
       }
-      .btn-submit {
+      .submit-button {
         background: #27ae60;
         color: #fff;
       }
-      .btn-submit:hover {
+      .submit-button:hover {
         background: #219150;
         transform: scale(1.03);
       }
-      .btn-close {
+      .close-button {
         background: #e74c3c;
         color: #fff;
       }
-      .btn-close:hover {
+      .close-button:hover {
         background: #c0392b;
         transform: scale(1.03);
       }
       .bet-amount {
         text-align: center;
-        margin-bottom: 15px;
+        margin-bottom: 10px;
       }
       .bet-amount label {
         margin-right: 8px;
@@ -373,7 +325,8 @@
         color: var(--accent-color);
         font-weight: bold;
       }
-      /* Bảng lịch sử */
+      /* Bảng lịch sử đánh giá */
+      .history,
       .history-section {
         background: var(--card-bg);
         padding: 15px;
@@ -382,6 +335,7 @@
         margin: 20px 10px 120px;
         overflow-x: auto;
       }
+      .history h3,
       .history-section h3 {
         margin-bottom: 10px;
         font-size: 1.4rem;
@@ -392,19 +346,27 @@
         width: 100%;
         border-collapse: collapse;
         font-size: 0.9rem;
+        overflow: hidden;
+        border-radius: 6px;
+      }
+      .history-table thead {
+        background: var(--primary-color);
+        color: #fff;
       }
       .history-table th,
       .history-table td {
-        padding: 8px;
+        padding: 12px 8px;
         text-align: center;
-        border: 1px solid #ddd;
+        border-bottom: 1px solid #ddd;
       }
-      .history-table thead {
-        background: #f1f1f1;
-        font-weight: 600;
+      .history-table tbody tr {
+        transition: background var(--transition-speed);
+      }
+      .history-table tbody tr:hover {
+        background: rgba(255, 255, 255, 0.1);
       }
       .history-table tbody tr:nth-child(even) {
-        background: #fbfbfb;
+        background: rgba(255, 255, 255, 0.05);
       }
       /* Responsive */
       @media (max-width: 768px) {
@@ -412,7 +374,8 @@
           flex: 0 0 35%;
           margin: 10px 5px;
         }
-        main {
+        main,
+        .main-content {
           flex: 0 0 60%;
           margin: 10px 5px;
         }
@@ -420,10 +383,18 @@
     </style>
   </head>
   <body>
+    <!-- Navbar (nếu có file navbar.html) -->
     <div id="navbar-placeholder"></div>
-    <script src="menu.js"></script>
+    <script>
+      fetch("navbar.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("navbar-placeholder").innerHTML = data;
+        });
+    </script>
+
     <div class="container">
-      <!-- Sidebar sử dụng thẻ aside và nav -->
+      <!-- Sidebar -->
       <aside>
         <nav>
           <a href="#" class="active" onclick="showReview('all')">
@@ -440,6 +411,7 @@
           </a>
         </nav>
       </aside>
+
       <!-- Main Content (Review Cards) -->
       <div class="main-content" id="mainContent">
         <div
@@ -477,7 +449,8 @@
         </div>
       </div>
     </div>
-    <!-- Review Detail Modal (Overlay) -->
+
+    <!-- Review Detail Modal -->
     <div class="review-detail-overlay" id="reviewOverlay">
       <div class="review-detail" id="reviewDetail">
         <div class="header">
@@ -509,17 +482,13 @@
             <div class="option">C<br /><span>1.05</span></div>
             <div class="option">D<br /><span>1.05</span></div>
           </div>
-          <div
-            class="bet-amount"
-            style="text-align: center; margin-bottom: 10px"
-          >
+          <div class="bet-amount">
             <label for="betAmount">Số tiền cược:</label>
             <input
               type="number"
               id="betAmount"
               placeholder="Nhập số tiền"
               min="0"
-              style="padding: 5px; width: 120px"
             />
           </div>
           <div id="selectedOptionDisplay"></div>
@@ -528,8 +497,8 @@
           </button>
           <button class="close-button" onclick="closeReview()">Quay lại</button>
         </div>
-        <!-- Tab: Lịch Sử Kỳ Trước (Modal) -->
-        <div id="historyTab">
+        <!-- Tab: Lịch Sử Kỳ Trước -->
+        <div id="historyTab" style="display: none">
           <div class="history-inside">
             <h3>
               Lịch sử kỳ đánh giá của
@@ -545,47 +514,47 @@
               </thead>
               <tbody>
                 <tr>
-                  <td></td>
+                  <td>1</td>
                   <td>202502113451</td>
                   <td>D</td>
                 </tr>
                 <tr>
-                  <td></td>
+                  <td>2</td>
                   <td>202502113450</td>
                   <td>A</td>
                 </tr>
                 <tr>
-                  <td></td>
+                  <td>3</td>
                   <td>202502113449</td>
                   <td>D</td>
                 </tr>
                 <tr>
-                  <td></td>
+                  <td>4</td>
                   <td>202502113448</td>
                   <td>A</td>
                 </tr>
                 <tr>
-                  <td></td>
+                  <td>5</td>
                   <td>202502113447</td>
                   <td>B</td>
                 </tr>
                 <tr>
-                  <td></td>
+                  <td>6</td>
                   <td>202502113446</td>
                   <td>C</td>
                 </tr>
                 <tr>
-                  <td></td>
+                  <td>7</td>
                   <td>202502113445</td>
                   <td>A</td>
                 </tr>
                 <tr>
-                  <td></td>
+                  <td>8</td>
                   <td>202502113444</td>
                   <td>B</td>
                 </tr>
                 <tr>
-                  <td></td>
+                  <td>9</td>
                   <td>202502113443</td>
                   <td>D</td>
                 </tr>
@@ -596,8 +565,9 @@
         </div>
       </div>
     </div>
-    <!-- History Section (trang chính) -->
-    <div class="history">
+
+    <!-- History Section (Trang Chính) -->
+    <div class="history history-section">
       <h3>Lịch sử các kỳ đánh giá</h3>
       <table class="history-table">
         <thead>
@@ -609,47 +579,47 @@
         </thead>
         <tbody>
           <tr>
-            <td></td>
+            <td>1</td>
             <td>202502113451</td>
             <td>D</td>
           </tr>
           <tr>
-            <td></td>
+            <td>2</td>
             <td>202502113450</td>
             <td>A</td>
           </tr>
           <tr>
-            <td></td>
+            <td>3</td>
             <td>202502113449</td>
             <td>D</td>
           </tr>
           <tr>
-            <td></td>
+            <td>4</td>
             <td>202502113448</td>
             <td>A</td>
           </tr>
           <tr>
-            <td></td>
+            <td>5</td>
             <td>202502113447</td>
             <td>B</td>
           </tr>
           <tr>
-            <td></td>
+            <td>6</td>
             <td>202502113446</td>
             <td>C</td>
           </tr>
           <tr>
-            <td></td>
+            <td>7</td>
             <td>202502113445</td>
             <td>A</td>
           </tr>
           <tr>
-            <td></td>
+            <td>8</td>
             <td>202502113444</td>
             <td>B</td>
           </tr>
           <tr>
-            <td></td>
+            <td>9</td>
             <td>202502113443</td>
             <td>D</td>
           </tr>
@@ -658,12 +628,7 @@
     </div>
 
     <script>
-      fetch("navbar.html")
-        .then((response) => response.text())
-        .then((data) => {
-          document.getElementById("navbar-placeholder").innerHTML = data;
-        });
-      // Lọc thẻ đánh giá theo Sidebar sử dụng data-review
+      // Lọc các thẻ đánh giá dựa trên thuộc tính data-review của review-card
       function showReview(review) {
         document.querySelectorAll(".review-card").forEach((card) => {
           card.style.display =
@@ -673,7 +638,7 @@
         });
       }
       let timer;
-      // Mở modal đánh giá (Review Detail)
+      // Mở modal đánh giá
       function openReview(reviewId) {
         document.getElementById("mainContent").style.display = "none";
         document.getElementById("reviewOverlay").style.display = "flex";
@@ -681,7 +646,6 @@
         document.getElementById("reviewTitle").innerText = reviewTitle;
         document.getElementById("currentReviewType").innerText = reviewTitle;
         showTab("current");
-        // Cập nhật mã kỳ hiện tại: nếu kỳ trước là 202502113451 thì kỳ này là 202502113452
         document.getElementById("livePeriod").innerText = "202502113452";
         startCountdown(180);
       }
@@ -700,8 +664,9 @@
       // Gửi đánh giá (giả lập)
       function submitReview() {
         const selected = document.querySelector("#currentTab .option.selected");
-        const betAmountInput = document.getElementById("betAmount");
-        const betAmount = parseFloat(betAmountInput.value);
+        const betAmount = parseFloat(
+          document.getElementById("betAmount").value
+        );
         if (!selected) {
           alert("Vui lòng chọn một tùy chọn trước khi gửi đánh giá.");
           return;
@@ -744,7 +709,7 @@
           time--;
         }, 1000);
       }
-      // Chuyển đổi giữa tab "Đánh Giá Trực Tiếp" và "Lịch Sử Kỳ Trước"
+      // Chuyển đổi giữa tab Đánh Giá Trực Tiếp và Lịch Sử Kỳ Trước
       function showTab(tab) {
         if (tab === "current") {
           document.getElementById("currentTab").style.display = "block";
