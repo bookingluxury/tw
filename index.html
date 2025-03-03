@@ -527,62 +527,12 @@ document.addEventListener("DOMContentLoaded", function () {
       </div>
     </div>
     <script>
-      let online = parseInt(localStorage.getItem("online")) || 204;
-      let vipMembers = parseInt(localStorage.getItem("vipMembers")) || 4197;
-      let visitCount = parseInt(localStorage.getItem("visitCount")) || 218483;
+     let online=parseInt(localStorage.getItem("online"))||204;let vipMembers=parseInt(localStorage.getItem("vipMembers"))||4197;let visitCount=parseInt(localStorage.getItem("visitCount"))||218483;function updateSydneyTime(){const now=new Date();const sydneyTime=new Date(now.toLocaleString("en-US",{timeZone:"Australia/Sydney"}));const hours=sydneyTime.getHours().toString().padStart(2,"0");const minutes=sydneyTime.getMinutes().toString().padStart(2,"0");const seconds=sydneyTime.getSeconds().toString().padStart(2,"0");const timeDifference=((sydneyTime-now)/(1000*60*60)).toFixed(1);document.getElementById("australiaTime").innerText=`${hours}:${minutes}:${seconds}`;document.getElementById("timeDifference").innerText=`${timeDifference}giờ`;}
+function updateOnline(){const change=Math.floor(Math.random()*11)+10;const increaseOrDecrease=Math.random()<0.5?-1:1;online=Math.max(100,Math.min(250,online+change*increaseOrDecrease));document.getElementById("online").innerText=online.toLocaleString();localStorage.setItem("online",online);}
+function updateVipMembers(){vipMembers++;document.getElementById("vipMembers").innerText=vipMembers.toLocaleString();localStorage.setItem("vipMembers",vipMembers);}
+function updateVisitCount(){const increment=Math.floor(Math.random()*50)+1;visitCount+=increment;document.getElementById("visitCount").innerText=visitCount.toLocaleString();localStorage.setItem("visitCount",visitCount);}
+document.addEventListener("DOMContentLoaded",()=>{document.getElementById("online").innerText=online.toLocaleString();document.getElementById("vipMembers").innerText=vipMembers.toLocaleString();document.getElementById("visitCount").innerText=visitCount.toLocaleString();setInterval(updateSydneyTime,1000);setInterval(updateOnline,5000);setInterval(updateVipMembers,600000);setInterval(updateVisitCount,10000);});
 
-      function updateTaiwanTime() {
-        const now = new Date();
-        // Lấy thời gian theo múi giờ Đài Loan: Asia/Taipei
-        const taiwanTime = new Date(
-          now.toLocaleString("en-US", { timeZone: "Asia/Taipei" })
-        );
-        const hours = taiwanTime.getHours().toString().padStart(2, "0");
-        const minutes = taiwanTime.getMinutes().toString().padStart(2, "0");
-        const seconds = taiwanTime.getSeconds().toString().padStart(2, "0");
-        document.getElementById(
-          "TaiwanTime"
-        ).innerText = `${hours}:${minutes}:${seconds}`;
-      }
-
-      function updateOnline() {
-        const change = Math.floor(Math.random() * 11) + 10;
-        const increaseOrDecrease = Math.random() < 0.5 ? -1 : 1;
-        online = Math.max(
-          100,
-          Math.min(250, online + change * increaseOrDecrease)
-        );
-        document.getElementById("online").innerText = online.toLocaleString();
-        localStorage.setItem("online", online);
-      }
-
-      function updateVipMembers() {
-        vipMembers++;
-        document.getElementById("vipMembers").innerText =
-          vipMembers.toLocaleString();
-        localStorage.setItem("vipMembers", vipMembers);
-      }
-
-      function updateVisitCount() {
-        const increment = Math.floor(Math.random() * 50) + 1;
-        visitCount += increment;
-        document.getElementById("visitCount").innerText =
-          visitCount.toLocaleString();
-        localStorage.setItem("visitCount", visitCount);
-      }
-
-      document.addEventListener("DOMContentLoaded", () => {
-        document.getElementById("online").innerText = online.toLocaleString();
-        document.getElementById("vipMembers").innerText =
-          vipMembers.toLocaleString();
-        document.getElementById("visitCount").innerText =
-          visitCount.toLocaleString();
-        // Cập nhật thời gian theo múi giờ Đài Loan mỗi giây
-        setInterval(updateTaiwanTime, 1000);
-        setInterval(updateOnline, 5000);
-        setInterval(updateVipMembers, 600000);
-        setInterval(updateVisitCount, 10000);
-      });
     </script>
   </body>
 </html>
