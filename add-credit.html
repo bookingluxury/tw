@@ -409,81 +409,80 @@
       <div class="scrolling-text">
         <div class="scrolling-content">
           <span class="icon-line">
-            <ion-icon name="bulb-outline"></ion-icon> Vì Sao Quý Khách Cần Thanh
-            Toán? 為什麼需要付款？
+            <ion-icon name="bulb-outline"></ion-icon> Why Pay?
           </span>
           <span class="icon-line">
-            <ion-icon name="checkmark-circle-outline"></ion-icon> Xác thực khách
-            hàng có nhu cầu thật (驗證真實 khách hàng)
+            <ion-icon name="checkmark-circle-outline"></ion-icon> Verify genuine
+            customer interest
           </span>
           <span class="icon-line">
-            <ion-icon name="checkmark-circle-outline"></ion-icon> Kích hoạt
-            quyền truy cập dịch vụ đặc biệt (開通特別服務)
+            <ion-icon name="checkmark-circle-outline"></ion-icon> Activate
+            access to exclusive services
           </span>
           <span class="icon-line">
-            <ion-icon name="checkmark-circle-outline"></ion-icon> Bảo vệ quyền
-            lợi khách hàng (保障您的權益)
+            <ion-icon name="checkmark-circle-outline"></ion-icon> Protect
+            customer rights
           </span>
           <span class="icon-line">
-            <ion-icon name="checkmark-circle-outline"></ion-icon> Hỗ trợ từ CSKH
-            (專業客服指導)
+            <ion-icon name="checkmark-circle-outline"></ion-icon> Support from
+            customer service
           </span>
           <span class="icon-line">
-            <ion-icon name="checkmark-circle-outline"></ion-icon> Quyền lợi ưu
-            tiên (優先享受 nhiều ưu đãi)
+            <ion-icon name="checkmark-circle-outline"></ion-icon> Priority
+            benefits
           </span>
           <span class="icon-line">
-            <ion-icon name="bulb-outline"></ion-icon> Lưu ý 提醒:
+            <ion-icon name="bulb-outline"></ion-icon> Note:
           </span>
           <span class="icon-line">
-            <ion-icon name="checkmark-circle-outline"></ion-icon> Thanh toán một
-            lần (一次性付款)
+            <ion-icon name="checkmark-circle-outline"></ion-icon> One-time
+            payment
           </span>
           <span class="icon-line">
-            <ion-icon name="checkmark-circle-outline"></ion-icon> Hệ thống tự
-            động xử lý giao dịch (系統自動確認付款)
+            <ion-icon name="checkmark-circle-outline"></ion-icon> Automatic
+            transaction processing
           </span>
           <span class="icon-line">
-            <ion-icon name="checkmark-circle-outline"></ion-icon> Liên hệ CSKH
-            (如有疑問請聯繫客服)
+            <ion-icon name="checkmark-circle-outline"></ion-icon> Contact
+            customer service for assistance
           </span>
           <span class="icon-line">
-            <ion-icon name="disc-outline"></ion-icon> Hãy thanh toán ngay để tận
-            hưởng dịch vụ đặc biệt!
+            <ion-icon name="disc-outline"></ion-icon> Pay now to enjoy exclusive
+            services!
           </span>
         </div>
       </div>
 
-      <!-- Note thanh toán & chi tiết -->
+      <!-- Payment note & details -->
       <div class="payment-note">
         <p>
           <ion-icon name="alert-circle-outline"></ion-icon
-          ><strong
-            >THÔNG BÁO THANH TOÁN & QUYỀN TRUY CẬP DỊCH VỤ ĐẶC BIỆT</strong
-          >
+          ><strong>PAYMENT & ACCESS TO EXCLUSIVE SERVICES NOTICE</strong>
         </p>
         <p>
           <ion-icon name="card-outline"></ion-icon
-          ><strong>Hướng Dẫn Thanh Toán</strong>
+          ><strong>Payment Instructions</strong>
         </p>
-        <p>Quý khách có thể thanh toán qua các phương thức sau:</p>
+        <p>You can make payments through the following methods:</p>
         <ul>
           <li>
-            <ion-icon name="chevron-forward-outline"></ion-icon> Tài khoản ngân
-            hàng Việt Nam – Chuyển khoản nội địa.
+            <ion-icon name="chevron-forward-outline"></ion-icon> Vietnamese bank
+            account – Secure and reliable.
           </li>
           <li>
-            <ion-icon name="chevron-forward-outline"></ion-icon> Tài khoản ngân
-            hàng Đài Loan – Phù hợp cho khách hàng tại Đài Loan.
+            <ion-icon name="chevron-forward-outline"></ion-icon> International
+            bank account – Suitable for customers outside Vietnam.
           </li>
           <li>
-            <ion-icon name="chevron-forward-outline"></ion-icon> Ví điện tử
-            &amp; phương thức quốc tế (nếu có) – Liên hệ để được hướng dẫn.
+            <ion-icon name="chevron-forward-outline"></ion-icon> E-wallets &
+            international payment methods (if applicable) – Contact for
+            guidance.
           </li>
         </ul>
         <p>
-          Sau khi thanh toán, hệ thống tự động xác nhận giao dịch và cấp quyền
-          truy cập dịch vụ. Nếu cần hỗ trợ, hãy liên hệ CSKH.
+          After payment, the system automatically confirms the transaction and
+          grants access to services. For assistance, please contact customer
+          service.
         </p>
       </div>
 
@@ -559,12 +558,12 @@
 
       <!-- Thanh toán qua Ngân hàng Đài Loan -->
       <div class="payment-option">
-        <a onclick="togglePaymentForm('tw')"
-          >Thanh toán qua Ngân hàng Đài Loan</a
+        <a onclick="togglePaymentForm('Australia')"
+          >Thanh toán qua Ngân hàng Australia</a
         >
         <div class="payment-details" id="twDetails">
           <p style="color: #ff6666; font-weight: 600">
-            Thông tin tài khoản Đài Loan hiện không khả dụng!
+            Thông tin tài khoản Úc hiện không khả dụng!
           </p>
         </div>
       </div>
@@ -692,7 +691,7 @@
           }
         });
         // Với tài khoản Đài Loan, hiển thị thông báo động và ẩn luôn thông tin
-        if (method === "tw") {
+        if (method === "Australia") {
           showNotification(
             "Các giao dịch hiện đang quá tải. Vui lòng chọn phương thức khác hoặc liên hệ CSKH."
           );
