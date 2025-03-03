@@ -66,24 +66,29 @@
       }
       /* Tiêu đề chính */
       h1 {
- 
         background: linear-gradient(90deg, #000000, #000000, #0eff45, #007bff);
-    -webkit-background-clip: text;
-    color: transparent;
-    animation: textAnimation 3slinear infinite;
-  text-align: center;
-  padding: 1.8rem;
-  margin-bottom: 0.5rem;
-  font-weight: 700;
-  
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Hiệu ứng nổi */
+        -webkit-background-clip: text;
+        color: transparent;
+        animation: textAnimation 3slinear infinite;
+        text-align: center;
+        padding: 1.8rem;
+        margin-bottom: 0.5rem;
+        font-weight: 700;
+
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Hiệu ứng nổi */
       }
 
       @keyframes gradientAnimation {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
       /* Marquee */
       .scrolling-text {
         position: relative;
@@ -181,7 +186,6 @@
         text-transform: uppercase;
       }
       .pricing-table td {
-    
         background: linear-gradient(90deg, #10b905, #efefef, #c48dff);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
@@ -193,7 +197,6 @@
         transition: background 0.3s, transform 0.3s;
       }
       .pricing-table td:hover {
-       
         transform: scale(1.02);
       }
       /* Ô Giá */
@@ -330,20 +333,20 @@
     <div class="scrolling-text">
       <div class="scrolling-content">
         <span
-          ><i class="fas fa-bolt"></i> Dịch vụ nhanh chóng và chuyên
-          nghiệp</span
+          ><i class="fas fa-bolt"></i> Dịch vụ nhanh chóng, chuyên nghiệp, phù
+          hợp với người Việt</span
         >
         <span
-          ><i class="fas fa-star"></i> Chất lượng vượt trội, giá cả phải
-          chăng</span
+          ><i class="fas fa-star"></i> Chất lượng cao, giá cả hợp lý, tiết kiệm
+          chi phí</span
         >
         <span
-          ><i class="fas fa-heart"></i> Trải nghiệm đẳng cấp với phong cách hiện
-          đại</span
+          ><i class="fas fa-heart"></i> Trải nghiệm đẳng cấp, phong cách hiện
+          đại, gần gũi</span
         >
         <span
-          ><i class="fas fa-thumbs-up"></i> Cam kết hài lòng 100% từ khách
-          hàng</span
+          ><i class="fas fa-thumbs-up"></i> Cam kết hài lòng 100%, phục vụ tận
+          tình như ở Việt Nam</span
         >
       </div>
     </div>
@@ -360,90 +363,98 @@
         </thead>
         <tbody>
           <tr>
-            <td>Basic Service</td>
+            <td class="package-name">Basic Bliss</td>
             <td>60 phút</td>
-            <td class="price">1.800TWD</td>
+            <td class="price">200 AUD</td>
             <td>
-              Tắm chung thư giãn, massage nhẹ nhàng, HJ và BJ chuyên nghiệp,
-              quan hệ 2 lần.
+              <strong>Thư giãn tuyệt đối:</strong> Tắm chung thư giãn, massage
+              nhẹ nhàng, HJ và BJ chuyên nghiệp, quan hệ 2 lần. Hoàn hảo cho
+              những ai muốn thư giãn và tận hưởng khoảnh khắc.
             </td>
           </tr>
           <tr>
-            <td>Special Service</td>
+            <td class="package-name">Special Sensations</td>
             <td>90 phút</td>
-            <td class="price">2.700TWD</td>
+            <td class="price">300 AUD</td>
             <td>
-              Massage kết hợp, HJ và BJ với kỹ thuật nóng/lạnh, quan hệ 3 lần,
-              đổi nhân viên 1 lần nếu chưa hài lòng.
+              <strong>Trải nghiệm đỉnh cao:</strong> Massage kết hợp, HJ và BJ
+              với kỹ thuật nóng/lạnh, quan hệ 3 lần, đổi nhân viên 1 lần nếu
+              chưa hài lòng. Đắm chìm trong cảm giác tuyệt vời và phấn khích.
             </td>
           </tr>
           <tr>
-            <td>Diamond Service</td>
+            <td class="package-name">Diamond Delight</td>
             <td>180 phút</td>
-            <td class="price">3.500TWD</td>
+            <td class="price">500 AUD</td>
             <td>
-              Tắm chung, sử dụng đồ chơi cao cấp, massage kỹ thuật Nuru với dầu
-              đặc biệt, HJ &amp; BJ, quan hệ không giới hạn, đổi nhân viên 3 lần
-              nếu chưa hài lòng.
+              <strong>Đẳng cấp sang trọng:</strong> Tắm chung, sử dụng đồ chơi
+              cao cấp, massage kỹ thuật Nuru với dầu đặc biệt, HJ &amp; BJ, quan
+              hệ không giới hạn, đổi nhân viên 3 lần nếu chưa hài lòng. Trải
+              nghiệm xa xỉ và đẳng cấp.
             </td>
           </tr>
           <tr>
-            <td>Platinum Service</td>
+            <td class="package-name">Platinum Pleasure</td>
             <td>8 tiếng</td>
-            <td class="price">8.000TWD</td>
+            <td class="price">1.000 AUD</td>
             <td>
-              Tận hưởng toàn diện bao gồm tất cả các gói dịch vụ, phục vụ tận
-              tình chu đáo, đổi nhân viên không giới hạn, hài lòng tuyệt đối.
+              <strong>Hài lòng tuyệt đối:</strong> Tận hưởng toàn diện bao gồm
+              tất cả các gói dịch vụ, phục vụ tận tình chu đáo, đổi nhân viên
+              không giới hạn, hài lòng tuyệt đối. Một ngày trọn vẹn với những
+              cảm xúc không thể quên.
             </td>
           </tr>
         </tbody>
       </table>
-      <!-- Promotion Card -->
-      <div class="card full-width">
-        <h2>Khuyến mãi đặc biệt</h2>
-       <br><div class="image-group">
-          <img src="https://i.ibb.co/nN300Y9j/67c151e145baf-img-0258.jpg" alt="Khuyến mãi 1" />
-          <img
-            src="https://i.ibb.co/mVYnQzPB/review-of-levi-for-video-sex-han-baby-nang-dam-nu-dang-dep-mong-to-mat-xinh-2056818-original.jpg"
-            alt="Khuyến mãi 2"
-          />
-          <img
-            src="https://i.ibb.co/NTZ2yJS/photo-2024-11-08-17-50-13.jpg"
-            alt="Khuyến mãi 3"
-          />
-          <img
-            src="https://i.ibb.co/WvmjHRV3/review-of-qua-tuyet-voi-for-reup-tieu-vy-xinh-dam-ngoan-3034885-original.jpg"
-            alt="Khuyến mãi 4"
-          />
-          <img
-            src="https://i.ibb.co/rf54ZjMH/review-of-me-gai-dep-for-thu-ky-new-xinh-dep-sac-sao-ky-nang-dinh-cao-3218972-original.jpg"
-            alt="Khuyến mãi 5"
-          />
-          <img
-            src="https://i.ibb.co/PGHj3xzV/review-of-anhmegai-for-be-linna-hot-teen-tre-trung-xinh-xan-hang-moi-tin-vua-di-lam-3207712-original.jpg"
-            alt="Khuyến mãi 6"
-          />
-          <img
+    </div>
+    <!-- Promotion Card -->
+    <div class="card full-width">
+      <h2>Khuyến mãi đặc biệt</h2>
+      <br />
+      <div class="image-group">
+        <img
+          src="https://i.ibb.co/nN300Y9j/67c151e145baf-img-0258.jpg"
+          alt="Khuyến mãi 1"
+        />
+        <img
+          src="https://i.ibb.co/mVYnQzPB/review-of-levi-for-video-sex-han-baby-nang-dam-nu-dang-dep-mong-to-mat-xinh-2056818-original.jpg"
+          alt="Khuyến mãi 2"
+        />
+        <img
+          src="https://i.ibb.co/NTZ2yJS/photo-2024-11-08-17-50-13.jpg"
+          alt="Khuyến mãi 3"
+        />
+        <img
+          src="https://i.ibb.co/WvmjHRV3/review-of-qua-tuyet-voi-for-reup-tieu-vy-xinh-dam-ngoan-3034885-original.jpg"
+          alt="Khuyến mãi 4"
+        />
+        <img
+          src="https://i.ibb.co/rf54ZjMH/review-of-me-gai-dep-for-thu-ky-new-xinh-dep-sac-sao-ky-nang-dinh-cao-3218972-original.jpg"
+          alt="Khuyến mãi 5"
+        />
+        <img
+          src="https://i.ibb.co/PGHj3xzV/review-of-anhmegai-for-be-linna-hot-teen-tre-trung-xinh-xan-hang-moi-tin-vua-di-lam-3207712-original.jpg"
+          alt="Khuyến mãi 6"
+        />
+        <img
           src="https://i.ibb.co/fGtwVWzr/review-of-thanh-bui-tien-for-reup-tieu-linh-2k4-xinh-tuoi-dang-nuot-na-vu-dep-bym-non-to-3203402-ori.jpg"
           alt="Khuyến mãi 9"
         />
-          <img
-            src="https://i.ibb.co/zJfm74N/reup-bao-vy-2k3-cuc-pham-gai-xinh-trang-treo-body-cuc-nuot-3230131-original.jpg"
-            alt="Khuyến mãi 7"
-          />
-          <img
-            src="https://i.ibb.co/tz34g6N/reup-bao-vy-2k3-cuc-pham-gai-xinh-trang-treo-body-cuc-nuot-3230130-original.jpg"
-            alt="Khuyến mãi 8"
-          />
-   
-        </div>
-        <p>
-          <strong>Chi tiết:</strong> Tất cả các gói có quà tặng kèm theo nếu
-          khách hàng có nhu cầu. Khách hàng có thể chọn cosplay theo mã số trang
-          phục.
-        </p>
+        <img
+          src="https://i.ibb.co/zJfm74N/reup-bao-vy-2k3-cuc-pham-gai-xinh-trang-treo-body-cuc-nuot-3230131-original.jpg"
+          alt="Khuyến mãi 7"
+        />
+        <img
+          src="https://i.ibb.co/tz34g6N/reup-bao-vy-2k3-cuc-pham-gai-xinh-trang-treo-body-cuc-nuot-3230130-original.jpg"
+          alt="Khuyến mãi 8"
+        />
       </div>
-     
+      <p>
+        <strong>Chi tiết:</strong> Tất cả các gói có quà tặng kèm theo nếu khách
+        hàng có nhu cầu. Khách hàng có thể chọn cosplay theo mã số trang phục.
+      </p>
+    </div>
+
     <div
       style="
         display: flex;
