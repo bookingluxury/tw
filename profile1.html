@@ -25,7 +25,7 @@
     <style>
       :root {
         --card-bg: #dbdbdb;
-        --text-color: #5a20cb;
+        --text-color: #1b3a57;
         --disable-text-color: #7c3aed;
         --gray-color: #9ca3af;
       }
@@ -50,7 +50,8 @@
         position: relative;
         z-index: 1;
         height: 190px;
-        background: linear-gradient(90deg, #8c6ddd, #a770ce, #906edc);
+        background: linear-gradient(90deg, #959497, #d7d7d7, #717171);
+
         user-select: none;
         border-bottom-left-radius: 20px;
         border-bottom-right-radius: 20px;
@@ -117,8 +118,9 @@
       }
       .login-btn {
         font-size: 20px;
-        color: #fff;
-        font-weight: 600;
+        color: #1b3a57;
+        font-weight: 900;
+        text-transform: uppercase;
       }
       .login-content img {
         margin-left: 10px;
@@ -126,7 +128,7 @@
       .login-label {
         font-size: 18px;
         margin-left: 5px;
-        color: #c7c6c1;
+        color: #1b3a57;
         font-weight: 700;
       }
       .login-label i.icon-3d {
@@ -144,22 +146,23 @@
       .finance {
         position: relative;
         display: flex;
+        border: 2px solid #ccc;
         align-items: center;
         justify-content: space-around;
         margin: -30px 20px 10px;
         height: 95px;
         background-color: var(--card-bg);
         border-radius: 15px;
-        box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.15),
-          -2px -2px 6px rgba(255, 255, 255, 0.4);
+
         z-index: 10;
       }
       .finance-item {
         flex: 1;
+
         display: flex;
         align-items: center;
         justify-content: center;
-        color: var(--text-color);
+        color: #1b3a57;
         cursor: pointer;
       }
       .finance-item img {
@@ -180,24 +183,24 @@
       .wallet {
         background-color: var(--card-bg);
         border-radius: 15px;
-        box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.15),
-          -2px -2px 6px rgba(255, 255, 255, 0.4);
-        color: var(--text-color);
+        border: 2px solid #ccc; /* Thêm viền màu xám nhạt */
+        color: #1b3a57;
         margin: 0 20px 15px;
-        padding: 1px 20px; /* Giảm padding tổng thể */
-        /* Nếu cần cố định chiều cao, có thể dùng min-height hoặc height */
-        /* height: 120px; */
+        padding: 1px 20px;
       }
+
       .wallet .part-1 {
         display: flex;
+        border-bottom: 1px solid #fff; /* Kiểu viền, màu viền */
+        padding-bottom: 10px;
         align-items: center;
         margin-top: 15px; /* Giảm khoảng cách trên */
         height: 20px; /* Giảm chiều cao */
         margin-bottom: 18px; /* Giảm khoảng cách dưới */
       }
       .wallet .part-1 img.wallet-logo {
-        width: 35px; /* Giảm kích thước logo */
-        height: 35px;
+        width: 30px; /* Giảm kích thước logo */
+        height: 30px;
         margin-bottom: 5px;
         margin-right: 8px;
       }
@@ -211,7 +214,7 @@
         margin-bottom: 10px;
       }
       .wallet .part-2 span {
-        color: #662799;
+        color: #1b3a57;
         font-size: 14px;
         margin-right: 20px;
         font-weight: 900;
@@ -219,7 +222,7 @@
       .wallet .part-2 .balance {
         margin-left: auto;
         font-size: 18px;
-        color: rgb(192, 67, 173);
+        color: #9f3838;
         font-weight: 700;
         text-align: right;
       }
@@ -247,12 +250,11 @@
       .menu {
         display: flex;
         flex-wrap: wrap;
+        border: 2px solid #ccc;
         align-items: center;
         margin: 5px 20px 120px;
         background-color: var(--card-bg);
         border-radius: 15px;
-        box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.15),
-          -2px -2px 6px rgba(255, 255, 255, 0.4);
       }
       .menu-item {
         width: 50%;
@@ -264,7 +266,7 @@
         padding-left: 7px;
         border-bottom: 1px solid #f0f0f0;
         border-right: 1px solid #f0f0f0;
-        color: #c820cb;
+        color: #1b3a57;
         cursor: pointer;
         transition: background 0.2s, color 0.2s, box-shadow 0.2s;
       }
@@ -277,7 +279,7 @@
       }
       .menu-item:hover {
         background: #5e5293;
-        color: #ffe066;
+        color: #fff;
       }
       .menu-item:active {
         box-shadow: inset 2px 2px 6px rgba(0, 0, 0, 0.15),
@@ -398,7 +400,7 @@
           <div class="login-content">
             <p class="login-btn">huy2212</p>
             <img
-              src="https://girlvip.pro/img/mine/level_vip.webp"
+              src="https://i.ibb.co/jvnTgGq6/photo-2025-03-03-06-48-22-removebg-preview.png"
               width="40"
               style="margin-left: 20px"
               alt="VIP"
