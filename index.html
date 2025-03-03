@@ -429,78 +429,81 @@ document.addEventListener("DOMContentLoaded", function () {
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
       rel="stylesheet"
     />
-    <style>
-      /* Widget thống kê tổng thể */
-      .statistics-widget {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        border-radius: 12px;
-        max-width: 100%;
-        margin: 0px auto;
-    
-        padding: 15px;
-      }
+  <style>
+  /* CSS hiện tại giữ nguyên cấu trúc */
+  .statistics-widget {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    border-radius: 12px;
+    max-width: 100%;
+    margin: 0px auto;
+    padding: 15px;
+  }
 
-      .stat-item {
-        padding: 5px 9px;
-        border-radius: 12px;
-        display: flex;
-        gap: 12px;
-        font-weight: 600;
-        align-items: center;
-        background: linear-gradient(90deg, #fff, #efefef, #cb00bc);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-       
-      }
+  .stat-item {
+    padding: 5px 9px;
+    border-radius: 12px;
+    display: flex;
+    gap: 12px;
+    font-weight: 600;
+    align-items: center;
+    background: linear-gradient(90deg, #fff, #efefef, #cb00bc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  }
 
-      .stat-item i {
-        font-size: 18px;
-        color: #00ffea;
-      }
+  .stat-item i {
+    font-size: 18px;
+    color: #00ffea;
+  }
 
-      .stat-item strong {
-        font-weight: 550;
-        background: linear-gradient(90deg, #ffffff, #efefef, #cb00bc);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-        text-align: center;
-        font-size: 16px;
-        color: #ff5e00;
-      }
+  .stat-item strong {
+    font-weight: 550;
+    background: linear-gradient(90deg, #ffffff, #efefef, #cb00bc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    font-size: 16px;
+    color: #ff5e00;
+  }
 
-      .stat-item:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 6px 12px rgba(74, 105, 189, 0.6);
-      }
+  .stat-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(74, 105, 189, 0.6);
+  }
 
-      @media (max-width: 480px) {
-        .statistics-widget {
-          padding: 8px;
-        }
+  @media (max-width: 480px) {
+    .statistics-widget {
+      padding: 8px;
+    }
 
-        .stat-item {
-          flex: 1 1 calc(50% - 5px);
-          font-size: 13px;
-          padding: 4px 6px;
-        }
+    .stat-item {
+      flex: 1 1 calc(50% - 5px);
+      font-size: 13px;
+      padding: 4px 6px;
+    }
 
-        .stat-item i {
-          font-size: 14px;
-         
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-        }
+    .stat-item i {
+      font-size: 14px;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    }
 
-        .stat-item strong {
-          font-size: 12px;
-        }
-      }
-    </style>
+    .stat-item strong {
+      font-size: 12px;
+    }
+  }
+
+  /* Giảm khoảng cách cho số liệu "Used the service" */
+  .stat-item:nth-child(2) {
+    gap: 6px; /* Giảm gap từ 12px xuống 6px */
+  }
+</style>
+
   </head>
 
   <body>
