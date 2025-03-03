@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Video Nổi Bật</title>
+    <title>Video Nổi Bật - Loại Bỏ Trùng Ảnh</title>
     <!-- Bootstrap CSS -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
@@ -22,7 +22,6 @@
       nomodule
       src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
     ></script>
-
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
@@ -32,175 +31,94 @@
     <style>
       /* Global Styles */
       body {
-        background-color: var(--bg-color);
-        font-family: var(--font-primary);
+        font-family: "Montserrat", sans-serif;
         margin: 0;
-        padding: 0px;
-      }
-      .container {
-        padding-bottom: 80px;
-      }
-      body {
-        /* Màu nền gốc: xanh đen (navy/dark) */
+        padding: 0;
         background: #0b0f1a;
-
-        /* Gradient radial để tạo chiều sâu mờ ở trung tâm */
         background: radial-gradient(
           circle at center,
           rgba(11, 15, 26, 0.7) 0%,
-          /* Màu hơi trong suốt ở tâm */ rgba(11, 15, 26, 1) 100%
-            /* Màu đậm hơn ở ngoài rìa */
+          rgba(11, 15, 26, 1) 100%
         );
-
-        /* Đặt chiều cao full màn hình */
         min-height: 100vh;
-
-        /* Đảm bảo phần tử con được hiển thị phía trên */
         position: relative;
-
-        color: #fff; /* Màu chữ mặc định (trắng) trên nền tối */
+        color: #fff;
       }
-
-      /* Lớp phủ sao (starfield) tạo thêm độ sâu */
       body::before {
         content: "";
         position: absolute;
-        z-index: -1; /* Đẩy lớp phủ ra phía sau nội dung */
+        z-index: -1;
         top: 0;
         left: 0;
         right: 0;
         bottom: 0;
-
-        /* Thay đường dẫn ảnh sao, hoặc bạn có thể dùng ảnh bokeh, particle... */
         background: url("https://i.ibb.co/ycBpNQyM/pngtree-light-effect-background-halo-radial-image-2419979.jpg")
           no-repeat center center;
         background-size: cover;
-
-        /* Độ trong suốt để hòa trộn với nền phía dưới */
         opacity: 0.2;
         pointer-events: none;
       }
-
       .nav-item a {
         text-decoration: none !important;
       }
-
-      /* Hiệu ứng cho tiêu đề */
-      h1 {
-        position: relative;
-        font-weight: 600;
-        background: linear-gradient(90deg, #0544b9, #efefef, #ff0000);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-        text-align: center;
-        padding: 5px 10px;
-        font-size: 1.2rem;
-        text-align: center;
-        font-weight: bold;
-        z-index: 30;
-        transition: transform 0.4s ease, text-shadow 0.4s ease;
-      }
-
-      h1:hover {
-        transform: scale(1.1);
-        text-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
-      }
-
       .category-tabs {
         display: flex;
         justify-content: space-around;
         align-items: center;
-        width: 100%;
-        padding: 10px;
+        padding: 10px 20px;
         gap: 10px;
         overflow-x: auto;
         white-space: nowrap;
       }
-      /* Đảm bảo mỗi mục chia đều */
       .category-tabs .nav-item {
         flex: 1 1 0;
         text-align: center;
       }
       .category-tabs .nav-link {
         display: block;
-        width: 100%;
         padding: 12px;
+        z-index: 1000;
         font-weight: bold;
         border-radius: 5px;
-        /* Gradient màu cho tab */
-        background: linear-gradient(90deg, #b92fb4, #09e98c);
-        color: #000000;
+        color: #ffffff;
         transition: transform 0.3s ease, background 0.3s ease;
       }
       .category-tabs .nav-link:hover {
         transform: scale(1.05);
       }
       .category-tabs .nav-link.active {
-        /* Gradient khác cho tab active */
-        background: linear-gradient(90deg, #ff6a00, #ee0979);
-        color: #000000;
+        background: linear-gradient(90deg, #0077b5, #00bcd4);
+        color: #000;
       }
-      /* Video Cards (giữ nguyên hiệu ứng hiện tại) */
-      .video-container {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0px; /* Giảm khoảng cách giữa các card */
-        justify-content: center;
-      }
-
       .video-card {
-        background-color: var(--card-bg);
-        flex: 1 1 calc(25% - 10px); /* Hiển thị 4 video trên 1 hàng */
-        border-radius: 10px;
-        overflow: hidden;
-        width: 100%;
-        margin-bottom: 0px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-      }
-
-      .video-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-      }
-
-      .video-card video {
-        width: 100%;
-        border-radius: 8px 8px 0 0;
-      }
-
-      .video-card iframe {
-        width: 100%;
-        height: 270px;
-        border: none;
-        display: block;
-      }
-
-      .video-title {
         position: relative;
+        margin: 5px;
+        padding: 5px;
+        background: #111;
+        border-radius: 8px;
+        overflow: hidden;
+      }
+      .video-wrapper {
+        position: relative;
+        height: 270px;
+        overflow: hidden;
+      }
+      .video-wrapper img,
+      .video-wrapper iframe {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .video-iframe {
+        display: none; /* Ẩn iframe ban đầu */
+      }
+      .video-title {
         background: rgba(0, 0, 0, 0.6);
         color: #fff;
         padding: 5px 10px;
         font-size: 1rem;
         text-align: center;
         font-weight: bold;
-
-        transition: transform 0.3s ease, text-shadow 0.3s ease;
-      }
-
-      .video-title:hover {
-        transform: scale(1.05);
-        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-      }
-
-      @media (max-width: 768px) {
-        .header-section {
-          padding: 10px;
-        }
-        h1 {
-          font-size: 1.5rem;
-        }
       }
       .video-description {
         font-size: 0.9rem;
@@ -208,65 +126,59 @@
         background: linear-gradient(90deg, #ff5e00, #efefef, #7a00ff);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
-        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
         text-align: center;
       }
-
-      .video-card {
-        flex: 1 1 calc(25% - 10px); /* Hiển thị 4 video trên 1 hàng */
-        width: 100%;
-        max-width: 100%;
+      .video-views-bottom {
+        text-align: center;
+        font-size: 0.85rem;
+        color: #ccc;
+        background: rgba(0, 0, 0, 0.5);
+        padding: 3px 0;
+        margin-top: auto;
       }
-
-      * {
-        padding-left: 3px !important;
-        padding-right: 3px !important;
+      .row {
+        --bs-gutter-x: 0 !important;
+        --bs-gutter-y: 0 !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
       }
-      /* Khung chứa cho phần bị khóa */
-      .locked-content {
-        position: relative;
-        overflow: hidden;
-        min-height: 300px; /* Đảm bảo có chiều cao để overlay hiển thị */
-      }
-
-      /* Nội dung video hiển thị mờ và không tương tác */
-      .locked-content .row {
-        filter: blur(8px);
-        pointer-events: none;
-      }
-
-      /* Lớp phủ khóa luôn hiển thị */
+      /* Lớp phủ khóa yêu cầu nhập mã */
       .lock-overlay {
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.6); /* Độ đậm của overlay */
-        color: #fff;
+        height: 100%; /* Giảm chiều cao để không đè lên thanh điều hướng */
+        max-height: 100%;
+        background: rgba(0, 0, 0, 0.7);
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        text-align: center;
-        z-index: 1000; /* Đảm bảo lớp phủ nằm trên cùng */
+        color: #fff;
+        z-index: 5; /* Giảm z-index nếu cần */
+        overflow: auto;
       }
 
-      .lock-overlay i {
-        font-size: 2.5rem;
-        margin-bottom: 0.5rem;
+      .lock-overlay p {
+        font-size: 0.9rem;
+        margin-bottom: 10px;
       }
-      .video-title {
-        font-size: 1.2rem;
-        font-weight: bold;
-        color: #ff5722; /* Màu nổi bật, bạn có thể thay đổi theo ý */
-        transition: color 0.3s ease, text-shadow 0.3s ease;
+      .lock-overlay input {
+        padding: 8px;
+        border: none;
+        border-radius: 4px;
+        margin-bottom: 10px;
       }
-
-      .video-card:hover .video-title {
-        color: #e64a19; /* Màu chuyển khi hover */
-        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+      .lock-overlay button {
+        padding: 8px 12px;
+        border: none;
+        border-radius: 4px;
+        background: #0077b5;
+        color: #fff;
+        cursor: pointer;
       }
+      /* Footer & Social Icons */
       .content-footer {
         background: linear-gradient(90deg, #10b905, #efefef, #7a00ff);
         -webkit-background-clip: text;
@@ -291,35 +203,27 @@
       .footer-container a:hover {
         color: #ffdd57;
       }
-      @keyframes rotateIcon {
-        from {
-          transform: rotate(0deg);
-        }
-        to {
-          transform: rotate(360deg);
-        }
-      }
-
       .icon-dynamic {
         display: inline-block;
         animation: rotateIcon 4s linear infinite;
       }
-
+      @keyframes rotateIcon {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
       .social-icons {
         display: flex;
         justify-content: center;
-        gap: 0.5rem; /* Giảm khoảng cách giữa các icon */
-        margin-top: 0.5rem; /* Giảm khoảng cách phía trên */
+        gap: 0.5rem;
+        margin-top: 0.5rem;
       }
-
-      .social-icons a {
-        text-decoration: none;
-      }
-
       .social-icons ion-icon {
-        font-size: 1.8rem; /* Giảm kích thước icon nếu cần */
+        font-size: 1.8rem;
       }
-      /* ===== BOTTOM NAV ===== */
       .bottom-nav {
         position: fixed;
         bottom: 0;
@@ -332,10 +236,10 @@
         align-items: center;
         padding: 0.75rem 10px;
         border-top: 2px solid #444;
-        /* Hiệu ứng glow cho thanh điều hướng */
         box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.2),
           0 0 10px 2px rgba(255, 255, 255, 0.3);
         gap: 30px;
+        z-index: 2000;
         scroll-snap-type: x mandatory;
         overflow-x: auto !important;
         overflow-y: hidden !important;
@@ -345,15 +249,11 @@
         -webkit-overflow-scrolling: touch;
         touch-action: pan-x;
       }
-
-      /* Điều chỉnh kích thước logo cho các nút điều hướng */
       .bottom-nav .nav-btn img {
         width: 40px;
         height: 40px;
         object-fit: contain;
       }
-
-      /* Style cho các nút điều hướng */
       .nav-btn {
         display: flex;
         flex-direction: column;
@@ -362,11 +262,11 @@
         padding: 0.75rem 0;
         font-size: 0.85rem;
         font-weight: 600;
-        color: #fff; /* Màu chữ đồng bộ */
+        color: #fff;
         cursor: pointer;
         transition: all 0.3s ease;
         position: relative;
-        text-decoration: none; /* Loại bỏ gạch chân */
+        text-decoration: none;
       }
       .nav-btn i.icon-3d {
         font-size: 1.9rem;
@@ -378,7 +278,6 @@
         color: #ff5fa5;
         transition: transform 0.3s ease, color 0.3s ease;
       }
-      /* Hiệu ứng hover cho nút điều hướng */
       .nav-btn:hover {
         color: #ffe066;
       }
@@ -390,7 +289,6 @@
         color: #ffe066;
         animation: glow 1.2s infinite alternate;
       }
-      /* Hiệu ứng đánh dấu cho mục vừa chọn */
       .nav-btn.active::after {
         content: "";
         position: absolute;
@@ -410,10 +308,28 @@
           text-shadow: 0 0 20px #ff69b4, 0 0 30px #ff69b4;
         }
       }
+      /* Overlay khóa tab Tiktok */
+      .locked-content .lock-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        color: white;
+        font-size: 1rem;
+        font-weight: bold;
+        z-index: 5;
+        cursor: pointer;
+      }
     </style>
   </head>
   <body>
-    <!-- Tabs (Danh mục) -->
+    <!-- Tabs -->
     <ul
       class="nav nav-tabs category-tabs justify-content-center mb-3"
       id="myTab"
@@ -452,37 +368,35 @@
         <div class="row" id="hotgirl-videos"></div>
       </div>
       <div class="tab-pane fade" id="hottiktok">
-        <div class="locked-content">
+    
           <div class="row" id="hottiktok-videos">
-            <div class="lock-overlay">
-              <i class="fa fa-lock"></i>
-              <span>Phần Hot Tiktok đang được khóa</span>
+       
+             
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- 🚀 Di chuyển icons và footer ra ngoài tab-pane -->
+    <!-- Social Icons & Footer -->
     <div class="social-icons">
-      <a href="#" style="color: #4267b2"
-        ><ion-icon class="icon-dynamic" name="logo-facebook"></ion-icon
-      ></a>
-      <a href="#" style="color: #25d366"
-        ><ion-icon class="icon-dynamic" name="logo-whatsapp"></ion-icon
-      ></a>
-      <a href="#" style="color: #e1306c"
-        ><ion-icon class="icon-dynamic" name="logo-instagram"></ion-icon
-      ></a>
-      <a href="#" style="color: #69c9d0"
-        ><ion-icon class="icon-dynamic" name="logo-tiktok"></ion-icon
-      ></a>
-      <a href="#" style="color: #0077b5"
-        ><ion-icon class="icon-dynamic" name="logo-linkedin"></ion-icon
-      ></a>
+      <a href="#" style="color: #4267b2">
+        <ion-icon class="icon-dynamic" name="logo-facebook"></ion-icon>
+      </a>
+      <a href="#" style="color: #25d366">
+        <ion-icon class="icon-dynamic" name="logo-whatsapp"></ion-icon>
+      </a>
+      <a href="#" style="color: #e1306c">
+        <ion-icon class="icon-dynamic" name="logo-instagram"></ion-icon>
+      </a>
+      <a href="#" style="color: #69c9d0">
+        <ion-icon class="icon-dynamic" name="logo-tiktok"></ion-icon>
+      </a>
+      <a href="#" style="color: #0077b5">
+        <ion-icon class="icon-dynamic" name="logo-linkedin"></ion-icon>
+      </a>
     </div>
 
-    <!-- Footer -->
     <footer class="content-footer">
       <div class="footer-container">
         <p>&copy; 2023 <strong>Dangcapgaigoi</strong>. All rights reserved.</p>
@@ -495,8 +409,11 @@
       </div>
     </footer>
 
+    <!-- Menu.js (nếu có) -->
     <script src="menu.js"></script>
     <div id="navbar-placeholder"></div>
+
+    <!-- Thanh menu dưới cùng -->
     <div class="bottom-nav">
       <a href="index.html" class="nav-btn">
         <img src="https://i.ibb.co/7JMBcSLM/5684646.png" alt="Trang chủ" />
@@ -541,37 +458,27 @@
       </a>
     </div>
 
+    <!-- Bootstrap Bundle JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-      fetch("navbar.html")
-        .then((response) => response.text())
-        .then((data) => {
-          document.getElementById("navbar-placeholder").innerHTML = data;
-        });
-      // Danh sách videoIDs từ video 18+ (đã loại bỏ dấu nháy thừa nếu có)
-     const videoIds=["99bd2b33f49deb5ba071ac118b75b0c4","eae66f3b16ad5225b09a329f53a22114","7fda04eefa4b3318dcd589a08e11e018","3a95f1bb7f94782440564746f1c0f46a","73233e2d1ee2866d9a1bc47146e9a1b4","cb94874a32a3315426d31934c1f6dcc9","52e08b4f78a10334a5c5cbadcc95834c","0d2828e5106f492d993bab2048c5dbf4","43cb47d010367f4afdecd4adb9113da1","e7917240bf9f76540b67024512ba59c0","c7b1e0d32b6a04ac1b5febdb3c7ddaba","b121ce521de929a7e54ccd03aff69744","04789f038df004dea25d356402241711","6b93f9f3fa0a01ecf5eae001751259c8","adc8bd292603974d2aa9e0059f735b3d","02b11049560c026195e0cf2ccf27d44a","b59cb51d98b3f73015cb3c4cf49c77fb","eb9670db5f5f8e315b6cc05d1a5e09ce","c3feed12235dd55699ec074269281455","d7526dd1a2b032ddd3abde39a2335344","a2c88ab724a327e3fe45441d281c43f0","dc6b76395d7696f52a962146104004d7","20c619998a30fcabc556a0db0d02c0a6","94376599b7721f0b070bad4774b4d4d7","6999b15f30a57f600e3622606b11ecdb","55ec91aad4a3edce681e52e27d6678e9","fe279d2cc463be2de3987adef952781e","438b98e84e23b83dedc8d05aff4b98d6","55861af1a87a00bddc798710627b505e","459f4a498714c02991c26d2280100c4a","60f953ace8c6fc434efd2b15aa8fe11a","672e178059d91bd0bd7bb0b38d5bd16f","7f6bb92f2ba11fda4aa472d3f3fb4078","22e9568cef9d88f862284749895aa77c","7e82a223dd200fb99a2f424e2049806e","576f62e9a3f48e234c328b0b13559973","41d442d517af3a702e7f97d766e700fd","b208823807d596e159fe22c64148a4d7","621d9ebb7c2c64c00da2f2019e4dbaa9","89e082c9680d5b78c082eb4b82e220e2","6df45411db7bd216f57cf95a408233b3","e356eb573f5d2889663bb7ed1c268b68","82c66e46920553b389187a942d4ac408","a2ee6a2fb8ed6035dd143f3d658bb8c9","abd636c1c2cc8a9db4908a190aaac5a7","0abdcd1a88ecb790e4dcc703780dd137","1af8e249bba8a83fe24e63caa627116a","68d08b81cd0a169489af02745674e7a4","459f4a498714c02991c26d2280100c4a","c1d7dfd7a9b6507b15fa2025c576e22c","f10132648a8a9a08659740bd70f74f73","02043562e8c178afee5ece96bc9cc450","d34842d09310ee9d60fc4e76526cb858","b4a4c9c2298b6f3e6587dca885e72541","59528353e96bba27ff72cff5f6f4c574","4acabfe539c0669d5d96f97ff74d02e8","e4e7bf50a516fc8092ae21333bc4f6ea","1d438bce184636fd7e6306ea86691c1a","929cad3e0d805bf0dc49f4736b1a018f","4e96f14abd57c8bd2729e22c1f13a03c","95d7bb58386df656db5843ff57ed0e7e","21d86a3b6c73de767aa37e8520d0812c","b014db1f558af8d2fc29446578723203","253dc0757952ba8a334900dd23b30b51","0de3326c2b7ed5767789dd48f36d12ba","3323adf9cb0fe4bbfddfb9fe931dd2b0","a13e4de89aee48353810bca8057b078b","29d34fe4bd45b8ab08d1571f8c40f90e","a529fbbff29e4148078b4305618d7237","e6eb92eb9203fb89adb4e7ba26e8a3e2","3239f49f13fd1d54ef589e0a4caddb07","11df7eb0b597d0683a7a891c32aa2706","dbc80acbfd0fa522d2276c39c7348975","d2185249f4abdea3d5528f6530964ef7","63ca89d8b4cca7830b56af119be488ad","14f6cb805a7bb61634d215dc57dad530","31acb8adfb076c96525e1f5e2ea82178","bfaa58adcd847e0c568c6a30b1850b3c","900b61fab4e5f7e93c105a4957027c51","60d894a0b94a8ec230e88611da256fc7",];
-      // Tạo mảng cho Video Hot (không dùng số thứ tự)
-      const videoHot = videoIds.map((id) => ({
-        id: id,
-        title: `Video Hot`,
-        description: `Bấm để xem: Nội dung nóng bỏng`,
-      }));
+      // 1. Mảng URL poster gốc (có thể có trùng)
+      const posterUrls = [
+       "https://i.ibb.co/LDVNQmvW/review-of-quy-cuoc-that-for-reup-minh-chau-xinh-sang-vu-bu-mong-mong-nuoc-phuc-vu-co-tam-3346631-ori.jpg","https://i.ibb.co/vx9pRrwt/review-of-class-for-reup-trieu-uyen-cuc-pham-sieu-non-to-nong-bong-ngot-ngao-dang-yeu-3350949-origin.jpg","https://i.ibb.co/XkdF8J5F/review-of-binhmai-kim-for-re-up-tieu-my-dang-ngoc-nga-xinh-sang-3349018-original.jpg","https://i.ibb.co/6CS2mj0/review-of-tuan-pham-for-re-up-tieu-my-dang-ngoc-nga-xinh-sang-3341725-original.jpg","https://i.ibb.co/bjY8VGQp/review-of-trieu-van-for-han-baby-nang-dam-nu-dang-dep-mong-to-mat-xinh-3124606-original-1.jpg","https://i.ibb.co/cXbJjh4n/review-of-du-phan-for-han-baby-nang-dam-nu-dang-dep-mong-to-mat-xinh-3020996-original.jpg","https://i.ibb.co/WWjzXLH9/review-of-ha-tuan-tu-for-han-baby-nang-dam-nu-dang-dep-mong-to-mat-xinh-2876304-original.jpg","https://i.ibb.co/6cvtBp8Y/review-of-jokervn-for-video-sex-han-baby-nang-dam-nu-dang-dep-mong-to-mat-xinh-2043061-original.jpg","https://i.ibb.co/YBgBKTKj/review-of-john-don-for-video-sex-han-baby-nang-dam-nu-dang-dep-mong-to-mat-xinh-2042461-original.png","https://i.ibb.co/B5CfdyVN/review-of-dai-de-for-video-sex-han-baby-nang-dam-nu-dang-dep-mong-to-mat-xinh-1957038-original.jpg","https://i.ibb.co/MJS4fHm/review-of-dai-de-for-video-sex-han-baby-nang-dam-nu-dang-dep-mong-to-mat-xinh-1957039-original.jpg","https://i.ibb.co/xKHv3kG0/review-of-dai-de-for-video-sex-han-baby-nang-dam-nu-dang-dep-mong-to-mat-xinh-1957041-original.jpg","https://i.ibb.co/wj47534/review-of-maceo-for-video-sex-han-baby-nang-dam-nu-dang-dep-mong-to-mat-xinh-1973128-original.jpg","https://i.ibb.co/rRWWcYbK/review-of-maceo-for-video-sex-han-baby-nang-dam-nu-dang-dep-mong-to-mat-xinh-1973130-original.jpg","https://i.ibb.co/WppH7sZr/review-of-lover-for-video-sex-han-baby-nang-dam-nu-dang-dep-mong-to-mat-xinh-1989910-original.jpg","https://i.ibb.co/PvSDYfpp/review-of-pigboy91-for-han-baby-u95-nang-dam-nu-dang-dep-mong-to-mat-xinh-1660976-original.jpg","https://i.ibb.co/Y7hbKWBW/review-of-pigboy91-for-han-baby-u95-nang-dam-nu-dang-dep-mong-to-mat-xinh-1660977-original.jpg","https://i.ibb.co/ZpRtmXzS/review-of-hat-xi-hoi-for-video-sex-han-baby-nang-dam-nu-dang-dep-mong-to-mat-xinh-1917937-original.jpg","https://i.ibb.co/6R2Dk1Ms/review-of-du-phan-for-thu-ky-new-xinh-dep-sac-sao-ky-nang-dinh-cao-3347423-original.jpg","https://i.ibb.co/XNZnvhB/review-of-me-gai-dep-for-thu-ky-new-xinh-dep-sac-sao-ky-nang-dinh-cao-3218974-original.jpg","https://i.ibb.co/93mBG9cK/review-of-mrbuoi-for-reup-kha-han-hoa-khoi-cua-kane-3330765-original.jpg","https://i.ibb.co/C3QdtTbn/review-of-mrbuoi-for-reup-kha-han-hoa-khoi-cua-kane-3330766-original.jpg","https://i.ibb.co/5xKKsj7q/review-of-fomo-lord-for-be-linna-hot-teen-tre-trung-xinh-xan-hang-moi-tin-vua-di-lam-3264795-origina.jpg","https://i.ibb.co/0VnFJwrc/review-of-mr-badboy-for-be-linna-hot-teen-tre-trung-xinh-xan-hang-moi-tin-vua-di-lam-3263411-origina.jpg","https://i.ibb.co/f6B2gjS/review-of-mr-badboy-for-be-linna-hot-teen-tre-trung-xinh-xan-hang-moi-tin-vua-di-lam-3263413-origina.jpg","https://i.ibb.co/bggfHmpm/review-of-hangugui-aleumdaum-for-be-linna-hot-teen-tre-trung-xinh-xan-hang-moi-tin-vua-di-lam-326269.jpg","https://i.ibb.co/q3qSJbX2/review-of-tay-du-thien-xa-for-be-linna-hot-teen-tre-trung-xinh-xan-hang-moi-tin-vua-di-lam-3257356-o.jpg","https://i.ibb.co/hxMsfFgh/review-of-thanh-for-be-linna-hot-teen-tre-trung-xinh-xan-hang-moi-tin-vua-di-lam-3241049-original.jpg","https://i.ibb.co/TB3sSXNV/review-of-iron-man-for-be-linna-hot-teen-tre-trung-xinh-xan-hang-moi-tin-vua-di-lam-3248411-original.jpg","https://i.ibb.co/4Zr8VKPg/review-of-nguyen-erik-for-be-linna-hot-teen-tre-trung-xinh-xan-hang-moi-tin-vua-di-lam-3256505-origi.jpg","https://i.ibb.co/0pfYh0v9/review-of-megaidep-for-be-linna-hot-teen-tre-trung-xinh-xan-hang-moi-tin-vua-di-lam-3213743-original.jpg","https://i.ibb.co/snr3vNf/review-of-hon-em-for-reup-l-kha-di-sinh-vien-nam-2-cuc-teen-ngoan-3167942-original.jpg","https://i.ibb.co/HTFXKTL7/review-of-vai-lo-for-hotgirl-minh-anh-2k1-xinh-suggar-baby-tuyet-hang-moi-vao-nghe-3355404-original.jpg","https://i.ibb.co/NhfgV6h/review-of-tran-bien-for-hotgirl-minh-anh-2k1-xinh-suggar-baby-tuyet-hang-moi-vao-nghe-3353951-origin.jpg","https://i.ibb.co/8gqLc8h5/review-of-quy-cuoc-that-for-reup-minh-chau-xinh-sang-vu-bu-mong-mong-nuoc-phuc-vu-co-tam-3346631-ori.jpg","https://i.ibb.co/SDYb0b1W/review-of-thien-minh-long-for-reup-minh-chau-xinh-sang-vu-bu-mong-mong-nuoc-phuc-vu-co-tam-3217300-o.jpg","https://i.ibb.co/2Yvy5szm/review-of-quan-minh-for-be-hani-2k-cute-xinh-xan-vu-dep-body-nong-bong-lan-dau-di-lam-3245337-origin.jpg","https://i.ibb.co/JWNmkDyn/review-of-luke-for-sieu-pham-mia-thien-than-2k4-moi-lon-tieu-muoi-douyin-hong-hao-3258387-original.jpg","https://i.ibb.co/XxwfCn58/review-of-dark-for-reup-huyen-my-nhe-nhang-tinh-cam-yeu-chieu-nhu-nguoi-yeu-3220609-original.jpg","https://i.ibb.co/DDVjG2Ww/reup-trieu-uyen-cuc-pham-sieu-non-to-nong-bong-ngot-ngao-dang-yeu-3218910-original.jpg","https://i.ibb.co/0ym729jk/photo-15-2024-10-23-11-52-15.jpg","https://i.ibb.co/WWQ0dPrX/photo-2024-09-05-18-38-06-2.jpg","https://i.ibb.co/hNkLk3Z/photo-2024-09-05-18-35-48-3.jpg","https://i.ibb.co/pj7H2g6r/photo-2024-08-18-19-32-29.jpg","https://i.ibb.co/k6V1ngSg/photo-2024-08-14-22-24-10.jpg","https://i.ibb.co/fVwzkkd0/photo-2024-08-01-01-07-43.jpg","https://i.ibb.co/xKmnPfmd/photo-2024-08-01-01-12-34-3.jpg","https://i.ibb.co/Mr3R14t/photo-2024-07-26-20-22-05.jpg","https://i.ibb.co/VY5b4RRT/photo-2024-07-26-13-59-08.jpg","https://i.ibb.co/96pBg3K/photo-2024-07-13-20-02-05.jpg","https://i.ibb.co/MSHYgN1/photo-2024-09-08-19-47-21.jpg","https://i.ibb.co/fHQg4kL/photo-2024-08-24-12-50-36.jpg","https://i.ibb.co/pnxwnqv/photo-2024-08-04-17-39-11.jpg","https://i.ibb.co/rygHbZ2/photo-2024-07-31-13-27-12.jpg","https://i.ibb.co/0FYvf0Y/photo-2024-07-26-20-22-04.jpg","https://i.ibb.co/5shzYm1/photo-2024-07-26-18-16-36.jpg","https://i.ibb.co/cCxxfKn/photo-2024-07-10-17-20-55.jpg","https://i.ibb.co/8DZLjJX/photo-2024-07-02-15-30-31.jpg","https://i.ibb.co/TqK8YJV/photo-2024-06-23-13-20-40-2.jpg","https://i.ibb.co/DYN5XmR/photo-98-2024-10-23-11-52-15.jpg","https://i.ibb.co/rH5pt2y/photo-95-2024-10-23-11-51-38.jpg","https://i.ibb.co/nB1D576/photo-92-2024-10-23-11-51-38.jpg","https://i.ibb.co/6b9PGtD/photo-90-2024-10-23-11-52-15.jpg","https://i.ibb.co/QKQCMwh/photo-87-2024-10-23-11-52-15.jpg","https://i.ibb.co/KrZjh4S/photo-81-2024-10-23-11-22-02.jpg","https://i.ibb.co/ZcQKwg2/photo-76-2024-10-23-11-51-38.jpg","https://i.ibb.co/zGkqhv7/photo-73-2024-10-23-11-22-02.jpg","https://i.ibb.co/LQ40dnq/photo-72-2024-10-23-11-51-38.jpg","https://i.ibb.co/rF2f6Y1/photo-68-2024-10-23-11-51-38.jpg","https://i.ibb.co/7VHyZZS/photo-64-2024-10-23-11-52-15.jpg","https://i.ibb.co/kGQtzb0/photo-61-2024-10-23-11-52-15.jpg","https://i.ibb.co/0GmtgRX/photo-61-2024-10-23-11-22-02.jpg","https://i.ibb.co/Dfg6cwr/photo-60-2024-10-23-11-52-15.jpg","https://i.ibb.co/yVJ0YX6/photo-56-2024-10-23-11-52-15.jpg","https://i.ibb.co/YPc3hBG/photo-56-2024-10-23-11-22-02.jpg","https://i.ibb.co/WyBRncv/photo-45-2024-10-23-11-22-02.jpg","https://i.ibb.co/Gv4XS42/photo-43-2024-10-23-11-22-02.jpg","https://i.ibb.co/syw8M2x/photo-33-2024-10-23-11-52-15.jpg","https://i.ibb.co/K07JMK8/photo-18-2024-10-23-11-52-30.jpg","https://i.ibb.co/dp5Nr6k/photo-17-2024-10-23-11-22-02.jpg","https://i.ibb.co/0fTgT8S/photo-9-2024-10-23-11-52-30.jpg","https://i.ibb.co/Lhwhq9W/photo-6-2024-10-23-11-51-38.jpg","https://i.ibb.co/kcRrfp4/photo-95-2024-10-23-11-51-38.jpg","https://i.ibb.co/F8Q2RQP/photo-92-2024-10-23-11-51-38.jpg","https://i.ibb.co/3vDdrwr/photo-87-2024-10-23-11-52-15.jpg","https://i.ibb.co/3rbKbNC/photo-82-2024-10-23-11-51-38.jpg","https://i.ibb.co/Gxt9Hf1/photo-61-2024-10-23-11-52-15.jpg","https://i.ibb.co/xjPKQNh/photo-56-2024-10-23-11-52-15.jpg","https://i.ibb.co/pRnwn46/photo-41-2024-10-23-11-51-38.jpg","https://i.ibb.co/g9zB1yT/photo-35-2024-10-23-11-52-30.jpg","https://i.ibb.co/XxZDK60/photo-34-2024-10-23-11-52-30.jpg","https://i.ibb.co/bNyRhZw/photo-34-2024-10-23-11-51-38.jpg","https://i.ibb.co/ZcjJLfm/photo-28-2024-10-23-11-51-38.jpg","https://i.ibb.co/WKQv69w/photo-26-2024-10-23-11-52-30.jpg","https://i.ibb.co/gM42Djp/photo-19-2024-10-23-11-22-02.jpg",
+        // ...
+      ];
 
-      // Tạo mảng cho Video New
-      const videoNew = videoIds.map((id) => ({
-        id: id,
-        title: `Video New`,
-        description: `Bấm để xem: Nội dung mới cập nhật`,
-      }));
+      // 2. Lưu và lấy poster từ localStorage (nếu muốn)
+      if (!localStorage.getItem("posterUrls")) {
+        localStorage.setItem("posterUrls", JSON.stringify(posterUrls));
+      }
+      const storedPosterUrls = JSON.parse(localStorage.getItem("posterUrls"));
 
-      // Tạo mảng cho Xem Nhiều Nhất
-      const videoMostViewed = videoIds.map((id) => ({
-        id: id,
-        title: `Xem Nhiều Nhất`,
-        description: `Bấm để xem: Nội dung được yêu thích nhất`,
-      }));
+      // 3. Lọc ảnh trùng lặp => uniquePosterUrls
+      const uniquePosterUrls = [...new Set(storedPosterUrls)];
 
-      let videos = [...videoHot, ...videoNew, ...videoMostViewed];
+      // 4. Danh sách ID video (Cloudflare Stream) - không trùng
+  const videoIds=["99bd2b33f49deb5ba071ac118b75b0c4","eae66f3b16ad5225b09a329f53a22114","7fda04eefa4b3318dcd589a08e11e018","3a95f1bb7f94782440564746f1c0f46a","73233e2d1ee2866d9a1bc47146e9a1b4","cb94874a32a3315426d31934c1f6dcc9","52e08b4f78a10334a5c5cbadcc95834c","0d2828e5106f492d993bab2048c5dbf4","43cb47d010367f4afdecd4adb9113da1","e7917240bf9f76540b67024512ba59c0","c7b1e0d32b6a04ac1b5febdb3c7ddaba","b121ce521de929a7e54ccd03aff69744","04789f038df004dea25d356402241711","6b93f9f3fa0a01ecf5eae001751259c8","adc8bd292603974d2aa9e0059f735b3d","02b11049560c026195e0cf2ccf27d44a","b59cb51d98b3f73015cb3c4cf49c77fb","eb9670db5f5f8e315b6cc05d1a5e09ce","c3feed12235dd55699ec074269281455","d7526dd1a2b032ddd3abde39a2335344","a2c88ab724a327e3fe45441d281c43f0","dc6b76395d7696f52a962146104004d7","20c619998a30fcabc556a0db0d02c0a6","94376599b7721f0b070bad4774b4d4d7","6999b15f30a57f600e3622606b11ecdb","55ec91aad4a3edce681e52e27d6678e9","fe279d2cc463be2de3987adef952781e","438b98e84e23b83dedc8d05aff4b98d6","55861af1a87a00bddc798710627b505e","459f4a498714c02991c26d2280100c4a","60f953ace8c6fc434efd2b15aa8fe11a","672e178059d91bd0bd7bb0b38d5bd16f","7f6bb92f2ba11fda4aa472d3f3fb4078","22e9568cef9d88f862284749895aa77c","7e82a223dd200fb99a2f424e2049806e","576f62e9a3f48e234c328b0b13559973","41d442d517af3a702e7f97d766e700fd","b208823807d596e159fe22c64148a4d7","621d9ebb7c2c64c00da2f2019e4dbaa9","89e082c9680d5b78c082eb4b82e220e2","6df45411db7bd216f57cf95a408233b3","e356eb573f5d2889663bb7ed1c268b68","82c66e46920553b389187a942d4ac408","a2ee6a2fb8ed6035dd143f3d658bb8c9","abd636c1c2cc8a9db4908a190aaac5a7","0abdcd1a88ecb790e4dcc703780dd137","1af8e249bba8a83fe24e63caa627116a","68d08b81cd0a169489af02745674e7a4","459f4a498714c02991c26d2280100c4a","c1d7dfd7a9b6507b15fa2025c576e22c","f10132648a8a9a08659740bd70f74f73","02043562e8c178afee5ece96bc9cc450","d34842d09310ee9d60fc4e76526cb858","b4a4c9c2298b6f3e6587dca885e72541","59528353e96bba27ff72cff5f6f4c574","4acabfe539c0669d5d96f97ff74d02e8","e4e7bf50a516fc8092ae21333bc4f6ea","1d438bce184636fd7e6306ea86691c1a","929cad3e0d805bf0dc49f4736b1a018f","4e96f14abd57c8bd2729e22c1f13a03c","95d7bb58386df656db5843ff57ed0e7e","21d86a3b6c73de767aa37e8520d0812c","b014db1f558af8d2fc29446578723203","253dc0757952ba8a334900dd23b30b51","0de3326c2b7ed5767789dd48f36d12ba","3323adf9cb0fe4bbfddfb9fe931dd2b0","a13e4de89aee48353810bca8057b078b","29d34fe4bd45b8ab08d1571f8c40f90e","a529fbbff29e4148078b4305618d7237","e6eb92eb9203fb89adb4e7ba26e8a3e2","3239f49f13fd1d54ef589e0a4caddb07","11df7eb0b597d0683a7a891c32aa2706","dbc80acbfd0fa522d2276c39c7348975","d2185249f4abdea3d5528f6530964ef7","63ca89d8b4cca7830b56af119be488ad","14f6cb805a7bb61634d215dc57dad530","31acb8adfb076c96525e1f5e2ea82178","bfaa58adcd847e0c568c6a30b1850b3c",];
+      // Hàm xáo trộn
       function shuffle(array) {
         for (let i = array.length - 1; i > 0; i--) {
           const j = Math.floor(Math.random() * (i + 1));
@@ -579,13 +486,42 @@
         }
         return array;
       }
-      videos = shuffle(videos);
+
+      // 5. Shuffle mảng ID và mảng poster
+      const shuffledVideoIds = shuffle([...new Set(videoIds)]);
+      const shuffledPosters = shuffle([...uniquePosterUrls]);
+
+      // Hàm tạo lượt xem ban đầu
+      function getRandomInitialViews() {
+        return Math.floor(Math.random() * (15000 - 1000 + 1)) + 1000;
+      }
+
+      // 6. Tạo 1 mảng video (mỗi video ID gán 1 poster không lặp)
+      // Nếu hết poster, dùng placeholder
+      const videos = shuffledVideoIds.map((id, i) => ({
+        id,
+        title: "Video cao cấp",
+        description: "Sử dụng mã thẻ CLB để truy cập",
+        viewCount: getRandomInitialViews(),
+        // Không fallback => nếu i vượt quá số ảnh, poster sẽ là undefined
+        poster: shuffledPosters[i],
+      }));
+
+      // 7. Chia videos thành 5 nhóm: hot, jav, selected, hotgirl, hottiktok
       const categories = ["hot", "jav", "selected", "hotgirl", "hottiktok"];
+      // Mỗi nhóm 1/5 tổng videos (làm tròn lên)
       const groupSize = Math.ceil(videos.length / categories.length);
       const groups = {};
-      categories.forEach((cat, index) => {
-        groups[cat] = videos.slice(index * groupSize, (index + 1) * groupSize);
+      categories.forEach((cat, idx) => {
+        groups[cat] = videos.slice(idx * groupSize, (idx + 1) * groupSize);
       });
+
+      // 8. Danh sách video cần khóa
+      const lockedVideoIds = [
+      "99bd2b33f49deb5ba071ac118b75b0c4","eae66f3b16ad5225b09a329f53a22114","7fda04eefa4b3318dcd589a08e11e018","3a95f1bb7f94782440564746f1c0f46a","73233e2d1ee2866d9a1bc47146e9a1b4","cb94874a32a3315426d31934c1f6dcc9","52e08b4f78a10334a5c5cbadcc95834c","0d2828e5106f492d993bab2048c5dbf4","43cb47d010367f4afdecd4adb9113da1","e7917240bf9f76540b67024512ba59c0","c7b1e0d32b6a04ac1b5febdb3c7ddaba","b121ce521de929a7e54ccd03aff69744","04789f038df004dea25d356402241711","6b93f9f3fa0a01ecf5eae001751259c8","adc8bd292603974d2aa9e0059f735b3d","02b11049560c026195e0cf2ccf27d44a","b59cb51d98b3f73015cb3c4cf49c77fb","eb9670db5f5f8e315b6cc05d1a5e09ce","c3feed12235dd55699ec074269281455","d7526dd1a2b032ddd3abde39a2335344","a2c88ab724a327e3fe45441d281c43f0","dc6b76395d7696f52a962146104004d7","20c619998a30fcabc556a0db0d02c0a6","94376599b7721f0b070bad4774b4d4d7","6999b15f30a57f600e3622606b11ecdb","55ec91aad4a3edce681e52e27d6678e9","fe279d2cc463be2de3987adef952781e","438b98e84e23b83dedc8d05aff4b98d6","55861af1a87a00bddc798710627b505e","459f4a498714c02991c26d2280100c4a","60f953ace8c6fc434efd2b15aa8fe11a","672e178059d91bd0bd7bb0b38d5bd16f","7f6bb92f2ba11fda4aa472d3f3fb4078","22e9568cef9d88f862284749895aa77c","7e82a223dd200fb99a2f424e2049806e","576f62e9a3f48e234c328b0b13559973","41d442d517af3a702e7f97d766e700fd","b208823807d596e159fe22c64148a4d7","621d9ebb7c2c64c00da2f2019e4dbaa9","89e082c9680d5b78c082eb4b82e220e2","6df45411db7bd216f57cf95a408233b3","e356eb573f5d2889663bb7ed1c268b68","82c66e46920553b389187a942d4ac408","a2ee6a2fb8ed6035dd143f3d658bb8c9","abd636c1c2cc8a9db4908a190aaac5a7","0abdcd1a88ecb790e4dcc703780dd137","1af8e249bba8a83fe24e63caa627116a","68d08b81cd0a169489af02745674e7a4","459f4a498714c02991c26d2280100c4a","c1d7dfd7a9b6507b15fa2025c576e22c","f10132648a8a9a08659740bd70f74f73","02043562e8c178afee5ece96bc9cc450","d34842d09310ee9d60fc4e76526cb858","b4a4c9c2298b6f3e6587dca885e72541","59528353e96bba27ff72cff5f6f4c574","4acabfe539c0669d5d96f97ff74d02e8","e4e7bf50a516fc8092ae21333bc4f6ea","1d438bce184636fd7e6306ea86691c1a","929cad3e0d805bf0dc49f4736b1a018f","4e96f14abd57c8bd2729e22c1f13a03c","95d7bb58386df656db5843ff57ed0e7e","21d86a3b6c73de767aa37e8520d0812c","b014db1f558af8d2fc29446578723203","253dc0757952ba8a334900dd23b30b51","0de3326c2b7ed5767789dd48f36d12ba","3323adf9cb0fe4bbfddfb9fe931dd2b0","a13e4de89aee48353810bca8057b078b","29d34fe4bd45b8ab08d1571f8c40f90e","a529fbbff29e4148078b4305618d7237","e6eb92eb9203fb89adb4e7ba26e8a3e2","3239f49f13fd1d54ef589e0a4caddb07","11df7eb0b597d0683a7a891c32aa2706","dbc80acbfd0fa522d2276c39c7348975","d2185249f4abdea3d5528f6530964ef7","63ca89d8b4cca7830b56af119be488ad","14f6cb805a7bb61634d215dc57dad530","31acb8adfb076c96525e1f5e2ea82178","bfaa58adcd847e0c568c6a30b1850b3c",
+      ];
+
+      // 9. Màu tiêu đề luân phiên
       const titleColors = [
         "#ff5722",
         "#4caf50",
@@ -595,24 +531,786 @@
         "#ff9800",
         "#00bcd4",
       ];
+
+      // 10. Render videos
       function renderVideos() {
         let globalIndex = 0;
-        categories.forEach((category) => {
-          const container = document.getElementById(category + "-videos");
-          if (container) {
-            groups[category].forEach((video, index) => {
-              const col = document.createElement("div");
-              col.className = "col-6 mb-3";
-              col.innerHTML = `<div class="video-card"><iframe src="https://customer-vd2dw6zchzsa06w6.cloudflarestream.com/${video.id}/iframe"frameborder="0"allowfullscreen loading="lazy"></iframe><p class="video-title">${video.title}</p><p class="video-description">${video.description}</p></div>`;
-              const color = titleColors[globalIndex % titleColors.length];
-              col.querySelector(".video-title").style.color = color;
-              globalIndex++;
-              container.appendChild(col);
-            });
+        categories.forEach((cat) => {
+          const container = document.getElementById(cat + "-videos");
+          if (!container) return;
+          groups[cat].forEach((video) => {
+            const col = document.createElement("div");
+            col.className = "col-6 mb-3";
+
+            // Kiểm tra có bị khóa?
+            const needLock = lockedVideoIds.includes(video.id);
+            const unlocked =
+              needLock &&
+              localStorage.getItem("unlocked_" + video.id) === "true";
+
+            // Overlay khóa nếu cần
+            let lockOverlayHTML = "";
+            if (needLock) {
+              lockOverlayHTML = `
+                <div class="lock-overlay" data-video-id="${video.id}"
+                     style="display: ${unlocked ? "none" : "flex"};">
+                  
+                  <input type="password" placeholder="Nhập mã thẻ thành viên" class="unlock-code">
+                  <button class="unlock-btn">Xác nhận</button>
+                </div>
+              `;
+            }
+
+            // Tạo HTML card video
+            col.innerHTML = `
+              <div class="video-card">
+                <div class="video-wrapper">
+                  <img src="${video.poster}"
+                       alt="Poster Image"
+                       class="video-poster"
+                       style="cursor: pointer;">
+                  <iframe src="https://customer-vd2dw6zchzsa06w6.cloudflarestream.com/${
+                    video.id
+                  }/iframe"
+                          frameborder="0"
+                          allowfullscreen
+                          loading="lazy"
+                          class="video-iframe">
+                  </iframe>
+                </div>
+                <p class="video-title"
+                   style="color: ${
+                     titleColors[globalIndex % titleColors.length]
+                   }">
+                  ${video.title}
+                </p>
+                <p class="video-description">${video.description}</p>
+                <div class="video-views-bottom">
+                  <i class="fa fa-eye"></i>
+                  <span class="view-count">${video.viewCount}</span> lượt xem
+                </div>
+                ${lockOverlayHTML}
+              </div>
+            `;
+            globalIndex++;
+            container.appendChild(col);
+          });
+        });
+
+        // Sự kiện: click poster => hiển thị video nếu không còn overlay
+        document.querySelectorAll(".video-poster").forEach((poster) => {
+          poster.addEventListener("click", function () {
+            const wrapper = this.parentElement;
+            const overlay =
+              wrapper.parentElement.querySelector(".lock-overlay");
+            if (overlay && overlay.style.display !== "none") return;
+            // Ẩn poster, hiển thị iframe
+            this.style.display = "none";
+            wrapper.querySelector(".video-iframe").style.display = "block";
+          });
+        });
+
+        // Sự kiện: Mở khóa video
+        document.querySelectorAll(".unlock-btn").forEach((btn) => {
+          btn.addEventListener("click", function () {
+            const overlay = this.parentElement;
+            const videoId = overlay.getAttribute("data-video-id");
+            const input = overlay.querySelector(".unlock-code");
+            if (input.value.length < 6) {
+              alert("Mã thành viên phải đủ 6 số!");
+              return;
+            }
+            // Demo: mã mặc định = 123443
+            if (input.value === "123443") {
+              overlay.style.display = "none";
+              localStorage.setItem("unlocked_" + videoId, "true");
+            } else {
+              alert("Mã không chính xác. Vui lòng thử lại!");
+            }
+          });
+        });
+      }
+
+      // Gọi hàm render sau khi load DOM
+      document.addEventListener("DOMContentLoaded", renderVideos);
+
+      // 11. Cập nhật lượt xem: 5 giây/lần, tối đa +100 so với ban đầu
+      function updateViewCounts() {
+        document.querySelectorAll(".video-card").forEach((card) => {
+          const viewSpan = card.querySelector(".view-count");
+          if (!viewSpan) return;
+          let current = parseInt(viewSpan.textContent, 10);
+          if (!viewSpan.hasAttribute("data-max")) {
+            // Lần đầu chạy, đặt data-max = current + 100
+            viewSpan.setAttribute("data-max", current + 100);
+          }
+          const maxViews = parseInt(viewSpan.getAttribute("data-max"), 10);
+          // 50% cơ hội tăng +1
+          if (current < maxViews && Math.random() < 0.5) {
+            current++;
+            viewSpan.textContent = current;
           }
         });
       }
+      setInterval(updateViewCounts, 5000);
+    </script>
+  </body>
+</html>
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Video Nổi Bật - Loại Bỏ Trùng Ảnh</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Roboto:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* Global Styles */
+      body {
+        font-family: "Montserrat", sans-serif;
+        margin: 0;
+        padding: 0;
+        background: #0b0f1a;
+        background: radial-gradient(
+          circle at center,
+          rgba(11, 15, 26, 0.7) 0%,
+          rgba(11, 15, 26, 1) 100%
+        );
+        min-height: 100vh;
+        position: relative;
+        color: #fff;
+      }
+      body::before {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url("https://i.ibb.co/ycBpNQyM/pngtree-light-effect-background-halo-radial-image-2419979.jpg")
+          no-repeat center center;
+        background-size: cover;
+        opacity: 0.2;
+        pointer-events: none;
+      }
+      .nav-item a {
+        text-decoration: none !important;
+      }
+      .category-tabs {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding: 10px 20px;
+        gap: 10px;
+        overflow-x: auto;
+        white-space: nowrap;
+      }
+      .category-tabs .nav-item {
+        flex: 1 1 0;
+        text-align: center;
+      }
+      .category-tabs .nav-link {
+        display: block;
+        padding: 12px;
+        z-index: 1000;
+        font-weight: bold;
+        border-radius: 5px;
+        color: #ffffff;
+        transition: transform 0.3s ease, background 0.3s ease;
+      }
+      .category-tabs .nav-link:hover {
+        transform: scale(1.05);
+      }
+      .category-tabs .nav-link.active {
+        background: linear-gradient(90deg, #0077b5, #00bcd4);
+        color: #000;
+      }
+      .video-card {
+        position: relative;
+        margin: 5px;
+        padding: 5px;
+        background: #111;
+        border-radius: 8px;
+        overflow: hidden;
+      }
+      .video-wrapper {
+        position: relative;
+        height: 270px;
+        overflow: hidden;
+      }
+      .video-wrapper img,
+      .video-wrapper iframe {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .video-iframe {
+        display: none; /* Ẩn iframe ban đầu */
+      }
+      .video-title {
+        background: rgba(0, 0, 0, 0.6);
+        color: #fff;
+        padding: 5px 10px;
+        font-size: 1rem;
+        text-align: center;
+        font-weight: bold;
+      }
+      .video-description {
+        font-size: 0.9rem;
+        margin: 0 10px 10px;
+        background: linear-gradient(90deg, #ff5e00, #efefef, #7a00ff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-align: center;
+      }
+      .video-views-bottom {
+        text-align: center;
+        font-size: 0.85rem;
+        color: #ccc;
+        background: rgba(0, 0, 0, 0.5);
+        padding: 3px 0;
+        margin-top: auto;
+      }
+      .row {
+        --bs-gutter-x: 0 !important;
+        --bs-gutter-y: 0 !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+      }
+      /* Lớp phủ khóa yêu cầu nhập mã */
+      .lock-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%; /* Giảm chiều cao để không đè lên thanh điều hướng */
+        max-height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+        z-index: 5; /* Giảm z-index nếu cần */
+        overflow: auto;
+      }
+
+      .lock-overlay p {
+        font-size: 0.9rem;
+        margin-bottom: 10px;
+      }
+      .lock-overlay input {
+        padding: 8px;
+        border: none;
+        border-radius: 4px;
+        margin-bottom: 10px;
+      }
+      .lock-overlay button {
+        padding: 8px 12px;
+        border: none;
+        border-radius: 4px;
+        background: #0077b5;
+        color: #fff;
+        cursor: pointer;
+      }
+      /* Footer & Social Icons */
+      .content-footer {
+        background: linear-gradient(90deg, #10b905, #efefef, #7a00ff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        text-align: center;
+        padding: 1.5rem 0;
+        margin-top: 2rem;
+        border-top: 1px solid #444;
+        font-size: 0.9rem;
+        letter-spacing: 0.5px;
+        margin-bottom: 80px;
+      }
+      .footer-container p {
+        margin: 0.5rem;
+      }
+      .footer-container a {
+        color: #ffc107;
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+      .footer-container a:hover {
+        color: #ffdd57;
+      }
+      .icon-dynamic {
+        display: inline-block;
+        animation: rotateIcon 4s linear infinite;
+      }
+      @keyframes rotateIcon {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+      .social-icons {
+        display: flex;
+        justify-content: center;
+        gap: 0.5rem;
+        margin-top: 0.5rem;
+      }
+      .social-icons ion-icon {
+        font-size: 1.8rem;
+      }
+      .bottom-nav {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background: #222;
+        height: 95px !important;
+        display: flex;
+        font-weight: 700;
+        align-items: center;
+        padding: 0.75rem 10px;
+        border-top: 2px solid #444;
+        box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.2),
+          0 0 10px 2px rgba(255, 255, 255, 0.3);
+        gap: 30px;
+        z-index: 2000;
+        scroll-snap-type: x mandatory;
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+        white-space: nowrap !important;
+        scroll-behavior: smooth !important;
+        padding-bottom: env(safe-area-inset-bottom) !important;
+        -webkit-overflow-scrolling: touch;
+        touch-action: pan-x;
+      }
+      .bottom-nav .nav-btn img {
+        width: 40px;
+        height: 40px;
+        object-fit: contain;
+      }
+      .nav-btn {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+        padding: 0.75rem 0;
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: #fff;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: relative;
+        text-decoration: none;
+      }
+      .nav-btn i.icon-3d {
+        font-size: 1.9rem;
+        color: #ff5fa5;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+      }
+      .nav-btn i {
+        font-size: 1.7rem;
+        color: #ff5fa5;
+        transition: transform 0.3s ease, color 0.3s ease;
+      }
+      .nav-btn:hover {
+        color: #ffe066;
+      }
+      .nav-btn:hover i {
+        transform: scale(1.2);
+        color: #ffe066;
+      }
+      .nav-btn.active i {
+        color: #ffe066;
+        animation: glow 1.2s infinite alternate;
+      }
+      .nav-btn.active::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60%;
+        height: 3px;
+        background: #ffe066;
+        border-radius: 2px;
+      }
+      @keyframes glow {
+        0% {
+          text-shadow: 0 0 10px #ff69b4, 0 0 20px #ff69b4;
+        }
+        100% {
+          text-shadow: 0 0 20px #ff69b4, 0 0 30px #ff69b4;
+        }
+      }
+      /* Overlay khóa tab Tiktok */
+      .locked-content .lock-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        color: white;
+        font-size: 1rem;
+        font-weight: bold;
+        z-index: 5;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Tabs -->
+    <ul
+      class="nav nav-tabs category-tabs justify-content-center mb-3"
+      id="myTab"
+    >
+      <li class="nav-item">
+        <a class="nav-link active" data-bs-toggle="tab" href="#hot">Phim Hot</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-bs-toggle="tab" href="#jav">Phim mới</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-bs-toggle="tab" href="#selected">Tuyển chọn</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-bs-toggle="tab" href="#hotgirl">Xem nhiều</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-bs-toggle="tab" href="#hottiktok"
+          >Hot Tiktok</a
+        >
+      </li>
+    </ul>
+
+    <!-- Nội dung tabs -->
+    <div class="tab-content">
+      <div class="tab-pane fade show active" id="hot">
+        <div class="row" id="hot-videos"></div>
+      </div>
+      <div class="tab-pane fade" id="jav">
+        <div class="row" id="jav-videos"></div>
+      </div>
+      <div class="tab-pane fade" id="selected">
+        <div class="row" id="selected-videos"></div>
+      </div>
+      <div class="tab-pane fade" id="hotgirl">
+        <div class="row" id="hotgirl-videos"></div>
+      </div>
+      <div class="tab-pane fade" id="hottiktok">
+    
+          <div class="row" id="hottiktok-videos">
+       
+             
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Social Icons & Footer -->
+    <div class="social-icons">
+      <a href="#" style="color: #4267b2">
+        <ion-icon class="icon-dynamic" name="logo-facebook"></ion-icon>
+      </a>
+      <a href="#" style="color: #25d366">
+        <ion-icon class="icon-dynamic" name="logo-whatsapp"></ion-icon>
+      </a>
+      <a href="#" style="color: #e1306c">
+        <ion-icon class="icon-dynamic" name="logo-instagram"></ion-icon>
+      </a>
+      <a href="#" style="color: #69c9d0">
+        <ion-icon class="icon-dynamic" name="logo-tiktok"></ion-icon>
+      </a>
+      <a href="#" style="color: #0077b5">
+        <ion-icon class="icon-dynamic" name="logo-linkedin"></ion-icon>
+      </a>
+    </div>
+
+    <footer class="content-footer">
+      <div class="footer-container">
+        <p>&copy; 2023 <strong>Dangcapgaigoi</strong>. All rights reserved.</p>
+        <p>
+          Designed by
+          <a href="https://dangcapgaigoi.com" target="_blank"
+            >Dangcapgaigoi Team</a
+          >
+        </p>
+      </div>
+    </footer>
+
+    <!-- Menu.js (nếu có) -->
+    <script src="menu.js"></script>
+    <div id="navbar-placeholder"></div>
+
+    <!-- Thanh menu dưới cùng -->
+    <div class="bottom-nav">
+      <a href="index.html" class="nav-btn">
+        <img src="https://i.ibb.co/7JMBcSLM/5684646.png" alt="Trang chủ" />
+        <span>Trang chủ</span>
+      </a>
+      <a href="services.html" class="nav-btn">
+        <img
+          src="https://i.ibb.co/SwbKL5LF/3668636-premium-rate-rating-icon.png"
+          alt="Đánh giá"
+        />
+        <span>Đánh giá</span>
+      </a>
+      <a href="add-credit.html" class="nav-btn">
+        <img
+          src="https://i.ibb.co/yn0NTF8T/3631712-cash-money-wallet-icon.png"
+          alt="Tài khoản tôi"
+        />
+        <span>Tài khoản tôi</span>
+      </a>
+      <a href="services.html" class="nav-btn">
+        <img src="https://i.ibb.co/WRcbXqY/6091783.png" alt="Dịch Vụ" />
+        <span>Dịch Vụ</span>
+      </a>
+      <a href="booking.html" class="nav-btn">
+        <img src="https://i.ibb.co/209QjsY8/5695442.png" alt="Booking" />
+        <span>Booking</span>
+      </a>
+      <a href="photos.html" class="nav-btn">
+        <img src="https://i.ibb.co/d4bTk40m/8341973.png" alt="Thư Viện Ảnh" />
+        <span>Thư Viện Ảnh</span>
+      </a>
+      <a href="video.html" class="nav-btn">
+        <img
+          src="https://i.ibb.co/XkVNCPPQ/7793060-flowchart-video-gallery-movies-icon.png"
+          alt="Video Nổi Bật"
+        />
+        <span>Video Nổi Bật</span>
+      </a>
+      <a href="private-connection.html" class="nav-btn">
+        <img src="https://i.ibb.co/3yyX9n08/5337863.png" alt="Kết Nối 18+" />
+        <span>Kết Nối 18+</span>
+      </a>
+    </div>
+
+    <!-- Bootstrap Bundle JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      // 1. Mảng URL poster gốc (có thể có trùng)
+      const posterUrls = [
+       "https://i.ibb.co/LDVNQmvW/review-of-quy-cuoc-that-for-reup-minh-chau-xinh-sang-vu-bu-mong-mong-nuoc-phuc-vu-co-tam-3346631-ori.jpg","https://i.ibb.co/vx9pRrwt/review-of-class-for-reup-trieu-uyen-cuc-pham-sieu-non-to-nong-bong-ngot-ngao-dang-yeu-3350949-origin.jpg","https://i.ibb.co/XkdF8J5F/review-of-binhmai-kim-for-re-up-tieu-my-dang-ngoc-nga-xinh-sang-3349018-original.jpg","https://i.ibb.co/6CS2mj0/review-of-tuan-pham-for-re-up-tieu-my-dang-ngoc-nga-xinh-sang-3341725-original.jpg","https://i.ibb.co/bjY8VGQp/review-of-trieu-van-for-han-baby-nang-dam-nu-dang-dep-mong-to-mat-xinh-3124606-original-1.jpg","https://i.ibb.co/cXbJjh4n/review-of-du-phan-for-han-baby-nang-dam-nu-dang-dep-mong-to-mat-xinh-3020996-original.jpg","https://i.ibb.co/WWjzXLH9/review-of-ha-tuan-tu-for-han-baby-nang-dam-nu-dang-dep-mong-to-mat-xinh-2876304-original.jpg","https://i.ibb.co/6cvtBp8Y/review-of-jokervn-for-video-sex-han-baby-nang-dam-nu-dang-dep-mong-to-mat-xinh-2043061-original.jpg","https://i.ibb.co/YBgBKTKj/review-of-john-don-for-video-sex-han-baby-nang-dam-nu-dang-dep-mong-to-mat-xinh-2042461-original.png","https://i.ibb.co/B5CfdyVN/review-of-dai-de-for-video-sex-han-baby-nang-dam-nu-dang-dep-mong-to-mat-xinh-1957038-original.jpg","https://i.ibb.co/MJS4fHm/review-of-dai-de-for-video-sex-han-baby-nang-dam-nu-dang-dep-mong-to-mat-xinh-1957039-original.jpg","https://i.ibb.co/xKHv3kG0/review-of-dai-de-for-video-sex-han-baby-nang-dam-nu-dang-dep-mong-to-mat-xinh-1957041-original.jpg","https://i.ibb.co/wj47534/review-of-maceo-for-video-sex-han-baby-nang-dam-nu-dang-dep-mong-to-mat-xinh-1973128-original.jpg","https://i.ibb.co/rRWWcYbK/review-of-maceo-for-video-sex-han-baby-nang-dam-nu-dang-dep-mong-to-mat-xinh-1973130-original.jpg","https://i.ibb.co/WppH7sZr/review-of-lover-for-video-sex-han-baby-nang-dam-nu-dang-dep-mong-to-mat-xinh-1989910-original.jpg","https://i.ibb.co/PvSDYfpp/review-of-pigboy91-for-han-baby-u95-nang-dam-nu-dang-dep-mong-to-mat-xinh-1660976-original.jpg","https://i.ibb.co/Y7hbKWBW/review-of-pigboy91-for-han-baby-u95-nang-dam-nu-dang-dep-mong-to-mat-xinh-1660977-original.jpg","https://i.ibb.co/ZpRtmXzS/review-of-hat-xi-hoi-for-video-sex-han-baby-nang-dam-nu-dang-dep-mong-to-mat-xinh-1917937-original.jpg","https://i.ibb.co/6R2Dk1Ms/review-of-du-phan-for-thu-ky-new-xinh-dep-sac-sao-ky-nang-dinh-cao-3347423-original.jpg","https://i.ibb.co/XNZnvhB/review-of-me-gai-dep-for-thu-ky-new-xinh-dep-sac-sao-ky-nang-dinh-cao-3218974-original.jpg","https://i.ibb.co/93mBG9cK/review-of-mrbuoi-for-reup-kha-han-hoa-khoi-cua-kane-3330765-original.jpg","https://i.ibb.co/C3QdtTbn/review-of-mrbuoi-for-reup-kha-han-hoa-khoi-cua-kane-3330766-original.jpg","https://i.ibb.co/5xKKsj7q/review-of-fomo-lord-for-be-linna-hot-teen-tre-trung-xinh-xan-hang-moi-tin-vua-di-lam-3264795-origina.jpg","https://i.ibb.co/0VnFJwrc/review-of-mr-badboy-for-be-linna-hot-teen-tre-trung-xinh-xan-hang-moi-tin-vua-di-lam-3263411-origina.jpg","https://i.ibb.co/f6B2gjS/review-of-mr-badboy-for-be-linna-hot-teen-tre-trung-xinh-xan-hang-moi-tin-vua-di-lam-3263413-origina.jpg","https://i.ibb.co/bggfHmpm/review-of-hangugui-aleumdaum-for-be-linna-hot-teen-tre-trung-xinh-xan-hang-moi-tin-vua-di-lam-326269.jpg","https://i.ibb.co/q3qSJbX2/review-of-tay-du-thien-xa-for-be-linna-hot-teen-tre-trung-xinh-xan-hang-moi-tin-vua-di-lam-3257356-o.jpg","https://i.ibb.co/hxMsfFgh/review-of-thanh-for-be-linna-hot-teen-tre-trung-xinh-xan-hang-moi-tin-vua-di-lam-3241049-original.jpg","https://i.ibb.co/TB3sSXNV/review-of-iron-man-for-be-linna-hot-teen-tre-trung-xinh-xan-hang-moi-tin-vua-di-lam-3248411-original.jpg","https://i.ibb.co/4Zr8VKPg/review-of-nguyen-erik-for-be-linna-hot-teen-tre-trung-xinh-xan-hang-moi-tin-vua-di-lam-3256505-origi.jpg","https://i.ibb.co/0pfYh0v9/review-of-megaidep-for-be-linna-hot-teen-tre-trung-xinh-xan-hang-moi-tin-vua-di-lam-3213743-original.jpg","https://i.ibb.co/snr3vNf/review-of-hon-em-for-reup-l-kha-di-sinh-vien-nam-2-cuc-teen-ngoan-3167942-original.jpg","https://i.ibb.co/HTFXKTL7/review-of-vai-lo-for-hotgirl-minh-anh-2k1-xinh-suggar-baby-tuyet-hang-moi-vao-nghe-3355404-original.jpg","https://i.ibb.co/NhfgV6h/review-of-tran-bien-for-hotgirl-minh-anh-2k1-xinh-suggar-baby-tuyet-hang-moi-vao-nghe-3353951-origin.jpg","https://i.ibb.co/8gqLc8h5/review-of-quy-cuoc-that-for-reup-minh-chau-xinh-sang-vu-bu-mong-mong-nuoc-phuc-vu-co-tam-3346631-ori.jpg","https://i.ibb.co/SDYb0b1W/review-of-thien-minh-long-for-reup-minh-chau-xinh-sang-vu-bu-mong-mong-nuoc-phuc-vu-co-tam-3217300-o.jpg","https://i.ibb.co/2Yvy5szm/review-of-quan-minh-for-be-hani-2k-cute-xinh-xan-vu-dep-body-nong-bong-lan-dau-di-lam-3245337-origin.jpg","https://i.ibb.co/JWNmkDyn/review-of-luke-for-sieu-pham-mia-thien-than-2k4-moi-lon-tieu-muoi-douyin-hong-hao-3258387-original.jpg","https://i.ibb.co/XxwfCn58/review-of-dark-for-reup-huyen-my-nhe-nhang-tinh-cam-yeu-chieu-nhu-nguoi-yeu-3220609-original.jpg","https://i.ibb.co/DDVjG2Ww/reup-trieu-uyen-cuc-pham-sieu-non-to-nong-bong-ngot-ngao-dang-yeu-3218910-original.jpg","https://i.ibb.co/0ym729jk/photo-15-2024-10-23-11-52-15.jpg","https://i.ibb.co/WWQ0dPrX/photo-2024-09-05-18-38-06-2.jpg","https://i.ibb.co/hNkLk3Z/photo-2024-09-05-18-35-48-3.jpg","https://i.ibb.co/pj7H2g6r/photo-2024-08-18-19-32-29.jpg","https://i.ibb.co/k6V1ngSg/photo-2024-08-14-22-24-10.jpg","https://i.ibb.co/fVwzkkd0/photo-2024-08-01-01-07-43.jpg","https://i.ibb.co/xKmnPfmd/photo-2024-08-01-01-12-34-3.jpg","https://i.ibb.co/Mr3R14t/photo-2024-07-26-20-22-05.jpg","https://i.ibb.co/VY5b4RRT/photo-2024-07-26-13-59-08.jpg","https://i.ibb.co/96pBg3K/photo-2024-07-13-20-02-05.jpg","https://i.ibb.co/MSHYgN1/photo-2024-09-08-19-47-21.jpg","https://i.ibb.co/fHQg4kL/photo-2024-08-24-12-50-36.jpg","https://i.ibb.co/pnxwnqv/photo-2024-08-04-17-39-11.jpg","https://i.ibb.co/rygHbZ2/photo-2024-07-31-13-27-12.jpg","https://i.ibb.co/0FYvf0Y/photo-2024-07-26-20-22-04.jpg","https://i.ibb.co/5shzYm1/photo-2024-07-26-18-16-36.jpg","https://i.ibb.co/cCxxfKn/photo-2024-07-10-17-20-55.jpg","https://i.ibb.co/8DZLjJX/photo-2024-07-02-15-30-31.jpg","https://i.ibb.co/TqK8YJV/photo-2024-06-23-13-20-40-2.jpg","https://i.ibb.co/DYN5XmR/photo-98-2024-10-23-11-52-15.jpg","https://i.ibb.co/rH5pt2y/photo-95-2024-10-23-11-51-38.jpg","https://i.ibb.co/nB1D576/photo-92-2024-10-23-11-51-38.jpg","https://i.ibb.co/6b9PGtD/photo-90-2024-10-23-11-52-15.jpg","https://i.ibb.co/QKQCMwh/photo-87-2024-10-23-11-52-15.jpg","https://i.ibb.co/KrZjh4S/photo-81-2024-10-23-11-22-02.jpg","https://i.ibb.co/ZcQKwg2/photo-76-2024-10-23-11-51-38.jpg","https://i.ibb.co/zGkqhv7/photo-73-2024-10-23-11-22-02.jpg","https://i.ibb.co/LQ40dnq/photo-72-2024-10-23-11-51-38.jpg","https://i.ibb.co/rF2f6Y1/photo-68-2024-10-23-11-51-38.jpg","https://i.ibb.co/7VHyZZS/photo-64-2024-10-23-11-52-15.jpg","https://i.ibb.co/kGQtzb0/photo-61-2024-10-23-11-52-15.jpg","https://i.ibb.co/0GmtgRX/photo-61-2024-10-23-11-22-02.jpg","https://i.ibb.co/Dfg6cwr/photo-60-2024-10-23-11-52-15.jpg","https://i.ibb.co/yVJ0YX6/photo-56-2024-10-23-11-52-15.jpg","https://i.ibb.co/YPc3hBG/photo-56-2024-10-23-11-22-02.jpg","https://i.ibb.co/WyBRncv/photo-45-2024-10-23-11-22-02.jpg","https://i.ibb.co/Gv4XS42/photo-43-2024-10-23-11-22-02.jpg","https://i.ibb.co/syw8M2x/photo-33-2024-10-23-11-52-15.jpg","https://i.ibb.co/K07JMK8/photo-18-2024-10-23-11-52-30.jpg","https://i.ibb.co/dp5Nr6k/photo-17-2024-10-23-11-22-02.jpg","https://i.ibb.co/0fTgT8S/photo-9-2024-10-23-11-52-30.jpg","https://i.ibb.co/Lhwhq9W/photo-6-2024-10-23-11-51-38.jpg","https://i.ibb.co/kcRrfp4/photo-95-2024-10-23-11-51-38.jpg","https://i.ibb.co/F8Q2RQP/photo-92-2024-10-23-11-51-38.jpg","https://i.ibb.co/3vDdrwr/photo-87-2024-10-23-11-52-15.jpg","https://i.ibb.co/3rbKbNC/photo-82-2024-10-23-11-51-38.jpg","https://i.ibb.co/Gxt9Hf1/photo-61-2024-10-23-11-52-15.jpg","https://i.ibb.co/xjPKQNh/photo-56-2024-10-23-11-52-15.jpg","https://i.ibb.co/pRnwn46/photo-41-2024-10-23-11-51-38.jpg","https://i.ibb.co/g9zB1yT/photo-35-2024-10-23-11-52-30.jpg","https://i.ibb.co/XxZDK60/photo-34-2024-10-23-11-52-30.jpg","https://i.ibb.co/bNyRhZw/photo-34-2024-10-23-11-51-38.jpg","https://i.ibb.co/ZcjJLfm/photo-28-2024-10-23-11-51-38.jpg","https://i.ibb.co/WKQv69w/photo-26-2024-10-23-11-52-30.jpg","https://i.ibb.co/gM42Djp/photo-19-2024-10-23-11-22-02.jpg",
+        // ...
+      ];
+
+      // 2. Lưu và lấy poster từ localStorage (nếu muốn)
+      if (!localStorage.getItem("posterUrls")) {
+        localStorage.setItem("posterUrls", JSON.stringify(posterUrls));
+      }
+      const storedPosterUrls = JSON.parse(localStorage.getItem("posterUrls"));
+
+      // 3. Lọc ảnh trùng lặp => uniquePosterUrls
+      const uniquePosterUrls = [...new Set(storedPosterUrls)];
+
+      // 4. Danh sách ID video (Cloudflare Stream) - không trùng
+  const videoIds=["99bd2b33f49deb5ba071ac118b75b0c4","eae66f3b16ad5225b09a329f53a22114","7fda04eefa4b3318dcd589a08e11e018","3a95f1bb7f94782440564746f1c0f46a","73233e2d1ee2866d9a1bc47146e9a1b4","cb94874a32a3315426d31934c1f6dcc9","52e08b4f78a10334a5c5cbadcc95834c","0d2828e5106f492d993bab2048c5dbf4","43cb47d010367f4afdecd4adb9113da1","e7917240bf9f76540b67024512ba59c0","c7b1e0d32b6a04ac1b5febdb3c7ddaba","b121ce521de929a7e54ccd03aff69744","04789f038df004dea25d356402241711","6b93f9f3fa0a01ecf5eae001751259c8","adc8bd292603974d2aa9e0059f735b3d","02b11049560c026195e0cf2ccf27d44a","b59cb51d98b3f73015cb3c4cf49c77fb","eb9670db5f5f8e315b6cc05d1a5e09ce","c3feed12235dd55699ec074269281455","d7526dd1a2b032ddd3abde39a2335344","a2c88ab724a327e3fe45441d281c43f0","dc6b76395d7696f52a962146104004d7","20c619998a30fcabc556a0db0d02c0a6","94376599b7721f0b070bad4774b4d4d7","6999b15f30a57f600e3622606b11ecdb","55ec91aad4a3edce681e52e27d6678e9","fe279d2cc463be2de3987adef952781e","438b98e84e23b83dedc8d05aff4b98d6","55861af1a87a00bddc798710627b505e","459f4a498714c02991c26d2280100c4a","60f953ace8c6fc434efd2b15aa8fe11a","672e178059d91bd0bd7bb0b38d5bd16f","7f6bb92f2ba11fda4aa472d3f3fb4078","22e9568cef9d88f862284749895aa77c","7e82a223dd200fb99a2f424e2049806e","576f62e9a3f48e234c328b0b13559973","41d442d517af3a702e7f97d766e700fd","b208823807d596e159fe22c64148a4d7","621d9ebb7c2c64c00da2f2019e4dbaa9","89e082c9680d5b78c082eb4b82e220e2","6df45411db7bd216f57cf95a408233b3","e356eb573f5d2889663bb7ed1c268b68","82c66e46920553b389187a942d4ac408","a2ee6a2fb8ed6035dd143f3d658bb8c9","abd636c1c2cc8a9db4908a190aaac5a7","0abdcd1a88ecb790e4dcc703780dd137","1af8e249bba8a83fe24e63caa627116a","68d08b81cd0a169489af02745674e7a4","459f4a498714c02991c26d2280100c4a","c1d7dfd7a9b6507b15fa2025c576e22c","f10132648a8a9a08659740bd70f74f73","02043562e8c178afee5ece96bc9cc450","d34842d09310ee9d60fc4e76526cb858","b4a4c9c2298b6f3e6587dca885e72541","59528353e96bba27ff72cff5f6f4c574","4acabfe539c0669d5d96f97ff74d02e8","e4e7bf50a516fc8092ae21333bc4f6ea","1d438bce184636fd7e6306ea86691c1a","929cad3e0d805bf0dc49f4736b1a018f","4e96f14abd57c8bd2729e22c1f13a03c","95d7bb58386df656db5843ff57ed0e7e","21d86a3b6c73de767aa37e8520d0812c","b014db1f558af8d2fc29446578723203","253dc0757952ba8a334900dd23b30b51","0de3326c2b7ed5767789dd48f36d12ba","3323adf9cb0fe4bbfddfb9fe931dd2b0","a13e4de89aee48353810bca8057b078b","29d34fe4bd45b8ab08d1571f8c40f90e","a529fbbff29e4148078b4305618d7237","e6eb92eb9203fb89adb4e7ba26e8a3e2","3239f49f13fd1d54ef589e0a4caddb07","11df7eb0b597d0683a7a891c32aa2706","dbc80acbfd0fa522d2276c39c7348975","d2185249f4abdea3d5528f6530964ef7","63ca89d8b4cca7830b56af119be488ad","14f6cb805a7bb61634d215dc57dad530","31acb8adfb076c96525e1f5e2ea82178","bfaa58adcd847e0c568c6a30b1850b3c",];
+      // Hàm xáo trộn
+      function shuffle(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+      }
+
+      // 5. Shuffle mảng ID và mảng poster
+      const shuffledVideoIds = shuffle([...new Set(videoIds)]);
+      const shuffledPosters = shuffle([...uniquePosterUrls]);
+
+      // Hàm tạo lượt xem ban đầu
+      function getRandomInitialViews() {
+        return Math.floor(Math.random() * (15000 - 1000 + 1)) + 1000;
+      }
+
+      // 6. Tạo 1 mảng video (mỗi video ID gán 1 poster không lặp)
+      // Nếu hết poster, dùng placeholder
+      const videos = shuffledVideoIds.map((id, i) => ({
+        id,
+        title: "Video cao cấp",
+        description: "Sử dụng mã thẻ CLB để truy cập",
+        viewCount: getRandomInitialViews(),
+        // Không fallback => nếu i vượt quá số ảnh, poster sẽ là undefined
+        poster: shuffledPosters[i],
+      }));
+
+      // 7. Chia videos thành 5 nhóm: hot, jav, selected, hotgirl, hottiktok
+      const categories = ["hot", "jav", "selected", "hotgirl", "hottiktok"];
+      // Mỗi nhóm 1/5 tổng videos (làm tròn lên)
+      const groupSize = Math.ceil(videos.length / categories.length);
+      const groups = {};
+      categories.forEach((cat, idx) => {
+        groups[cat] = videos.slice(idx * groupSize, (idx + 1) * groupSize);
+      });
+
+      // 8. Danh sách video cần khóa
+      const lockedVideoIds = [
+      "99bd2b33f49deb5ba071ac118b75b0c4","eae66f3b16ad5225b09a329f53a22114","7fda04eefa4b3318dcd589a08e11e018","3a95f1bb7f94782440564746f1c0f46a","73233e2d1ee2866d9a1bc47146e9a1b4","cb94874a32a3315426d31934c1f6dcc9","52e08b4f78a10334a5c5cbadcc95834c","0d2828e5106f492d993bab2048c5dbf4","43cb47d010367f4afdecd4adb9113da1","e7917240bf9f76540b67024512ba59c0","c7b1e0d32b6a04ac1b5febdb3c7ddaba","b121ce521de929a7e54ccd03aff69744","04789f038df004dea25d356402241711","6b93f9f3fa0a01ecf5eae001751259c8","adc8bd292603974d2aa9e0059f735b3d","02b11049560c026195e0cf2ccf27d44a","b59cb51d98b3f73015cb3c4cf49c77fb","eb9670db5f5f8e315b6cc05d1a5e09ce","c3feed12235dd55699ec074269281455","d7526dd1a2b032ddd3abde39a2335344","a2c88ab724a327e3fe45441d281c43f0","dc6b76395d7696f52a962146104004d7","20c619998a30fcabc556a0db0d02c0a6","94376599b7721f0b070bad4774b4d4d7","6999b15f30a57f600e3622606b11ecdb","55ec91aad4a3edce681e52e27d6678e9","fe279d2cc463be2de3987adef952781e","438b98e84e23b83dedc8d05aff4b98d6","55861af1a87a00bddc798710627b505e","459f4a498714c02991c26d2280100c4a","60f953ace8c6fc434efd2b15aa8fe11a","672e178059d91bd0bd7bb0b38d5bd16f","7f6bb92f2ba11fda4aa472d3f3fb4078","22e9568cef9d88f862284749895aa77c","7e82a223dd200fb99a2f424e2049806e","576f62e9a3f48e234c328b0b13559973","41d442d517af3a702e7f97d766e700fd","b208823807d596e159fe22c64148a4d7","621d9ebb7c2c64c00da2f2019e4dbaa9","89e082c9680d5b78c082eb4b82e220e2","6df45411db7bd216f57cf95a408233b3","e356eb573f5d2889663bb7ed1c268b68","82c66e46920553b389187a942d4ac408","a2ee6a2fb8ed6035dd143f3d658bb8c9","abd636c1c2cc8a9db4908a190aaac5a7","0abdcd1a88ecb790e4dcc703780dd137","1af8e249bba8a83fe24e63caa627116a","68d08b81cd0a169489af02745674e7a4","459f4a498714c02991c26d2280100c4a","c1d7dfd7a9b6507b15fa2025c576e22c","f10132648a8a9a08659740bd70f74f73","02043562e8c178afee5ece96bc9cc450","d34842d09310ee9d60fc4e76526cb858","b4a4c9c2298b6f3e6587dca885e72541","59528353e96bba27ff72cff5f6f4c574","4acabfe539c0669d5d96f97ff74d02e8","e4e7bf50a516fc8092ae21333bc4f6ea","1d438bce184636fd7e6306ea86691c1a","929cad3e0d805bf0dc49f4736b1a018f","4e96f14abd57c8bd2729e22c1f13a03c","95d7bb58386df656db5843ff57ed0e7e","21d86a3b6c73de767aa37e8520d0812c","b014db1f558af8d2fc29446578723203","253dc0757952ba8a334900dd23b30b51","0de3326c2b7ed5767789dd48f36d12ba","3323adf9cb0fe4bbfddfb9fe931dd2b0","a13e4de89aee48353810bca8057b078b","29d34fe4bd45b8ab08d1571f8c40f90e","a529fbbff29e4148078b4305618d7237","e6eb92eb9203fb89adb4e7ba26e8a3e2","3239f49f13fd1d54ef589e0a4caddb07","11df7eb0b597d0683a7a891c32aa2706","dbc80acbfd0fa522d2276c39c7348975","d2185249f4abdea3d5528f6530964ef7","63ca89d8b4cca7830b56af119be488ad","14f6cb805a7bb61634d215dc57dad530","31acb8adfb076c96525e1f5e2ea82178","bfaa58adcd847e0c568c6a30b1850b3c",
+      ];
+
+      // 9. Màu tiêu đề luân phiên
+      const titleColors = [
+        "#ff5722",
+        "#4caf50",
+        "#2196f3",
+        "#9c27b0",
+        "#f44336",
+        "#ff9800",
+        "#00bcd4",
+      ];
+
+      // 10. Render videos
+      function renderVideos() {
+        let globalIndex = 0;
+        categories.forEach((cat) => {
+          const container = document.getElementById(cat + "-videos");
+          if (!container) return;
+          groups[cat].forEach((video) => {
+            const col = document.createElement("div");
+            col.className = "col-6 mb-3";
+
+            // Kiểm tra có bị khóa?
+            const needLock = lockedVideoIds.includes(video.id);
+            const unlocked =
+              needLock &&
+              localStorage.getItem("unlocked_" + video.id) === "true";
+
+            // Overlay khóa nếu cần
+            let lockOverlayHTML = "";
+            if (needLock) {
+              lockOverlayHTML = `
+                <div class="lock-overlay" data-video-id="${video.id}"
+                     style="display: ${unlocked ? "none" : "flex"};">
+                  
+                  <input type="password" placeholder="Nhập mã thẻ thành viên" class="unlock-code">
+                  <button class="unlock-btn">Xác nhận</button>
+                </div>
+              `;
+            }
+
+            // Tạo HTML card video
+            col.innerHTML = `
+              <div class="video-card">
+                <div class="video-wrapper">
+                  <img src="${video.poster}"
+                       alt="Poster Image"
+                       class="video-poster"
+                       style="cursor: pointer;">
+                  <iframe src="https://customer-vd2dw6zchzsa06w6.cloudflarestream.com/${
+                    video.id
+                  }/iframe"
+                          frameborder="0"
+                          allowfullscreen
+                          loading="lazy"
+                          class="video-iframe">
+                  </iframe>
+                </div>
+                <p class="video-title"
+                   style="color: ${
+                     titleColors[globalIndex % titleColors.length]
+                   }">
+                  ${video.title}
+                </p>
+                <p class="video-description">${video.description}</p>
+                <div class="video-views-bottom">
+                  <i class="fa fa-eye"></i>
+                  <span class="view-count">${video.viewCount}</span> lượt xem
+                </div>
+                ${lockOverlayHTML}
+              </div>
+            `;
+            globalIndex++;
+            container.appendChild(col);
+          });
+        });
+
+        // Sự kiện: click poster => hiển thị video nếu không còn overlay
+        document.querySelectorAll(".video-poster").forEach((poster) => {
+          poster.addEventListener("click", function () {
+            const wrapper = this.parentElement;
+            const overlay =
+              wrapper.parentElement.querySelector(".lock-overlay");
+            if (overlay && overlay.style.display !== "none") return;
+            // Ẩn poster, hiển thị iframe
+            this.style.display = "none";
+            wrapper.querySelector(".video-iframe").style.display = "block";
+          });
+        });
+
+        // Sự kiện: Mở khóa video
+        document.querySelectorAll(".unlock-btn").forEach((btn) => {
+          btn.addEventListener("click", function () {
+            const overlay = this.parentElement;
+            const videoId = overlay.getAttribute("data-video-id");
+            const input = overlay.querySelector(".unlock-code");
+            if (input.value.length < 6) {
+              alert("Mã thành viên phải đủ 6 số!");
+              return;
+            }
+            // Demo: mã mặc định = 123443
+            if (input.value === "123443") {
+              overlay.style.display = "none";
+              localStorage.setItem("unlocked_" + videoId, "true");
+            } else {
+              alert("Mã không chính xác. Vui lòng thử lại!");
+            }
+          });
+        });
+      }
+
+      // Gọi hàm render sau khi load DOM
       document.addEventListener("DOMContentLoaded", renderVideos);
+
+      // 11. Cập nhật lượt xem: 5 giây/lần, tối đa +100 so với ban đầu
+      function updateViewCounts() {
+        document.querySelectorAll(".video-card").forEach((card) => {
+          const viewSpan = card.querySelector(".view-count");
+          if (!viewSpan) return;
+          let current = parseInt(viewSpan.textContent, 10);
+          if (!viewSpan.hasAttribute("data-max")) {
+            // Lần đầu chạy, đặt data-max = current + 100
+            viewSpan.setAttribute("data-max", current + 100);
+          }
+          const maxViews = parseInt(viewSpan.getAttribute("data-max"), 10);
+          // 50% cơ hội tăng +1
+          if (current < maxViews && Math.random() < 0.5) {
+            current++;
+            viewSpan.textContent = current;
+          }
+        });
+      }
+      setInterval(updateViewCounts, 5000);
     </script>
   </body>
 </html>
