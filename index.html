@@ -430,8 +430,7 @@ document.addEventListener("DOMContentLoaded", function () {
       rel="stylesheet"
     />
   <style>
-  /* CSS hiện tại giữ nguyên cấu trúc */
-  .statistics-widget {
+.statistics-widget {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
@@ -439,9 +438,9 @@ document.addEventListener("DOMContentLoaded", function () {
     max-width: 100%;
     margin: 0px auto;
     padding: 15px;
-  }
+}
 
-  .stat-item {
+.stat-item {
     padding: 5px 9px;
     border-radius: 12px;
     display: flex;
@@ -452,14 +451,15 @@ document.addEventListener("DOMContentLoaded", function () {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-  }
+    transition: transform 0.2s ease-in-out;
+}
 
-  .stat-item i {
+.stat-item i {
     font-size: 18px;
     color: #00ffea;
-  }
+}
 
-  .stat-item strong {
+.stat-item strong {
     font-weight: 550;
     background: linear-gradient(90deg, #ffffff, #efefef, #cb00bc);
     -webkit-background-clip: text;
@@ -468,46 +468,58 @@ document.addEventListener("DOMContentLoaded", function () {
     text-align: center;
     font-size: 16px;
     color: #ff5e00;
-  }
+}
 
-  .stat-item:hover {
+.stat-item:hover {
     transform: translateY(-3px);
     box-shadow: 0 6px 12px rgba(74, 105, 189, 0.6);
-  }
+}
 
-  @media (max-width: 480px) {
+/* Responsive: Hiển thị đẹp trên mobile */
+@media (max-width: 480px) {
     .statistics-widget {
-      padding: 8px;
+        padding: 8px;
     }
 
     .stat-item {
-      flex: 1 1 calc(50% - 5px);
-      font-size: 13px;
-      padding: 4px 6px;
+        flex: 1 1 calc(50% - 5px);
+        font-size: 13px;
+        padding: 4px 6px;
     }
 
     .stat-item i {
-      font-size: 14px;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        font-size: 14px;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
     }
 
     .stat-item strong {
-      font-size: 12px;
+        font-size: 12px;
     }
-  }
+}
 
-  /* Giảm khoảng cách cho số liệu "Used the service" */
-  .stat-item:nth-child(2) {
+/* Giảm khoảng cách cho số Telegram */
+.stat-item:nth-child(2) {
     gap: 6px; /* Giảm gap từ 12px xuống 6px */
-  }
+}
+
+/* Hiệu ứng click vào số Telegram mở Telegram */
+.stat-item:nth-child(2) strong {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.stat-item:nth-child(2) strong:hover {
+    color: #00ffea;
+}
+
 </style>
 
   </head>
 
   <body>
-       <div class="statistics-widget">
+    <div class="statistics-widget">
       <div class="stat-item">
         <i class="fas fa-user-circle"></i>
         <span>Online</span>
@@ -515,8 +527,8 @@ document.addEventListener("DOMContentLoaded", function () {
       </div>
       <div class="stat-item">
         <i class="fas fa-check-circle"></i>
-        <span>Used the service</span>
-        <strong id="vipMembers">--</strong>
+        <span>Telegram</span>
+        <strong id="vipMembers">61478859976</strong>
       </div>
       <div class="stat-item">
         <i class="fas fa-chart-line"></i>
@@ -529,12 +541,48 @@ document.addEventListener("DOMContentLoaded", function () {
         <strong id="australiaTime">--:--:--</strong>
       </div>
     </div>
+    
     <script>
-     let online=parseInt(localStorage.getItem("online"))||204;let vipMembers=parseInt(localStorage.getItem("vipMembers"))||4197;let visitCount=parseInt(localStorage.getItem("visitCount"))||218483;function updateSydneyTime(){const now=new Date();const sydneyTime=new Date(now.toLocaleString("en-US",{timeZone:"Australia/Sydney"}));const hours=sydneyTime.getHours().toString().padStart(2,"0");const minutes=sydneyTime.getMinutes().toString().padStart(2,"0");const seconds=sydneyTime.getSeconds().toString().padStart(2,"0");const timeDifference=((sydneyTime-now)/(1000*60*60)).toFixed(1);document.getElementById("australiaTime").innerText=`${hours}:${minutes}:${seconds}`;document.getElementById("timeDifference").innerText=`${timeDifference}giờ`;}
-function updateOnline(){const change=Math.floor(Math.random()*11)+10;const increaseOrDecrease=Math.random()<0.5?-1:1;online=Math.max(100,Math.min(250,online+change*increaseOrDecrease));document.getElementById("online").innerText=online.toLocaleString();localStorage.setItem("online",online);}
-function updateVipMembers(){vipMembers++;document.getElementById("vipMembers").innerText=vipMembers.toLocaleString();localStorage.setItem("vipMembers",vipMembers);}
-function updateVisitCount(){const increment=Math.floor(Math.random()*50)+1;visitCount+=increment;document.getElementById("visitCount").innerText=visitCount.toLocaleString();localStorage.setItem("visitCount",visitCount);}
-document.addEventListener("DOMContentLoaded",()=>{document.getElementById("online").innerText=online.toLocaleString();document.getElementById("vipMembers").innerText=vipMembers.toLocaleString();document.getElementById("visitCount").innerText=visitCount.toLocaleString();setInterval(updateSydneyTime,1000);setInterval(updateOnline,5000);setInterval(updateVipMembers,600000);setInterval(updateVisitCount,10000);});
+   let online = parseInt(localStorage.getItem("online")) || 204;
+let visitCount = parseInt(localStorage.getItem("visitCount")) || 218483;
+const telegramNumber = "61478859976"; // Thay vì vipMembers, giữ số Telegram cố định
+
+function updateSydneyTime() {
+    const now = new Date();
+    const sydneyTime = new Date(now.toLocaleString("en-US", { timeZone: "Australia/Sydney" }));
+    const hours = sydneyTime.getHours().toString().padStart(2, "0");
+    const minutes = sydneyTime.getMinutes().toString().padStart(2, "0");
+    const seconds = sydneyTime.getSeconds().toString().padStart(2, "0");
+    const timeDifference = ((sydneyTime - now) / (1000 * 60 * 60)).toFixed(1);
+    
+    document.getElementById("australiaTime").innerText = `${hours}:${minutes}:${seconds}`;
+}
+
+function updateOnline() {
+    const change = Math.floor(Math.random() * 11) + 10;
+    const increaseOrDecrease = Math.random() < 0.5 ? -1 : 1;
+    online = Math.max(100, Math.min(250, online + change * increaseOrDecrease));
+    document.getElementById("online").innerText = online.toLocaleString();
+    localStorage.setItem("online", online);
+}
+
+function updateVisitCount() {
+    const increment = Math.floor(Math.random() * 50) + 1;
+    visitCount += increment;
+    document.getElementById("visitCount").innerText = visitCount.toLocaleString();
+    localStorage.setItem("visitCount", visitCount);
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    document.getElementById("online").innerText = online.toLocaleString();
+    document.getElementById("vipMembers").innerHTML = `<a href="https://t.me/+${telegramNumber}" target="_blank">${telegramNumber}</a>`; // Hiển thị Telegram dưới dạng link
+    document.getElementById("visitCount").innerText = visitCount.toLocaleString();
+    
+    setInterval(updateSydneyTime, 1000);
+    setInterval(updateOnline, 5000);
+    setInterval(updateVisitCount, 10000);
+});
+
 
     </script>
   </body>
