@@ -7,7 +7,7 @@
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no"
     />
     <title>Sảnh Đánh Giá - Giao Diện Nâng Cấp</title>
-    <!-- Font Awesome cho icon (phiên bản 4.7) -->
+    <!-- Font Awesome cho icon -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
@@ -19,16 +19,16 @@
     />
     <style>
       :root {
-        /* Màu sắc mới */
-        --primary-color: #1abc9c; /* Xanh ngọc */
-        --secondary-color: #16a085; /* Xanh đậm */
-        --tertiary-color: #2ecc71; /* Xanh lá tươi sáng */
-        --accent-color: #e74c3c; /* Điểm nhấn đỏ */
-        --text-color: #ecf0f1; /* Màu chữ sáng */
-        --bg-color: #34495e; /* Nền tổng thể */
-        --card-bg: #2c3e50; /* Nền thẻ card */
-        --nav-bg: #2c3e50; /* Nền sidebar */
-        --hover-nav-bg: #1abc9c; /* Hiệu ứng hover sidebar */
+        /* Bảng màu hiện đại */
+        --primary-color: #4a90e2;
+        --secondary-color: #357ab8;
+        --tertiary-color: #50e3c2;
+        --accent-color: #f5a623;
+        --text-color: #ffffff;
+        --bg-color: #2d3436;
+        --card-bg: rgba(45, 52, 54, 0.9);
+        --nav-bg: rgba(45, 52, 54, 0.85);
+        --hover-nav-bg: rgba(69, 123, 157, 0.9);
         --transition-speed: 0.3s;
       }
       /* Reset & Global Styles */
@@ -39,11 +39,7 @@
       }
       body {
         font-family: "Roboto", sans-serif;
-        background: radial-gradient(
-          circle at center,
-          rgba(52, 73, 94, 0.8) 0%,
-          rgba(52, 73, 94, 1) 100%
-        );
+        background: linear-gradient(135deg, #2d3436, #000000);
         min-height: 100vh;
         color: var(--text-color);
         position: relative;
@@ -59,55 +55,28 @@
         background: url("https://i.ibb.co/ycBpNQyM/pngtree-light-effect-background-halo-radial-image-2419979.jpg")
           no-repeat center center;
         background-size: cover;
-        opacity: 0.2;
-        pointer-events: none;
+        opacity: 0.15;
+        filter: blur(2px);
       }
       a {
         text-decoration: none;
       }
-      header {
-        background: linear-gradient(
-          270deg,
-          var(--primary-color),
-          var(--secondary-color),
-          var(--tertiary-color)
-        );
-        background-size: 600% 600%;
-        animation: gradientAnimation 8s ease infinite;
-        padding: 30px 0;
-        text-align: center;
-        font-size: 2.5rem;
-        font-weight: 700;
-        letter-spacing: 2px;
-        margin-bottom: 15px;
-        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-      }
-      @keyframes gradientAnimation {
-        0% {
-          background-position: 0% 50%;
-        }
-        50% {
-          background-position: 100% 50%;
-        }
-        100% {
-          background-position: 0% 50%;
-        }
-      }
-      /* Layout chính sử dụng Flexbox */
+      /* Layout chính */
       .container {
         display: flex;
         flex-wrap: wrap;
-        padding: 0 15px;
+        padding: 10px;
       }
       aside {
-        flex: 0 0 150px;
+        flex: 0 0 160px;
         background: var(--nav-bg);
         border-radius: 10px;
-        box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
         margin: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
       }
       nav a {
-        margin-bottom: 5px;
+        text-transform: uppercase;
+        margin: 8px 5px;
         border-radius: 5px;
         display: block;
         padding: 12px 15px;
@@ -132,8 +101,8 @@
         flex: 1;
         margin: 10px;
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-        grid-gap: 15px;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        grid-gap: 20px;
       }
       /* Review Cards */
       .review-card {
@@ -141,21 +110,23 @@
         border-radius: 10px;
         overflow: hidden;
         cursor: pointer;
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-        transition: transform var(--transition-speed);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+        transition: transform var(--transition-speed),
+          box-shadow var(--transition-speed);
       }
       .review-card:hover {
-        transform: scale(1.03);
+        transform: scale(1.05);
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
       }
       .review-card img {
         width: 100%;
-        height: 220px;
+        height: 200px;
         object-fit: cover;
-        border-bottom: 2px solid var(--secondary-color);
+        border-bottom: 3px solid var(--secondary-color);
       }
       .review-card span {
         display: block;
-        padding: 8px;
+        padding: 10px;
         text-align: center;
         font-size: 1.1rem;
         font-weight: 600;
@@ -167,19 +138,20 @@
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
       }
-      /* Modal Overlay */
+      /* Modal Overlay (glassmorphism effect) */
       .review-detail-overlay {
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        background: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(5px);
+        background: rgba(0, 0, 0, 0.6);
         display: none;
         justify-content: center;
         align-items: center;
-        z-index: 100;
-        animation: fadeIn 0.3s ease;
+        z-index: 200;
+        animation: fadeIn var(--transition-speed) ease;
       }
       @keyframes fadeIn {
         from {
@@ -191,12 +163,12 @@
       }
       .review-detail {
         background: var(--card-bg);
-        padding: 20px;
-        border-radius: 10px;
+        padding: 25px;
+        border-radius: 12px;
         width: 90%;
-        max-width: 450px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-        animation: zoomIn 0.3s ease;
+        max-width: 480px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        animation: zoomIn var(--transition-speed) ease;
       }
       @keyframes zoomIn {
         from {
@@ -212,10 +184,10 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 15px;
+        margin-bottom: 20px;
       }
       .review-detail h2 {
-        font-size: 1.8rem;
+        font-size: 1.9rem;
         color: var(--text-color);
       }
       .review-detail .balance {
@@ -225,15 +197,15 @@
       .tab-header {
         display: flex;
         justify-content: center;
-        margin-bottom: 15px;
+        margin-bottom: 20px;
       }
       .tab {
-        background: #f1f1f1;
+        background: rgba(255, 255, 255, 0.2);
         border: none;
-        padding: 8px 16px;
-        margin: 0 3px;
-        border-radius: 4px;
-        font-size: 0.9rem;
+        padding: 10px 18px;
+        margin: 0 5px;
+        border-radius: 6px;
+        font-size: 0.95rem;
         cursor: pointer;
         transition: background var(--transition-speed),
           color var(--transition-speed);
@@ -243,20 +215,20 @@
         color: #fff;
       }
       .review-detail .content {
-        font-size: 0.9rem;
+        font-size: 0.95rem;
       }
       /* Form & Option Buttons */
       .options {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
-        margin: 15px 0;
+        gap: 12px;
+        margin: 20px 0;
       }
       .option {
         padding: 15px;
-        background: #000000;
+        background: rgba(0, 0, 0, 0.7);
         text-align: center;
-        border-radius: 6px;
+        border-radius: 8px;
         cursor: pointer;
         font-size: 1.1rem;
         font-weight: 600;
@@ -264,44 +236,54 @@
           transform var(--transition-speed);
       }
       .option:hover {
-        color: #000000;
         background: #48ff00;
+        color: #000;
         transform: scale(1.03);
       }
       .option.selected {
         background: var(--accent-color);
         color: #fff;
+        box-shadow: 0 0 10px var(--accent-color);
+        position: relative;
+      }
+      .option.selected::after {
+        content: "\2713";
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        font-size: 1.2rem;
+        color: #fff;
       }
       .submit-button,
       .close-button {
-        padding: 10px 18px;
+        padding: 12px 20px;
         border: none;
         border-radius: 6px;
         font-size: 1rem;
         font-weight: bold;
         cursor: pointer;
         transition: background var(--transition-speed), transform 0.2s;
-        margin-right: 8px;
+        margin-right: 10px;
       }
       .submit-button {
-        background: #27ae60;
+        background: var(--tertiary-color);
         color: #fff;
       }
       .submit-button:hover {
-        background: #219150;
+        background: #3ac2a0;
         transform: scale(1.03);
       }
       .close-button {
-        background: #e74c3c;
+        background: var(--accent-color);
         color: #fff;
       }
       .close-button:hover {
-        background: #c0392b;
+        background: #d18b1d;
         transform: scale(1.03);
       }
       .bet-amount {
         text-align: center;
-        margin-bottom: 10px;
+        margin-bottom: 15px;
       }
       .bet-amount label {
         margin-right: 8px;
@@ -309,19 +291,19 @@
         font-weight: 500;
       }
       .bet-amount input {
-        padding: 5px;
+        padding: 7px;
         font-size: 1rem;
-        width: 120px;
+        width: 130px;
         border: 1px solid #ccc;
         border-radius: 4px;
       }
       .timer,
       .live-period-label {
         text-align: center;
-        margin-bottom: 10px;
+        margin-bottom: 15px;
       }
       .timer {
-        font-size: 1.4rem;
+        font-size: 1.5rem;
         color: var(--accent-color);
         font-weight: bold;
       }
@@ -329,46 +311,59 @@
       .history,
       .history-section {
         background: var(--card-bg);
-        padding: 15px;
-        border-radius: 6px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         margin: 20px 10px 120px;
         overflow-x: auto;
       }
       .history h3,
       .history-section h3 {
-        margin-bottom: 10px;
-        font-size: 1.4rem;
+        margin-bottom: 15px;
+        font-size: 1.5rem;
         text-align: center;
         color: var(--text-color);
       }
       .history-table {
         width: 100%;
         border-collapse: collapse;
-        font-size: 0.9rem;
+        font-size: 0.95rem;
         overflow: hidden;
-        border-radius: 6px;
+        border-radius: 8px;
       }
       .history-table thead {
         background: var(--primary-color);
         color: #fff;
+        transition: background 0.3s ease;
       }
       .history-table th,
       .history-table td {
-        padding: 12px 8px;
+        padding: 14px 10px;
         text-align: center;
         border-bottom: 1px solid #ddd;
       }
       .history-table tbody tr {
-        transition: background var(--transition-speed);
+        transition: background 0.3s ease, transform 0.3s ease;
       }
       .history-table tbody tr:hover {
         background: rgba(255, 255, 255, 0.1);
+        transform: scale(1.02);
       }
       .history-table tbody tr:nth-child(even) {
         background: rgba(255, 255, 255, 0.05);
       }
-
+      /* Responsive */
+      @media (max-width: 768px) {
+        aside {
+          flex: 0 0 40%;
+          margin: 10px 5px;
+        }
+        main,
+        .main-content {
+          flex: 0 0 55%;
+          margin: 10px 5px;
+        }
+      }
     </style>
   </head>
   <body>
@@ -403,7 +398,7 @@
 
       <!-- Main Content (Review Cards) -->
       <div class="main-content" id="mainContent">
-             <div
+        <div
           class="review-card"
           data-review="Đánh Giá 1"
           onclick="openReview('review1')"
@@ -617,7 +612,7 @@
     </div>
 
     <script>
-      // Lọc các thẻ đánh giá dựa trên thuộc tính data-review của review-card
+      // Hiển thị đánh giá dựa vào thuộc tính data-review
       function showReview(review) {
         document.querySelectorAll(".review-card").forEach((card) => {
           card.style.display =
@@ -652,11 +647,13 @@
       }
       // Gửi đánh giá (giả lập)
       function submitReview() {
-        const selected = document.querySelector("#currentTab .option.selected");
+        const selected = document.querySelectorAll(
+          "#currentTab .option.selected"
+        );
         const betAmount = parseFloat(
           document.getElementById("betAmount").value
         );
-        if (!selected) {
+        if (selected.length === 0) {
           alert("Vui lòng chọn một tùy chọn trước khi gửi đánh giá.");
           return;
         }
@@ -672,9 +669,12 @@
         }
         let newBalance = currentBalance - betAmount;
         balanceElement.textContent = newBalance.toFixed(2);
+        let optionsChosen = Array.from(selected)
+          .map((opt) => opt.innerText.trim().charAt(0))
+          .join(", ");
         alert(
           "Đánh giá của bạn đã được gửi thành công!\nBạn đã chọn: " +
-            selected.innerText.trim().charAt(0) +
+            optionsChosen +
             "\nSố tiền cược: " +
             betAmount
         );
@@ -714,15 +714,36 @@
           document.getElementById("tabCurrent").classList.remove("active");
         }
       }
-      // Xử lý chọn đáp án
+      // Xử lý chọn đáp án: Đánh Giá 3 cho phép chọn tối đa 2 đáp án, còn Đánh Giá 1 & 2 chỉ cho phép chọn 1 đáp án
       document.querySelectorAll("#currentTab .option").forEach((option) => {
         option.addEventListener("click", function () {
-          document.querySelectorAll("#currentTab .option").forEach((opt) => {
-            opt.classList.remove("selected");
-          });
-          this.classList.add("selected");
+          const reviewTitle = document.getElementById("reviewTitle").innerText;
+          if (reviewTitle.includes("Đánh Giá 3")) {
+            // Với Đánh Giá 3: cho phép chọn tối đa 2 đáp án
+            if (this.classList.contains("selected")) {
+              this.classList.remove("selected");
+            } else {
+              const selectedOptions = document.querySelectorAll(
+                "#currentTab .option.selected"
+              );
+              if (selectedOptions.length < 2) {
+                this.classList.add("selected");
+              } else {
+                alert("Trong Đánh Giá 3, bạn chỉ được chọn tối đa 2 đáp án!");
+              }
+            }
+          } else {
+            // Với Đánh Giá 1 & 2: chỉ cho phép chọn 1 đáp án
+            document
+              .querySelectorAll("#currentTab .option")
+              .forEach((opt) => opt.classList.remove("selected"));
+            this.classList.add("selected");
+          }
+          const allSelected = Array.from(
+            document.querySelectorAll("#currentTab .option.selected")
+          ).map((opt) => opt.innerText.trim().charAt(0));
           document.getElementById("selectedOptionDisplay").textContent =
-            "Bạn đã chọn: " + this.innerText.trim().charAt(0);
+            "Bạn đã chọn: " + allSelected.join(", ");
         });
       });
     </script>
