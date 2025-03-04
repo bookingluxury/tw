@@ -2683,7 +2683,40 @@
         .then((data) => {
           document.getElementById("navbar-placeholder").innerHTML = data;
         });
+        function updateVisitCount() {
+    const today = new Date().toDateString();
+    let visitCount = parseInt(localStorage.getItem('visitCount') || '0');
+    let lastVisit = localStorage.getItem('lastVisit');
 
+    // Nếu ngày thay đổi thì reset số lần truy cập
+    if (lastVisit !== today) {
+      visitCount = 0;
+      localStorage.setItem('lastVisit', today);
+    }
+    
+    visitCount++;
+    localStorage.setItem('visitCount', visitCount);
+    return visitCount;
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const count = updateVisitCount();
+    console.log('Số lần truy cập trong ngày:', count);
+    if(count >= 5) {
+      // Lấy tất cả các card
+      const cards = document.querySelectorAll('.live-card');
+      cards.forEach(card => {
+        // Đảm bảo card có position relative để overlay định vị chính xác
+        card.style.position = 'relative';
+        // Tạo lớp phủ
+        const overlay = document.createElement('div');
+        overlay.classList.add('card-overlay');
+        overlay.innerHTML = 'Không thể click';
+        // Thêm overlay vào card
+        card.appendChild(overlay);
+      });
+    }
+  });
       // Cập nhật số người xem (viewers count) ngẫu nhiên
       function updateViewersCount() {
         const viewersCountElement = document.getElementById("viewers-count");
