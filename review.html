@@ -399,6 +399,37 @@
           transform: rotate(360deg);
         }
       }
+       .content-footer {
+        background: linear-gradient(90deg, #10b905, #efefef, #7a00ff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        text-align: center;
+        padding: 1.5rem 0;
+        margin-top: 2rem;
+        border-top: 1px solid #444;
+        font-size: 0.9rem;
+        letter-spacing: 0.5px;
+      }
+      .footer-container p {
+        margin: 0.5rem;
+      }
+      .footer-container a {
+        color: #ffc107;
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+      .footer-container a:hover {
+        color: #ffdd57;
+      }
+      @keyframes rotateIcon {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
     </style>
   </head>
   <body>
