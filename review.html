@@ -8,13 +8,27 @@
     />
     <title>Sảnh Đánh Giá - Giao Diện Nâng Cấp</title>
     <!-- Font Awesome cho icon -->
+   <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
+
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
     />
     <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
-      href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Roboto:wght@400;500&display=swap"
       rel="stylesheet"
     />
     <style>
@@ -364,6 +378,25 @@
           margin: 10px 5px;
         }
       }
+     .icon-dynamic {
+        display: inline-block;
+        animation: rotateIcon 4s linear infinite;
+      }
+      .social-icons {
+        display: flex;
+        justify-content: center;
+        gap: 0.5rem; /* Giảm khoảng cách giữa các icon */
+        margin-top: 0.3rem; /* Giảm khoảng cách phía trên */
+        margin-bottom: 0rem; /* Giảm khoảng cách phía dưới */
+      }
+       @keyframes rotateIcon {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
     </style>
   </head>
   <body>
@@ -610,7 +643,63 @@
         </tbody>
       </table>
     </div>
+    <div
+      style="
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-top: 1rem;
+      "
+    >
+      <a href="#" style="color: #4267b2; text-decoration: none">
+        <ion-icon
+          class="icon-dynamic"
+          name="logo-facebook"
+          style="font-size: 2rem"
+        ></ion-icon>
+      </a>
+      <a href="#" style="color: #25d366; text-decoration: none">
+        <ion-icon
+          class="icon-dynamic"
+          name="logo-whatsapp"
+          style="font-size: 2rem"
+        ></ion-icon>
+      </a>
+      <a href="#" style="color: #e1306c; text-decoration: none">
+        <ion-icon
+          class="icon-dynamic"
+          name="logo-instagram"
+          style="font-size: 2rem"
+        ></ion-icon>
+      </a>
+      <a href="#" style="color: #69c9d0; text-decoration: none">
+        <ion-icon
+          class="icon-dynamic"
+          name="logo-SexyChineseGirls"
+          style="font-size: 2rem"
+        ></ion-icon>
+      </a>
+      <a href="#" style="color: #0077b5; text-decoration: none">
+        <ion-icon
+          class="icon-dynamic"
+          name="logo-linkedin"
+          style="font-size: 2rem"
+        ></ion-icon>
+      </a>
+    </div>
 
+    <!-- Footer -->
+    <footer class="content-footer">
+      <div class="footer-container">
+        <p>&copy; 2023 <strong>Dangcapgaigoi</strong>. All rights reserved.</p>
+        <p>
+          Designed by
+          <a href="+61 4788 59976" target="_blank"
+            >+61 4788 59976</a
+          >
+        </p>
+      </div>
+    </footer>
     <script>
       // Hiển thị đánh giá dựa vào thuộc tính data-review
       function showReview(review) {
