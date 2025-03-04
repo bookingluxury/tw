@@ -321,7 +321,11 @@
           transform: rotate(360deg);
         }
       }
-
+img {
+    max-width: 100%; /* Không phóng lớn hơn kích thước gốc */
+    height: auto;
+    object-fit: contain; /* Giữ tỉ lệ, không bị kéo dãn */
+}
       .icon-dynamic {
         display: inline-block;
         animation: rotateIcon 4s linear infinite;
