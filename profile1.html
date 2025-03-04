@@ -373,6 +373,25 @@
       i.icon-3d {
         filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.3));
       }
+       .icon-dynamic {
+        display: inline-block;
+        animation: rotateIcon 4s linear infinite;
+      }
+      .social-icons {
+        display: flex;
+        justify-content: center;
+        gap: 0.5rem; /* Giảm khoảng cách giữa các icon */
+        margin-top: 0.3rem; /* Giảm khoảng cách phía trên */
+        margin-bottom: 0rem; /* Giảm khoảng cách phía dưới */
+      }
+       @keyframes rotateIcon {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
     </style>
   </head>
   <body>
@@ -561,6 +580,17 @@
         <span>Kết Nối 18+</span>
       </a>
     </div>
+        <footer class="content-footer">
+      <div class="footer-container">
+        <p>&copy; 2023 <strong>Dangcapgaigoi</strong>. All rights reserved.</p>
+        <p>
+          Designed by
+          <a href="+61 4788 59976" target="_blank"
+            >+61 4788 59976</a
+          >
+        </p>
+      </div>
+    </footer>
     <div id="navbar-placeholder"></div>
     <script src="menu.js"></script>
   </body>
